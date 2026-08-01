@@ -162,29 +162,41 @@ document.addEventListener('DOMContentLoaded', () => {
         createDots();
     }
 
-    // --- Contact Form ---
+    // --- Contact Form (ouvre le client email avec la demande pre-remplie) ---
     const form = document.getElementById('contactForm');
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const data = new FormData(form);
+            const serviceSelect = form.querySelector('#service');
+            const serviceLabel = serviceSelect.options[serviceSelect.selectedIndex].text;
+
+            const subject = 'Demande de devis' + (data.get('service') ? ' - ' + serviceLabel : '');
+            const body = [
+                'Nom : ' + data.get('nom'),
+                'Prénom : ' + data.get('prenom'),
+                'Email : ' + data.get('email'),
+                'Téléphone : ' + data.get('telephone'),
+                'Type de travaux : ' + (data.get('service') ? serviceLabel : 'Non précisé'),
+                '',
+                'Description du projet :',
+                data.get('message')
+            ].join('\n');
+
+            window.location.href = 'mailto:contact@rushiti-renovation.fr'
+                + '?subject=' + encodeURIComponent(subject)
+                + '&body=' + encodeURIComponent(body);
+
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
-            btn.textContent = 'Envoi en cours...';
+            btn.textContent = 'Ouverture de votre messagerie...';
             btn.disabled = true;
 
-            // Simulate form submission
             setTimeout(() => {
-                btn.textContent = 'Message Envoye !';
-                btn.style.background = '#2a7a4a';
-
-                setTimeout(() => {
-                    form.reset();
-                    btn.textContent = originalText;
-                    btn.disabled = false;
-                    btn.style.background = '';
-                }, 3000);
-            }, 1500);
+                btn.textContent = originalText;
+                btn.disabled = false;
+            }, 3000);
         });
     }
 
