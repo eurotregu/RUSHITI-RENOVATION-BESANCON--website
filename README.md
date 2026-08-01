@@ -1,6 +1,8 @@
-# RUSHITI RENOVATION BESANCON - Website
+# RUSHITI RÉNOVATION BESANÇON - Website
 
-Site web professionnel pour **RUSHITI RENOVATION BESANCON**, entreprise de renovation et peinture basee a Besancon (25000), Doubs.
+Site web professionnel pour **RUSHITI RÉNOVATION BESANÇON**, entreprise de rénovation et peinture basée à Besançon (25000), Doubs.
+
+Contact : 07 60 27 98 97 — contact@rushiti-renovation.fr — SIRET 905 214 631 00012
 
 ## Structure
 
@@ -10,16 +12,18 @@ css/style.css    - Feuille de styles
 js/main.js       - Scripts interactifs
 ```
 
-## Fonctionnalites
+## Fonctionnalités
 
 - Design responsive (mobile, tablette, desktop)
 - Navigation fixe avec effet au scroll
-- Section hero avec compteurs animes
-- Galerie de realisations avec filtres
-- Slider de temoignages clients
-- Formulaire de contact
+- Section hero avec compteurs animés
+- Galerie de réalisations avec filtres
+- Section À Propos (assurance décennale, RGE, SIRET)
+- Slider de témoignages clients
+- Formulaire de contact (ouvre le client email avec la demande pré-remplie)
+- Données structurées JSON-LD (LocalBusiness / HousePainter)
 - Animations au scroll
 
-## Deploiement
+## Déploiement
 
-Site statique - deployer sur n'importe quel hebergeur web ou utiliser GitHub Pages.
+Site statique - déployé automatiquement sur GitHub Pages à chaque push sur `main` (workflow `.github/workflows/deploy.yml`).

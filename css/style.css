@@ -743,6 +743,59 @@ h4 { font-size: 1.1rem; }
     flex-shrink: 0;
 }
 
+/* --- A Propos --- */
+.apropos {
+    padding: 100px 0;
+    background: var(--bg);
+}
+
+.apropos-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.apropos-content .section-tag {
+    margin-bottom: 16px;
+}
+
+.apropos-content h2 {
+    margin-bottom: 16px;
+}
+
+.apropos-content p {
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+.apropos-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background: var(--bg-light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+}
+
+.apropos-badge {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.apropos-badge h4 {
+    margin-bottom: 4px;
+    color: var(--dark);
+}
+
+.apropos-badge p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
 /* --- Testimonials --- */
 .testimonials {
     padding: 100px 0;
@@ -1236,6 +1289,7 @@ h4 { font-size: 1.1rem; }
 
     .services-grid { grid-template-columns: 1fr; }
     .why-us-grid { grid-template-columns: 1fr; }
+    .apropos-grid { grid-template-columns: 1fr; gap: 40px; }
     .why-us-image { order: -1; }
     .gallery-grid { grid-template-columns: 1fr; }
     .contact-grid { grid-template-columns: 1fr; }
