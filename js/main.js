@@ -44,7 +44,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function animateCounters() {
         if (countersDone) return;
         counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
+            const target = parseFloat(counter.getAttribute('data-target'));
+            const decimals = Number.isInteger(target) ? 0 : 1;
+            const format = value => value.toFixed(decimals).replace('.', ',');
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
@@ -52,10 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const update = () => {
                 current += step;
                 if (current >= target) {
-                    counter.textContent = target;
+                    counter.textContent = format(target);
                     return;
                 }
-                counter.textContent = Math.floor(current);
+                counter.textContent = format(current);
                 requestAnimationFrame(update);
             };
             update();
