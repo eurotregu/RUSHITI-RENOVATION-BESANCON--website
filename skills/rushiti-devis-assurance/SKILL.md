@@ -53,6 +53,8 @@ Garantie décennale : PLACEHOLDER (assureur, n° de police, échéance)
 
 **Client :** PLACEHOLDER — **Adresse du chantier :** PLACEHOLDER
 **Date du devis :** PLACEHOLDER — **Validité :** PLACEHOLDER jours
+**Délai d'exécution :** PLACEHOLDER jours ouvrés après acceptation, sous réserve de
+séchage complet du support (rapport d'humidité joint en fin de travaux)
 
 ## Rappel du sinistre
 - **Nature :** dégât des eaux — PLACEHOLDER (ex. fuite d'alimentation, logement supérieur)
@@ -77,7 +79,15 @@ murs sains, non inclus. »]
 | Impression | Primaire adapté au support (plâtre ancien : impression fixante) | X | m² | PLACEHOLDER | PLACEHOLDER |
 | Finition | 2 couches peinture finition PLACEHOLDER, conforme DTU 59.1 | X | m² | PLACEHOLDER | PLACEHOLDER |
 
-[Répéter par pièce et par ouvrage. Une ligne = un poste = une unité d'œuvre.]
+[Répéter par pièce et par ouvrage. Une ligne = un poste = une unité d'œuvre.
+Chaque prestation transverse (protection, nettoyage de fin de chantier) est rattachée
+à un ouvrage et quantifiée — jamais de poste fourre-tout « frais de chantier ».]
+
+## Améliorations en option (hors prise en charge sinistre)
+[Si le client souhaite une prestation supérieure à l'existant : chiffrer l'équivalent
+strict dans le devis sinistre, et l'écart en OPTION clairement séparée. Ex. :
+« Peinture plafond : finition mate standard, strict équivalent existant (ci-dessus).
+Option finition lessivable satinée : supplément PLACEHOLDER, à la charge du client. »]
 
 ## Récapitulatif
 | | Montant |
@@ -100,9 +110,14 @@ d'un signalement avant traitement et, le cas échéant, d'un devis complémentai
 aucun travail supplémentaire n'est engagé sans accord.
 
 ## Garanties
-Garantie décennale et responsabilité civile professionnelle en cours de validité
-(attestations jointes sur demande). Garantie de parfait achèvement (1 an) et
+Garantie décennale et responsabilité civile professionnelle en cours de validité —
+**attestations jointes au présent envoi**. Garantie de parfait achèvement (1 an) et
 garantie biennale selon la nature des ouvrages.
+
+## Pièces jointes
+- Photos légendées avant intervention (localisation, dimensions, humidité mesurée)
+- Schéma coté du dégât (relevé des surfaces)
+- Attestations RC professionnelle et décennale en cours de validité
 
 ---
 Nous restons disponibles pour toute précision ou pour un passage sur site avec
@@ -121,11 +136,26 @@ Joindre après chaque devis ce mémo, adapté au chantier :
 ```markdown
 ## Dossier d'accompagnement — à constituer avant envoi
 
-**Photos datées, avant intervention :**
+**Envoi à l'expert — objet d'email normalisé :**
+« SINISTRE PLACEHOLDER-référence NOM — Devis réfection + photos + plan de repérage »
+L'expert classe des dizaines de dossiers : un objet qui contient la référence et le
+contenu de l'envoi lui fait gagner une manipulation — et vous fait repérer.
+
+**Photos datées ET légendées, avant intervention :**
 - [ ] Vue d'ensemble de chaque pièce touchée
-- [ ] Détail de chaque désordre (auréole, cloque, gondolement)
+- [ ] Détail de chaque désordre — légende localisée et mesurée, sur le modèle :
+      « Photo 1 — Plafond salon, auréole ~50 x 70 cm, humidité résiduelle mesurée : X % »
 - [ ] Humidimètre posé sur le support, **valeur lisible** sur la photo
 - [ ] Origine de la fuite (si accessible) et sa réparation
+
+**Schéma coté du dégât :** un croquis (même à main levée, photographié) avec les
+dimensions relevées — l'expert vérifie les surfaces sans se déplacer.
+
+**Attestations jointes d'office :** RC professionnelle + décennale en cours de
+validité. Ne pas attendre qu'on les demande.
+
+**Rapport de fin de travaux :** relevé d'humidité avant mise en peinture, consigné
+et transmis avec les photos « après » — il clôt le dossier proprement.
 
 **Note d'origine :** une phrase factuelle sur l'origine de la fuite, qui l'a
 identifiée/réparée et quand. Sans elle, l'expert bloque le dossier.
@@ -149,6 +179,10 @@ Chaque règle vient d'un motif réel de rejet ou de confiance côté expert (dé
 - **TVA conditionnée, jamais affirmée.** 10 % rénovation logement de plus de 2 ans — écrire « à confirmer selon éligibilité ».
 - **L'origine de la fuite est traitée dans le devis** (bloc Rappel du sinistre). Un expert ne finance pas une réfection dont la cause n'est pas réparée.
 - **Deux devis, deux mondes.** Le moindre poste hors sinistre glissé dans le devis assurance est perçu comme opportunisme. Le second devis (travaux choisis par le client) est un devis RUSHITI normal, séparé.
+- **Remise en état à l'équivalent strict, amélioration en option.** L'assurance indemnise le juste dommage : l'existant remis à l'identique. Si le client veut mieux (finition supérieure, autre revêtement), chiffrer l'équivalent dans le devis sinistre et l'écart en option séparée à sa charge. C'est la marque du jeu franc — et l'expert le voit immédiatement.
+- **Pas de postes fourre-tout.** « Frais de chantier », « gestion des déchets », « protection » en lignes floues non quantifiées : l'expert y lit de la main-d'œuvre comptée deux fois. Chaque prestation transverse est rattachée à un ouvrage et quantifiée.
+- **Ne jamais facturer une prestation déjà réalisée.** Recherche de fuite déjà faite par le plombier missionné par l'assureur, séchage déjà mené : vérifier ce qui existe au dossier avant de chiffrer. Une prestation fantôme grille la crédibilité de tout le devis.
+- **En cas de doute sur la prise en charge, un appel de 5 minutes à l'expert avant de rédiger** vaut mieux qu'un devis retoqué. C'est la marque des artisans que les experts retiennent.
 - **Sobriété du document.** En-tête complet (SIRET, assurances avec polices et échéances), date, numéro, validité. Pas de superlatifs, pas d'argumentaire commercial : dans un dossier sinistre, la preuve technique EST l'argument.
 
 ## Pièges à éviter
@@ -160,6 +194,10 @@ Chaque règle vient d'un motif réel de rejet ou de confiance côté expert (dé
 - ❌ Chiffrer une surface non vue → ✅ `PLACEHOLDER m²` + « à confirmer lors du diagnostic gratuit sur site ».
 - ❌ Tout repeindre avant le passage de l'expert → ✅ documenter (photos datées + humidimètre) et attendre si le dossier le nécessite.
 - ❌ Devis unique mêlant sinistre et embellissements choisis → ✅ deux devis distincts.
+- ❌ « Frais de chantier — forfait » / « gestion des déchets » en lignes floues → ✅ chaque prestation transverse rattachée à un ouvrage, quantifiée.
+- ❌ Facturer une recherche de fuite déjà réalisée par le plombier de l'assureur → ✅ vérifier le dossier, ne chiffrer que ce qui reste à faire.
+- ❌ Glisser une finition supérieure dans la ligne « remise en état » → ✅ équivalent strict au devis sinistre + option chiffrée séparément, à la charge du client.
+- ❌ Citer un plafond de convention ou un taux non vérifié → ✅ aucune convention ni plafond affirmé sans vérification ; en cas de doute, appeler l'expert avant de rédiger.
 
 ## Exemple complet
 
