@@ -1,24 +1,19 @@
 ---
 name: rushiti-audit-seo
 description: >-
-  Audit SEO complet et priorisé de rushiti-renovation.fr — artisan peintre,
-  plaquiste et rénovation intérieure à Besançon et dans le Doubs (25).
-  Diagnostique, analyse et priorise les corrections sur toutes les dimensions
-  SEO : technique, on-page, contenu, SEO local, popularité, conversion.
-  À déclencher dès qu'Isuf ou Yll dit « audit SEO », « SEO technique »,
-  « pourquoi on ne ressort pas sur Google », « problèmes SEO », « on-page SEO »,
-  « vérifie les balises meta », « bilan de santé SEO », « le trafic a chuté »,
-  « on a perdu des positions », « on n'apparaît pas sur Google », « le site ne
-  ranke pas », « une mise à jour Google nous a touchés », « vitesse des pages »,
-  « core web vitals », « erreurs de crawl », « problèmes d'indexation » — ou des
-  formulations vagues comme « mon SEO est mauvais », « aide-moi avec le SEO »,
-  ou en albanais « kontrollo SEO », « pse s'dalim në Google » — même sans dire
-  skill. Pour créer des pages locales à l'échelle, voir rushiti-page-locale et
-  rushiti-declinaison-chantier. Pour implémenter des données structurées, voir
-  schema-builder. Pour l'optimisation moteurs IA (ChatGPT, Perplexity, aperçus
-  IA), voir rushiti-visibilite-ia. Lecture seule : diagnostique et priorise,
-  ne modifie jamais la production ; aucun chiffre inventé, jamais de
-  classement promis.
+  Audit SEO complet et priorisé de rushiti-renovation.fr (artisan peintre,
+  plaquiste, rénovation intérieure à Besançon / Doubs) : technique, on-page,
+  contenu, SEO local, popularité, conversion. À déclencher dès qu'Isuf ou Yll
+  dit « audit SEO », « SEO technique », « pourquoi on ne ressort pas sur
+  Google », « problèmes SEO », « vérifie les balises meta », « bilan de santé
+  SEO », « le trafic a chuté », « on a perdu des positions », « le site ne
+  ranke pas », « core web vitals », « erreurs de crawl », « problèmes
+  d'indexation », des formulations vagues (« mon SEO est mauvais ») ou en
+  albanais « kontrollo SEO », « pse s'dalim në Google » — même sans dire
+  skill. Pages à l'échelle → rushiti-page-locale ; données structurées →
+  schema-builder ; moteurs IA → rushiti-visibilite-ia. Lecture seule :
+  diagnostique et priorise, ne modifie jamais la production ; aucun chiffre
+  inventé, jamais de classement promis.
 metadata:
   version: 1.0.0
 ---
