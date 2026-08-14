@@ -34,8 +34,8 @@ lecteur décrive son chantier au 07 60 27 98 97 ou demande un devis.
 - **Aucun fait inventé.** Prix, délai, chiffre, témoignage, certification,
   chantier, note Google : si ce n'est pas dans la source de vérité ci-dessous,
   écris `[À CONFIRMER]` et pose la question à Isuf. Jamais de mémoire.
-- **RGE** : mentionné dans le pied de page du site mais non confirmé —
-  interdiction de l'utiliser dans un texte tant qu'Isuf ne l'a pas tranché.
+- **RGE** : confirmé par Isuf (14/08/2026) — utilisable dans les textes,
+  sans en faire une promesse d'aides ou de performance énergétique.
 - **Aucune promesse de résultat** ni de classement Google.
 - **RGPD** : jamais de nom, d'adresse ou de photo de client sans accord écrit.
 - **Lecture seule** : tu proposes, rien n'est publié sans validation d'Isuf.
@@ -64,7 +64,8 @@ lecteur décrive son chantier au 07 60 27 98 97 ou demande un devis.
 | Zone | Besançon tous quartiers (Boucle, Battant, Planoise, Palente, Montrapon, secteur Vauban…) + Doubs (25) |
 | Services | Peinture intérieure/extérieure, papier peint, toile de verre, ratissage/enduit, plâtrerie et placo (cloisons, doublage, faux plafonds), sols (parquet flottant, vitrification, PVC, lino/LVT, ragréage), dégât des eaux, isolation intérieure |
 | Second domaine | rushiti.fr — jamais de lien croisé |
-| RGE, note Google, avis, témoignages | `[À CONFIRMER]` auprès d'Isuf |
+| Certification | RGE — confirmé par Isuf (14/08/2026) |
+| Note Google, avis, témoignages | `[À CONFIRMER]` auprès d'Isuf |
 
 ## Voix de marque
 

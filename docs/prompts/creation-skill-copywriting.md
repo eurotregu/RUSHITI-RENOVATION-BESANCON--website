@@ -48,9 +48,9 @@ RUSHITI), suivi du corps complet.
   isolation intérieure
 - Second domaine : rushiti.fr — ne JAMAIS créer de lien croisé entre
   les deux sites
-- Mention « RGE » présente dans le pied de page du site : statut
-  [À CONFIRMER] auprès d'Isuf — interdiction de l'utiliser dans un
-  texte tant qu'il n'est pas confirmé
+- Certification RGE : confirmée par Isuf (14/08/2026) — utilisable
+  dans les textes, sans en faire une promesse d'aides ou de
+  performance énergétique
 - Note Google, nombre d'avis, témoignages : [À CONFIRMER] — jamais de
   chiffre de mémoire
 
