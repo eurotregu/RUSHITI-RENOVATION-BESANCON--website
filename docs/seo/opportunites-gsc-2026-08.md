@@ -32,12 +32,15 @@ cluster « entreprise de peinture besançon » avec zéro clic**.
    Et la vraie demande du secteur est **« crépi » : 191 impressions**
    (« crepissage besançon » 113, « crépis besançon » 78, positions 20-23) —
    la section crépi ajoutée en production est exactement au bon endroit.
-3. **Le dépôt git est en retard sur la production** pour les pages piliers
-   (constat détaillé dans le PR #11) : les snippets live des piliers sont déjà
-   réécrits (« devis sous 48 h », « 34 avis 4,7/5 »), **postérieurs à la
-   période mesurée**. Les zéro-clics du point CTR ci-dessous reflètent les
-   ANCIENS snippets : la correction est déjà posée, il reste à la **mesurer**
-   (re-export dans 4-6 semaines).
+3. **L'écart git ↔ production est élucidé** : la production est déployée
+   depuis `main`, mais un **worker Cloudflare** (`image-license-jsonld`,
+   route `*rushiti-renovation.fr/*`) réécrit le HTML à chaque requête —
+   titres CTR du 18/08, bascule `noindex→index` sur 1 229 pages, section
+   crépi, « 34 avis », horaires. Ces snippets réécrits sont **postérieurs à
+   la période mesurée** : les zéro-clics du point CTR ci-dessous reflètent
+   les ANCIENS snippets ; la correction est posée, il reste à la **mesurer**
+   (re-export dans 4-6 semaines). Le PR #12 du dépôt du site rapatrie cette
+   couche de corrections dans les sources git.
 
 ## Synthèse croisée priorisée
 
@@ -186,13 +189,15 @@ la consolidation corrige.
   tiers — à ignorer, aucune action.
 - **Accueil vs page peinture sur « peintre besançon »** : si l'export croisé
   confirme l'alternance → **rushiti-cannibal-check**.
-- **Dépôt git en retard sur la production** (pages piliers) : à resynchroniser
-  avant tout déploiement complet — détail dans le PR #11 du dépôt du site.
+- **Couche de corrections à l'edge** : les écarts git ↔ production venaient
+  d'un worker Cloudflare, pas d'un dossier hors git — rapatriement dans les
+  sources proposé par le PR #12 du dépôt du site.
 
 ## Plan d'action
 
-1. **Poser le PR #11** (75 pages papier peint) — après resynchronisation
-   git ↔ production, redéploiement complet Cloudflare Pages.
+1. **Merger le PR #12** (rapatriement des corrections du worker dans git),
+   puis le **PR #11** (75 pages papier peint) — le déploiement Cloudflare
+   Pages suit automatiquement depuis `main`.
 2. **Enrichir l'article moisissure** (H2 « malgré la VMC », bloc conversion,
    2 liens vers dégât des eaux et peinture) — une demi-journée, plus gros
    levier du moment.
