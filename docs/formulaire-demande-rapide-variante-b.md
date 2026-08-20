@@ -1,11 +1,39 @@
 # Formulaire « Demande rapide » — variante B
 
-Bloc à coller sur les pages service qui ne font pas partie de ce dépôt
-(`papier-peint-besancon`, `peinture-interieure-besancon`, `degat-des-eaux-besancon`…).
-Il est autonome : styles, balisage et script sont indépendants du reste de la page.
+Bloc à coller sur les pages service. Deux contextes, deux versions du même
+formulaire :
 
-Version appliquée à `index.html` de ce dépôt : mêmes champs, mais elle réutilise
-les classes existantes de `css/style.css` (`.contact-form`, `.form-group`, `.form-row`).
+| Où | Envoi | Où trouver le code |
+|---|---|---|
+| **rushiti-renovation.fr** (dépôt `eurotregu/rushiti-renovation`, Cloudflare Pages) | **Web3Forms** : la demande arrive par e-mail sans dépendre de la messagerie du visiteur, puis redirection vers `/merci` | copier le bloc d'une page existante, par ex. `papier-peint-besancon.html` |
+| **Ce dépôt** (copie GitHub Pages, `noindex`) | messagerie pré-remplie (`mailto`) — suffisant pour une copie non indexée | `index.html` + `js/main.js`, ou le bloc autonome ci-dessous |
+
+> **Attention à ne pas se tromper de mécanique.** Les pages en production ne
+> passent pas par `mailto` : elles postent vers Web3Forms avec une clé, un
+> objet propre à chaque page et une redirection vers `/merci`. Coller le bloc
+> `mailto` ci-dessous sur une page de production reviendrait à **dégrader** le
+> formulaire existant.
+
+## Mise à niveau préparée pour la production (PR `eurotregu/rushiti-renovation` #10)
+
+Sur les 27 pages à formulaire de rushiti-renovation.fr, en attente de fusion —
+un déploiement de prévisualisation Cloudflare Pages permet de la voir avant :
+
+- **Styles créés de zéro** : les formulaires Web3Forms n'avaient aucune règle
+  CSS — labels collés à des champs bruts, projet en police à chasse fixe. La
+  grille, les champs, les labels, le focus, la case à cocher et le bandeau de
+  réassurance sont désormais dans `assets/css/s971fb819.css`.
+- Case de consentement RGPD obligatoire (`consentement=oui` part dans l'e-mail).
+- E-mail et code postal / commune obligatoires.
+- `inputmode="tel"` : clavier numérique sur mobile.
+- Bandeau de réassurance sous le bouton.
+- `merci.html` : l'événement Meta `Lead` se déclenche à l'arrivée sur la page
+  de remerciement — auparavant, une demande réellement envoyée n'était comptée
+  nulle part.
+
+## Version `mailto` autonome (copie GitHub Pages, maquettes, tests)
+
+Le reste de ce document décrit la version indépendante de tout service tiers.
 
 ## Ce que la variante B contient
 
@@ -161,15 +189,16 @@ dans l'e-mail est repris de son `<label>`, donc renommer un champ suffit.
 </script>
 ```
 
-## À décider avant de généraliser
+## Points restés ouverts
 
-1. **Envoi par messagerie ou par serveur.** Le `mailto` ne coûte rien mais ne laisse aucune
-   trace : si le visiteur ferme sa messagerie, la demande est perdue et vous ne le saurez pas.
-   Un envoi côté serveur (fonction Cloudflare Pages ou service de formulaire) règle le problème
-   et permet un accusé de réception automatique. À arbitrer avec Isuf.
-2. **Texte de la case de consentement et mentions légales.** Le texte proposé est un point de
-   départ : la page mentions légales doit indiquer qui traite les données, pour quelle finalité,
-   combien de temps elles sont conservées et comment les faire supprimer.
-3. **Suivi des conversions.** L'appel `fbq('track', 'Lead')` n'est déclenché que si le pixel Meta
-   est chargé, donc uniquement après acceptation des cookies. Sans cela, les demandes envoyées
-   par formulaire ne sont comptées nulle part.
+1. **Texte du consentement et mentions légales.** Le texte de la case est un
+   point de départ : la page mentions légales doit indiquer qui traite les
+   données, pour quelle finalité, combien de temps elles sont conservées et
+   comment les faire supprimer. À valider par Isuf.
+2. **E-mail obligatoire.** La variante B rend l'e-mail obligatoire alors qu'il
+   était facultatif : un devis écrit se transmet par e-mail, mais cela peut
+   coûter quelques demandes de visiteurs qui ne laissaient qu'un numéro.
+   Retirer le `required` du champ `name="email"` suffit à revenir en arrière.
+3. **Suivi des conversions.** L'événement `Lead` ne part qu'après acceptation
+   des cookies (pixel Meta chargé). À vérifier dans Events Manager après le
+   déploiement en production.
