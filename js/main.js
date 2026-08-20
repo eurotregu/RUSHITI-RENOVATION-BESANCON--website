@@ -4,47 +4,95 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Navbar scroll effect ---
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // --- Navbar & back-to-top on scroll (un seul écouteur, throttlé en rAF) ---
     const navbar = document.getElementById('navbar');
     const backToTop = document.getElementById('backToTop');
-
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        navbar.classList.toggle('scrolled', scrollY > 50);
-        backToTop.classList.toggle('visible', scrollY > 500);
-    });
-
-    // --- Mobile nav toggle ---
     const navToggle = document.getElementById('navToggle');
     const navLinks = document.getElementById('navLinks');
+    const sections = document.querySelectorAll('section[id]');
 
-    navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('active');
-        navLinks.classList.toggle('active');
-        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-    });
+    let scrollQueued = false;
 
-    navLinks.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = '';
+    function onScroll() {
+        const scrollY = window.scrollY;
+
+        if (navbar) navbar.classList.toggle('scrolled', scrollY > 50);
+        if (backToTop) backToTop.classList.toggle('visible', scrollY > 500);
+
+        // Lien de navigation actif
+        if (navLinks) {
+            let current = '';
+            sections.forEach(section => {
+                if (scrollY >= section.offsetTop - 120) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.classList.toggle('active-link', link.getAttribute('href') === '#' + current);
+            });
+        }
+
+        scrollQueued = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (scrollQueued) return;
+        scrollQueued = true;
+        requestAnimationFrame(onScroll);
+    }, { passive: true });
+
+    onScroll();
+
+    // --- Mobile nav toggle ---
+    if (navToggle && navLinks) {
+        const setNav = (open) => {
+            navToggle.classList.toggle('active', open);
+            navLinks.classList.toggle('active', open);
+            navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            navToggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+            document.body.style.overflow = open ? 'hidden' : '';
+        };
+
+        navToggle.addEventListener('click', () => {
+            setNav(!navLinks.classList.contains('active'));
         });
-    });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => setNav(false));
+        });
+
+        // Échap ferme le menu et rend le focus au bouton.
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                setNav(false);
+                navToggle.focus();
+            }
+        });
+    }
 
     // --- Back to top ---
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    if (backToTop) {
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+        });
+    }
 
-    // --- Stat counter animation ---
-    const counters = document.querySelectorAll('.stat-number');
-    let countersDone = false;
+    // --- Compteur du hero ---
+    // Uniquement les éléments portant un data-target numérique : sans ce filtre,
+    // parseInt(null) donne NaN et la boucle d'animation ne se termine jamais.
+    const counters = Array.from(document.querySelectorAll('.stat-number'))
+        .map(el => ({ el, target: parseInt(el.getAttribute('data-target'), 10) }))
+        .filter(c => Number.isFinite(c.target));
 
     function animateCounters() {
-        if (countersDone) return;
-        counters.forEach(counter => {
-            const target = parseInt(counter.getAttribute('data-target'));
+        counters.forEach(({ el, target }) => {
+            if (reduceMotion) {
+                el.textContent = target;
+                return;
+            }
+
             const duration = 2000;
             const step = target / (duration / 16);
             let current = 0;
@@ -52,20 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
             const update = () => {
                 current += step;
                 if (current >= target) {
-                    counter.textContent = target;
+                    el.textContent = target;
                     return;
                 }
-                counter.textContent = Math.floor(current);
+                el.textContent = Math.floor(current);
                 requestAnimationFrame(update);
             };
             update();
         });
-        countersDone = true;
     }
 
-    // Observe hero stats for counter animation
     const statsSection = document.querySelector('.hero-stats');
-    if (statsSection) {
+    if (statsSection && counters.length) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -77,93 +123,38 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(statsSection);
     }
 
-    // --- Gallery Filter ---
+    // --- Filtre de la galerie ---
     const filterBtns = document.querySelectorAll('.filter-btn');
     const galleryItems = document.querySelectorAll('.gallery-item');
 
     filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            filterBtns.forEach(b => b.classList.remove('active'));
+            filterBtns.forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
             btn.classList.add('active');
+            btn.setAttribute('aria-pressed', 'true');
 
             const filter = btn.getAttribute('data-filter');
 
             galleryItems.forEach(item => {
-                if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                    item.classList.remove('hidden');
+                const shown = filter === 'all' || item.getAttribute('data-category') === filter;
+                item.classList.toggle('hidden', !shown);
+                // Masqué visuellement ET retiré de l'ordre de tabulation et des
+                // lecteurs d'écran, sinon le contenu filtré reste atteignable.
+                item.hidden = !shown;
+                if (shown && !reduceMotion) {
                     item.style.animation = 'fadeIn 0.4s ease forwards';
-                } else {
-                    item.classList.add('hidden');
                 }
             });
         });
     });
 
-    // --- Testimonial Slider ---
-    const track = document.getElementById('testimonialTrack');
-    const dotsContainer = document.getElementById('testimonialDots');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
-    if (track) {
-        const cards = track.querySelectorAll('.testimonial-card');
-        let currentIndex = 0;
-        let slidesPerView = window.innerWidth >= 768 ? 2 : 1;
-        const totalSlides = Math.ceil(cards.length / slidesPerView);
-
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('span');
-                dot.className = 'dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => goToSlide(i));
-                dotsContainer.appendChild(dot);
-            }
-        }
-
-        function goToSlide(index) {
-            currentIndex = index;
-            const offset = -(100 / slidesPerView) * currentIndex * slidesPerView;
-            track.style.transform = `translateX(${offset}%)`;
-            const dots = dotsContainer.querySelectorAll('.dot');
-            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
-        }
-
-        prevBtn.addEventListener('click', () => {
-            goToSlide(currentIndex > 0 ? currentIndex - 1 : totalSlides - 1);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            goToSlide(currentIndex < totalSlides - 1 ? currentIndex + 1 : 0);
-        });
-
-        // Auto slide
-        let autoSlide = setInterval(() => {
-            goToSlide(currentIndex < totalSlides - 1 ? currentIndex + 1 : 0);
-        }, 5000);
-
-        track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-        track.addEventListener('mouseleave', () => {
-            autoSlide = setInterval(() => {
-                goToSlide(currentIndex < totalSlides - 1 ? currentIndex + 1 : 0);
-            }, 5000);
-        });
-
-        window.addEventListener('resize', () => {
-            const newSlidesPerView = window.innerWidth >= 768 ? 2 : 1;
-            if (newSlidesPerView !== slidesPerView) {
-                slidesPerView = newSlidesPerView;
-                currentIndex = 0;
-                createDots();
-                goToSlide(0);
-            }
-        });
-
-        createDots();
-    }
-
-    // --- Contact Form (ouvre le client email avec la demande pre-remplie) ---
+    // --- Formulaire de contact (ouvre le client email avec la demande pré-remplie) ---
     const form = document.getElementById('contactForm');
+    const formStatus = document.getElementById('formStatus');
+
     if (form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -196,49 +187,38 @@ document.addEventListener('DOMContentLoaded', () => {
             setTimeout(() => {
                 btn.textContent = originalText;
                 btn.disabled = false;
+                // Aucun retour n'est possible depuis un lien mailto : on affiche
+                // systématiquement l'adresse pour les visiteurs sans client mail.
+                if (formStatus) {
+                    formStatus.textContent = 'Votre messagerie devrait s’ouvrir avec la demande pré-remplie. '
+                        + 'Si ce n’est pas le cas, écrivez-nous à contact@rushiti-renovation.fr '
+                        + 'ou appelez le 07 60 27 98 97.';
+                }
             }, 3000);
         });
     }
 
-    // --- Smooth reveal on scroll ---
-    const revealElements = document.querySelectorAll('.service-card, .step, .info-card, .gallery-item');
+    // --- Apparition au défilement ---
+    const revealElements = document.querySelectorAll('.service-card, .step, .info-card, .gallery-item, .engagement-card');
 
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                revealObserver.unobserve(entry.target);
-            }
+    if (!reduceMotion) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+        revealElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            revealObserver.observe(el);
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
-
-    revealElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        revealObserver.observe(el);
-    });
-
-    // --- Active nav link on scroll ---
-    const sections = document.querySelectorAll('section[id]');
-
-    window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop - 120;
-            if (window.scrollY >= sectionTop) {
-                current = section.getAttribute('id');
-            }
-        });
-
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.classList.remove('active-link');
-            if (link.getAttribute('href') === '#' + current) {
-                link.classList.add('active-link');
-            }
-        });
-    });
+    }
 });
 
 // Fade in animation keyframe
