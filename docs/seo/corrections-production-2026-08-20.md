@@ -16,16 +16,16 @@ générées `/{service}-{commune}` (18 services × 76 communes) et 27 pages
 
 ## Tableau de bord
 
-| # | Constat | Gravité | Effort | Décision d'Isuf requise |
+| # | Constat | Gravité | Effort | Décision d'Isuf |
 |---|---|---|---|---|
 | 1 | Mentions légales : la clause cookies contredit le site | 🔴 P0 | 1 fichier | non |
 | 2 | Fautes de français systémiques dans les pages générées | 🔴 P0 | générateur | non |
-| 3 | Horaires : trois versions contradictoires en ligne | 🔴 P0 | générateur | **oui** |
-| 4 | Mention « Qualification RGE » sur une seule page | 🟠 P1 | 1 page | **oui** |
+| 3 | Horaires : trois versions contradictoires en ligne | 🔴 P0 | générateur | ✅ tranchée |
+| 4 | Mention « Qualification RGE » sur une seule page | 🟠 P1 | 1 page | ✅ retrait + vérif |
 | 5 | `llms.txt` annonce 29 avis, le site en annonce 34 | 🟠 P1 | 1 fichier | non |
 | 6 | `sitemap-communes.xml` vide et déclaré deux fois | 🟠 P1 | 2 fichiers | non |
-| 7 | `/organic-ehpad-besancon` redirige vers un sujet sans rapport | 🟠 P1 | 1 règle | **oui** |
-| 8 | « devis sous 48 h » promis en SERP, absent des pages | 🟠 P1 | métadonnées | **oui** |
+| 7 | `/organic-ehpad-besancon` redirige vers un sujet sans rapport | 🟠 P1 | 1 règle | ✅ tranchée |
+| 8 | « devis sous 48 h » promis en SERP, absent des pages | 🟠 P1 | métadonnées + pages | ✅ tranchée |
 | 9 | Titre de CTA hors sujet sur la page syndics | 🟡 P2 | 1 page | non |
 | 10 | Apostrophe échappée dans un `og:title` | 🟡 P2 | 1 page | non |
 | 11 | Meta description d'accueil à 157 caractères | 🟡 P2 | 1 page | non |
@@ -158,15 +158,49 @@ C'est un signal de fiabilité important : les horaires sont l'une des données
 que Google recoupe entre le site et la fiche Google Business Profile, et que les
 moteurs IA citent directement.
 
-**Décision requise d'Isuf : quelle est la plage réelle ?**
+**Décision d'Isuf (20/08/2026) : les deux plages sont vraies, mais ne
+désignent pas la même chose.** Il ne s'agit donc pas de choisir, mais de les
+distinguer explicitement — c'est aujourd'hui leur confusion qui fait
+contradiction.
 
-- Si **8h – 18h du lundi au vendredi** → corriger le pied de page du gabarit.
-- Si **7h – 20h30 + samedi + dimanche** (plage d'appel élargie) → corriger
-  `/contact` et `llms.txt`, et vérifier que la fiche Google dit la même chose.
+Lecture retenue, à confirmer d'un mot par Isuf avant mise en ligne :
 
-Une fois la valeur tranchée, elle doit être écrite **au même endroit unique** et
-reprise partout : pied de page, `/contact`, `llms.txt`, JSON-LD (cf. #12), fiche
-Google Business Profile.
+| Notion | Plage | Où l'afficher |
+|---|---|---|
+| **Joignabilité téléphonique** | 7h – 20h30 en semaine, samedi 8h – 20h30, dimanche 9h – 17h30 | Pied de page, à côté du numéro |
+| **Horaires d'intervention et de bureau** | Lundi – vendredi, 8h – 18h | `/contact`, `llms.txt`, JSON-LD, fiche Google |
+
+### Texte à poser
+
+**Pied de page** (remplacer la ligne d'horaires actuelle) :
+
+```
+Joignables par téléphone : lun – ven 7h – 20h30 · sam 8h – 20h30 · dim 9h – 17h30
+Interventions et bureau : lun – ven 8h – 18h
+```
+
+**Bloc contact de `/contact`** (remplacer le bloc « Horaires ») :
+
+```
+Interventions et bureau : lundi – vendredi, 8h – 18h
+Téléphone : 7j/7, lun – ven 7h – 20h30, sam 8h – 20h30, dim 9h – 17h30
+```
+
+**`llms.txt`** (remplacer la ligne « Horaires ») :
+
+```
+- Horaires d'intervention : du lundi au vendredi, 8h–18h
+- Joignabilité téléphonique : 7j/7 — lun-ven 7h–20h30, sam 8h–20h30, dim 9h–17h30
+```
+
+**JSON-LD** : `openingHoursSpecification` reçoit les **horaires d'intervention**
+(lun – ven 8h – 18h, cf. #12), pas la plage d'appel. La joignabilité élargie est
+un argument commercial qui se dit en texte, pas une donnée d'ouverture.
+
+> ⚠️ La **fiche Google Business Profile** doit porter la même chose que le
+> JSON-LD : Google recoupe les deux. Si la fiche affiche aujourd'hui la plage
+> large, l'aligner sur 8h – 18h et mentionner la joignabilité élargie dans la
+> description de l'établissement.
 
 ---
 
@@ -185,18 +219,46 @@ RGE est un label **réglementé et vérifiable publiquement**, qui conditionne
 l'accès à la plupart des aides. L'afficher sans le détenir expose à une
 qualification de pratique commerciale trompeuse.
 
-**Décision requise d'Isuf :**
+**Décision d'Isuf (20/08/2026) : à vérifier — la mention est retirée par
+précaution en attendant confirmation.**
 
-- **Si la qualification est détenue** : l'afficher partout où elle a de la
+### Action immédiate
+
+Retirer **« Qualification RGE »** de la barre de confiance de
+`/isolation-besancon`. Remplacer par une mention vérifiée, alignée sur le reste
+du site :
+
+```
+Mise en œuvre conforme aux DTU
+```
+
+### Vérification officielle à mener
+
+La qualification RGE est publique et se vérifie sur le SIRET, gratuitement :
+
+- **Annuaire France Rénov'** : https://france-renov.gouv.fr/annuaires-professionnels/artisan-rge-architecte
+- **Open data ADEME** (même source, interrogeable directement) :
+  `https://data.ademe.fr/data-fair/api/v1/datasets/liste-des-entreprises-rge-2/lines?q=905214631`
+
+**Résultat préliminaire du 20/08/2026 — à confirmer :** l'appel ci-dessus sur le
+SIREN `905214631` a répondu `{"total":0,"results":[]}` (HTTP 200), c'est-à-dire
+aucune qualification RGE trouvée. **Ce résultat n'est pas concluant en l'état** :
+la requête de contrôle qui aurait prouvé que le paramètre de recherche fonctionne
+n'a pas pu être exécutée (service d'accès web indisponible au moment du test). Un
+`total: 0` peut donc aussi bien signifier « aucune qualification » que « requête
+mal formée ». À rejouer, avec une recherche de contrôle sur une entreprise
+connue comme RGE.
+
+- **Si la vérification confirme l'absence de RGE** : la mention reste retirée,
+  définitivement.
+- **Si une qualification est trouvée** : la réafficher partout où elle a de la
   valeur (accueil, `/a-propos`, `llms.txt`, pages isolation), avec l'organisme
-  et le domaine couvert — c'est un argument commercial fort, aujourd'hui
-  quasiment invisible.
-- **Si elle ne l'est pas** : retirer la mention de `/isolation-besancon`
-  immédiatement.
+  certificateur, le domaine de travaux couvert et la date de validité — c'est un
+  argument commercial fort, aujourd'hui quasiment invisible.
 
 Note : la FAQ de cette même page indique, à propos des aides, « Nous ne nous
-substituons pas aux organismes officiels » sans invoquer RGE — ce qui est
-cohérent avec l'hypothèse d'une mention posée par erreur.
+substituons pas aux organismes officiels » sans invoquer RGE — cohérent avec
+l'hypothèse d'une mention posée par erreur.
 
 ---
 
@@ -268,19 +330,36 @@ Google traite une redirection vers une page hors sujet comme un *soft 404* : le
 lien entrant ne transmet rien et l'URL sort de l'index sans que la nouvelle
 page en profite.
 
-**Décision requise d'Isuf : la cible EHPAD / maisons de retraite est-elle
-toujours travaillée ?**
+**Décision d'Isuf (20/08/2026) : la cible EHPAD est conservée — la page est
+republiée sous une URL propre.**
 
-- **Oui** → publier la page sous `/ehpad-besancon` et rediriger vers elle :
+### Actions
 
-  ```
-  /organic-ehpad-besancon/ /ehpad-besancon 301
-  /organic-ehpad-besancon  /ehpad-besancon 301
-  ```
+1. Republier le contenu EHPAD sous **`/ehpad-besancon`** (sans le préfixe
+   `organic-`, qui était un artefact de campagne).
+2. Remplacer la redirection actuelle vers `/platrerie-besancon` par une 301 vers
+   la nouvelle page. Sur Cloudflare Pages, fichier `_redirects` :
 
-- **Non** → laisser l'URL répondre en 404 (ou 410). C'est préférable à une
-  redirection trompeuse : le 404 du site est déjà bien fait (statut HTTP 404
-  correct, `noindex, follow`, et six liens de rattrapage vers les services).
+```
+/organic-ehpad-besancon/ /ehpad-besancon 301
+/organic-ehpad-besancon  /ehpad-besancon 301
+```
+
+3. Ajouter `/ehpad-besancon` au sitemap, et la lier depuis les pages qui la
+   servent : `/renovation-syndic-gestionnaire-besancon` (même public
+   professionnel), `/peinture-interieure-besancon` et `/revetements-sol-besancon`.
+4. Vérifier au crawl qu'aucune autre URL ne porte le préfixe `organic-` ou
+   `paid-` : si le générateur a produit ce préfixe une fois, il a pu le faire
+   ailleurs.
+
+Le title relevé en SERP à l'époque — « EHPAD & maison de retraite à Besançon —
+RUSHITI Rénovation » — reste bon, il suffit de le porter sur la nouvelle URL.
+
+> À surveiller : une page EHPAD s'adresse à des directeurs d'établissement, pas
+> à des particuliers. L'angle qui convertit y est la contrainte de site occupé —
+> chantier en milieu de soin, phasage par zone, propreté, nuisances sonores,
+> continuité de service. C'est le même argumentaire que la page syndics, appliqué
+> à un établissement de santé.
 
 ---
 
@@ -301,16 +380,45 @@ place », sans jamais citer 48 h.
 Un visiteur qui clique sur la promesse ne la retrouve pas : c'est une déception
 au premier écran, et un engagement commercial pris sans être tenu par écrit.
 
-**Décision requise d'Isuf : le délai de 48 h est-il tenable ?**
+**Décision d'Isuf (20/08/2026) : le délai est tenable — il est donc assumé
+dans le texte des pages, et non plus seulement dans la SERP.**
 
-- **Oui** → l'assumer dans le corps des pages (bloc méthode et FAQ), avec sa
-  formulation exacte : 48 h après la visite ? après le premier contact ? jours
-  ouvrés ? Et l'harmoniser sur les pages qui ne le portent pas
-  (`/degat-des-eaux-besancon`, `/cloisons-besancon`).
-- **Non** → le retirer des titles et metas et le remplacer par ce que le site
-  tient réellement, par exemple « Diagnostic gratuit sur site ».
+Reste un point à préciser d'un mot : **48 h après la visite technique**, ou
+**48 h après le premier contact** ? Les textes ci-dessous retiennent *après la
+visite*, seule version opérationnellement cohérente — un devis détaillé suppose
+d'avoir vu les supports. Si c'est le premier contact qui compte, remplacer la
+formule partout.
 
-Dans les deux cas : **un seul message**, en SERP comme sur la page.
+### Texte à poser dans le bloc méthode (toutes les pages service)
+
+```
+Devis sous 48 h. Après la visite technique, vous recevez un devis détaillé
+poste par poste sous 48 heures ouvrées — pas une fourchette au téléphone,
+un chiffrage qui correspond à ce que nous avons vu sur place.
+```
+
+### Question à ajouter aux FAQ des pages service
+
+```
+Sous quel délai reçoit-on le devis ?
+Sous 48 heures ouvrées après la visite technique. La visite et le devis sont
+gratuits et sans engagement. Ce délai nous permet de chiffrer poste par poste
+à partir de l'état réel des supports relevé sur place.
+```
+
+### Harmonisation
+
+- Ajouter la promesse aux metas des pages qui ne la portent pas encore :
+  `/degat-des-eaux-besancon`, `/cloisons-besancon`.
+- **Corriger la FAQ de `/renovation-syndic-gestionnaire-besancon`**, qui répond
+  aujourd'hui « Nous convenons rapidement d'une visite sur place » sans jamais
+  citer 48 h — elle contredit la promesse affichée en SERP. Y porter la même
+  réponse que ci-dessus.
+
+> Une promesse chiffrée tenue vaut mieux qu'une promesse vague : c'est
+> exactement ce que compare un syndic entre deux devis. Mais elle n'a de valeur
+> que si elle est écrite au même endroit que le reste — sinon le visiteur qui a
+> cliqué sur « devis sous 48 h » ne la retrouve nulle part et doute du reste.
 
 ---
 
@@ -510,15 +618,22 @@ il faudra la reporter ici aussi.
 
 ## Ordre d'exécution recommandé
 
+Les quatre arbitrages qui bloquaient ont été rendus par Isuf le 20/08/2026
+(constats #3, #4, #7, #8). Tout ce qui suit est désormais exécutable.
+
 1. **Section 7 des mentions légales** (#1) — un seul fichier, exposition
-   juridique, aucune décision à prendre.
-2. **Trancher les horaires** (#3) puis les propager partout, JSON-LD compris (#12).
-3. **Confirmer ou retirer la mention RGE** (#4) — une réponse oui/non.
-4. **`llms.txt` : 29 → 34 avis** (#5) et **sitemap vide** (#6) — deux corrections
+   juridique, texte de remplacement déjà rédigé.
+2. **Retirer la mention RGE** de `/isolation-besancon` (#4) — une ligne, à faire
+   tout de suite ; la vérification officielle par SIRET suit et décidera d'un
+   éventuel retour.
+3. **`llms.txt` : 29 → 34 avis** (#5) et **sitemap vide** (#6) — deux corrections
    de dix minutes.
+4. **Poser les horaires distingués** (#3) — pied de page, `/contact`, `llms.txt`,
+   JSON-LD (#12), puis aligner la fiche Google Business Profile.
 5. **Corriger les chaînes fautives du générateur** (#2) puis régénérer, et
-   recontrôler sur un nouvel échantillon.
-6. **Arbitrer la promesse « 48 h »** (#8) et la redirection EHPAD (#7).
+   recontrôler sur un nouvel échantillon d'une quinzaine de pages.
+6. **Assumer le délai 48 h dans le texte** (#8) et **republier `/ehpad-besancon`**
+   avec sa 301 (#7).
 7. Correctifs de détail : titre de CTA syndics (#9), `og:title` (#10), meta
    d'accueil (#11).
 8. **Stratégie pages communes** (#13) — chantier de fond, à mener une fois le
@@ -534,3 +649,12 @@ il faudra la reporter ici aussi.
   une page commune, en mobile.
 - **Statut exact de la redirection** `/organic-ehpad-besancon` (301 ou 302) :
   la redirection a été constatée, son code HTTP n'a pas pu être isolé.
+- **Contrôle RGE à rejouer** (#4) : le premier appel a renvoyé « aucun
+  résultat » sur le SIREN, mais la requête de contrôle qui aurait validé la
+  méthode n'a pas pu être exécutée. Résultat non concluant tant qu'il n'est pas
+  rejoué.
+- **Accès au dépôt de la production** : les corrections ci-dessus portent sur les
+  fichiers du site en ligne, dont la source est le dépôt privé
+  `eurotregu/rushiti-renovation` — distinct de ce dépôt-ci. Son rattachement à la
+  session a été refusé par le garde-fou de permissions ; sans lui, ces
+  corrections restent rédigées mais non appliquées.
