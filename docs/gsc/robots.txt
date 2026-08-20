@@ -1,0 +1,9 @@
+# robots.txt — RUSHITI Rénovation
+# Tous les robots sont les bienvenus : moteurs de recherche et moteurs de réponse IA.
+# « User-agent: * / Allow: / » autorise déjà l'ensemble des robots (inutile de les lister un par un).
+# Résumé du site pour les IA : /llms.txt
+
+User-agent: *
+Allow: /
+
+Sitemap: https://rushiti-renovation.fr/sitemap.xml
