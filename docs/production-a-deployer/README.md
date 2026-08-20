@@ -9,11 +9,43 @@ racine de `rushiti-renovation.fr`, via le déploiement Cloudflare Pages habituel
 Ils ont été construits à partir du contenu réellement en ligne le 20/08/2026, en
 ne modifiant que les lignes listées ci-dessous.
 
+| Fichier | Destination | Ce qui change | Statut |
+|---|---|---|---|
+| `llms.txt` | `/llms.txt` | 3 lignes : avis 29 → **34** (×2), horaires | ✅ à déployer |
+| `robots.txt` | — | 1 ligne retirée : le sitemap vide | ⛔ **inutile — voir ci-dessous** |
+| `sitemap.xml` | — | 1 bloc `<sitemap>` retiré | ⛔ **inutile — voir ci-dessous** |
+
+> ## ⛔ Correction du 20/08/2026 (soir) — `robots.txt` et `sitemap.xml` sont à ignorer
+>
+> Ces deux fichiers ont été préparés avant l'inspection de l'infrastructure
+> Cloudflare. Ils ne serviraient à rien : **un Worker intercepte toutes les
+> requêtes** du site (`image-license-jsonld`, routé sur
+> `*rushiti-renovation.fr/*`) et c'est lui, pas le dépôt, qui produit
+> `robots.txt` et les sitemaps.
+>
+> Ce que fait le Worker, relevé dans son code :
+>
+> | Chemin | Comportement |
+> |---|---|
+> | `/sitemap.xml` | **fabrique** un `<sitemapindex>` à 2 enfants — le fichier du dépôt est ignoré |
+> | `/sitemap-pages.xml` | proxy vers le `/sitemap.xml` du dépôt |
+> | `/robots.txt` | prend celui du dépôt et lui **ajoute** la ligne `sitemap-communes.xml` |
+> | `/sitemap-communes.xml` | construit un `<urlset>` en filtrant le sitemap du dépôt |
+>
+> Or le dépôt de production est **déjà correct** : son `robots.txt` ne déclare
+> qu'un seul sitemap, et son `sitemap.xml` contient les **1 396 URL**, communes
+> comprises — depuis le commit du 20/08 à 10:54, « Sitemap : rapatrie les
+> 1227 URL de communes depuis le Worker ». C'est précisément pour ça que
+> `/sitemap-communes.xml` répond vide : le filtre du Worker ne trouve plus rien
+> à extraire.
+>
+> **Le correctif est donc dans le Worker**, pas dans un fichier : retirer les
+> quatre gestionnaires ci-dessus pour que le dépôt soit servi tel quel. Les deux
+> fichiers sont conservés ici comme référence de la cible, pas comme livrable.
+
 | Fichier | Destination | Ce qui change |
 |---|---|---|
 | `llms.txt` | `/llms.txt` | 3 lignes : avis 29 → **34** (×2), horaires |
-| `robots.txt` | `/robots.txt` | 1 ligne retirée : le sitemap vide |
-| `sitemap.xml` | `/sitemap.xml` | 1 bloc `<sitemap>` retiré : le sitemap vide |
 
 ## Détail des changements
 
@@ -101,14 +133,36 @@ suffisent.
 Contrôle après déploiement : la chaîne ne doit plus apparaître sur
 `/isolation-besancon` **ni** sur deux pages commune tirées au hasard.
 
-### 3. `/desamiantage-sol-besancon` — supprimer la redirection
+### 3. `/desamiantage-sol-besancon` — il n'y a aucune règle à supprimer
 
-L'URL redirige aujourd'hui vers `/revetements-sol-besancon` (parquet, PVC,
-ragréage). La certification étant détenue, la redirection prive une prestation
-certifiée de toute page, et Google lit une redirection hors sujet comme un
+**Correction du 20/08 (soir).** Cette URL ne fait l'objet d'aucune règle de
+redirection : le fichier `desamiantage-sol-besancon.html` **n'existe pas** dans
+le dépôt de production, donc l'URL répond 404 — et le Worker rattrape tous les
+404 avec un **devineur par mots-clés** (`legacyTarget`) qui renvoie un 301 vers
+la première page dont un mot-clé apparaît dans l'URL. « sol » →
+`/revetements-sol-besancon`.
+
+Le même mécanisme explique les trois autres cas relevés le matin :
+
+| URL en 404 | Mot-clé qui déclenche | Cible devinée |
+|---|---|---|
+| `/desamiantage-sol-besancon` | `sol` | `/revetements-sol-besancon` |
+| `/peinture-plafond-batiment-besancon` | `plafond`, testé avant `peinture` | `/faux-plafonds-besancon` |
+| `/enduit-chaux-besancon` | `enduit` | `/ratissage-enduit-besancon` |
+| `/organic-ehpad-besancon` | `organic` | `/platrerie-besancon` |
+
+Ce n'est donc pas un problème de quatre URL mais un comportement **systémique** :
+toute URL morte ou mal orthographiée contenant « sol », « peinture »,
+« plafond »… reçoit un 301 vers une page sans rapport, que Google traite en
 soft 404.
 
-Supprimer la règle, puis publier la page. **La rédaction attend les références
+**Conséquence pratique, et elle est bonne :** publier la page désamiantage fait
+disparaître le 404, donc le mauvais 301, sans toucher au Worker.
+
+**Décision distincte à prendre** (elle dépasse le désamiantage) : rendre le
+rattrapage 404 conservateur — ne rediriger que sur une correspondance certaine,
+sinon servir un vrai 404. Ce changement touche **chaque requête du site** : il
+n'est pas posé sans validation explicite d'Isuf. **La rédaction attend les références
 du certificat** — périmètre SS3/SS4, organisme, numéro, validité : elles
 déterminent le contenu autant que la conformité de l'affirmation.
 
@@ -117,17 +171,18 @@ déterminent le contenu autant que la conformité de l'affirmation.
 ## Ordre de déploiement
 
 1. Horaires `/contact` + JSON-LD + fiche Google
-2. Retrait RGE du gabarit isolation (152 pages)
-3. `llms.txt`, `robots.txt`, `sitemap.xml` (les 3 fichiers de ce dossier)
-4. Suppression de la redirection désamiantage
-5. Page désamiantage — bloquée tant que les références manquent
+2. Retrait RGE des 152 pages isolation
+3. `llms.txt`
+4. Page désamiantage — supprime d'elle-même le mauvais 301 ; bloquée tant que les références du certificat manquent
+5. Worker : gestionnaires sitemap/robots, puis rattrapage 404 — sur décision d'Isuf
 
 ## Vérification après mise en ligne
 
 ```
 /llms.txt        → « 34 avis », horaires complets, plus aucun « 8h–18h »
-/robots.txt      → une seule ligne Sitemap:
-/sitemap.xml     → un seul bloc <sitemap>
 /contact         → une seule version des horaires sur la page
 /isolation-thise → plus de « Qualification RGE »
+(après intervention sur le Worker uniquement :)
+/robots.txt      → une seule ligne Sitemap:
+/sitemap.xml     → les 1 396 URL directement, plus d'index à 2 enfants
 ```

@@ -17,6 +17,33 @@ demandent le compte Google d'Isuf : elles ne peuvent pas être automatisées.
 
 ---
 
+> ## ⛔ Correction du 20/08/2026 (soir) — lire avant la Partie 2
+>
+> Le relevé ci-dessous (Partie 1) reste exact : ce sont des mesures. Mais
+> **deux causes y étaient mal attribuées**, et les corrections proposées en
+> P0-A et P0-B visaient le mauvais niveau. L'inspection de l'infrastructure
+> Cloudflare, faite après coup, montre qu'un **Worker intercepte toutes les
+> requêtes** du site (`image-license-jsonld`, routé sur
+> `*rushiti-renovation.fr/*`).
+>
+> **P0-A — le sitemap vide.** Ce n'est pas un fichier à corriger : le Worker
+> fabrique lui-même l'index `/sitemap.xml` à deux enfants, ajoute la ligne
+> `sitemap-communes.xml` au `robots.txt` du dépôt, et construit
+> `/sitemap-communes.xml` en filtrant le sitemap. Le dépôt de production est
+> **déjà correct** (un seul sitemap déclaré, 1 396 URL communes comprises,
+> depuis le commit du 20/08 à 10:54). Le sitemap communes sort vide parce que
+> le filtre du Worker ne trouve plus rien. **Correctif : dans le Worker.**
+>
+> **P0-B — les quatre redirections.** Il n'existe aucune règle de redirection
+> pour ces URL. Le Worker rattrape **tous les 404** avec un devineur par
+> mots-clés (`legacyTarget`) qui renvoie un 301 vers la première page dont un
+> mot-clé apparaît dans l'URL : « sol » → `/revetements-sol-besancon`,
+> « plafond » (testé avant « peinture ») → `/faux-plafonds-besancon`,
+> « enduit » → `/ratissage-enduit-besancon`, « organic » →
+> `/platrerie-besancon`. Le problème n'est donc pas de quatre URL mais
+> systémique : toute URL morte contenant un de ces mots reçoit un 301 hors
+> sujet. Détail et suites : `docs/production-a-deployer/README.md`.
+
 ## Partie 1 — Relevé de l'état réel (20/08/2026)
 
 | Bloc | État | Détail mesuré |

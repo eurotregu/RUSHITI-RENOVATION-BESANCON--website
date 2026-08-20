@@ -39,9 +39,12 @@ Deux dégâts distincts :
 
 **Correction.**
 
-1. Supprimer la règle de redirection `/desamiantage-sol-besancon` →
-   `/revetements-sol-besancon` (côté `_redirects` Cloudflare Pages ou Worker,
-   selon celui qui gère cette route — les deux existent sur ce site).
+1. ~~Supprimer la règle de redirection~~ — **correction du 20/08 (soir) : il
+   n'y a aucune règle.** Le fichier `desamiantage-sol-besancon.html` n'existe
+   pas dans le dépôt de production, donc l'URL répond 404, et le Worker
+   rattrape tous les 404 avec un devineur par mots-clés qui renvoie un 301 vers
+   la première correspondance — ici « sol ». Publier la page fait donc
+   disparaître le mauvais 301 **sans toucher au Worker**.
 2. Publier une vraie page sur cette URL.
 3. Ajouter la prestation au méga-menu et au `sitemap-pages.xml` (elle n'y figure
    pas aujourd'hui : vérifié sur les 1 395 URL).
