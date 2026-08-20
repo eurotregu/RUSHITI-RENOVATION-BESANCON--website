@@ -3,6 +3,10 @@
 > Audit **en lecture seule**. Rien n'a été modifié en production. Chaque
 > décision listée ici attend la validation d'Isuf avant exécution.
 
+> **Lire d'abord l'addendum en fin de document (20/08/2026, soir).** Il
+> corrige le constat 2 sur la foi du code source, intègre les chiffres réels
+> de Search Console et liste les corrections déjà appliquées.
+
 ## Ce qu'il faut retenir en dix lignes
 
 Le site compte **1 395 URLs**, dont **1 368 pages « service × zone »** : exactement
@@ -527,3 +531,181 @@ mots-clés. Ils ne sont pas instruits ici, seulement signalés :
 aucune page, aucun title, aucune redirection n'a été modifié. Aucun volume de
 recherche n'est estimé dans ce document ; les cases vides le sont faute de
 donnée. Aucun gain de position n'est promis.*
+
+---
+
+# Addendum du 20/08/2026 (soir) — vérification sur le code source et données Search Console
+
+Après la première version de ce rapport, deux sources sont devenues accessibles :
+le **dépôt du site en production** (`eurotregu/rushiti-renovation`, commit
+`ad8cdcb` du 20/08/2026) et une **analyse Search Console** conservée dans le
+Drive de l'entreprise (période 17/05 → 16/08/2026, relevé du 19/08/2026).
+Tout ce qui suit prime sur la première version.
+
+## A. Une correction : le constat 2 était partiellement faux
+
+**Ce que disait la première version :** les titles de `/isolation-besancon` et de
+`/isolation-interieure-besancon` commençaient tous deux par « Isolation
+intérieure », donc visaient la même requête.
+
+**Ce que dit le code source :**
+
+| URL | Title réel dans le dépôt |
+|---|---|
+| `/isolation-besancon` | `Isolation Besançon – Devis gratuit \| RUSHITI` |
+| `/isolation-interieure-besancon` | `Isolation intérieure (ITI) Besançon \| RUSHITI` |
+
+Les H1 et les descriptions sont eux aussi distincts sur les 76 zones
+(« Isolation thermique et phonique à… » contre « Isolation par l'intérieur
+(ITI) à… »). **Le couple isolation est donc différencié dans les balises.**
+
+**D'où venait l'erreur :** le title relevé (« Isolation intérieure à Besançon —
+murs et plafonds ») provenait d'un index de recherche, pas du site : c'était un
+titre **réécrit par Google**. Le contrôle a d'ailleurs montré que les
+descriptions du même relevé (« 34 avis 4,7/5, visite et devis sous 48 h ») sont
+elles aussi fabriquées par Google — l'expression « sous 48 h » n'existe que dans
+un seul fichier du dépôt.
+
+**Leçon de méthode, valable pour les prochains audits :** un title lu dans une
+SERP ou dans un index tiers n'est pas le title du site. Tant que le code source
+n'est pas consulté, une différence de balise reste une hypothèse.
+
+**Ce qui reste vrai du constat 2 :** le risque de concurrence entre les deux
+pages sur la requête « isolation <zone> » existe toujours — mais il se juge sur
+les impressions, pas sur les balises. Search Console montre `/isolation-besancon`
+à **184 impressions, position 28,3, zéro clic** : la page ne se classe pas, avec
+ou sans doublon. Le sujet passe de « corriger les balises » à « renforcer la
+page », et le verdict revient à **rushiti-cannibal-check** avec l'export
+requête × page.
+
+## B. Une confirmation : papier peint / toile de verre était bien un doublon
+
+Vérifié fichier par fichier dans le dépôt :
+
+- **73 pages sur 76** portaient « toile de verre » dans leur `<title>` ;
+- **74 pages sur 76** dans leur `<h1>` ;
+- **75 pages sur 76** dans leur `meta description` et leur `og:description` ;
+- et **76 pages `toile-de-verre-<zone>` dédiées** existent en parallèle.
+
+La page `papier-peint-besancon` avait déjà été corrigée dans ce sens : elle
+servait de modèle.
+
+## C. Les données Search Console (17/05 → 16/08/2026)
+
+Source : analyse Search Console du 19/08/2026 conservée dans le Drive de
+l'entreprise. Ces chiffres ne sont pas estimés.
+
+| Indicateur | Valeur |
+|---|---|
+| Clics (3 mois) | 52 |
+| Impressions | 5 670 |
+| CTR moyen | 0,9 % |
+| Position moyenne | 14,3 |
+| Pages remontées dans le rapport | 217 |
+
+**Ce que ces chiffres font au constat 1.** Le site publie 1 395 URLs ; Search
+Console en fait remonter **217**. La grille produit donc massivement des pages
+que Google ne montre jamais. La tendance dit la même chose autrement :
+impressions par jour **+62 %** sur les 28 derniers jours, mais position moyenne
+**−2 places** et CTR **−33 %**. Les nouvelles pages entrent en page 2, 3 ou 4 :
+elles ajoutent des impressions sans clic et tirent la moyenne vers le bas. C'est
+la signature exacte d'une grille trop large — le constat 1 est confirmé par la
+mesure, plus seulement par la structure.
+
+**Le gisement immédiat : 249 impressions en top 6, zéro clic.**
+
+| Requête | Position | Impressions | Clics |
+|---|---|---|---|
+| renov bois besançon | 6,2 | 58 | 0 |
+| entreprise de peinture à besançon | 3,3 | 37 | 0 |
+| plaquiste besançon | 6,2 | 31 | 0 |
+| entreprise de peinture besncon *(faute de frappe)* | 1,0 | 30 | 0 |
+| enduit à la chaux besançon | 5,8 | 30 | 0 |
+| peintre besançon | 4,4 | 20 | 0 |
+| peintre en batiment besancon | 1,3 | 7 | 0 |
+
+Ce n'est pas un problème de classement : c'est ce que Google affiche du site qui
+ne déclenche pas le clic. C'est l'action la moins chère et la plus rapide du
+plan — et une partie a été appliquée (section D).
+
+**Les piliers enterrés**, à mettre en regard du Volet 4 :
+
+| Page | Clics | Impressions | Position |
+|---|---|---|---|
+| / (accueil) | 20 | 1 808 | 11,4 |
+| /blog/moisissure-plafond-salle-de-bain-besancon | 4 | 1 257 | 12,9 |
+| /platrerie-besancon | 4 | 481 | 21,1 |
+| /peinture-interieure-besancon | 1 | 189 | 24,8 |
+| /isolation-besancon | 0 | 184 | 28,3 |
+| /papier-peint-besancon | 3 | 181 | 14,1 |
+| /toile-de-verre-besancon | 1 | 83 | 36,4 |
+| /peinture-exterieure-besancon | 0 | 59 | 15,1 |
+| **/degat-des-eaux-besancon** | **0** | **18** | **20,0** |
+
+Deux lectures qui changent des priorités de ce rapport :
+
+1. **Le silo dégât des eaux n'est pas le point fort du site — il est
+   invisible.** 18 impressions en trois mois. Le Volet 1 le présentait comme le
+   silo modèle sur la foi de sa couverture éditoriale ; en visibilité réelle,
+   c'est le silo à remonter en premier, parce que c'est celui qui amène les
+   assurances et les syndics.
+2. **`/papier-peint-besancon` (position 14,1) devance largement
+   `/toile-de-verre-besancon` (position 36,4)** : la page qui portait les deux
+   cibles écrasait la page dédiée. La correction de la section D vise
+   précisément cela — avec une réserve honnête : elle peut coûter des
+   impressions « toile de verre » aux pages papier peint avant que les pages
+   dédiées ne remontent. À mesurer dans quatre à six semaines.
+
+**Deux anomalies héritées, hors périmètre de cet audit mais à ne pas perdre :**
+la requête de marque « rushiti-renovation.fr » ressort en position 22,1 ; et des
+pages de l'ancien site WordPress continuent d'imprimer sur des prestations qui
+ne sont pas au catalogue (bardage métallique 88 impressions, restauration de
+meubles 78, désamiantage 19, montage de meuble 10, piscines 8, démolition 6).
+Environ 170 impressions viennent par ailleurs de villes hors zone
+d'intervention. → **rushiti-indexation** et arbitrage d'Isuf.
+
+## D. Ce qui a été exécuté
+
+Sur autorisation explicite d'Isuf, deux corrections ont été **appliquées dans le
+dépôt de production**, sur la branche `claude/ciblage-mots-cles-corrections`
+(commit `ab23ae9`, 78 fichiers, aucune URL supprimée ni redirigée, aucun contenu
+de page retiré) :
+
+1. **Dé-duplication papier peint / toile de verre — 75 fichiers.** Title, H1,
+   meta description et og:description des pages `papier-peint-<zone>` ne visent
+   plus « toile de verre » ; tous les titles tiennent en 60 caractères ; la
+   toile de verre reste dans le corps de page et le lien vers la page dédiée est
+   conservé sur les 76 zones.
+2. **Snippets des pages vues sans être cliquées — 3 fichiers.**
+   `peinture-interieure-besancon` prend le title `Peintre & entreprise de
+   peinture à Besançon | RUSHITI` (52 caractères, calé sur les requêtes réelles
+   du tableau ci-dessus) et une description portant les 20 ans de métier et la
+   note 4,7/5 sur 34 avis ; `plaquiste-besancon` et `platrerie-besancon`
+   reçoivent les mêmes preuves dans leur description. Aucun argument n'est
+   inventé : tous figurent déjà sur ces pages.
+
+**État : commit prêt, non poussé.** L'environnement de cette session bloque le
+`git push` vers le dépôt de production. La branche existe localement ; il faut
+soit débloquer la permission, soit rejouer les deux scripts
+(`fix_papier_peint.py`, `fix_ctr.py`) depuis un poste qui a le droit de pousser.
+
+**Volontairement non traité :** le doublon ravalement entre
+`/peinture-exterieure-besancon` (59 impressions, position 15,1) et
+`/ravalement-facade-besancon` (aucune impression relevée). Retirer la cible de la
+seule des deux pages qui a de la visibilité serait un pari ; la décision demande
+le croisement requête × page dans Search Console.
+
+## E. Le Volet 7 corrigé — par quoi commencer maintenant
+
+1. **Fait, en attente de déploiement** : dé-duplication papier peint et snippets
+   des trois pages (section D).
+2. **Exporter le croisement requête × page** dans Search Console (les deux
+   exports séparés ne suffisent pas pour trancher les cas ravalement et
+   isolation).
+3. **Remonter `/degat-des-eaux-besancon`** : 18 impressions, position 20, c'est
+   le silo le plus rentable et le moins visible du site.
+4. **Nettoyer l'héritage WordPress** : pages hors métier encore indexées,
+   requête de marque en position 22.
+5. **Puis seulement** la consolidation de la grille du Volet 4, toujours sous la
+   même condition : aucune page qui imprime n'est supprimée.
+

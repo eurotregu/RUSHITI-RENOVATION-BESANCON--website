@@ -3,8 +3,8 @@ Peinture;peintre besançon;Locale/transactionnelle;/peinture-interieure-besancon
 Peinture;peinture intérieure <commune>;Locale;peinture-interieure-<zone> (76);Couvert;;Conserver sur les 3 paliers;-;-
 Peinture;ravalement façade besançon;Locale/transactionnelle;/ravalement-facade-besancon + /peinture-exterieure-besancon;Cible a corriger;;Doublon : une seule page porte la cible;P1;seo-title-meta
 Peinture;peinture façade isolée par l'extérieur;Locale/niche;/peinture-facade-isolation-exterieure-besancon;Couvert;;Garder distincte;-;-
-Peinture;papier peint <zone>;Locale/transactionnelle;papier-peint-<zone> (76);Cible a corriger;;Retirer "& toile de verre" du title;P1;seo-title-meta
-Peinture;toile de verre <zone>;Locale/transactionnelle;toile-de-verre-<zone> (76);Cible a corriger;;Devient seule porteuse de la cible;P1;seo-title-meta
+Peinture;papier peint <zone>;Locale/transactionnelle;papier-peint-<zone> (76);Corrige;;FAIT branche claude/ciblage-mots-cles-corrections : title, H1, descriptions;-;-
+Peinture;toile de verre <zone>;Locale/transactionnelle;toile-de-verre-<zone> (76);Corrige;;Seule porteuse de la cible depuis la correction ; mesurer sous 4-6 semaines;-;rushiti-regression-seo
 Peinture;ratissage enduit de lissage besançon;Locale/technique;ratissage-enduit-<zone> (76);Couvert;;Conserver;-;-
 Peinture;prix peinture m2 besançon;Transactionnelle;/blog/prix-peinture-interieure-besancon-2026;Couvert;;Renforcer le maillage entrant;P3;rushiti-maillage-interne
 Peinture;peinture bâti ancien boucle besançon;Locale/niche;-;Manquant;;A arbitrer avec Isuf;P4;-
@@ -20,14 +20,14 @@ Sols;sol PVC lino LVT besançon;Locale/transactionnelle;sol-pvc-<zone> + lino-vi
 Sols;vitrification parquet besançon;Locale/transactionnelle;vitrification-parquet-<zone> (76);Couvert;;Conserver palier A;P2;-
 Sols;ragréage de sol besançon;Locale/technique;ragreage-sol-<zone> (76);Couvert;;Conserver palier A;P2;-
 Sols;moquette besançon;Locale/transactionnelle;-;Manquant;;A arbitrer avec Isuf;P4;-
-Degat des eaux;dégât des eaux besançon;Locale/urgence;degat-des-eaux-<zone> (76);Couvert;;Silo modèle - ne rien casser;-;-
+Degat des eaux;dégât des eaux besançon;Locale/urgence;degat-des-eaux-<zone> (76);Partiel;18 impressions pos 20,0 (GSC 17/05-16/08/2026);PRIORITE 1 : silo le plus rentable et le moins visible - a remonter;P1;rushiti-opportunites-gsc
 Degat des eaux;devis dégât des eaux pour l'assurance;Transactionnelle/B2B;/devis-assurance-degat-des-eaux-besancon;Couvert;;Conserver;-;-
 Degat des eaux;réparer plafond ou mur après fuite;Informationnelle;/blog/reparer-plafond... + /blog/reparer-mur...;Couvert;;Conserver;-;-
 Degat des eaux;dégât des eaux qui paie quoi IRSI;Informationnelle;/blog/degat-des-eaux-assurance-qui-paie-quoi;Couvert;;Conserver;-;-
 Degat des eaux;assèchement après dégât des eaux besançon;Locale/technique;-;Manquant;;Renforcer la page existante plutôt que créer;P3;rushiti-brief-seo
-Isolation;isolation intérieure ITI besançon;Locale/transactionnelle;isolation-interieure-<zone> (76);Cible a corriger;;Garde la cible ITI;P1;seo-title-meta
-Isolation;isolation combles et phonique besançon;Locale/transactionnelle;isolation-<zone> (76);Cible a corriger;;Requalifier le title - ne plus viser l'ITI;P1;seo-title-meta
-Isolation;isolation des combles besançon;Locale/transactionnelle;isolation-<zone> (76);Cible a corriger;;Attribuer explicitement à la page chapeau;P1;seo-title-meta
+Isolation;isolation intérieure ITI besançon;Locale/transactionnelle;isolation-interieure-<zone> (76);Couvert;;Balises deja differenciees (verifie au code source) - ne pas toucher;-;-
+Isolation;isolation combles et phonique besançon;Locale/transactionnelle;isolation-<zone> (76);Partiel;184 impressions pos 28,3 (GSC 17/05-16/08/2026);Renforcer la page - elle ne se classe pas ; cannibalisation a juger sur requete x page;P2;rushiti-cannibal-check
+Isolation;isolation des combles besançon;Locale/transactionnelle;isolation-<zone> (76);Partiel;;Attribuer explicitement a la page chapeau;P3;seo-title-meta
 Isolation;ITI ou ITE que choisir;Informationnelle;/blog/isolation-interieure-iti-perte-de-place-epaisseur;Couvert;;Conserver;-;-
 Isolation;mur froid condensation que faire;Informationnelle;-;Manquant;;Article de blog;P3;rushiti-brief-seo
 Renovation de piece;rénovation appartement besançon;Locale/transactionnelle;/renovation-appartement-besancon;Couvert;;Conserver;-;-
