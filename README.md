@@ -18,7 +18,7 @@ js/main.js       - Scripts interactifs
 - Navigation fixe avec effet au scroll
 - Section hero avec compteurs animés
 - Galerie de réalisations avec filtres
-- Section À Propos (assurance décennale, RGE, SIRET)
+- Section À Propos (assurance décennale, conformité DTU, SIRET)
 - Slider de témoignages clients
 - Formulaire de contact (ouvre le client email avec la demande pré-remplie)
 - Données structurées JSON-LD (LocalBusiness / HousePainter)
