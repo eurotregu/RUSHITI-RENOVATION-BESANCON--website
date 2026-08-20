@@ -136,9 +136,13 @@ elles ne se verront que dans le rapport d'indexation GSC.
    cible juste est `/peinture-interieure-besancon` (murs, **plafonds**,
    boiseries), pas `/faux-plafonds-besancon`.
 2. **La prestation n'existe pas / n'est pas proposée** → servir un **410 Gone**
-   plutôt qu'une redirection trompeuse. C'est le cas de `/desamiantage-sol-besancon`
-   si la réponse au point P0-B de l'audit du 13/08 (« l'entreprise détient-elle
-   une certification amiante ? ») est non. `[À CONFIRMER par Isuf]`
+   plutôt qu'une redirection trompeuse. ~~C'est le cas de
+   `/desamiantage-sol-besancon`~~ — **ce n'est pas le cas** : Isuf a confirmé le
+   20/08/2026 détenir un certificat de désamiantage. Cette URL relève donc du
+   cas 3, et sa redirection actuelle vers `/revetements-sol-besancon` prive une
+   prestation certifiée de toute page. Voir
+   `docs/seo/decisions-isuf-2026-08-20.md` (D1) — la rédaction attend les
+   références du certificat (périmètre SS3/SS4, organisme, numéro, validité).
 3. **L'URL vaut la peine d'exister** → créer la page sur l'URL propre et rediriger.
    C'est le cas de `/organic-ehpad-besancon` → `/ehpad-besancon`, déjà tranché
    dans `docs/seo/corrections-audit-2026-08.md` (P1-A).
@@ -170,10 +174,12 @@ c'est le genre de contradiction qui fait qu'un moteur de réponse IA (ChatGPT,
 Perplexity, l'Aperçu IA de Google) préfère ne pas citer de chiffre du tout, et
 `llms.txt` est précisément le fichier écrit pour eux.
 
-**Correction :** relever le compteur réel sur la fiche Google Business Profile,
-puis aligner **toutes** les occurrences sur cette valeur. `[À CONFIRMER : chiffre
-exact au jour de la correction]` — ne pas trancher entre 29 et 34 sans regarder
-la fiche.
+**Tranché par Isuf le 20/08/2026 : le compteur réel est 34.** Les pages ont
+raison, `llms.txt` est périmé.
+
+**Correction :** deux remplacements dans `/llms.txt` (« 29 avis » → « 34 avis »),
+aucune page HTML à modifier. Détail et chaînes exactes :
+`docs/seo/decisions-isuf-2026-08-20.md` (D2).
 
 ---
 
@@ -316,10 +322,10 @@ appartient au skill `rushiti-ga4-gtm`, en session dédiée.
 - [ ] P0-A — `robots.txt` sans la ligne `sitemap-communes.xml` (fichier fourni)
 - [ ] P0-A — `sitemap.xml` sans le bloc `<sitemap>` communes
 - [ ] P0-B — redirection de `/peinture-plafond-batiment-besancon` repointée vers `/peinture-interieure-besancon`
-- [ ] P0-B — `/desamiantage-sol-besancon` : décision certification amiante, puis 410 ou page dédiée `[À CONFIRMER]`
+- [ ] P0-B — `/desamiantage-sol-besancon` : redirection supprimée et page dédiée publiée (certification confirmée le 20/08/2026 ; en attente des références du certificat)
 - [ ] P0-B — `/organic-ehpad-besancon` : page `/ehpad-besancon` créée puis redirection repointée
 - [ ] P0-B — `/enduit-chaux-besancon` : cible réellement équivalente, ou 410 `[À CONFIRMER]`
-- [ ] P1-A — compteur d'avis aligné partout sur la valeur réelle de la fiche Google `[À CONFIRMER]`
+- [ ] P1-A — `llms.txt` : « 29 avis » → « **34 avis** » (valeur confirmée par Isuf le 20/08/2026)
 
 **Après déploiement**
 
