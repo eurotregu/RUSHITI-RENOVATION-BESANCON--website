@@ -1,0 +1,41 @@
+silo;cluster_pivot;intention;page_cible;statut;volume;decision;priorite;agent
+Peinture;peintre besançon;Locale/transactionnelle;/peinture-interieure-besancon;Couvert;;Ne rien changer;-;-
+Peinture;peinture intérieure <commune>;Locale;peinture-interieure-<zone> (76);Couvert;;Conserver sur les 3 paliers;-;-
+Peinture;ravalement façade besançon;Locale/transactionnelle;/ravalement-facade-besancon + /peinture-exterieure-besancon;Cible a corriger;;Doublon : une seule page porte la cible;P1;seo-title-meta
+Peinture;peinture façade isolée par l'extérieur;Locale/niche;/peinture-facade-isolation-exterieure-besancon;Couvert;;Garder distincte;-;-
+Peinture;papier peint <zone>;Locale/transactionnelle;papier-peint-<zone> (76);Cible a corriger;;Retirer "& toile de verre" du title;P1;seo-title-meta
+Peinture;toile de verre <zone>;Locale/transactionnelle;toile-de-verre-<zone> (76);Cible a corriger;;Devient seule porteuse de la cible;P1;seo-title-meta
+Peinture;ratissage enduit de lissage besançon;Locale/technique;ratissage-enduit-<zone> (76);Couvert;;Conserver;-;-
+Peinture;prix peinture m2 besançon;Transactionnelle;/blog/prix-peinture-interieure-besancon-2026;Couvert;;Renforcer le maillage entrant;P3;rushiti-maillage-interne
+Peinture;peinture bâti ancien boucle besançon;Locale/niche;-;Manquant;;A arbitrer avec Isuf;P4;-
+Platrerie/placo;plaquiste besançon;Locale/transactionnelle;/plaquiste-besancon;Couvert;;Conserver comme porte d'entrée;-;-
+Platrerie/placo;plâtrerie placo besançon;Locale/transactionnelle;platrerie-<zone> (76);Couvert;;Conserver paliers A et B et C;-;-
+Platrerie/placo;pose de cloison créer une pièce;Locale/transactionnelle;cloisons-<zone> (76);Couvert;;Conserver palier A et B;P2;-
+Platrerie/placo;faux plafond besançon;Locale/transactionnelle;faux-plafonds-<zone> (76);Couvert;;Conserver palier A et B;P2;-
+Platrerie/placo;doublage de mur besançon;Locale/technique;doublage-murs-<zone> (76);Cible a corriger;;Surveiller le recouvrement avec l'ITI;P2;rushiti-cannibal-check
+Platrerie/placo;prix placo au m2 besançon;Transactionnelle;-;Manquant;;Article de blog;P3;rushiti-brief-seo
+Sols;pose revêtement de sol besançon;Locale/transactionnelle;revetements-sol-<zone> (76);Couvert;;Page chapeau du silo;-;-
+Sols;parquet flottant stratifié besançon;Locale/transactionnelle;parquet-flottant-<zone> (76);Couvert;;Conserver palier A et B;P2;-
+Sols;sol PVC lino LVT besançon;Locale/transactionnelle;sol-pvc-<zone> + lino-vinyle-lvt-<zone>;Cible a corriger;;Fusionner hors palier A;P2;rushiti-cannibal-check
+Sols;vitrification parquet besançon;Locale/transactionnelle;vitrification-parquet-<zone> (76);Couvert;;Conserver palier A;P2;-
+Sols;ragréage de sol besançon;Locale/technique;ragreage-sol-<zone> (76);Couvert;;Conserver palier A;P2;-
+Sols;moquette besançon;Locale/transactionnelle;-;Manquant;;A arbitrer avec Isuf;P4;-
+Degat des eaux;dégât des eaux besançon;Locale/urgence;degat-des-eaux-<zone> (76);Couvert;;Silo modèle - ne rien casser;-;-
+Degat des eaux;devis dégât des eaux pour l'assurance;Transactionnelle/B2B;/devis-assurance-degat-des-eaux-besancon;Couvert;;Conserver;-;-
+Degat des eaux;réparer plafond ou mur après fuite;Informationnelle;/blog/reparer-plafond... + /blog/reparer-mur...;Couvert;;Conserver;-;-
+Degat des eaux;dégât des eaux qui paie quoi IRSI;Informationnelle;/blog/degat-des-eaux-assurance-qui-paie-quoi;Couvert;;Conserver;-;-
+Degat des eaux;assèchement après dégât des eaux besançon;Locale/technique;-;Manquant;;Renforcer la page existante plutôt que créer;P3;rushiti-brief-seo
+Isolation;isolation intérieure ITI besançon;Locale/transactionnelle;isolation-interieure-<zone> (76);Cible a corriger;;Garde la cible ITI;P1;seo-title-meta
+Isolation;isolation combles et phonique besançon;Locale/transactionnelle;isolation-<zone> (76);Cible a corriger;;Requalifier le title - ne plus viser l'ITI;P1;seo-title-meta
+Isolation;isolation des combles besançon;Locale/transactionnelle;isolation-<zone> (76);Cible a corriger;;Attribuer explicitement à la page chapeau;P1;seo-title-meta
+Isolation;ITI ou ITE que choisir;Informationnelle;/blog/isolation-interieure-iti-perte-de-place-epaisseur;Couvert;;Conserver;-;-
+Isolation;mur froid condensation que faire;Informationnelle;-;Manquant;;Article de blog;P3;rushiti-brief-seo
+Renovation de piece;rénovation appartement besançon;Locale/transactionnelle;/renovation-appartement-besancon;Couvert;;Conserver;-;-
+Renovation de piece;rénovation salle de bains besançon;Locale/transactionnelle;-;Manquant;;Page a creer;P1;rushiti-page-locale
+Renovation de piece;entreprise de rénovation besançon;Locale/transactionnelle;-;Manquant;;Page a creer;P2;rushiti-page-locale
+Renovation de piece;rénovation cuisine besançon;Locale/transactionnelle;-;Manquant;;Page a creer;P2;rushiti-page-locale
+Renovation de piece;aménagement commerce bureau besançon;B2B;/amenagement-commerce-bureau-besancon;Couvert;;Conserver;-;-
+Renovation de piece;syndic de copropriété gestionnaire;B2B;/renovation-syndic-gestionnaire-besancon;Couvert;;Conserver;-;-
+Renovation de piece;remise en état logement locatif;B2B;/remise-en-etat-logement-locatif-besancon;Couvert;;Conserver;-;-
+Renovation de piece;prix travaux rénovation besançon;Transactionnelle;/prix-travaux-renovation-besancon;Couvert;;Mailler depuis les pages service;P3;rushiti-maillage-interne
+Renovation de piece;expert d'assurance cabinet de sinistres;B2B;-;Manquant;;Page a creer - a arbitrer;P3;rushiti-page-locale
