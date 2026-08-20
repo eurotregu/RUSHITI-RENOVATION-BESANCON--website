@@ -153,46 +153,53 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Formulaire de contact (ouvre le client email avec la demande pré-remplie) ---
     const form = document.getElementById('contactForm');
-    const formStatus = document.getElementById('formStatus');
 
     if (form) {
+        const status = form.querySelector('.form-status');
+
+        // Libellé lisible d'un champ, repris de son <label> (sans l'astérisque)
+        const libelle = (champ) => {
+            const label = form.querySelector('label[for="' + champ.id + '"]');
+            return label ? label.textContent.replace('*', '').trim() : champ.name;
+        };
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const data = new FormData(form);
-            const serviceSelect = form.querySelector('#service');
-            const serviceLabel = serviceSelect.options[serviceSelect.selectedIndex].text;
+            // Champ piège anti-spam : rempli = robot, on ignore silencieusement
+            const piege = form.querySelector('.form-hp');
+            if (piege && piege.value) return;
 
-            const subject = 'Demande de devis' + (data.get('service') ? ' - ' + serviceLabel : '');
-            const body = [
-                'Nom : ' + data.get('nom'),
-                'Prénom : ' + data.get('prenom'),
-                'Email : ' + data.get('email'),
-                'Téléphone : ' + data.get('telephone'),
-                'Type de travaux : ' + (data.get('service') ? serviceLabel : 'Non précisé'),
-                '',
-                'Description du projet :',
-                data.get('message')
-            ].join('\n');
+            const lignes = [];
+            form.querySelectorAll('input[id], select[id], textarea[id]').forEach((champ) => {
+                if (champ.type === 'checkbox' || !champ.value.trim()) return;
+                lignes.push(libelle(champ) + ' : ' + champ.value.trim());
+            });
+
+            const sujet = form.getAttribute('data-subject') || 'Demande de devis';
+            const corps = lignes.join('\n') + '\n\nDemande envoyée depuis rushiti-renovation.fr';
 
             window.location.href = 'mailto:contact@rushiti-renovation.fr'
-                + '?subject=' + encodeURIComponent(subject)
-                + '&body=' + encodeURIComponent(body);
+                + '?subject=' + encodeURIComponent(sujet)
+                + '&body=' + encodeURIComponent(corps);
 
             const btn = form.querySelector('button[type="submit"]');
             const originalText = btn.textContent;
             btn.textContent = 'Ouverture de votre messagerie...';
             btn.disabled = true;
+            if (status) {
+                status.textContent = 'Votre messagerie s\u2019ouvre avec la demande pré-remplie. Il ne reste qu\u2019à l\u2019envoyer.';
+            }
 
             setTimeout(() => {
                 btn.textContent = originalText;
                 btn.disabled = false;
-                // Aucun retour n'est possible depuis un lien mailto : on affiche
-                // systématiquement l'adresse pour les visiteurs sans client mail.
-                if (formStatus) {
-                    formStatus.textContent = 'Votre messagerie devrait s’ouvrir avec la demande pré-remplie. '
-                        + 'Si ce n’est pas le cas, écrivez-nous à contact@rushiti-renovation.fr '
-                        + 'ou appelez le 07 60 27 98 97.';
+                // Un lien mailto ne renvoie aucun retour : au bout de quelques
+                // secondes on bascule sur un message qui couvre le cas où aucune
+                // messagerie ne s'est ouverte.
+                if (status) {
+                    status.textContent = 'Si votre messagerie ne s\u2019est pas ouverte, écrivez-nous à '
+                        + 'contact@rushiti-renovation.fr ou appelez le 07 60 27 98 97.';
                 }
             }, 3000);
         });
