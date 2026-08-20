@@ -292,8 +292,13 @@ d'Ariane. Valider au Rich Results Test. → corrections via **schema-builder**.
   dupliquée entre projets.
 - **Dégât des eaux** : la page doit parler le langage assurance (IRSI,
   documentation du sinistre) — fort différenciateur local.
-- **Confiance** : décennale, RC pro, SIRET, DTU visibles ; toute mention
-  Qualibat/RGE uniquement si réellement détenue `[À CONFIRMER auprès d'Isuf]`.
+- **Confiance** : décennale, RC pro, SIRET, DTU visibles. **RGE : retiré du
+  site sur décision d'Isuf du 20/08/2026** — signaler comme erreur toute
+  réapparition de « Qualification RGE » ou « Certifié RGE ». En revanche la
+  **certification désamiantage est détenue** (confirmée le 20/08/2026) : elle
+  s'affiche avec ses références (périmètre SS3/SS4, organisme, numéro,
+  validité), jamais seule. Toute autre mention type Qualibat reste
+  `[À CONFIRMER auprès d'Isuf]`.
 - **Saisonnalité** : contenus planifiés (façades/extérieur au printemps,
   isolation à l'automne, dégâts des eaux en hiver) → **rushiti-refresh-planner**.
 - **Conversion** : téléphone cliquable visible partout (sticky mobile déjà en

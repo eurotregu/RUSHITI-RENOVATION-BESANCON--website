@@ -81,7 +81,7 @@ Structure réelle des 1 395 URL, décomptée :
 est déjà couvert. Deux gestes, tous les deux côté Cloudflare Pages :
 
 1. Retirer la ligne `Sitemap: https://rushiti-renovation.fr/sitemap-communes.xml`
-   de `robots.txt` → fichier corrigé prêt à déployer : **`docs/gsc/robots.txt`**.
+   de `robots.txt` → fichier corrigé prêt à déployer : **`docs/production-a-deployer/robots.txt`**.
 2. Retirer le bloc `<sitemap>` correspondant de l'index `sitemap.xml` :
 
 ```xml
@@ -262,7 +262,7 @@ Sitemap: https://rushiti-renovation.fr/sitemap-communes.xml
 ```
 
 Une seule modification à faire : retirer la seconde ligne `Sitemap:` (P0-A).
-Fichier corrigé prêt à déployer : **`docs/gsc/robots.txt`**.
+Fichier corrigé prêt à déployer : **`docs/production-a-deployer/robots.txt`**.
 
 À ne pas faire : lister les robots IA un par un pour les « autoriser ».
 `User-agent: * / Allow: /` les autorise déjà tous, et une liste explicite finit
