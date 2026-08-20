@@ -550,45 +550,67 @@
                         Planoise, Chaprais, Battant, Palente, Bregille, Chalezeule, École-Valentin, Thise, Miserey-Salines, Pirey, Franois, Serre-les-Sapins...</p>
                     </div>
                 </div>
-                <form class="contact-form" id="contactForm">
+                <form class="contact-form" id="contactForm" data-subject="Demande rapide — devis rénovation Besançon">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="nom">Nom *</label>
-                            <input type="text" id="nom" name="nom" required placeholder="Votre nom">
-                        </div>
-                        <div class="form-group">
-                            <label for="prenom">Prénom *</label>
-                            <input type="text" id="prenom" name="prenom" required placeholder="Votre prénom">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" id="email" name="email" required placeholder="votre@email.com">
+                            <label for="nom">Nom et prénom *</label>
+                            <input type="text" id="nom" name="nom" required autocomplete="name" placeholder="Votre nom">
                         </div>
                         <div class="form-group">
                             <label for="telephone">Téléphone *</label>
-                            <input type="tel" id="telephone" name="telephone" required placeholder="06 00 00 00 00">
+                            <input type="tel" id="telephone" name="telephone" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required autocomplete="email" placeholder="vous@exemple.fr">
+                        </div>
+                        <div class="form-group">
+                            <label for="lieu">Code postal / commune *</label>
+                            <input type="text" id="lieu" name="lieu" required autocomplete="postal-code" placeholder="25000 Besançon">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="service">Type de Travaux</label>
+                        <label for="service">Service souhaité</label>
                         <select id="service" name="service">
                             <option value="">Sélectionnez un service</option>
-                            <option value="peinture-interieure">Peinture Intérieure</option>
-                            <option value="peinture-exterieure">Peinture Extérieure</option>
-                            <option value="renovation">Rénovation Complète</option>
-                            <option value="revetements">Revêtements Muraux</option>
-                            <option value="carrelage">Carrelage & Sol</option>
-                            <option value="isolation">Isolation & Placo</option>
-                            <option value="autre">Autre</option>
+                            <option>Peinture intérieure</option>
+                            <option>Peinture extérieure / façade</option>
+                            <option>Papier peint / toile de verre</option>
+                            <option>Plâtrerie &amp; placo</option>
+                            <option>Isolation</option>
+                            <option>Revêtements de sol &amp; carrelage</option>
+                            <option>Dégât des eaux</option>
+                            <option>Rénovation complète</option>
+                            <option>Autre</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="message">Description du Projet *</label>
-                        <textarea id="message" name="message" rows="5" required placeholder="Décrivez votre projet : type de travaux, surface, délais souhaités..."></textarea>
+                        <label for="projet">Votre projet *</label>
+                        <textarea id="projet" name="projet" rows="5" required placeholder="Pièces concernées, surfaces approximatives, état actuel, délais souhaités…"></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-full">Envoyer la Demande de Devis</button>
+                    <input type="text" name="entreprise_hp" class="form-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+                    <label class="form-consent">
+                        <input type="checkbox" id="consentement" name="consentement" required>
+                        <span>J'accepte que mes coordonnées soient utilisées pour me recontacter au sujet de cette demande. Elles ne sont ni revendues ni utilisées à d'autres fins.</span>
+                    </label>
+                    <button type="submit" class="btn btn-primary btn-lg btn-full">Envoyer ma demande</button>
+                    <p class="form-status" role="status" aria-live="polite"></p>
+                    <div class="form-reassure">
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M20 6L9 17l-5-5"/></svg>
+                            Diagnostic gratuit sur place
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            Décennale &amp; RC pro
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                            Devis détaillé, sans engagement
+                        </span>
+                    </div>
                     <p class="form-note">* Champs obligatoires. L'envoi ouvre votre messagerie email. Nous vous recontacterons sous 24h.</p>
                 </form>
             </div>

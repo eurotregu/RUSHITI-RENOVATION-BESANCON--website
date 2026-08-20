@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Exemples de formulaires « Demande rapide » — RUSHITI Rénovation</title>
+<meta name="description" content="Page de travail interne : six variantes du formulaire de demande rapide utilisé sur les pages service de rushiti-renovation.fr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#1a5632;--primary-light:#2a7a4a;--primary-dark:#0e3a1f;
+  --accent:#d4a843;--dark:#1a1a2e;--text:#333;--text-light:#666;--text-muted:#999;
+  --bg:#fff;--bg-light:#f8f9fa;--bg-warm:#faf8f5;--border:#e8e8e8;
+  --shadow:0 4px 20px rgba(0,0,0,.08);--shadow-lg:0 10px 40px rgba(0,0,0,.12);
+  --radius:12px;--radius-sm:8px;--transition:.3s cubic-bezier(.4,0,.2,1);
+  --font-heading:'Montserrat',sans-serif;--font-body:'Open Sans',sans-serif;
+}
+body{font-family:var(--font-body);color:var(--text);line-height:1.7;background:var(--bg-warm)}
+h1,h2,h3,h4{font-family:var(--font-heading);line-height:1.25;color:var(--dark)}
+a{color:var(--primary);text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* --- En-tête de la page de travail --- */
+.page-head{background:var(--primary-dark);color:#fff;padding:56px 0 48px}
+.page-head h1{color:#fff;font-size:clamp(26px,4vw,38px)}
+.page-head p{max-width:760px;margin-top:14px;color:rgba(255,255,255,.86)}
+.page-head .tag{display:inline-block;font-family:var(--font-heading);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.page-head ul{list-style:none;margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.page-head li{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:6px 14px;font-size:14px}
+
+/* --- Carte de variante --- */
+.variants{padding:48px 0 72px;display:grid;gap:36px}
+.variant{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.variant>header{padding:24px 28px;border-bottom:1px solid var(--border);background:var(--bg-light)}
+.variant .ref{font-family:var(--font-heading);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--primary-light)}
+.variant h2{font-size:22px;margin:4px 0 8px}
+.variant .usage{color:var(--text-light);font-size:15px;max-width:780px}
+.variant .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.variant .meta span{font-size:13px;background:#fff;border:1px solid var(--border);border-radius:999px;padding:4px 12px;color:var(--text-light)}
+.variant .demo{padding:28px;background:var(--bg-warm)}
+.variant .demo.narrow{display:flex;justify-content:center}
+.code-zone{border-top:1px solid var(--border);padding:16px 28px 24px;background:#fff}
+.code-zone summary{cursor:pointer;font-family:var(--font-heading);font-size:14px;color:var(--primary);padding:6px 0}
+.code-zone pre{margin-top:12px;background:#12121c;color:#e6e6ef;border-radius:var(--radius-sm);padding:18px;overflow:auto;max-height:420px;font-size:12.5px;line-height:1.6}
+.copy-btn{margin-top:12px;font-family:var(--font-heading);font-size:13px;background:var(--primary);color:#fff;border:0;border-radius:var(--radius-sm);padding:9px 16px;cursor:pointer;transition:background var(--transition)}
+.copy-btn:hover{background:var(--primary-light)}
+
+/* --- Styles communs des formulaires (à reprendre tels quels sur le site) --- */
+.dr{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;max-width:620px;width:100%}
+.dr h3{font-size:20px;margin-bottom:8px}
+.dr .dr-intro{font-size:15px;color:var(--text-light);margin-bottom:20px}
+.dr .dr-intro a{font-weight:600;white-space:nowrap}
+.dr-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.dr-field{margin-bottom:16px;display:flex;flex-direction:column}
+.dr-field label{font-family:var(--font-heading);font-size:14px;font-weight:600;color:var(--dark);margin-bottom:6px}
+.dr-field input,.dr-field select,.dr-field textarea{
+  font-family:var(--font-body);font-size:15px;color:var(--text);
+  padding:12px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);
+  background:#fff;transition:border-color var(--transition),box-shadow var(--transition);width:100%}
+.dr-field textarea{resize:vertical;min-height:110px}
+.dr-field input:focus,.dr-field select:focus,.dr-field textarea:focus{
+  outline:0;border-color:var(--primary-light);box-shadow:0 0 0 3px rgba(42,122,74,.15)}
+.dr-field .hint{font-size:13px;color:var(--text-muted);margin-top:6px}
+.dr-btn{width:100%;font-family:var(--font-heading);font-size:16px;font-weight:600;color:#fff;
+  background:var(--primary);border:0;border-radius:var(--radius-sm);padding:15px 24px;cursor:pointer;
+  transition:background var(--transition),transform var(--transition)}
+.dr-btn:hover{background:var(--primary-light);transform:translateY(-1px)}
+.dr-btn:disabled{background:var(--text-muted);cursor:progress;transform:none}
+.dr-note{font-size:13px;color:var(--text-muted);margin-top:12px;text-align:center}
+.dr-consent{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--text-light);margin-bottom:16px}
+.dr-consent input{width:18px;height:18px;flex:0 0 auto;margin-top:3px;accent-color:var(--primary)}
+.dr-status{margin-top:12px;font-size:14px;color:var(--primary);text-align:center;min-height:1.2em}
+.dr-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.dr-reassure{display:flex;flex-wrap:wrap;gap:14px;margin-top:18px;padding-top:16px;border-top:1px solid var(--border)}
+.dr-reassure span{font-size:13px;color:var(--text-light);display:flex;align-items:center;gap:6px}
+.dr-reassure svg{color:var(--primary-light);flex:0 0 auto}
+.dr-phone{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-heading);font-weight:600;color:var(--primary)}
+
+/* Pastilles de service (variante C) */
+.dr-chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.dr-chips input{position:absolute;opacity:0;width:0;height:0}
+.dr-chips label{font-family:var(--font-heading);font-size:14px;font-weight:600;color:var(--text-light);
+  border:1px solid var(--border);border-radius:999px;padding:9px 16px;cursor:pointer;margin:0;
+  transition:all var(--transition);background:#fff}
+.dr-chips input:checked+label{background:var(--primary);border-color:var(--primary);color:#fff}
+.dr-chips input:focus-visible+label{box-shadow:0 0 0 3px rgba(42,122,74,.25)}
+
+/* Barre compacte (variante A) */
+.dr.compact{max-width:520px;padding:24px}
+.dr.compact .dr-field{margin-bottom:12px}
+
+/* Deux étapes (variante E) */
+.dr-steps{display:flex;gap:8px;margin-bottom:18px}
+.dr-steps div{flex:1;height:5px;border-radius:999px;background:var(--border)}
+.dr-steps div.on{background:var(--accent)}
+.dr-step{display:none}
+.dr-step.on{display:block}
+.dr-back{background:none;border:0;color:var(--text-light);font-family:var(--font-heading);font-size:14px;cursor:pointer;padding:10px 0;text-decoration:underline}
+
+/* Encart latéral (variante F) */
+.dr.side{max-width:400px;padding:24px;border-top:4px solid var(--accent)}
+.dr.side .dr-field{margin-bottom:12px}
+
+@media (max-width:640px){
+  .dr-row{grid-template-columns:1fr}
+  .variant .demo{padding:18px}
+  .dr{padding:22px}
+}
+</style>
+</head>
+<body>
+
+<header class="page-head">
+  <div class="wrap">
+    <span class="tag">Document de travail interne</span>
+    <h1>Six variantes du formulaire « Demande rapide »</h1>
+    <p>Toutes reprennent la promesse actuelle des pages service : le visiteur laisse l'essentiel en une minute, vous rappelez pour convenir du diagnostic gratuit sur place, puis il reçoit un devis précis. Chaque variante est fonctionnelle sur cette page — l'envoi ouvre la messagerie du visiteur vers contact@rushiti-renovation.fr, exactement comme le formulaire de la page d'accueil. Le code de chaque formulaire est affichable et copiable sous la démonstration.</p>
+    <ul>
+      <li>Libellés et style repris de la charte du site</li>
+      <li>Champ piège anti-spam (honeypot) sur chaque variante</li>
+      <li>Case de consentement RGPD</li>
+      <li>Aucun prix ni délai de chantier annoncé</li>
+    </ul>
+  </div>
+</header>
+
+<main class="wrap variants">
+
+  <!-- ================= VARIANTE A ================= -->
+  <article class="variant" id="variante-a">
+    <header>
+      <span class="ref">Variante A</span>
+      <h2>Rappel express — 3 champs</h2>
+      <p class="usage">À placer haut de page, juste sous le bandeau, et dans la barre collante mobile. Le visiteur pressé ne rédige rien : il laisse un numéro, une commune et le type de travaux. C'est la variante qui convertit le mieux sur téléphone, mais elle qualifie peu — prévoyez que le rappel serve à tout apprendre.</p>
+      <div class="meta"><span>3 champs</span><span>Mobile d'abord</span><span>Qualification faible</span><span>Haut de page / barre collante</span></div>
+    </header>
+    <div class="demo narrow">
+      <form class="dr compact" data-dr data-subject="Rappel express — papier peint Besançon">
+        <h3>Être rappelé pour un diagnostic gratuit</h3>
+        <p class="dr-intro">Laissez-nous votre numéro : nous vous rappelons pour convenir de la visite sur place. Ou appelez directement le <a class="dr-phone" href="tel:+33760279897">07 60 27 98 97</a>.</p>
+        <div class="dr-field">
+          <label for="a-tel">Téléphone</label>
+          <input type="tel" id="a-tel" name="Téléphone" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00">
+        </div>
+        <div class="dr-field">
+          <label for="a-lieu">Code postal / commune</label>
+          <input type="text" id="a-lieu" name="Code postal / commune" required autocomplete="postal-code" placeholder="25000 Besançon">
+        </div>
+        <div class="dr-field">
+          <label for="a-service">Service souhaité</label>
+          <select id="a-service" name="Service souhaité" required>
+            <option value="">Choisissez un service</option>
+            <option>Papier peint / toile de verre</option>
+            <option>Peinture intérieure</option>
+            <option>Peinture extérieure / façade</option>
+            <option>Plâtrerie &amp; placo</option>
+            <option>Isolation</option>
+            <option>Revêtements de sol</option>
+            <option>Dégât des eaux</option>
+            <option>Rénovation complète</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <input type="text" name="entreprise_hp" class="dr-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="dr-consent"><input type="checkbox" required> J'accepte d'être recontacté par RUSHITI Rénovation au sujet de ma demande.</label>
+        <button type="submit" class="dr-btn">Être rappelé</button>
+        <p class="dr-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <details class="code-zone"><summary>Voir et copier le code HTML</summary><pre><code></code></pre><button class="copy-btn" type="button">Copier le code</button></details>
+  </article>
+
+  <!-- ================= VARIANTE B ================= -->
+  <article class="variant" id="variante-b">
+    <header>
+      <span class="ref">Variante B</span>
+      <h2>Demande rapide standard — la version actuelle, consolidée</h2>
+      <p class="usage">C'est le formulaire déjà en place sur les pages service, avec trois ajouts : la case de consentement, le champ piège anti-spam et le bandeau de réassurance sous le bouton. À garder comme formulaire de référence en bas de chaque page service.</p>
+      <div class="meta"><span>6 champs</span><span>Référence</span><span>Bas de page service</span><span>Qualification correcte</span></div>
+    </header>
+    <div class="demo narrow">
+      <form class="dr" data-dr data-subject="Demande rapide — projet papier peint">
+        <h3>Demande rapide : décrivez votre projet papier peint</h3>
+        <p class="dr-intro">Laissez-nous l'essentiel en une minute : nous vous rappelons pour convenir du diagnostic gratuit sur place, puis vous recevez un devis précis. Vous pouvez aussi nous appeler directement au <a class="dr-phone" href="tel:+33760279897">07 60 27 98 97</a>.</p>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="b-nom">Nom et prénom</label>
+            <input type="text" id="b-nom" name="Nom et prénom" required autocomplete="name" placeholder="Votre nom">
+          </div>
+          <div class="dr-field">
+            <label for="b-tel">Téléphone</label>
+            <input type="tel" id="b-tel" name="Téléphone" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00">
+          </div>
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="b-email">E-mail</label>
+            <input type="email" id="b-email" name="E-mail" required autocomplete="email" placeholder="vous@exemple.fr">
+          </div>
+          <div class="dr-field">
+            <label for="b-lieu">Code postal / commune</label>
+            <input type="text" id="b-lieu" name="Code postal / commune" required autocomplete="postal-code" placeholder="25000 Besançon">
+          </div>
+        </div>
+        <div class="dr-field">
+          <label for="b-service">Service souhaité</label>
+          <select id="b-service" name="Service souhaité" required>
+            <option>Papier peint / toile de verre</option>
+            <option>Peinture intérieure</option>
+            <option>Peinture extérieure / façade</option>
+            <option>Plâtrerie &amp; placo</option>
+            <option>Isolation</option>
+            <option>Revêtements de sol</option>
+            <option>Dégât des eaux</option>
+            <option>Rénovation complète</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="dr-field">
+          <label for="b-projet">Votre projet</label>
+          <textarea id="b-projet" name="Votre projet" rows="4" placeholder="Pièces concernées, surfaces approximatives, état actuel, délais souhaités…"></textarea>
+        </div>
+        <input type="text" name="entreprise_hp" class="dr-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="dr-consent"><input type="checkbox" required> J'accepte que mes coordonnées soient utilisées pour me recontacter au sujet de cette demande. Elles ne sont ni revendues ni utilisées à d'autres fins.</label>
+        <button type="submit" class="dr-btn">Envoyer ma demande</button>
+        <p class="dr-status" role="status" aria-live="polite"></p>
+        <div class="dr-reassure">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> Diagnostic gratuit sur place</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Décennale &amp; RC pro</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Devis détaillé, sans engagement</span>
+        </div>
+      </form>
+    </div>
+    <details class="code-zone"><summary>Voir et copier le code HTML</summary><pre><code></code></pre><button class="copy-btn" type="button">Copier le code</button></details>
+  </article>
+
+  <!-- ================= VARIANTE C ================= -->
+  <article class="variant" id="variante-c">
+    <header>
+      <span class="ref">Variante C</span>
+      <h2>Pastilles de service — le choix se fait au doigt</h2>
+      <p class="usage">Le menu déroulant devient une rangée de pastilles : sur téléphone, un appui au lieu d'une liste à faire défiler, et le visiteur voit immédiatement tout ce que vous faites. Utile sur les pages où le service est déjà présélectionné (page papier peint : la pastille correspondante est cochée d'avance).</p>
+      <div class="meta"><span>5 champs</span><span>Choix en un appui</span><span>Montre l'étendue des métiers</span><span>Pages service</span></div>
+    </header>
+    <div class="demo narrow">
+      <form class="dr" data-dr data-subject="Demande rapide — sélection par pastilles">
+        <h3>Quel type de travaux vous concerne ?</h3>
+        <p class="dr-intro">Sélectionnez votre besoin, laissez-nous deux coordonnées : nous vous rappelons pour convenir du diagnostic gratuit sur place.</p>
+        <div class="dr-chips">
+          <input type="radio" id="c-s1" name="Service souhaité" value="Papier peint / toile de verre" checked><label for="c-s1">Papier peint</label>
+          <input type="radio" id="c-s2" name="Service souhaité" value="Peinture intérieure"><label for="c-s2">Peinture intérieure</label>
+          <input type="radio" id="c-s3" name="Service souhaité" value="Plâtrerie &amp; placo"><label for="c-s3">Plâtrerie &amp; placo</label>
+          <input type="radio" id="c-s4" name="Service souhaité" value="Revêtements de sol"><label for="c-s4">Sols</label>
+          <input type="radio" id="c-s5" name="Service souhaité" value="Isolation"><label for="c-s5">Isolation</label>
+          <input type="radio" id="c-s6" name="Service souhaité" value="Dégât des eaux"><label for="c-s6">Dégât des eaux</label>
+          <input type="radio" id="c-s7" name="Service souhaité" value="Autre"><label for="c-s7">Autre</label>
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="c-nom">Nom et prénom</label>
+            <input type="text" id="c-nom" name="Nom et prénom" required autocomplete="name" placeholder="Votre nom">
+          </div>
+          <div class="dr-field">
+            <label for="c-tel">Téléphone</label>
+            <input type="tel" id="c-tel" name="Téléphone" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00">
+          </div>
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="c-email">E-mail</label>
+            <input type="email" id="c-email" name="E-mail" autocomplete="email" placeholder="vous@exemple.fr">
+            <span class="hint">Facultatif — pour recevoir le devis par écrit.</span>
+          </div>
+          <div class="dr-field">
+            <label for="c-lieu">Code postal / commune</label>
+            <input type="text" id="c-lieu" name="Code postal / commune" required autocomplete="postal-code" placeholder="25000 Besançon">
+          </div>
+        </div>
+        <input type="text" name="entreprise_hp" class="dr-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="dr-consent"><input type="checkbox" required> J'accepte d'être recontacté au sujet de ma demande.</label>
+        <button type="submit" class="dr-btn">Demander mon diagnostic gratuit</button>
+        <p class="dr-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+    <details class="code-zone"><summary>Voir et copier le code HTML</summary><pre><code></code></pre><button class="copy-btn" type="button">Copier le code</button></details>
+  </article>
+
+  <!-- ================= VARIANTE D ================= -->
+  <article class="variant" id="variante-d">
+    <header>
+      <span class="ref">Variante D</span>
+      <h2>Qualification chantier — vous savez quoi préparer avant de vous déplacer</h2>
+      <p class="usage">Trois questions de plus (surface, état du support, délai) et le rappel devient un vrai pré-diagnostic : vous savez si l'ancien papier peint est à décoller, si le support demande une reprise d'enduit, et si le chantier est pour ce mois-ci ou pour l'automne. Moins d'envois qu'une variante courte, mais des demandes exploitables.</p>
+      <div class="meta"><span>9 champs</span><span>Qualification forte</span><span>Moins de volume</span><span>Page service détaillée</span></div>
+    </header>
+    <div class="demo narrow">
+      <form class="dr" data-dr data-subject="Demande qualifiée — papier peint Besançon">
+        <h3>Décrivez votre chantier papier peint</h3>
+        <p class="dr-intro">Plus vous nous en dites, plus la visite est efficace : nous arrivons avec le bon matériel et le devis part plus vite. Une question ? <a class="dr-phone" href="tel:+33760279897">07 60 27 98 97</a>.</p>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="d-nom">Nom et prénom</label>
+            <input type="text" id="d-nom" name="Nom et prénom" required autocomplete="name" placeholder="Votre nom">
+          </div>
+          <div class="dr-field">
+            <label for="d-tel">Téléphone</label>
+            <input type="tel" id="d-tel" name="Téléphone" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00">
+          </div>
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="d-email">E-mail</label>
+            <input type="email" id="d-email" name="E-mail" required autocomplete="email" placeholder="vous@exemple.fr">
+          </div>
+          <div class="dr-field">
+            <label for="d-lieu">Code postal / commune</label>
+            <input type="text" id="d-lieu" name="Code postal / commune" required autocomplete="postal-code" placeholder="25000 Besançon">
+          </div>
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="d-pieces">Pièces concernées</label>
+            <input type="text" id="d-pieces" name="Pièces concernées" placeholder="Salon, couloir, chambre…">
+          </div>
+          <div class="dr-field">
+            <label for="d-surface">Surface approximative</label>
+            <input type="text" id="d-surface" name="Surface approximative" inputmode="numeric" placeholder="environ 40 m² de murs">
+            <span class="hint">Une estimation suffit, nous mesurons sur place.</span>
+          </div>
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="d-support">État actuel des murs</label>
+            <select id="d-support" name="État actuel des murs">
+              <option value="">À préciser</option>
+              <option>Murs peints, en bon état</option>
+              <option>Ancien papier peint à retirer</option>
+              <option>Toile de verre existante</option>
+              <option>Murs abîmés, fissures ou trous</option>
+              <option>Plâtre ou placo neuf</option>
+              <option>Traces d'humidité ou dégât des eaux</option>
+              <option>Je ne sais pas</option>
+            </select>
+          </div>
+          <div class="dr-field">
+            <label for="d-delai">Délai souhaité</label>
+            <select id="d-delai" name="Délai souhaité">
+              <option value="">À préciser</option>
+              <option>Dès que possible</option>
+              <option>Dans le mois</option>
+              <option>Dans les 3 mois</option>
+              <option>Plus tard / je me renseigne</option>
+            </select>
+          </div>
+        </div>
+        <div class="dr-field">
+          <label for="d-projet">Précisions utiles</label>
+          <textarea id="d-projet" name="Précisions utiles" rows="3" placeholder="Hauteur sous plafond, motif ou finition envisagée, logement occupé, étage sans ascenseur…"></textarea>
+        </div>
+        <input type="text" name="entreprise_hp" class="dr-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="dr-consent"><input type="checkbox" required> J'accepte que ces informations servent à préparer ma visite et mon devis.</label>
+        <button type="submit" class="dr-btn">Envoyer ma demande</button>
+        <p class="dr-status" role="status" aria-live="polite"></p>
+        <p class="dr-note">Des photos de vos murs ? Envoyez-les au 07 60 27 98 97 par SMS ou WhatsApp après votre demande.</p>
+      </form>
+    </div>
+    <details class="code-zone"><summary>Voir et copier le code HTML</summary><pre><code></code></pre><button class="copy-btn" type="button">Copier le code</button></details>
+  </article>
+
+  <!-- ================= VARIANTE E ================= -->
+  <article class="variant" id="variante-e">
+    <header>
+      <span class="ref">Variante E</span>
+      <h2>Deux étapes — le projet d'abord, les coordonnées ensuite</h2>
+      <p class="usage">Le visiteur commence par parler de ses murs, ce qui ne l'engage à rien ; il ne donne son numéro qu'à l'étape 2, une fois investi dans sa demande. C'est la variante à tester face à la B quand le formulaire est vu mais peu rempli. Elle demande un peu de JavaScript en plus (fourni dans le code).</p>
+      <div class="meta"><span>7 champs sur 2 écrans</span><span>Engagement progressif</span><span>À tester face à la B</span><span>Nécessite du JS</span></div>
+    </header>
+    <div class="demo narrow">
+      <form class="dr" data-dr data-multistep data-subject="Demande en 2 étapes — papier peint">
+        <h3>Votre projet papier peint en deux minutes</h3>
+        <div class="dr-steps"><div class="on"></div><div></div></div>
+        <div class="dr-step on">
+          <p class="dr-intro">Étape 1 sur 2 — parlez-nous de vos murs. Aucune coordonnée demandée pour l'instant.</p>
+          <div class="dr-field">
+            <label for="e-service">Ce que vous voulez faire</label>
+            <select id="e-service" name="Service souhaité" required>
+              <option>Poser du papier peint</option>
+              <option>Poser de la toile de verre</option>
+              <option>Retirer un ancien papier peint et refaire les murs</option>
+              <option>Papier peint panoramique / mur d'accent</option>
+              <option>Je ne sais pas encore, je veux un conseil</option>
+            </select>
+          </div>
+          <div class="dr-row">
+            <div class="dr-field">
+              <label for="e-pieces">Pièces concernées</label>
+              <input type="text" id="e-pieces" name="Pièces concernées" placeholder="Salon, chambre, couloir…">
+            </div>
+            <div class="dr-field">
+              <label for="e-surface">Surface approximative</label>
+              <input type="text" id="e-surface" name="Surface approximative" placeholder="environ 40 m²">
+            </div>
+          </div>
+          <div class="dr-field">
+            <label for="e-delai">Délai souhaité</label>
+            <select id="e-delai" name="Délai souhaité">
+              <option value="">À préciser</option>
+              <option>Dès que possible</option>
+              <option>Dans le mois</option>
+              <option>Dans les 3 mois</option>
+              <option>Plus tard / je me renseigne</option>
+            </select>
+          </div>
+          <button type="button" class="dr-btn" data-next>Continuer</button>
+        </div>
+        <div class="dr-step">
+          <p class="dr-intro">Étape 2 sur 2 — où vous joindre pour convenir du diagnostic gratuit sur place.</p>
+          <div class="dr-row">
+            <div class="dr-field">
+              <label for="e-nom">Nom et prénom</label>
+              <input type="text" id="e-nom" name="Nom et prénom" required autocomplete="name" placeholder="Votre nom">
+            </div>
+            <div class="dr-field">
+              <label for="e-tel">Téléphone</label>
+              <input type="tel" id="e-tel" name="Téléphone" required autocomplete="tel" inputmode="tel" placeholder="06 00 00 00 00">
+            </div>
+          </div>
+          <div class="dr-row">
+            <div class="dr-field">
+              <label for="e-email">E-mail</label>
+              <input type="email" id="e-email" name="E-mail" required autocomplete="email" placeholder="vous@exemple.fr">
+            </div>
+            <div class="dr-field">
+              <label for="e-lieu">Code postal / commune</label>
+              <input type="text" id="e-lieu" name="Code postal / commune" required autocomplete="postal-code" placeholder="25000 Besançon">
+            </div>
+          </div>
+          <input type="text" name="entreprise_hp" class="dr-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label class="dr-consent"><input type="checkbox" required> J'accepte d'être recontacté au sujet de ma demande.</label>
+          <button type="submit" class="dr-btn">Envoyer ma demande</button>
+          <button type="button" class="dr-back" data-prev>Revenir à l'étape précédente</button>
+          <p class="dr-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+    <details class="code-zone"><summary>Voir et copier le code HTML</summary><pre><code></code></pre><button class="copy-btn" type="button">Copier le code</button></details>
+  </article>
+
+  <!-- ================= VARIANTE F ================= -->
+  <article class="variant" id="variante-f">
+    <header>
+      <span class="ref">Variante F</span>
+      <h2>Encart professionnel — syndics, gestionnaires, assurances</h2>
+      <p class="usage">Pour les pages B2B (syndic et copropriété, dégât des eaux) : le demandeur n'est pas un particulier, il gère un immeuble ou un dossier de sinistre. Les champs société, adresse de l'immeuble et référence de dossier vous évitent trois allers-retours par e-mail. Format étroit, pensé pour une colonne latérale collante.</p>
+      <div class="meta"><span>8 champs</span><span>Colonne latérale</span><span>Pages syndic / dégât des eaux</span><span>Vocabulaire pro</span></div>
+    </header>
+    <div class="demo narrow">
+      <form class="dr side" data-dr data-subject="Demande professionnelle — syndic / gestionnaire / assurance">
+        <h3>Votre demande professionnelle</h3>
+        <p class="dr-intro">Visite technique gratuite et devis détaillé poste par poste, prêt à présenter en assemblée générale ou à transmettre à l'assureur.</p>
+        <div class="dr-field">
+          <label for="f-societe">Société / cabinet</label>
+          <input type="text" id="f-societe" name="Société" required autocomplete="organization" placeholder="Nom du cabinet ou de la société">
+        </div>
+        <div class="dr-field">
+          <label for="f-nom">Interlocuteur</label>
+          <input type="text" id="f-nom" name="Interlocuteur" required autocomplete="name" placeholder="Nom et fonction">
+        </div>
+        <div class="dr-row">
+          <div class="dr-field">
+            <label for="f-tel">Téléphone</label>
+            <input type="tel" id="f-tel" name="Téléphone" required autocomplete="tel" inputmode="tel" placeholder="03 00 00 00 00">
+          </div>
+          <div class="dr-field">
+            <label for="f-email">E-mail</label>
+            <input type="email" id="f-email" name="E-mail" required autocomplete="email" placeholder="vous@cabinet.fr">
+          </div>
+        </div>
+        <div class="dr-field">
+          <label for="f-type">Nature de la demande</label>
+          <select id="f-type" name="Nature de la demande" required>
+            <option>Parties communes (cage d'escalier, hall, couloirs)</option>
+            <option>Remise en état après dégât des eaux</option>
+            <option>Remise en état locative entre deux locataires</option>
+            <option>Ravalement / façade</option>
+            <option>Aménagement de local commercial</option>
+            <option>Autre — à préciser ci-dessous</option>
+          </select>
+        </div>
+        <div class="dr-field">
+          <label for="f-adresse">Adresse de l'immeuble</label>
+          <input type="text" id="f-adresse" name="Adresse de l'immeuble" required placeholder="Rue, code postal, commune">
+        </div>
+        <div class="dr-field">
+          <label for="f-dossier">Référence de dossier (sinistre, immeuble)</label>
+          <input type="text" id="f-dossier" name="Référence de dossier" placeholder="Facultatif">
+        </div>
+        <div class="dr-field">
+          <label for="f-detail">Détail de la demande</label>
+          <textarea id="f-detail" name="Détail de la demande" rows="3" placeholder="Surfaces, étages concernés, contraintes d'accès, échéance d'AG ou d'expertise…"></textarea>
+        </div>
+        <input type="text" name="entreprise_hp" class="dr-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <label class="dr-consent"><input type="checkbox" required> J'accepte d'être recontacté au sujet de cette demande.</label>
+        <button type="submit" class="dr-btn">Demander une visite technique</button>
+        <p class="dr-status" role="status" aria-live="polite"></p>
+        <div class="dr-reassure">
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Décennale &amp; RC pro (ERGO France)</span>
+          <span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg> SIRET 905 214 631 00012</span>
+        </div>
+      </form>
+    </div>
+    <details class="code-zone"><summary>Voir et copier le code HTML</summary><pre><code></code></pre><button class="copy-btn" type="button">Copier le code</button></details>
+  </article>
+
+  <!-- ================= NOTES DE MISE EN ŒUVRE ================= -->
+  <article class="variant" id="mise-en-oeuvre">
+    <header>
+      <span class="ref">Pour poser l'une de ces variantes</span>
+      <h2>Ce qu'il faut savoir avant de remplacer le formulaire en ligne</h2>
+    </header>
+    <div class="demo">
+      <h3 style="font-size:17px;margin-bottom:6px">1. Où part la demande</h3>
+      <p style="margin-bottom:18px;color:var(--text-light)">Sur cette page comme sur le site actuel, l'envoi ouvre la messagerie du visiteur, pré-remplie vers contact@rushiti-renovation.fr. C'est simple et sans coût, mais deux limites : sur un téléphone mal configuré rien ne s'ouvre, et vous ne gardez aucune trace des demandes perdues. Un envoi côté serveur (fonction Cloudflare Pages, ou un service de formulaire) supprime ces deux limites et permet d'ajouter un accusé de réception automatique. À arbitrer avec vous avant déploiement.</p>
+
+      <h3 style="font-size:17px;margin-bottom:6px">2. Anti-spam</h3>
+      <p style="margin-bottom:18px;color:var(--text-light)">Chaque variante contient un champ piège invisible (<code>entreprise_hp</code>) : un humain ne le voit pas, un robot le remplit, et l'envoi est alors ignoré sans message d'erreur. C'est suffisant contre le spam automatique courant, sans imposer de captcha à vos clients.</p>
+
+      <h3 style="font-size:17px;margin-bottom:6px">3. RGPD</h3>
+      <p style="margin-bottom:18px;color:var(--text-light)">La case de consentement et une phrase de finalité claire sont le minimum. Pensez à ce que la page mentions légales indique qui traite les données, pour quoi, combien de temps elles sont conservées et comment les faire supprimer. Le texte de la case est à valider par vos soins.</p>
+
+      <h3 style="font-size:17px;margin-bottom:6px">4. Suivi des conversions</h3>
+      <p style="margin-bottom:18px;color:var(--text-light)">Le site déclenche déjà un événement <code>Lead</code> Meta sur les clics « devis » et un événement <code>Contact</code> sur les clics téléphone. Si vous adoptez une de ces variantes, ajoutez le même déclenchement à l'envoi du formulaire, sinon les demandes envoyées ne seront comptées nulle part.</p>
+
+      <h3 style="font-size:17px;margin-bottom:6px">5. Ce que je conseille</h3>
+      <p style="color:var(--text-light)">La <strong>variante B</strong> en bas de chaque page service (c'est votre formulaire actuel, consolidé), la <strong>variante A</strong> en haut de page et dans la barre collante mobile, et la <strong>variante F</strong> sur les pages syndic et dégât des eaux. La <strong>D</strong> et la <strong>E</strong> sont à tester ensuite, une seule à la fois, pour pouvoir dire laquelle a changé quelque chose.</p>
+    </div>
+  </article>
+
+</main>
+
+<script>
+(function () {
+  var MAIL = 'contact@rushiti-renovation.fr';
+
+  /* --- Envoi : ouverture de la messagerie pré-remplie --- */
+  document.querySelectorAll('[data-dr]').forEach(function (form) {
+    var status = form.querySelector('.dr-status');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      /* Champ piège : rempli = robot, on ignore silencieusement */
+      var hp = form.querySelector('.dr-hp');
+      if (hp && hp.value) { return; }
+
+      var lignes = [];
+      new FormData(form).forEach(function (valeur, cle) {
+        if (cle === 'entreprise_hp' || !String(valeur).trim()) { return; }
+        lignes.push(cle + ' : ' + valeur);
+      });
+
+      var sujet = form.getAttribute('data-subject') || 'Demande de devis';
+      var corps = lignes.join('\n') + '\n\nDemande envoyée depuis rushiti-renovation.fr';
+
+      window.location.href = 'mailto:' + MAIL +
+        '?subject=' + encodeURIComponent(sujet) +
+        '&body=' + encodeURIComponent(corps);
+
+      var btn = form.querySelector('button[type="submit"]');
+      var texte = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Ouverture de votre messagerie…';
+      if (status) { status.textContent = 'Votre messagerie s’ouvre avec la demande pré-remplie. Il ne reste qu’à l’envoyer.'; }
+      setTimeout(function () { btn.disabled = false; btn.textContent = texte; }, 3000);
+    });
+  });
+
+  /* --- Variante E : navigation entre les deux étapes --- */
+  document.querySelectorAll('[data-multistep]').forEach(function (form) {
+    var etapes = form.querySelectorAll('.dr-step');
+    var jauges = form.querySelectorAll('.dr-steps div');
+
+    function afficher(i) {
+      etapes.forEach(function (et, n) { et.classList.toggle('on', n === i); });
+      jauges.forEach(function (j, n) { j.classList.toggle('on', n <= i); });
+      var premier = etapes[i].querySelector('input, select, textarea');
+      if (premier) { premier.focus({ preventScroll: true }); }
+    }
+
+    var suivant = form.querySelector('[data-next]');
+    if (suivant) {
+      suivant.addEventListener('click', function () {
+        var champs = etapes[0].querySelectorAll('input, select, textarea');
+        for (var i = 0; i < champs.length; i++) {
+          if (!champs[i].checkValidity()) { champs[i].reportValidity(); return; }
+        }
+        afficher(1);
+      });
+    }
+    var precedent = form.querySelector('[data-prev]');
+    if (precedent) { precedent.addEventListener('click', function () { afficher(0); }); }
+  });
+
+  /* --- Zones de code : affichage et copie du HTML de chaque formulaire --- */
+  document.querySelectorAll('.code-zone').forEach(function (zone) {
+    var form = zone.closest('.variant').querySelector('form');
+    var code = zone.querySelector('code');
+    var source = form.outerHTML
+      .replace(/ data-dr=""/g, ' data-dr')
+      .replace(/ data-multistep=""/g, ' data-multistep');
+
+    zone.addEventListener('toggle', function () {
+      if (zone.open && !code.textContent) { code.textContent = source; }
+    });
+
+    zone.querySelector('.copy-btn').addEventListener('click', function () {
+      var btn = this;
+      var fini = function (texte) {
+        var initial = btn.textContent;
+        btn.textContent = texte;
+        setTimeout(function () { btn.textContent = initial; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(source).then(function () { fini('Code copié'); })
+          .catch(function () { fini('Copie refusée — sélectionnez le code ci-dessus'); });
+      } else {
+        fini('Copie indisponible — sélectionnez le code ci-dessus');
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>
