@@ -5,30 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Copie GitHub Pages : le site officiel est https://rushiti-renovation.fr — ne pas indexer ce doublon -->
     <meta name="robots" content="noindex, nofollow">
-    <meta name="description" content="RUSHITI RÉNOVATION BESANÇON - Entreprise de rénovation, peinture et aménagement intérieur à Besançon et dans le Doubs. Devis gratuit.">
-    <meta name="keywords" content="rénovation, peinture, Besançon, aménagement, travaux, RUSHITI">
-    <title>RUSHITI RÉNOVATION BESANÇON | Rénovation & Peinture</title>
+    <meta name="description" content="RUSHITI Rénovation, artisan peintre et plâtrier à Besançon (Doubs) : peinture, plâtrerie et placo, sols, isolation et remise en état après dégât des eaux. Diagnostic gratuit sur site.">
+    <title>Artisan peintre &amp; rénovation à Besançon | RUSHITI</title>
+    <link rel="canonical" href="https://rushiti-renovation.fr/">
+    <meta name="theme-color" content="#1a5632">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="RUSHITI Rénovation">
+    <meta property="og:title" content="Artisan peintre &amp; rénovation à Besançon | RUSHITI">
+    <meta property="og:description" content="Artisan peintre et plâtrier à Besançon (Doubs) : peinture, plâtrerie et placo, sols, isolation et remise en état après dégât des eaux. Diagnostic gratuit sur site.">
+    <meta property="og:url" content="https://rushiti-renovation.fr/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "HousePainter",
+      "@type": ["LocalBusiness", "Painter", "HomeAndConstructionBusiness"],
+      "@id": "https://rushiti-renovation.fr/#business",
       "name": "RUSHITI Rénovation",
-      "description": "Entreprise de rénovation, peinture, plâtrerie et aménagement intérieur à Besançon et dans le Doubs. Devis gratuit.",
+      "legalName": "SARL RUSHITI Rénovation",
+      "description": "Entreprise artisanale de peinture, plâtrerie et placo, revêtements de sol, isolation et remise en état après dégât des eaux à Besançon et dans le Doubs. Diagnostic gratuit sur site.",
       "url": "https://rushiti-renovation.fr/",
       "telephone": "+33760279897",
       "email": "contact@rushiti-renovation.fr",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "18 rue du Professeur Haag",
         "addressLocality": "Besançon",
         "postalCode": "25000",
-        "addressRegion": "Doubs",
+        "addressRegion": "Bourgogne-Franche-Comté",
         "addressCountry": "FR"
       },
-      "areaServed": ["Besançon", "Doubs"],
+      "areaServed": [
+        { "@type": "City", "name": "Besançon" },
+        { "@type": "AdministrativeArea", "name": "Doubs" }
+      ],
+      "founder": [
+        { "@type": "Person", "name": "Isuf Rushiti" },
+        { "@type": "Person", "name": "Yll Rushiti" }
+      ],
+      "taxID": "90521463100012",
+      "identifier": {
+        "@type": "PropertyValue",
+        "propertyID": "SIRET",
+        "value": "90521463100012"
+      },
       "sameAs": [
         "https://www.facebook.com/rushiti.renovation/",
         "https://www.instagram.com/rushiti.renovation/"
@@ -37,21 +61,17 @@
         {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "07:30",
-          "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
           "opens": "08:00",
-          "closes": "12:00"
+          "closes": "18:00"
         }
       ],
-      "priceRange": "Devis gratuit"
+      "priceRange": "€€"
     }
     </script>
 </head>
 <body>
+    <a class="skip-link" href="#contenu">Aller au contenu principal</a>
+
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container nav-container">
@@ -62,7 +82,7 @@
                     <span class="logo-sub">RÉNOVATION BESANÇON</span>
                 </div>
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <button class="nav-toggle" id="navToggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
                 <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks">
@@ -70,35 +90,36 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#realisations">Réalisations</a></li>
                 <li><a href="#apropos">À Propos</a></li>
-                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#engagements">Engagements</a></li>
                 <li><a href="#contact" class="nav-cta">Devis Gratuit</a></li>
             </ul>
         </div>
     </nav>
 
+    <main id="contenu">
     <!-- Hero Section -->
     <section class="hero" id="accueil">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
             <div class="hero-badge">Artisan de confiance à Besançon</div>
-            <h1>Votre Expert en<br><span class="highlight">Rénovation</span> à Besançon</h1>
-            <p class="hero-subtitle">Peinture, aménagement intérieur et rénovation complète. Plus de 10 ans d'expérience au service de votre habitat.</p>
+            <h1>Votre Artisan en<br><span class="highlight">Rénovation</span> à Besançon</h1>
+            <p class="hero-subtitle">Peinture, plâtrerie et rénovation intérieure. Vingt ans d'expérience du bâti bisontin et franc-comtois, au service de votre habitat.</p>
             <div class="hero-buttons">
                 <a href="#contact" class="btn btn-primary">Demander un Devis Gratuit</a>
                 <a href="#services" class="btn btn-outline">Nos Services</a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number" data-target="500">0</span>+
-                    <span class="stat-label">Projets Réalisés</span>
+                    <span class="stat-number" data-target="20">0</span>
+                    <span class="stat-label">Ans d'expérience</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" data-target="10">0</span>+
-                    <span class="stat-label">Ans d'Expérience</span>
+                    <span class="stat-figure">Gratuit</span>
+                    <span class="stat-label">Diagnostic sur site</span>
                 </div>
                 <div class="stat">
-                    <span class="stat-number" data-target="100">0</span>%
-                    <span class="stat-label">Clients Satisfaits</span>
+                    <span class="stat-figure">Décennale</span>
+                    <span class="stat-label">&amp; RC pro (ERGO France)</span>
                 </div>
             </div>
         </div>
@@ -277,54 +298,57 @@
         <div class="container">
             <div class="section-header">
                 <span class="section-tag">Nos Réalisations</span>
-                <h2>Découvrez Nos Projets</h2>
-                <p>Un aperçu de nos travaux récents à Besançon et ses environs.</p>
+                <h2>Ce que Nous Réalisons</h2>
+                <p>Les types de chantiers que nous menons à Besançon et dans le Doubs. Les photos de nos chantiers récents sont regroupées sur notre page réalisations.</p>
             </div>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Tous</button>
-                <button class="filter-btn" data-filter="peinture">Peinture</button>
-                <button class="filter-btn" data-filter="renovation">Rénovation</button>
-                <button class="filter-btn" data-filter="facade">Façade</button>
-                <button class="filter-btn" data-filter="sol">Sol</button>
+                <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">Tous</button>
+                <button class="filter-btn" type="button" data-filter="peinture" aria-pressed="false">Peinture</button>
+                <button class="filter-btn" type="button" data-filter="renovation" aria-pressed="false">Rénovation</button>
+                <button class="filter-btn" type="button" data-filter="facade" aria-pressed="false">Façade</button>
+                <button class="filter-btn" type="button" data-filter="sol" aria-pressed="false">Sol</button>
             </div>
             <div class="gallery-grid">
                 <div class="gallery-item" data-category="peinture">
                     <div class="gallery-placeholder" style="background: linear-gradient(135deg, #e8d5b7, #c4a882);">
-                        <span>Peinture Salon</span>
-                        <small>Appartement Centre-ville Besançon</small>
+                        <span>Peinture de pièces à vivre</span>
+                        <small>Murs, plafonds et boiseries, préparation comprise</small>
                     </div>
                 </div>
                 <div class="gallery-item" data-category="renovation">
                     <div class="gallery-placeholder" style="background: linear-gradient(135deg, #b7c8e8, #8297c4);">
-                        <span>Rénovation Cuisine</span>
-                        <small>Maison Planoise</small>
+                        <span>Rénovation de cuisine</span>
+                        <small>Reprise des murs, sols et finitions</small>
                     </div>
                 </div>
                 <div class="gallery-item" data-category="facade">
                     <div class="gallery-placeholder" style="background: linear-gradient(135deg, #d5e8b7, #a8c482);">
-                        <span>Ravalement Façade</span>
-                        <small>Immeuble Battant</small>
+                        <span>Peinture extérieure</span>
+                        <small>Nettoyage, traitement et protection des façades</small>
                     </div>
                 </div>
                 <div class="gallery-item" data-category="sol">
                     <div class="gallery-placeholder" style="background: linear-gradient(135deg, #e8b7b7, #c48282);">
-                        <span>Pose Parquet</span>
-                        <small>Villa Chalezeule</small>
+                        <span>Pose de parquet</span>
+                        <small>Ragréage du support puis pose flottante</small>
                     </div>
                 </div>
                 <div class="gallery-item" data-category="peinture">
                     <div class="gallery-placeholder" style="background: linear-gradient(135deg, #d5b7e8, #a882c4);">
-                        <span>Peinture Chambre</span>
-                        <small>Appartement Chaprais</small>
+                        <span>Peinture de chambres</span>
+                        <small>Fonds anciens traités avant mise en peinture</small>
                     </div>
                 </div>
                 <div class="gallery-item" data-category="renovation">
                     <div class="gallery-placeholder" style="background: linear-gradient(135deg, #b7e8d5, #82c4a8);">
-                        <span>Salle de Bain</span>
-                        <small>Rénovation Complète</small>
+                        <span>Salle de bain</span>
+                        <small>Supports en pièce humide, sols et peinture adaptée</small>
                     </div>
                 </div>
             </div>
+            <p class="gallery-note">
+                <a class="btn btn-outline" href="https://rushiti-renovation.fr/realisations">Voir les photos de nos chantiers</a>
+            </p>
         </div>
     </section>
 
@@ -358,7 +382,7 @@
                 <div class="step">
                     <div class="step-number">04</div>
                     <h3>Réception</h3>
-                    <p>Vérification finale avec vous. Nous ne partons que lorsque vous êtes 100% satisfait du résultat.</p>
+                    <p>Réception contradictoire avec vous, point par point, et reprise des finitions si quelque chose ne va pas.</p>
                 </div>
             </div>
         </div>
@@ -371,7 +395,7 @@
                 <div class="apropos-content">
                     <span class="section-tag">À Propos</span>
                     <h2>Une Entreprise Artisanale de Besançon</h2>
-                    <p>RUSHITI RÉNOVATION est une entreprise artisanale basée à Besançon, spécialisée dans la peinture, la plâtrerie et la rénovation intérieure. Avec plus de 10 ans d'expérience, nous intervenons auprès des particuliers comme des professionnels, à Besançon et dans tout le Doubs.</p>
+                    <p>RUSHITI Rénovation est une entreprise artisanale (SARL) basée à Besançon, dirigée par Isuf et Yll Rushiti, spécialisée dans la peinture, la plâtrerie et la rénovation intérieure. Depuis plus de 20 ans, nous intervenons auprès des particuliers comme des professionnels, à Besançon et dans tout le Doubs.</p>
                     <p>Notre approche est simple : un diagnostic honnête, un devis clair et détaillé, et un chantier mené proprement, dans le respect des délais convenus. Chaque projet, du rafraîchissement d'une pièce à la rénovation complète d'un logement, bénéficie du même soin et du même niveau d'exigence.</p>
                     <p>Nous accompagnons également les syndics de copropriété, les gestionnaires de biens et les compagnies d'assurance, notamment pour la remise en état après dégât des eaux.</p>
                 </div>
@@ -379,15 +403,15 @@
                     <div class="apropos-badge">
                         <div class="feature-icon">&#10003;</div>
                         <div>
-                            <h4>Assurance Décennale</h4>
-                            <p>Tous nos travaux sont couverts.</p>
+                            <h4>Assurance décennale &amp; RC pro</h4>
+                            <p>Couverture professionnelle (assureur ERGO France).</p>
                         </div>
                     </div>
                     <div class="apropos-badge">
                         <div class="feature-icon">&#10003;</div>
                         <div>
-                            <h4>Certifié RGE</h4>
-                            <p>Reconnu Garant de l'Environnement.</p>
+                            <h4>Travail conforme aux DTU</h4>
+                            <p>DTU 59.1 (peinture), DTU 25.41 (plaques de plâtre).</p>
                         </div>
                     </div>
                     <div class="apropos-badge">
@@ -400,8 +424,8 @@
                     <div class="apropos-badge">
                         <div class="feature-icon">&#10003;</div>
                         <div>
-                            <h4>Entreprise Déclarée</h4>
-                            <p>SIRET : 905 214 631 00012</p>
+                            <h4>Entreprise déclarée</h4>
+                            <p>SARL RUSHITI Rénovation — SIRET 905 214 631 00012</p>
                         </div>
                     </div>
                 </div>
@@ -409,67 +433,33 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="temoignages">
+    <!-- Engagements Section -->
+    <section class="testimonials" id="engagements">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Témoignages</span>
-                <h2>Ce que Disent Nos Clients</h2>
-                <p>La satisfaction de nos clients est notre meilleure carte de visite.</p>
+                <span class="section-tag">Nos engagements</span>
+                <h2>Ce sur Quoi Vous Pouvez Compter</h2>
+                <p>Ce que nous garantissons sur chaque chantier, de la première visite à la réception.</p>
             </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-track" id="testimonialTrack">
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"Travail impeccable pour la rénovation de notre appartement. Équipe sérieuse, propre et respectueuse des délais. Je recommande vivement !"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">ML</div>
-                            <div>
-                                <strong>Marie L.</strong>
-                                <span>Besançon Centre</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"M. Rushiti a refait toute la peinture de notre maison. Le résultat est magnifique. Très bon conseil sur les couleurs et finitions parfaites."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">PD</div>
-                            <div>
-                                <strong>Pierre D.</strong>
-                                <span>Planoise</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"Ravalement de façade réussi. Prix compétitif, travail soigné. L'équipe est agréable et professionnelle. Notre immeuble a retrouvé sa splendeur."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SD</div>
-                            <div>
-                                <strong>Sophie D.</strong>
-                                <span>Battant</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"Rénovation complète de notre salle de bain. Du carrelage à la peinture, tout est parfait. Merci à toute l'équipe RUSHITI !"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">JM</div>
-                            <div>
-                                <strong>Jean M.</strong>
-                                <span>Chaprais</span>
-                            </div>
-                        </div>
-                    </div>
+            <div class="engagements-grid">
+                <div class="engagement-card">
+                    <h3>Le diagnostic avant le prix</h3>
+                    <p>Nous venons voir l'état réel des supports et l'origine du problème avant de chiffrer quoi que ce soit. Un devis sérieux ne sort pas d'un barème au mètre carré : il découle de ce que l'on a constaté sur place.</p>
                 </div>
-                <div class="testimonial-nav">
-                    <button class="test-nav-btn" id="prevBtn" aria-label="Précédent">&larr;</button>
-                    <div class="testimonial-dots" id="testimonialDots"></div>
-                    <button class="test-nav-btn" id="nextBtn" aria-label="Suivant">&rarr;</button>
+                <div class="engagement-card">
+                    <h3>La préparation, le vrai travail</h3>
+                    <p>Protection, rebouchage, traitement des fonds : c'est cette étape invisible qui fait tenir une finition dans le temps. Repeindre sur un support fariné ou humide, c'est garantir un résultat qui s'écaille en quelques années.</p>
+                </div>
+                <div class="engagement-card">
+                    <h3>Une lecture du bâti franc-comtois</h3>
+                    <p>Pierre calcaire, enduits à la chaux, plâtre traditionnel, parois humides : le bâti ancien bisontin a ses règles. Vingt ans de chantiers dans le Doubs nous permettent d'adapter le traitement au support plutôt que l'inverse.</p>
+                </div>
+                <div class="engagement-card">
+                    <h3>Un seul interlocuteur</h3>
+                    <p>Vous avez en face de vous l'artisan qui réalise le travail, pas un intermédiaire. Le même interlocuteur suit le chantier de la visite technique jusqu'à la réception et la reprise des finitions.</p>
                 </div>
             </div>
+            <p class="engagements-note">Nos avis clients sont publics sur notre fiche Google Business Profile et sur nos pages Facebook et Instagram.</p>
         </div>
     </section>
 
@@ -506,7 +496,7 @@
                         </div>
                         <div>
                             <h4>Adresse</h4>
-                            <p>Besançon, 25000<br>Doubs, France</p>
+                            <p>18 rue du Professeur Haag<br>25000 Besançon, France</p>
                         </div>
                     </div>
                     <div class="info-card">
@@ -541,7 +531,7 @@
                         </div>
                         <div>
                             <h4>Horaires</h4>
-                            <p>Lun - Ven : 7h30 - 18h<br>Sam : 8h - 12h</p>
+                            <p>Lundi - Vendredi : 8h - 18h</p>
                         </div>
                     </div>
                     <div class="zone-intervention">
@@ -611,11 +601,14 @@
                             Devis détaillé, sans engagement
                         </span>
                     </div>
-                    <p class="form-note">* Champs obligatoires. L'envoi ouvre votre messagerie email. Nous vous recontacterons sous 24h.</p>
+                    <p class="form-note">* Champs obligatoires. L'envoi ouvre votre messagerie e-mail avec la demande pré-remplie ; si rien ne se passe, écrivez-nous directement à <a href="mailto:contact@rushiti-renovation.fr">contact@rushiti-renovation.fr</a> ou appelez le <a href="tel:+33760279897">07 60 27 98 97</a>. Nous vous recontacterons sous 24h.</p>
+                    <p class="form-note">Vos données sont conservées 3 ans à compter du dernier contact. Vous disposez d'un droit d'accès, de rectification et de suppression : <a href="mailto:contact@rushiti-renovation.fr">contact@rushiti-renovation.fr</a>.</p>
                 </form>
             </div>
         </div>
     </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="footer">
@@ -653,7 +646,7 @@
                 </div>
                 <div class="footer-contact">
                     <h4>Contact</h4>
-                    <p>Besançon, 25000 Doubs</p>
+                    <p>18 rue du Professeur Haag<br>25000 Besançon</p>
                     <p><a href="tel:+33760279897">07 60 27 98 97</a></p>
                     <p><a href="mailto:contact@rushiti-renovation.fr">contact@rushiti-renovation.fr</a></p>
                     <div class="social-links">
@@ -668,7 +661,7 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2026 RUSHITI RÉNOVATION BESANÇON. Tous droits réservés.</p>
-                <p>SIRET : 905 214 631 00012 | Assurance décennale | RGE</p>
+                <p>SARL RUSHITI Rénovation | SIRET : 905 214 631 00012 | Assurance décennale &amp; RC pro</p>
             </div>
         </div>
     </footer>

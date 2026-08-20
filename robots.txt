@@ -1,0 +1,8 @@
+# robots.txt — copie GitHub Pages de RUSHITI Rénovation
+# Le site officiel est https://rushiti-renovation.fr
+# Cette copie ne doit jamais être explorée ni indexée : elle dupliquerait
+# le contenu du site de production sur un domaine github.io.
+# Le robots.txt de production, lui, autorise tous les robots.
+
+User-agent: *
+Disallow: /
