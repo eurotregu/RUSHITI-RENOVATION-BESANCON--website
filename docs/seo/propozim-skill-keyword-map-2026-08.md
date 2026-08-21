@@ -574,7 +574,7 @@ Pas autorizimit të Isufit («kryeni të gjitha veprimet e nevojshme»), gjendja
 
 ## B. Konsolidimi i grilës (Volet 4) ka nisur gjithashtu
 
-Sitemap-i i marrë live më 21/08: **755 URL** në `sitemap-pages.xml` (nga 1 395 të inventarit të 20/08), `sitemap-communes.xml` **bosh**. Papier-peint: 40 URL (nga 76); toile-de-verre: 17 (nga 76); shembull ridrejtimi konform planit: `/papier-peint-champoux` → 301 → `/papier-peint-besancon` (i njëjti shërbim në nivelin më të lartë, jo faqja kryesore — saktësisht rregulli i § 5.3). Shpërndarja e shërbimeve në sitemap përputhet gjerësisht me nivelet A/B/C të Volet 4 (dégât-des-eaux dhe isolation-intérieure në 77/76 zona; vitrification 27; sol-pvc 16; lino-vinyle-lvt 15). ⚠️ Kushti i planit — «asnjë faqe që printon nuk fshihet» — **duhet konfirmuar me eksportin GSC**, që mbetet i pasiguruar.
+Sitemap-i i marrë live më 21/08: **755 URL** në `sitemap-pages.xml` (nga 1 395 të inventarit të 20/08), `sitemap-communes.xml` **bosh**. Papier-peint: 40 URL (nga 76); toile-de-verre: 17 (nga 76); shembull ridrejtimi konform planit: `/papier-peint-champoux` → 301 → `/papier-peint-besancon` (i njëjti shërbim në nivelin më të lartë, jo faqja kryesore — saktësisht rregulli i § 5.3). Pas lidhjes së depos së prodhimit (leje e miratuar nga Isufi në mbrëmje): skedari `_redirects` përmban **646 ridrejtime 301**, të gjitha të tipit `shërbim-fshat → shërbim-besancon`, dhe **dubloni i fasadës është zgjidhur** — `/ravalement-facade-besancon` → 301 → `/peinture-exterieure-besancon`, me koment në skedar që citon auditin e 20/08 (ravalement pa asnjë impresion GSC). Verifikuesi i regresit u ekzekutua mbi checkout-in real: **40/40 skedarë, 0 gabime**. Shpërndarja e shërbimeve në sitemap përputhet gjerësisht me nivelet A/B/C të Volet 4 (dégât-des-eaux dhe isolation-intérieure në 77/76 zona; vitrification 27; sol-pvc 16; lino-vinyle-lvt 15). ⚠️ Kushti i planit — «asnjë faqe që printon nuk fshihet» — **duhet konfirmuar me eksportin GSC**, që mbetet i pasiguruar.
 
 ## C. Çfarë u zbatua nga vetë propozimi (Faza 2 e planit, e kryer më 21/08)
 
@@ -587,9 +587,9 @@ Sitemap-i i marrë live më 21/08: **755 URL** në `sitemap-pages.xml` (nga 1 39
 
 ## D. Çfarë mbetet vetëm në dorën e Isufit
 
-1. **Eksporti kryq kërkesë × faqe nga Search Console** (15 minuta) — nuk ekziston as në Drive (u verifikua); pa të s'ka verdikt fasade, s'ka gjykim isolation/ITI, s'ka konfirmim që konsolidimi s'fshiu faqe që printonin.
+1. **Eksporti kryq kërkesë × faqe nga Search Console** (15 minuta) — nuk ekziston as në Drive (u verifikua); pa të s'ka gjykim isolation/ITI dhe s'ka konfirmim që konsolidimi (646 ridrejtimet 301) s'fshiu faqe që printonin. *(Verdikti i fasadës nuk varet më prej tij: fusion-i u gjet i zbatuar në prodhim.)*
 2. **Vendimi i domenit kryesor** (P0-A, i hapur që nga 13/08).
 3. **Konfirmimi i praktikave DTU** (tabela § 2 e referencialit) dhe **arbitrazhi carrelage**.
-4. **Qasja push në depon e prodhimit** për seanca të ardhshme — kërkesa u bllokua nga klasifikuesi i lejeve në këtë sesion; nëse doni që agjentët ta prekin prodhimin drejtpërdrejt, jepni lejen kur t'ju kërkohet.
+4. ~~Qasja push në depon e prodhimit~~ — ✅ **e zgjidhur më 21/08 në mbrëmje**: Isufi e miratoi lejen, depoja `eurotregu/rushiti-renovation` u lidh me sesionin dhe verifikimi i regresit u ekzekutua mbi checkout-in real (40/40, 0 gabime).
 
 *Addendum i shkruar më 21/08/2026 pasdite. Metoda e verifikimit: lexim i kodit HTML të faqeve live (kurrë SERP), inventar i plotë 40/40, verifikim adversarial me agjentë të pavarur. Asnjë shifër e shpikur; asnjë pozicion i premtuar.*
