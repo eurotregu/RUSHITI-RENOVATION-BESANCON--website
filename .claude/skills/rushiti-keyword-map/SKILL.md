@@ -125,8 +125,8 @@ R — état du registre : 1 si la requête n'a pas de page canonique ou en a deu
 ```
 
 3. Applique les seuils : **≥ 70** → 🔴 action immédiate proposée (protocole
-   fusion / différenciation / 301 / canonical) ; **40–69** → 🟠 transmis à
-   `rushiti-cannibal-check` pour verdict approfondi ; **< 40** → 🟢 consigné.
+   fusion / différenciation / 301 / canonical) ; **≥ 40 et < 70** → 🟠 transmis
+   à `rushiti-cannibal-check` pour verdict approfondi ; **< 40** → 🟢 consigné.
 4. Priorise les cas par valeur business : dégât des eaux et rénovation de
    pièce d'abord, B2B ensuite, grille locale, blog en dernier.
 5. Sans export GSC disponible, dis-le et travaille en mode heuristique
@@ -140,7 +140,9 @@ clics, impressions, CTR, position moyenne (vs baseline 52 / 5 670 / 0,9 % /
 (baseline 217 / 1 395) ; gisement top-10 sans clic (baseline 249 impr) ;
 position de la requête de marque (baseline 22,1 🔴) ; conflits par tranche de
 score ; actions exécutées et à valider, routées par agent. Objectifs formulés
-en directions de travail, jamais en positions promises.
+en directions de travail, jamais en positions promises. À partir du deuxième
+rapport, la baseline de comparaison est le rapport précédent (les valeurs
+ci-dessus sont la baseline initiale, période 17/05–16/08/2026).
 
 ### 4. KONSULTA — « ku ta vendos këtë fjalë kyçe ? »
 

@@ -63,15 +63,15 @@ Ky korrigjim nuk është pedanteri: një skill «ultra-premium» i ndërtuar mbi
 
 ### 2.1 Arkitektura ekzistuese, shtresë për shtresë
 
+Shtresat më poshtë janë të ndara pa mbivendosje, sipas inventarit të auditit të 20/08 (1 368 + 10 + 7 + 11 ≈ 1 395 URL; faqet pilar «shërbim + Besançon» si `/peinture-interieure-besancon` numërohen brenda grilës, si zona Besançon):
+
 | Shtresa | URL / model | Sasia | Gjendja e verifikuar |
 |---|---|---|---|
-| Faqja kryesore | `/` | 1 | 20 klikime / 1 808 impresione / poz. 11,4 — faqja më e dukshme e sitit |
-| Faqe pilar shërbimesh (Besançon) | `/peinture-interieure-besancon`, `/platrerie-besancon`, `/plaquiste-besancon`, `/isolation-besancon`… | 9 | Të varrosura: p.sh. `/platrerie-besancon` poz. 21,1; `/isolation-besancon` 184 impresione, 0 klikime, poz. 28,3 |
-| Grila «shërbim × zonë» | `/<shërbim>-<zonë>` | 1 368 | Përmbajtje e mirë (~1 400 fjalë, paragrafë vërtet lokalë, FAQ, maillage), por **pa asnjë arbitrazh cibli**: Champoux (~90 banorë) trajtohet si Pontarlier |
-| Faqe B2B | `/renovation-syndic-gestionnaire-besancon`, `/remise-en-etat-logement-locatif-besancon`, `/amenagement-commerce-bureau-besancon`, `/devis-assurance-degat-des-eaux-besancon` | 4 | Të mbuluara mirë; silo-ja më e lidhur me vlerën e biznesit |
+| Grila «shërbim × zonë» (përfshirë Besançon si zonë) | `/<shërbim>-<zonë>` | 1 368 | Përmbajtje e mirë (~1 400 fjalë, paragrafë vërtet lokalë, FAQ, maillage), por **pa asnjë arbitrazh cibli**: Champoux (~90 banorë) trajtohet si Pontarlier. Krerët e saj të varrosur: `/platrerie-besancon` poz. 21,1; `/isolation-besancon` 184 impresione, 0 klikime, poz. 28,3 |
+| Faqe pilar & B2B jashtë grile | `/plaquiste-besancon`, `/renovation-appartement-besancon`, `/prix-travaux-renovation-besancon`, `/renovation-syndic-gestionnaire-besancon`, `/remise-en-etat-logement-locatif-besancon`, `/amenagement-commerce-bureau-besancon`, `/devis-assurance-degat-des-eaux-besancon`… | 10 | Të mbuluara mirë; silo-ja më e lidhur me vlerën e biznesit |
 | Blog | `/blog/…` | 11 | Artikuj që synojnë simptoma reale; `/blog/moisissure-plafond-salle-de-bain-besancon` ka **1 257 impresione** — dëshmi që aksi informativ funksionon |
-| Faqe utilitare | accueil, contact, à-propos, réalisations, zones, mentions, simulateur | 7 | Standard |
-| Trashëgimi WordPress | URL të vjetra jashtë katalogut | e panjohur | Ende printojnë (~200 impresione në shërbime që s'ofrohen) — për pastrim |
+| Faqe utilitare (përfshirë faqen kryesore) | `/` (20 klikime / 1 808 impresione / poz. 11,4 — faqja më e dukshme), contact (177 impr., poz. 6,6), à-propos, réalisations, zones, mentions, simulateur | 7 | Faqja kryesore + një artikull blogu përqendrojnë 62 % të gjithë dukshmërisë |
+| Trashëgimi WordPress | URL të vjetra jashtë katalogut | jashtë numërimit | Ende printojnë (~200 impresione në shërbime që s'ofrohen) — për pastrim |
 
 ### 2.2 Modeli i synuar: tre nivele zonash (palier), jo grilë uniforme
 
@@ -137,7 +137,7 @@ Ky disiplinim nuk është kufizim — është **tipari dallues** i skill-it: nj�
 | enduit à la chaux besançon | **30 impresione, poz. 5,8, 0 klikime** | e ulët | pa faqe sot — kandidate për arbitrazh (bâti ancien) |
 | rénov bois besançon | **58 impresione, poz. 6,2, 0 klikime** | e ulët | pa faqe — për arbitrazh me Isufin (a mbulohet drurë/parket?) |
 
-> Katër rreshtat me shifra të theksuara janë **gisement-i i menjëhershëm**: 249 impresione në top 6 pa asnjë klikim — problem snippet-i (title/meta), jo problem renditjeje. Pjesa e parë e korrigjimeve është kryer më 20/08 (dega `claude/ciblage-mots-cles-corrections`, e pashpërndarë ende).
+> Rreshtat me shifra të theksuara ilustrojnë **gisement-in e menjëhershëm**; totali i sitit për kërkesat në top 6 pa asnjë klikim është **249 impresione** (analiza Drive 19/08, përfshin edhe kërkesa të palistuara këtu) — problem snippet-i (title/meta), jo problem renditjeje. Gjendja e korrigjimeve: shih addendum-in e 21/08 në fund të dokumentit.
 
 ### 3.4 Fjalë kyçe informative (klienti kërkon të kuptojë — blogu)
 
@@ -178,14 +178,14 @@ Ky seksion është bërthama e regjistrit që skill-i do ta mbajë si **burim i 
 | `/peinture-interieure-besancon` | peintre besançon | entreprise de peinture besançon · peinture appartement besançon · peintre en bâtiment | 189 impr. faqja + 64 impr. kërkesat top-6 · mesatare |
 | `/plaquiste-besancon` | plaquiste besançon | pose placo besançon · artisan plaquiste doubs | 31 impr., poz. 6,2 · mesatare |
 | `/platrerie-besancon` | plâtrerie placo besançon | reprise plâtre ancien · plafond placo besançon | 481 impr., poz. 21,1 · mesatare |
-| `/cloisons-besancon` | pose de cloison besançon | créer une pièce appartement · cloison placo prix | PV · e ulët |
-| `/faux-plafonds-besancon` | faux plafond besançon | plafond suspendu ba13 · faux plafond phonique | PV · e ulët |
+| `/cloisons-besancon` | pose de cloison besançon | créer une pièce appartement · cloison placo prix | 85 impr., poz. 34,3 (Drive 19/08) · e ulët |
+| `/faux-plafonds-besancon` | faux plafond besançon | plafond suspendu ba13 · faux plafond phonique | 28 impr., poz. 48,0 (Drive 19/08) · e ulët |
 | `/isolation-besancon` | isolation besançon (çati: combles + fonike) | isolation combles besançon · isolation phonique appartement | 184 impr., poz. 28,3 — **për forcim, jo për prekje title-i** · mesatare |
 | `/isolation-interieure-besancon` | isolation intérieure (ITI) besançon | isolation mur froid · doublage isolant | PV · mesatare |
 | `/papier-peint-besancon` | papier peint besançon (pose) | pose papier peint tapissier · papier peint intissé | 181 impr., poz. 14,1 · e ulët |
 | `/toile-de-verre-besancon` | toile de verre besançon | pose toile de verre plafond · fibre de verre à peindre | 83 impr., poz. 36,4 — matje pas dé-duplikimit · e ulët |
-| `/revetements-sol-besancon` | pose revêtement de sol besançon | sol PVC lino besançon · pose parquet stratifié | PV · mesatare |
-| `/ratissage-enduit-besancon` | ratissage enduit de lissage besançon | enduit de lissage mur · préparation murs avant peinture | PV · e ulët |
+| `/revetements-sol-besancon` | pose revêtement de sol besançon | sol PVC lino besançon · pose parquet stratifié | 181 impr., poz. 29,6 (Drive 19/08) · mesatare |
+| `/ratissage-enduit-besancon` | ratissage enduit de lissage besançon | enduit de lissage mur · préparation murs avant peinture | 387 impr., poz. 18,6 + 24 impr. IA (Drive 19/08) · e ulët |
 | `/degat-des-eaux-besancon` | dégât des eaux besançon (rimëkëmbje) | réparation plafond dégât des eaux · assèchement mur après fuite | **18 impr., poz. 20,0 — silo më fitimprurëse, më e padukshme: prioriteti 1 i forcimit** · e ulët |
 | faqja e fasadës (verdikt § 5.3) | ravalement façade besançon | peinture façade · crépi façade besançon | 59 impr. (te `/peinture-exterieure-besancon`) · mesatare |
 
@@ -376,7 +376,7 @@ Raporti mujor: `docs/seo/raporte/raport-fjale-kyce-VVVV-MM.md` (+ tabelë përmb
 | CTR mesatar | 0,9 % | GSC | mujor |
 | Pozicioni mesatar i pivot-ëve të regjistrit | 14,3 (mesatarja sit) | GSC kërkesë × faqe | mujor |
 | Faqe me impresione / faqe të publikuara | 217 / 1 395 (15,6 %) | GSC + sitemap | mujor |
-| Kërkesa top-10 me 0 klikime (gisement snippet-i) | 249 impresione | GSC | mujor |
+| Kërkesa top-6 me 0 klikime (gisement snippet-i) | 249 impresione | GSC | mujor |
 | Skori mesatar & nr. i konflikteve ≥ 70 | vendoset në sinkronizimin e parë | algoritmi § 6.4 | mujor |
 | Pozicioni i kërkesës së markës | 22,1 🔴 | GSC | mujor |
 | Konvertime (dërgime formulari, klikime `tel:`) | e pamatur — kërkon GA4 → `rushiti-ga4-gtm` | GA4 | mujor, sapo të instalohet |
@@ -560,3 +560,36 @@ flowchart TD
 ---
 
 *Propozim i hartuar më 21/08/2026 mbi auditin e fjalëve kyçe të 20/08/2026 (`rushiti-keyword-clusters`), addendum-in e tij me të dhënat Search Console 17/05–16/08/2026, matricën e 40 cluster-ëve dhe kodin burimor të depove `eurotregu/rushiti-renovation` dhe `eurotregu/rushiti-renovation-besancon--website`. Asnjë vëllim kërkimi nuk është shpikur në këtë dokument; kutitë `PV` presin burim real. Asnjë pozicion nuk premtohet.*
+
+---
+
+# Addendum i 21/08/2026 (pasdite) — prodhimi evoluoi gjatë ditës; zbatimi i propozimit nisi
+
+Pas autorizimit të Isufit («kryeni të gjitha veprimet e nevojshme»), gjendja u riverifikua **drejtpërdrejt në kodin HTML të faqeve live** (Firecrawl mbi burimin e faqes, kurrë mbi SERP — sipas mësimit metodologjik të auditit). Ajo që u gjet ndryshon disa pohime të trupit të dokumentit, të cilat mbeten të sakta për mëngjesin e 21/08 por jo më për pasditen:
+
+## A. Veprimi i menjëhershëm nr. 1 është kryer — dhe më gjerë se dega e 20/08
+
+- **Dé-duplikimi papier peint / toile de verre është i shpërndarë plotësisht në prodhim.** Inventar live me 12 agjentë + 4 rikontrolle mbi të 40 URL-të `papier-peint-*` të sitemap-it aktual: **40/40 me title «Papier peint <Zonë> …» pa asnjë gjurmë «toile de verre» në balizat**. Shpërndarja po propagandohej pikërisht gjatë sesionit: `/papier-peint-boussieres` u kap në mëngjes ende me cibël të dyfishtë dhe një orë më vonë i korrigjuar. Inventari i plotë: `docs/seo/korrigjime-prodhim/inventar-live-2026-08-21.csv`.
+- **Edhe snippet-et CTR janë live**, me formulim të ndryshëm (dhe më të fortë) nga dega e 20/08: `peinture-interieure-besancon` mban «Peintre à Besançon — peinture intérieure, devis sous 48 h», `plaquiste-besancon` «Plaquiste à Besançon — cloisons, plafonds, devis sous 48 h», të dyja me provat «20 ans de métier, 34 avis 4,7/5» në description — të lexuara në kodin e faqes, jo në SERP. Rrjedhimisht referencat e trupit të dokumentit te «dega e pashpërndarë» janë të vjetruara: prodhimi është përditësuar nga një kanal tjetër.
+
+## B. Konsolidimi i grilës (Volet 4) ka nisur gjithashtu
+
+Sitemap-i i marrë live më 21/08: **755 URL** në `sitemap-pages.xml` (nga 1 395 të inventarit të 20/08), `sitemap-communes.xml` **bosh**. Papier-peint: 40 URL (nga 76); toile-de-verre: 17 (nga 76); shembull ridrejtimi konform planit: `/papier-peint-champoux` → 301 → `/papier-peint-besancon` (i njëjti shërbim në nivelin më të lartë, jo faqja kryesore — saktësisht rregulli i § 5.3). Shpërndarja e shërbimeve në sitemap përputhet gjerësisht me nivelet A/B/C të Volet 4 (dégât-des-eaux dhe isolation-intérieure në 77/76 zona; vitrification 27; sol-pvc 16; lino-vinyle-lvt 15). ⚠️ Kushti i planit — «asnjë faqe që printon nuk fshihet» — **duhet konfirmuar me eksportin GSC**, që mbetet i pasiguruar.
+
+## C. Çfarë u zbatua nga vetë propozimi (Faza 2 e planit, e kryer më 21/08)
+
+- **Skill-i `rushiti-keyword-map` v0.1** i instaluar në `.claude/skills/` — porta 4-kontrollëshe, formula e skorimit, 4 mënyrat e punës, rutimi.
+- **Regjistri kanonik v0** në `docs/seo/regjistri-fjale-kyce.csv` — 45 rreshta, çdo shifër me burim të datuar ose `PV`.
+- **Referenciali DTU** në `docs/seo/dtu-referencat-eeat.md` (kërkesë e Isufit, e verifikuar teknikisht: 42.1/59.4/53.12 ✅; 52.1-52.2 = carrelage, për arbitrazh; 20.1 = maçonnerie, zëvendësuar me 25.42/45.10; ragréage ≠ chape → CPT 3634/3635).
+- **Paketa e korrigjimeve** në `docs/seo/korrigjime-prodhim/` — skriptet u testuan me sukses mbi HTML-në reale të prodhimit; pas gjetjes A shërbejnë si **vegla verifikimi e regresi**, jo më si korrigjim i domosdoshëm.
+- **Pastrimi NeuronWriter**: i konstatuar i kryer më parë (etiketa `archive-audit-2026-08` mbi pseudo-kërkesat e Aneksit A) — asnjë kredit i harxhuar.
+- E gjithë puna u verifikua nga 4 agjentë adversarialë të pavarur; gjetjet e tyre të pranuara u ndreqën në po këtë commit.
+
+## D. Çfarë mbetet vetëm në dorën e Isufit
+
+1. **Eksporti kryq kërkesë × faqe nga Search Console** (15 minuta) — nuk ekziston as në Drive (u verifikua); pa të s'ka verdikt fasade, s'ka gjykim isolation/ITI, s'ka konfirmim që konsolidimi s'fshiu faqe që printonin.
+2. **Vendimi i domenit kryesor** (P0-A, i hapur që nga 13/08).
+3. **Konfirmimi i praktikave DTU** (tabela § 2 e referencialit) dhe **arbitrazhi carrelage**.
+4. **Qasja push në depon e prodhimit** për seanca të ardhshme — kërkesa u bllokua nga klasifikuesi i lejeve në këtë sesion; nëse doni që agjentët ta prekin prodhimin drejtpërdrejt, jepni lejen kur t'ju kërkohet.
+
+*Addendum i shkruar më 21/08/2026 pasdite. Metoda e verifikimit: lexim i kodit HTML të faqeve live (kurrë SERP), inventar i plotë 40/40, verifikim adversarial me agjentë të pavarur. Asnjë shifër e shpikur; asnjë pozicion i premtuar.*
