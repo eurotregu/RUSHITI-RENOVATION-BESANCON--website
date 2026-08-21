@@ -30,7 +30,7 @@ d'abord ce qui imprime déjà, puis crée peu mais au bon moment — publier 6 �
 
 | # | Sujet | Silo → pilier | Famille | Protocoles | Priorité | Fenêtre | Statut |
 |---|---|---|---|---|---|---|---|
-| 1 | **Enrichir l'article moisissure** : H2 « Moisissure au plafond malgré la VMC : pourquoi ça revient » (réponse directe extractible), bloc conversion « à partir de quand il faut un professionnel » + diagnostic gratuit, 2 liens vers `/degat-des-eaux-besancon` et `/peinture-interieure-besancon` | Transverse → DDE + Peinture | Pathologie (enrichissement) | DÉGÂT DES EAUX · AEO | 🔴 1 | **Septembre** — avant le premier chauffage ; preuve : « …malgré vmc » = 1re requête du site (137 impr, pos. 11,2), cluster ≈ 620 impr avec 2 clics, article 1 385 impr/12 m (registre + opportunités GSC) | Porte passée (renfort d'existant — « Vala 3 » consignée au registre le 21/08) |
+| 1 | **Enrichir l'article moisissure** : H2 « Moisissure au plafond malgré la VMC : pourquoi ça revient » (réponse directe extractible), bloc conversion « à partir de quand il faut un professionnel » + diagnostic gratuit, 2 liens vers `/degat-des-eaux-besancon` et `/peinture-interieure-besancon` | Transverse → DDE + Peinture | Pathologie (enrichissement) | DÉGÂT DES EAUX · AEO | 🔴 1 | **Septembre** — avant le premier chauffage ; preuve : « …malgré vmc » = 1re requête du site (137 impr, pos. 11,2), cluster ≈ 620 impr avec 2 clics, article 1 385 impr/12 m (registre + opportunités GSC) | Porte passée → **vérifié live le 21/08 (soir)** : H2 « malgré la VMC », bloc conversion et maillage **déjà déployés en production** ; compléments restants (FAQ, photos avant/après RGPD, pied d'article) livrés dans `docs/seo/contenus/moisissure-plafond-enrichissement.md` — en validation |
 | 2 | **Enrichir le pilier `/degat-des-eaux-besancon`** : section assèchement (mesures à l'humidimètre), déroulé du chantier avec l'assurance (langage IRSI, sans promesse de prise en charge), maillage renforcé depuis les 3 satellites DDE existants du blog | 5. Dégât des eaux | Enrichissement pilier | DÉGÂT DES EAUX · PRIX (facteurs) · AEO | 🔴 2 | **Octobre** — 6-8 semaines avant la haute saison hivernale des sinistres (doctrine maison, à affiner via rushiti-google-trends) ; preuve : « PRIORITETI 1 i forcimit », 33 impr/12 m pos. 16 (registre 21/08) | Porte passée (renfort d'existant + sous-cible assèchement consignée le 20/08) |
 | 3 | **Article « Mur froid et condensation : que faire ? »** — murs nord, premier chauffage, pièces peu ventilées ; quand l'isolation intérieure devient la vraie réponse | 4. Isolation → `/isolation-interieure-besancon` | Pathologie | BÂTI ANCIEN · AEO | 🟠 3 | **Octobre** — fenêtre fixée par le registre (« artikull blogu — tetor 2026 ») ; symptôme très recherché en saison froide | Porte passée (verdict « për krijim » consigné le 20/08) → prochain pas : Briefé (rushiti-brief-seo) |
 | 4 | **Enrichir le pilier `/isolation-besancon`** : sections combles perdus et condensation de saison froide — la requête combles est attribuée à cette page (pas de nouvel article), l'ITI vient d'être re-maillée depuis l'accueil (PR #19 mergé) | 4. Isolation | Enrichissement pilier | BÂTI ANCIEN · AEO | 🟠 4 | **Octobre-novembre** ; preuve : 184 impr pos. 28,3 avec 0 clic (12 m), ITI 0 impression — forcim décidé au registre, pas de chirurgie de balises | Porte passée (renfort d'existant, registre 21/08) |
@@ -39,13 +39,12 @@ d'abord ce qui imprime déjà, puis crée peu mais au bon moment — publier 6 �
 
 ## Écarté de ce plan, et pourquoi
 
-- **Enduit à la chaux** (30-41 impr, pos. ≈ 5, aucune page — vraie demande non
-  servie) et **rénovation boiseries / bois** (58 impr, pos. 6,2) : bloqués non
-  par le SEO mais par un **arbitrage métier en attente** — Isuf doit dire si
-  la prestation est offerte (registre, 21/08). Dès l'arbitrage rendu, ces
-  deux sujets entrent en tête de plan : la demande imprime déjà en haut de
-  page 1.
-- **Moquette** : même situation, arbitrage d'offre en attente.
+- **Enduit à la chaux** (30-41 impr, pos. ≈ 5) et **rénovation boiseries /
+  bois** (58 impr, pos. 6,2) : **arbitrage rendu le 21/08 au soir — Isuf :
+  prestations non offertes.** Classés sans suite au registre (REFUZOHET) ;
+  aucune page ne sera créée, la demande observée reste sciemment non servie
+  car hors offre.
+- **Moquette** : arbitrage d'offre toujours en attente.
 - **Nouvel article « isolation des combles »** : refusé — la requête est
   attribuée au pilier `/isolation-besancon` (registre, ligne combles) ; un
   article séparé fabriquerait la cannibalisation que la ligne 4 évite en
@@ -60,9 +59,10 @@ d'abord ce qui imprime déjà, puis crée peu mais au bon moment — publier 6 �
 
 ## Les 3 prochaines actions, routées
 
-1. **Rédiger la ligne 1** (enrichissement moisissure) — paquet A-B-C-D par
-   `rushiti-architecte-seo`, sur accord d'Isuf ; c'est le plus gros levier du
-   moment (opportunités GSC du 20/08) et une demi-journée de travail.
+1. ✅ 21/08 (soir) — **Ligne 1 traitée** : accord d'Isuf reçu ; la lecture
+   live a révélé les trois actions du brief **déjà déployées en production**.
+   Le paquet A-B-C-D livre les compléments restants — FAQ, photos RGPD, pied
+   d'article — en validation dans `docs/seo/contenus/`.
 2. **Briefs des lignes 2 et 3** → `rushiti-brief-seo` (le pilier DDE mérite
    une analyse SERP dédiée ; « mur froid » a besoin de son angle
    différenciant), puis rédaction ici.
@@ -77,3 +77,5 @@ d'abord ce qui imprime déjà, puis crée peu mais au bon moment — publier 6 �
 | Date | Événement |
 |---|---|
 | 21/08/2026 | Création du plan automne 2026 (6 lignes : 3 enrichissements, 2 créations consignées au registre, 1 candidat à valider). Aucune ligne rédigée à ce jour. |
+| 21/08/2026 (soir) | **Arbitrages rendus par Isuf** : enduit à la chaux — non offert ; rénovation boiseries — non couverte. Registre mis à jour (REFUZOHET, lignes chaux et bois). |
+| 21/08/2026 (soir) | **Ligne 1** : lecture live de l'article moisissure — les 3 actions du brief (H2 VMC, bloc conversion, maillage) déjà déployées en production ; paquet A-B-C-D des compléments (FAQ, photos RGPD, pied d'article) livré dans `docs/seo/contenus/moisissure-plafond-enrichissement.md`, en validation. |
