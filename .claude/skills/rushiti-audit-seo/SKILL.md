@@ -11,7 +11,8 @@ description: >-
   d'indexation », des formulations vagues (« mon SEO est mauvais ») ou en
   albanais « kontrollo SEO », « pse s'dalim në Google » — même sans dire
   skill. Pages à l'échelle → rushiti-page-locale ; données structurées →
-  schema-builder ; moteurs IA → rushiti-visibilite-ia. Lecture seule :
+  schema-builder ; moteurs IA → rushiti-visibilite-ia ; audit technique seul
+  (crawl, statuts HTTP, CWV, robots IA) → rushiti-audit-site. Lecture seule :
   diagnostique et priorise, ne modifie jamais la production ; aucun chiffre
   inventé, jamais de classement promis.
 metadata:
@@ -151,7 +152,7 @@ utiliser PageSpeed Insights (données terrain ET labo), pas une impression.
   orphelines (surtout pages locales) — croiser sitemap vs liens internes
   (→ **orphan-finder** pour le détail).
 - Codes HTTP : pas de chaînes de redirection, pas de 404 internes, cohérence
-  https / non-www / trailing slash (→ **rushiti-crawl-audit** pour le crawl
+  https / non-www / trailing slash (→ **rushiti-audit-site** pour le crawl
   complet site entier).
 
 ### Indexation
@@ -350,7 +351,7 @@ pages dégât des eaux, peinture intérieure, plâtrerie et syndics d'abord.
 - KPI à suivre : impressions et clics sur requêtes locales, pages indexées,
   appels et envois de formulaire, Core Web Vitals terrain.
 - Fréquence recommandée : check-up GSC mensuel (**rushiti-gsc**), crawl
-  technique après chaque déploiement significatif (**rushiti-crawl-audit**),
+  technique après chaque déploiement significatif (**rushiti-audit-site**),
   audit complet semestriel (ce skill).
 - Baseline datée : toute comparaison future passe par
   **rushiti-regression-seo** (baseline CSV) — jamais de comparaison de
@@ -368,7 +369,7 @@ pages dégât des eaux, peinture intérieure, plâtrerie et syndics d'abord.
 - **Rédiger un contenu identifié comme manquant** → **rushiti-brief-seo**
   puis **rushiti-humanisateur**
 - **Opportunités dans un export GSC** (striking distance, CTR) →
-  **rushiti-quick-wins-gsc**, **rushiti-ctr-opportunites**
+  **rushiti-opportunites-gsc**
 
 ## Outils de référence
 
