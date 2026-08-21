@@ -78,4 +78,6 @@ peintre besançon 187 impr. poz. 6,0 · marka shëndoshë: «rushiti besancon» 
 5. 🟡 Matja e efektit të korrigjimeve të shpërndara sot: rishikim më ~1 tetor → `rushiti-regression-seo`.
 6. 🟡 P3 cuisine pas validimit të vëllimit në Keyword Planner.
 
+**Përditësim i mbrëmjes (21/08):** veprimi 2 u ekzekutua — PR maillage [eurotregu/rushiti-renovation#19](https://github.com/eurotregu/rushiti-renovation/pull/19) me ankorat ekzakte drejt tri faqeve të eklipsuara (draft, pret miratimin e Isufit). Verifikuar gjithashtu live: trashëgimia WordPress trajtohet me ridrejtime — `/rafraichissement-piscines-besancon/` → 301 → `/peinture-interieure-besancon`.
+
 *Raporti #2 (fund shtatori 2026) do të krahasojë periudhë me periudhë dhe do të masë efektin e dé-duplikimit, të title-ve të rinj dhe të maillage-it. Asnjë pozicion nuk premtohet.*
