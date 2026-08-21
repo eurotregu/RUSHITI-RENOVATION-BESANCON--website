@@ -158,7 +158,7 @@ automatique en mode PORTA.
 | Réécrire title/meta d'une liste d'URLs | seo-title-meta |
 | Verdict approfondi sur un couple suspect | rushiti-cannibal-check |
 | Brief avant rédaction | rushiti-brief-seo |
-| Opportunités / CTR dans un export | rushiti-opportunites-gsc, rushiti-ctr-opportunites |
+| Opportunités / CTR dans un export | rushiti-opportunites-gsc |
 | Baseline et régressions | rushiti-regression-seo |
 | Pages non indexées, héritage WordPress | rushiti-indexation |
 | Saisonnalité avant calage éditorial | rushiti-google-trends |
