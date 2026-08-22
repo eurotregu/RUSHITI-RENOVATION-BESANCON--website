@@ -524,7 +524,7 @@ a{color:var(--primary);text-decoration:none}
     </header>
     <div class="demo">
       <h3 style="font-size:17px;margin-bottom:6px">1. Où part la demande</h3>
-      <p style="margin-bottom:18px;color:var(--text-light)">Sur cette page comme sur le site actuel, l'envoi ouvre la messagerie du visiteur, pré-remplie vers contact@rushiti-renovation.fr. C'est simple et sans coût, mais deux limites : sur un téléphone mal configuré rien ne s'ouvre, et vous ne gardez aucune trace des demandes perdues. Un envoi côté serveur (fonction Cloudflare Pages, ou un service de formulaire) supprime ces deux limites et permet d'ajouter un accusé de réception automatique. À arbitrer avec vous avant déploiement.</p>
+      <p style="margin-bottom:18px;color:var(--text-light)"><strong>Tranché le 22/08/2026 :</strong> en production, le formulaire est déployé sur les 30 pages pilier avec envoi côté serveur via <strong>Web3Forms</strong> (le même compte que la page /contact) : la demande part en POST natif, arrive par e-mail à contact@rushiti-renovation.fr et le visiteur est redirigé vers /merci. Plus aucune demande perdue, même sans messagerie configurée. Les démonstrations de cette page, elles, ouvrent encore la messagerie (mailto) — elles servent à comparer les mises en page, pas l'envoi.</p>
 
       <h3 style="font-size:17px;margin-bottom:6px">2. Anti-spam</h3>
       <p style="margin-bottom:18px;color:var(--text-light)">Chaque variante contient un champ piège invisible (<code>entreprise_hp</code>) : un humain ne le voit pas, un robot le remplit, et l'envoi est alors ignoré sans message d'erreur. C'est suffisant contre le spam automatique courant, sans imposer de captcha à vos clients.</p>
@@ -533,7 +533,7 @@ a{color:var(--primary);text-decoration:none}
       <p style="margin-bottom:18px;color:var(--text-light)">La case de consentement et une phrase de finalité claire sont le minimum. Pensez à ce que la page mentions légales indique qui traite les données, pour quoi, combien de temps elles sont conservées et comment les faire supprimer. Le texte de la case est à valider par vos soins.</p>
 
       <h3 style="font-size:17px;margin-bottom:6px">4. Suivi des conversions</h3>
-      <p style="margin-bottom:18px;color:var(--text-light)">Le site déclenche déjà un événement <code>Lead</code> Meta sur les clics « devis » et un événement <code>Contact</code> sur les clics téléphone. Si vous adoptez une de ces variantes, ajoutez le même déclenchement à l'envoi du formulaire, sinon les demandes envoyées ne seront comptées nulle part.</p>
+      <p style="margin-bottom:18px;color:var(--text-light)">Le site déclenche un événement <code>Lead</code> Meta sur les clics « devis » et un événement <code>Contact</code> sur les clics téléphone. <strong>Depuis le 22/08/2026</strong>, la page /merci déclenche aussi <code>Lead</code> (content_name « formulaire ») après consentement cookies : chaque envoi de formulaire est donc compté côté Meta, en plus de l'e-mail reçu (comptable tel quel) et du compteur Web3Forms.</p>
 
       <h3 style="font-size:17px;margin-bottom:6px">5. Ce que je conseille</h3>
       <p style="color:var(--text-light)">La <strong>variante B</strong> en bas de chaque page service (c'est votre formulaire actuel, consolidé), la <strong>variante A</strong> en haut de page et dans la barre collante mobile, et la <strong>variante F</strong> sur les pages syndic et dégât des eaux. La <strong>D</strong> et la <strong>E</strong> sont à tester ensuite, une seule à la fois, pour pouvoir dire laquelle a changé quelque chose.</p>
