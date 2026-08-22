@@ -1,0 +1,32 @@
+silo;famille;page_pilier;pages_zone_en_plus;pivot_registre;statut_registre
+Peinture;peinture intérieure;/peinture-interieure-besancon;75;peintre besançon;i caktuar
+Peinture;peinture extérieure / ravalement;/peinture-exterieure-besancon;37;ravalement façade besançon;i caktuar - konflikt i zgjidhur (301 nga ravalement)
+Peinture;peinture façade ITE;/peinture-facade-isolation-exterieure-besancon;0;peinture façade isolée par l'extérieur besançon;i caktuar
+Peinture;papier peint;/papier-peint-besancon;39;papier peint besançon;në matje (dé-duplikim 21/08)
+Peinture;toile de verre;/toile-de-verre-besancon;15;toile de verre besançon;në matje
+Peinture;ratissage / enduit de lissage;/ratissage-enduit-besancon;44;ratissage enduit de lissage besançon;i caktuar
+Plâtrerie/placo;plâtrerie placo;/platrerie-besancon;75;plâtrerie placo besançon;i caktuar
+Plâtrerie/placo;plaquiste;/plaquiste-besancon;0;plaquiste besançon;i caktuar
+Plâtrerie/placo;cloisons;/cloisons-besancon;40;pose de cloison besançon;i caktuar
+Plâtrerie/placo;doublage de murs;/doublage-murs-besancon;17;doublage de mur besançon;nën vëzhgim (afërsi ITI)
+Plâtrerie/placo;faux plafonds;/faux-plafonds-besancon;37;faux plafond besançon;i caktuar
+Sols;revêtements de sol;/revetements-sol-besancon;75;pose revêtement de sol besançon;i caktuar
+Sols;parquet flottant;/parquet-flottant-besancon;17;parquet flottant stratifié besançon;i caktuar
+Sols;sol PVC;/sol-pvc-besancon;15;sol PVC lino LVT besançon;në konflikt (fusion me lino-vinyle-lvt)
+Sols;lino vinyle LVT;/lino-vinyle-lvt-besancon;14;sol PVC lino LVT besançon;në konflikt (fusion me sol-pvc)
+Sols;vitrification parquet;/vitrification-parquet-besancon;26;vitrification parquet besançon;i caktuar
+Sols;ragréage de sol;/ragreage-sol-besancon;14;ragréage de sol besançon;i caktuar
+Sols;carrelage;-;0;-;MUNGON - shërbim i shpallur në accueil, pa faqe dhe pa pivot (arbitrazh i Isufit)
+Isolation;isolation (çati combles + fonike);/isolation-besancon;16;isolation besançon (çati: combles + fonike);i caktuar - skor kanibalizimi 40
+Isolation;isolation intérieure ITI;/isolation-interieure-besancon;75;isolation intérieure (ITI) besançon;në forcim
+Dégât des eaux;dégât des eaux;/degat-des-eaux-besancon;75;dégât des eaux besançon;i caktuar - PRIORITETI 1 i forcimit
+Dégât des eaux;devis pour l'assurance;/devis-assurance-degat-des-eaux-besancon;0;devis dégât des eaux pour l'assurance;i caktuar
+Rénovation de pièce;entreprise de rénovation;/entreprise-renovation-besancon;0;entreprise de rénovation besançon;e krijuar - në matje
+Rénovation de pièce;rénovation appartement;/renovation-appartement-besancon;0;rénovation appartement besançon;në forcim
+Rénovation de pièce;rénovation salle de bains;/renovation-salle-de-bain-besancon;0;rénovation salle de bains besançon;e krijuar - në matje
+Rénovation de pièce;rénovation cuisine;/renovation-cuisine-besancon;0;rénovation cuisine besançon;e krijuar - në matje
+Rénovation de pièce;prix travaux rénovation;/prix-travaux-renovation-besancon;0;prix travaux rénovation besançon;i caktuar
+B2B;aménagement commerce & bureau;/amenagement-commerce-bureau-besancon;0;aménagement commerce bureau besançon;i caktuar
+B2B;syndic & gestionnaire;/renovation-syndic-gestionnaire-besancon;0;syndic de copropriété gestionnaire besançon;i caktuar
+B2B;remise en état logement locatif;/remise-en-etat-logement-locatif-besancon;0;remise en état logement locatif besançon;i caktuar
+B2B;expert d'assurance / sinistres;/expert-assurance-sinistre-besancon;0;expert d'assurance cabinet de sinistres;e krijuar - në matje
