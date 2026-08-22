@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-"""Vegël regresi: `sameAs` i plotë në çdo nyje LocalBusiness me `@id`.
+"""Vegël regresi: `sameAs` dhe orari i plotë në çdo nyje LocalBusiness me `@id`.
 
 Kontrollon, mbi një checkout (prodhimi ose kopja GitHub Pages):
   1. çdo bllok `application/ld+json` mbetet JSON i vlefshëm;
   2. çdo nyje biznesi (LocalBusiness / HousePainter / Painter /
      HomeAndConstructionBusiness) që mban `@id` ka `sameAs`;
   3. ai `sameAs` përmban të 7 URL-të kanonike të verifikuara;
-  4. asnjë URL bosh apo e dyfishuar.
+  4. asnjë URL bosh apo e dyfishuar;
+  5. nëse nyja deklaron `openingHoursSpecification`, orari përputhet me
+     orarin e vetëm zyrtar (E hënë–E premte 07:00–20:30, E shtunë
+     08:00–20:30, E diel 09:00–17:30) — mospërputhja mes sitit, Google Maps
+     dhe PagesJaunes është pikërisht ajo që kërkohet të mos ndodhë më.
 
 Nyjet e ngulitura pa `@id` (contact, simulateur, blog/calcul-rouleaux)
 raportohen si KUJDES, jo si gabim: ato duhen kthyer në referencë `@id`.
@@ -36,6 +40,13 @@ SAMEAS_KANONIK = [
 TIPA_BIZNESI = {
     "LocalBusiness", "HousePainter", "Painter", "HomeAndConstructionBusiness"}
 
+# Orari i vetëm zyrtar — i njëjti në sit, Google Maps dhe PagesJaunes.
+ORARI_KANONIK = {
+    ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"): ("07:00", "20:30"),
+    ("Saturday",): ("08:00", "20:30"),
+    ("Sunday",): ("09:00", "17:30"),
+}
+
 LD_BLLOK = re.compile(
     r'<script[^>]*application/ld\+json[^>]*>(.*?)</script>', re.S)
 
@@ -51,6 +62,37 @@ def nyjet_e_biznesit(o, jashte):
     elif isinstance(o, list):
         for v in o:
             nyjet_e_biznesit(v, jashte)
+
+
+def kontrollo_orarin(rel: str, nyje: dict) -> list[str]:
+    """Orari, nëse deklarohet, duhet të jetë ai zyrtar — i plotë dhe i saktë."""
+    specat = nyje.get("openingHoursSpecification")
+    if not specat:
+        return []
+    if isinstance(specat, dict):
+        specat = [specat]
+    gjetur = {}
+    for s in specat:
+        if not isinstance(s, dict):
+            return [f"{rel}: openingHoursSpecification me formë të papritur"]
+        ditet = s.get("dayOfWeek")
+        ditet = tuple(ditet) if isinstance(ditet, list) else (ditet,)
+        gjetur[ditet] = (s.get("opens"), s.get("closes"))
+    if gjetur == ORARI_KANONIK:
+        return []
+    gabime = []
+    for ditet, pritur in ORARI_KANONIK.items():
+        etiketa = "/".join(d[:3] for d in ditet)
+        if ditet not in gjetur:
+            gabime.append(f"{rel}: orari pa {etiketa}")
+        elif gjetur[ditet] != pritur:
+            o, c = gjetur[ditet]
+            gabime.append(
+                f"{rel}: orari {etiketa} {o}–{c} ≠ {pritur[0]}–{pritur[1]}")
+    for ditet in gjetur:
+        if ditet not in ORARI_KANONIK:
+            gabime.append(f"{rel}: orar i panjohur për {ditet}")
+    return gabime
 
 
 def main() -> int:
@@ -100,6 +142,7 @@ def main() -> int:
                     gabime.append(f"{rel}: sameAs me URL të dyfishuara")
                 if any(not u or not str(u).startswith("http") for u in same):
                     gabime.append(f"{rel}: sameAs me URL bosh ose jo-HTTP")
+                gabime.extend(kontrollo_orarin(rel, nyje))
 
     print(f"Faqe me nyje biznesi: {faqe}")
     if kujdes:
