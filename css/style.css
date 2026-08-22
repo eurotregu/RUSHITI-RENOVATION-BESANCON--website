@@ -1256,10 +1256,45 @@ h4 { font-size: 1.1rem; }
     color: rgba(255,255,255,0.4);
 }
 
+/* --- WhatsApp Chat --- */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 22px 14px 16px;
+    background: #25d366;
+    color: #fff;
+    border-radius: 50px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.92rem;
+    z-index: 998;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+    transition: var(--transition);
+}
+
+.whatsapp-float:hover {
+    background: #1ebe57;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+}
+
+.whatsapp-float svg {
+    flex-shrink: 0;
+}
+
+.info-icon-whatsapp {
+    background: rgba(37, 211, 102, 0.12);
+    color: #1caa50;
+}
+
 /* --- Back to Top --- */
 .back-to-top {
     position: fixed;
-    bottom: 24px;
+    bottom: 92px;
     right: 24px;
     width: 48px;
     height: 48px;
@@ -1363,6 +1398,23 @@ h4 { font-size: 1.1rem; }
     }
 
     .step { max-width: 100%; }
+
+    /* WhatsApp : pastille ronde, icône seule */
+    .whatsapp-float {
+        width: 56px;
+        height: 56px;
+        padding: 0;
+        justify-content: center;
+        bottom: 16px;
+        right: 16px;
+    }
+
+    .whatsapp-float-label { display: none; }
+
+    .back-to-top {
+        bottom: 84px;
+        right: 16px;
+    }
 }
 
 @media (max-width: 480px) {
