@@ -2,24 +2,19 @@
 name: rushiti-page-service
 description: >-
   Fabrique et met à niveau les pages de service « pilier » de
-  rushiti-renovation.fr (service × Besançon : peinture intérieure,
-  peinture extérieure, plaquiste, plâtrerie, cloisons, faux plafonds,
-  doublage, isolation, sols, dégât des eaux, rénovation de pièce, B2B) —
-  la page commerciale de tête d'un silo, pas une page commune. Livre 4
-  blocs : brief d'intention, page HTML complète prête à déployer (title,
-  meta, H1-H3, contenu 1200-1500 mots, FAQ, JSON-LD Service +
-  BreadcrumbList + FAQPage, maillage, CTA), checklist de conformité, plan
-  de mesure. Mode création (rare, porte rushiti-keyword-map obligatoire),
-  mode mise à niveau d'une page existante (cas majoritaire), mode contrôle
-  avant déploiement. À déclencher dès qu'Isuf ou Yll dit « fais une page
-  dédiée pour ce service », « page peinture », « landing page placo »,
-  « notre page isolation est faible », « refais la page plaquiste »,
-  « une page par service », « page service × Besançon », ou en albanais
-  « faqe e veçantë për shërbimin », « landing page për placo »,
-  « përmirëso faqen e izolimit » — même sans dire skill. Pages commune ou
-  quartier → rushiti-page-locale ; articles de blog → rushiti-architecte-seo.
-  Aucun prix, délai, volume de recherche ni classement inventé ; rien n'est
-  déployé sans validation d'Isuf.
+  rushiti-renovation.fr (service × Besançon : peinture, placo, isolation,
+  sols, dégât des eaux, B2B) — la page de tête d'un silo, pas une page
+  commune. Livre 4 blocs : brief, page HTML prête à déployer (title, meta,
+  Hn, 1200-1500 mots, FAQ, JSON-LD Service/BreadcrumbList/FAQPage, maillage,
+  CTA), checklist de conformité, plan de mesure. Trois modes : mise à niveau
+  d'une page existante (cas majoritaire), création sous porte
+  rushiti-keyword-map, contrôle avant déploiement. À déclencher dès qu'Isuf
+  ou Yll dit « fais une page dédiée pour ce service », « landing page placo
+  », « refais la page plaquiste », « notre page isolation est faible », ou
+  en albanais « faqe e veçantë për shërbimin », « përmirëso faqen e izolimit
+  » — même sans dire skill. Pages commune ou quartier → rushiti-page-locale
+  ; articles → rushiti-architecte-seo. Aucun prix, délai ni classement
+  inventé ; rien n'est déployé sans validation d'Isuf.
 metadata:
   version: 1.0.0
 ---
