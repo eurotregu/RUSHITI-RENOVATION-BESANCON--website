@@ -14,10 +14,11 @@ formulaire :
 > `mailto` ci-dessous sur une page de production reviendrait à **dégrader** le
 > formulaire existant.
 
-## Mise à niveau préparée pour la production (PR `eurotregu/rushiti-renovation` #10)
+## Mise à niveau appliquée en production le 22/08/2026 (PR `eurotregu/rushiti-renovation` #10)
 
-Sur les 27 pages à formulaire de rushiti-renovation.fr, en attente de fusion —
-un déploiement de prévisualisation Cloudflare Pages permet de la voir avant :
+En ligne sur les 30 pages à formulaire de rushiti-renovation.fr
+(`simulateur-peinture`, dont le formulaire est piloté en JavaScript, reste à
+l'écart) :
 
 - **Styles créés de zéro** : les formulaires Web3Forms n'avaient aucune règle
   CSS — labels collés à des champs bruts, projet en police à chasse fixe. La
@@ -200,5 +201,6 @@ dans l'e-mail est repris de son `<label>`, donc renommer un champ suffit.
    coûter quelques demandes de visiteurs qui ne laissaient qu'un numéro.
    Retirer le `required` du champ `name="email"` suffit à revenir en arrière.
 3. **Suivi des conversions.** L'événement `Lead` ne part qu'après acceptation
-   des cookies (pixel Meta chargé). À vérifier dans Events Manager après le
-   déploiement en production.
+   des cookies (pixel Meta chargé). Maintenant que la mise à niveau est en
+   ligne, à vérifier dans Events Manager : une demande envoyée doit y
+   apparaître comme `Lead`.
