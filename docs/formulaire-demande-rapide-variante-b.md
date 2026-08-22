@@ -23,15 +23,18 @@ id="demande-rapide">` avec :
 - phrase de consentement RGPD avec lien vers `/mentions-legales` ;
 - service pré-sélectionné selon la page (liste identique à `/contact`).
 
-Le CSS global du site ne contenant aucune règle pour `label / input / select /
-textarea / .form-grid`, chaque page porte un petit bloc `<style>/*dr-style*/…`
-scopé sur `#demande-rapide` (grille 2 colonnes, focus vert, 1 colonne mobile).
+Le CSS global du site ne contenait aucune règle pour `label / input / select /
+textarea / .form-grid` : la mise en forme (grille 2 colonnes, focus, case de
+consentement, bandeau de réassurance) arrive par la **PR #10** du dépôt de
+production (`assets/css/s971fb819.css`, cache-buster `?v=8`), complétée par la
+**PR #20** (champ `page`, formulaire prix-travaux, mentions légales, validité).
 
 ## Pour poser le formulaire sur une nouvelle page
 
-Ne pas repartir de ce document : **copier la section `id="demande-rapide"` et le
-bloc `<style>/*dr-style*/` d'une page pilier existante** (par ex.
-`toile-de-verre-besancon.html`), puis adapter trois choses :
+Ne pas repartir de ce document : **copier la section `id="demande-rapide"`
+d'une page pilier existante** (par ex. `toile-de-verre-besancon.html` — les
+styles viennent de la feuille globale depuis la PR #10), puis adapter trois
+choses :
 
 1. `subject` : `Demande rapide — <Service ou objet> — rushiti-renovation.fr` ;
 2. champ caché `page` : l'URL exacte de la nouvelle page ;
@@ -39,7 +42,7 @@ bloc `<style>/*dr-style*/` d'une page pilier existante** (par ex.
 
 Les scripts `docs/seo/korrigjime-prodhim/korrigjo_formulare_prodhim.py`
 (complétion idempotente) et `verifiko_demande_rapide.py` (régression : structure,
-clé, subject, page, style — à lancer avant chaque déploiement) automatisent et
+clé, subject, champ page — à lancer avant chaque déploiement) automatisent et
 contrôlent l'ensemble.
 
 ## Décisions prises le 21–22/08/2026 (anciennement « À décider »)

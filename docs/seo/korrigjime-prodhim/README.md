@@ -53,25 +53,33 @@ Skriptet u testuan më 21/08 mbi HTML-në **reale** të prodhimit (`/papier-pein
 |---|---|
 | Data | 22/08/2026 |
 | Objekti | Tri vendimet e hapura të formularit (dërgimi, mentions légales, numërimi i lead-eve) — vendosur e zbatuar me autorizimin e Isufit |
-| Depoja e synuar | `eurotregu/rushiti-renovation` — kësaj radhe me **akses direkt**: ndryshimet u dorëzuan me PR në degën `claude/demande-rapide-web3forms-mentions` |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — kësaj radhe me **akses direkt**: PR [#20](https://github.com/eurotregu/rushiti-renovation/pull/20), degë `claude/demande-rapide-web3forms-mentions` |
 
 ## Çfarë u konstatua
 
 Formulari « Demande rapide » rezultoi **tashmë i shpërndarë** në 29 faqe pilier
 `-besancon` me POST nativ Web3Forms (i njëjti çelës me `/contact`) — pra vendimi
-« mailto apo server » ishte de facto i marrë. Mangësitë reale që u korrigjuan:
+« mailto apo server » ishte de facto i marrë. Për më tepër, **PR #10** (draft,
+20-21/08, «mise en forme et variante B») mbart tashmë: stilimin e formularit në
+CSS-në globale (`?v=8`), kutinë e detyrueshme të pëlqimit RGPD, bandën e
+risigurimit dhe **eventin Lead në `/merci`** — i verifikuar në Chromium, me
+parapamje Cloudflare. Pyetja e vetme e hapur aty: e-mail-i bëhet i detyrueshëm.
 
-1. **`/merci` pa event konvertimi** — asnjë dërgim formulari nuk numërohej te
-   Meta (vetëm klikimet « devis »). U shtua `Lead {content_name:"formulaire"}`
-   pas pëlqimit të cookies;
-2. **CSS-ja globale pa asnjë rregull formulari** (`label/input/select/.form-grid`
-   mungojnë në `assets/css/s971fb819.css`) — formulari shfaqej i pastilizuar.
-   U shtua blloku `/*dr-style*/` i fokusuar te `#demande-rapide` në çdo faqe;
-3. **Pa atribuim për faqe** — u shtua fusha e fshehtë `page` me URL-në;
-4. **`prix-travaux-renovation-besancon`** ishte e vetmja faqe pilier pa formular
+**Ndarja e punës**, që asgjë të mos mbivendoset e as të numërohet dyfish:
+
+| Pjesa | Kush e mbart |
+|---|---|
+| Stilimi i formularit (CSS globale), kutia e pëlqimit, eventi Lead në `/merci` | **PR #10** (paraekzistues — për t'u bashkuar) |
+| Fusha `page` (atribuim për faqe), formulari për `prix-travaux`, `</main></main>` ×11, mentions-legales RGPD | **PR #20** (kjo paketë) |
+
+## Çfarë korrigjon PR #20
+
+1. **Pa atribuim për faqe** — fushë e fshehtë `page` me URL-në në 30 formularët
+   (subjekti dallon vetëm shërbimin; tani çdo lead tregon edhe faqen e saktë);
+2. **`prix-travaux-renovation-besancon`** ishte e vetmja faqe pilier pa formular
    — iu transplantua nga gabariti live i `toile-de-verre-besancon`;
-5. **`</main></main>` i dyfishuar** në 11 faqe — u normalizua;
-6. **`mentions-legales.html`**: §7 thoshte « asnjë cookie, s'duhet pëlqim »
+3. **`</main></main>` i dyfishuar** në 11 faqe — u normalizua;
+4. **`mentions-legales.html`**: §7 thoshte « asnjë cookie, s'duhet pëlqim »
    ndërsa siti ngarkon Pixel Meta me bandeau — u rishkrua; Web3Forms u deklarua
    si nën-përpunues RGPD; të drejtat u plotësuan (fshirje, kundërshtim,
    portabilitet, ankesë CNIL); seksioni dublikatë në fund u hoq.
@@ -80,8 +88,8 @@ Formulari « Demande rapide » rezultoi **tashmë i shpërndarë** në 29 faqe p
 
 | Skedari | Roli |
 |---|---|
-| `korrigjo_formulare_prodhim.py` | Zbaton pikat 2–5, **idempotent** (faqet e korrigjuara i kapërcen). I ripërdorshëm nëse gjenerohen faqe të reja me gabaritin e vjetër |
-| `verifiko_demande_rapide.py` | **Vegla e përhershme e regresit**: 30 faqet + `/merci` — strukturë, çelës, subjekt, fushë page, stil, event Lead. Për t'u ekzekutuar para çdo deploy-i |
+| `korrigjo_formulare_prodhim.py` | Zbaton pikat 1–3, **idempotent**. I ripërdorshëm nëse gjenerohen faqe të reja me gabaritin e vjetër |
+| `verifiko_demande_rapide.py` | **Vegla e përhershme e regresit**: 30 faqet — strukturë, çelës, subjekt, fushë page; plus dy kontrolle KUJDES (stili global, eventi Lead në `/merci`) që kthehen OK pasi PR #10 të bashkohet. Për t'u ekzekutuar para çdo deploy-i |
 
 ## Përdorimi (mbi një checkout të depos së prodhimit)
 
@@ -90,3 +98,10 @@ python3 korrigjo_formulare_prodhim.py /rruga/drejt/rushiti-renovation           
 python3 korrigjo_formulare_prodhim.py /rruga/drejt/rushiti-renovation --apply   # zbatim
 python3 verifiko_demande_rapide.py /rruga/drejt/rushiti-renovation              # verifikim (exit 0 = konform)
 ```
+
+## Radha e bashkimit të rekomanduar
+
+1. **PR #10** — stilimi + pëlqimi + Lead në `/merci` (arbitrazhi për e-mail-in e
+   detyrueshëm: **mbahet i detyrueshëm** — varianti B e parasheh, devis-i i
+   shkruar kërkon e-mail; hiqet me një fjalë nëse Isuf vendos ndryshe);
+2. **PR #20** — plotësimet e kësaj pakete (të pavarura, pa konflikt përmbajtjeje).

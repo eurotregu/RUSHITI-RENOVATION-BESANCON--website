@@ -9,10 +9,12 @@ Kontrollet për secilën nga 30 faqet pilier me formular:
   - subjekt jo bosh që mbaron me « — rushiti-renovation.fr »;
   - redirect /merci, honeypot botcheck, lidhja /mentions-legales;
   - fusha e fshehtë page = URL-ja e faqes (atribuim për faqe);
-  - stili /*dr-style në <head> (CSS-ja globale nuk mbart rregulla formulari);
   - strukturë e shëndoshë: 1 </head>, 1 </main>, 1 </body>, <form> = </form>,
     asnjë «</main></main>» i dyfishuar.
-Plus: /merci mbart eventin Lead /*lead-formulaire (numërimi i konvertimeve).
+
+Dy kontrolle KUJDES (jo bllokuese deri sa PR #10 «mise en forme» të bashkohet,
+sepse ai i mbart): stilet e formularit (.form-grid në CSS-në globale) dhe
+eventi Lead në /merci (numërimi i konvertimeve).
 
 Përdorimi:
     python3 verifiko_demande_rapide.py /rruga/drejt/rushiti-renovation
@@ -88,8 +90,6 @@ def main():
             p.append("lidhja /mentions-legales mungon")
         if ('name="page" value="https://rushiti-renovation.fr/%s"' % fname[:-5]) not in h:
             p.append("fusha page nuk tregon faqen")
-        if "/*dr-style" not in h:
-            p.append("stili dr-style mungon")
         if "</main></main>" in h:
             p.append("</main></main> i dyfishuar")
         for tag in ("</head>", "</main>", "</body>"):
@@ -104,12 +104,19 @@ def main():
         else:
             print("OK     %s" % fname)
 
-    merci = root / "merci.html"
-    if not merci.exists() or "/*lead-formulaire" not in merci.read_text(encoding="utf-8"):
-        print("GABIM  merci.html — eventi Lead /*lead-formulaire mungon")
-        gabime += 1
+    # Kontrollet KUJDES — priten nga PR #10 «mise en forme»; s'bllokojnë exit-in
+    css = root / "assets" / "css" / "s971fb819.css"
+    if not css.exists() or ".form-grid" not in css.read_text(encoding="utf-8"):
+        print("KUJDES CSS-ja globale ende pa .form-grid — formulari i pastilizuar (pritet nga PR #10)")
     else:
-        print("OK     merci.html (eventi Lead i pranishëm)")
+        print("OK     stilet e formularit në CSS-në globale")
+
+    merci = root / "merci.html"
+    mh = merci.read_text(encoding="utf-8") if merci.exists() else ""
+    if 'Lead"' not in mh.replace("'", '"') or "content_name" not in mh or mh.count("Lead") < 2:
+        print("KUJDES /merci ende pa event Lead të dedikuar dërgimit (pritet nga PR #10)")
+    else:
+        print("OK     /merci mbart event Lead të dedikuar")
 
     print("\n%d faqe + /merci të kontrolluara, %d me probleme." % (len(PAGES), gabime))
     sys.exit(1 if gabime else 0)

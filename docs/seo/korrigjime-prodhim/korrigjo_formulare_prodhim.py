@@ -3,19 +3,18 @@
 """Plotëson formularët « Demande rapide » të depos së prodhimit
 (eurotregu/rushiti-renovation) — vendimet e 21-22/08/2026, autorizuar nga Isuf.
 
-Katër korrigjime, të gjitha idempotente:
+⚠️ Ndarja e punës me PR #10 (paraekzistues, «mise en forme et variante B»):
+PR #10 mbart stilimin në CSS-në globale (?v=8), kutinë e pëlqimit RGPD dhe
+eventin Lead në /merci. KY skript mbart pjesën plotësuese — asnjë mbivendosje:
 
-1. «</main></main>» i dyfishuar → «</main>» (defekt validiteti i pranishëm
-   në 11 faqe pilier), skanohet në gjithë depon;
-2. stil i fokusuar #demande-rapide në <head> të faqeve pilier me formular —
-   CSS-ja globale (assets/css/s971fb819.css) nuk përmban asnjë rregull për
-   .form-grid / label / input / select / textarea, ndaj formulari shfaqej
-   me pamjen e papunuar të shfletuesit;
-3. fushë e fshehtë name="page" me URL-në e faqes — atribuimi i saktë i çdo
-   kërkese (sot vetëm subjekti dallon shërbimin, jo faqen);
-4. prix-travaux-renovation-besancon.html — e vetmja faqe pilier pa formular —
+1. «</main></main>» i dyfishuar → «</main>» (defekt validiteti, 11 faqe);
+2. fushë e fshehtë name="page" me URL-në e faqes në çdo formular — atribuimi
+   i saktë i çdo kërkese (subjekti dallon vetëm shërbimin, jo faqen);
+3. prix-travaux-renovation-besancon.html — e vetmja faqe pilier pa formular —
    merr seksionin « Demande rapide » të transplantuar nga gabariti live i
    toile-de-verre-besancon.html (subjekt e para-zgjedhje të përshtatura).
+
+Idempotent: faqet e korrigjuara kapërcehen.
 
 Përdorimi (mbi një checkout të depos së prodhimit):
     python3 korrigjo_formulare_prodhim.py /rruga/drejt/rushiti-renovation           # simulim
@@ -60,16 +59,6 @@ PAGES_ME_FORMULAR = [
 FAQJA_PA_FORMULAR = "prix-travaux-renovation-besancon.html"
 DONATORI = "toile-de-verre-besancon.html"
 
-STYLE = """<style>/*dr-style : stil i formularit Demande rapide — CSS-ja globale nuk mbart rregulla për label/input/select/textarea*/
-#demande-rapide .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-#demande-rapide label{display:block;font-weight:600;color:var(--navy,#1B3A5B);font-size:.92rem;margin-bottom:5px}
-#demande-rapide input,#demande-rapide select,#demande-rapide textarea{width:100%;padding:11px 13px;border:1px solid var(--line,#e5e7eb);border-radius:10px;font:inherit;font-size:.95rem;background:#fff;color:var(--ink,#333)}
-#demande-rapide input:focus,#demande-rapide select:focus,#demande-rapide textarea:focus{outline:none;border-color:var(--accent,#2E7D52)}
-#demande-rapide .full{grid-column:1/-1}
-#demande-rapide form{max-width:720px}
-@media(max-width:680px){#demande-rapide .form-grid{grid-template-columns:1fr}}
-</style>"""
-
 
 def fusha_page(slug):
     return ('<input type="hidden" name="page" value="https://rushiti-renovation.fr/%s">'
@@ -78,7 +67,7 @@ def fusha_page(slug):
 
 def merr_seksionin_donator(root):
     """Nxjerr seksionin « Demande rapide » nga faqja donatore, i përshtatur
-    për prix-travaux (subjekt, H1 i seksionit, opsion i para-zgjedhur)."""
+    për prix-travaux (subjekt, H2 i seksionit, opsion i para-zgjedhur)."""
     h = (root / DONATORI).read_text(encoding="utf-8")
     i = h.find('<section class="soft" id="demande-rapide">')
     j = h.find("</section>", i) + len("</section>")
@@ -109,18 +98,15 @@ def main():
     ndryshime, gabime = 0, 0
 
     # 1. </main></main> kudo në depo
-    dyfishe = 0
     for f in sorted(root.glob("*.html")) + sorted(root.glob("blog/*.html")):
         h = f.read_text(encoding="utf-8")
         if "</main></main>" in h:
-            dyfishe += 1
             if apply:
                 f.write_text(h.replace("</main></main>", "</main>"), encoding="utf-8")
             print("MAIN2  %s" % f.relative_to(root))
-    if dyfishe:
-        ndryshime += dyfishe
+            ndryshime += 1
 
-    # 2 + 3. Stili dhe fusha page në faqet me formular
+    # 2. Fusha page në faqet me formular
     for fname in PAGES_ME_FORMULAR:
         f = root / fname
         if not f.exists():
@@ -128,29 +114,20 @@ def main():
             gabime += 1
             continue
         h = f.read_text(encoding="utf-8")
-        te_beme = []
-        if "/*dr-style" not in h:
-            if h.count("</head>") != 1:
-                print("GABIM  %s: </head> = %d" % (fname, h.count("</head>")))
-                gabime += 1
-                continue
-            h = h.replace("</head>", STYLE + "\n</head>", 1)
-            te_beme.append("stil")
-        if 'name="page"' not in h:
-            ankora = 'name="redirect" value="https://rushiti-renovation.fr/merci">'
-            if h.count(ankora) != 1:
-                print("GABIM  %s: ankora redirect = %d" % (fname, h.count(ankora)))
-                gabime += 1
-                continue
-            h = h.replace(ankora, ankora + "\n" + fusha_page(fname[:-5]), 1)
-            te_beme.append("page")
-        if te_beme:
-            if apply:
-                f.write_text(h, encoding="utf-8")
-            print("%s %s (%s)" % ("SHTUAR" if apply else "DO SHTOHEJ", fname, "+".join(te_beme)))
-            ndryshime += 1
+        if 'name="page"' in h:
+            continue
+        ankora = 'name="redirect" value="https://rushiti-renovation.fr/merci">'
+        if h.count(ankora) != 1:
+            print("GABIM  %s: ankora redirect = %d" % (fname, h.count(ankora)))
+            gabime += 1
+            continue
+        h = h.replace(ankora, ankora + "\n" + fusha_page(fname[:-5]), 1)
+        if apply:
+            f.write_text(h, encoding="utf-8")
+        print("%s %s (page)" % ("SHTUAR" if apply else "DO SHTOHEJ", fname))
+        ndryshime += 1
 
-    # 4. Formulari për prix-travaux
+    # 3. Formulari për prix-travaux
     f = root / FAQJA_PA_FORMULAR
     if f.exists():
         h = f.read_text(encoding="utf-8")
@@ -158,12 +135,11 @@ def main():
         h = h.replace("</main></main>", "</main>")
         if 'id="demande-rapide"' in h:
             print("KA TASHME %s" % FAQJA_PA_FORMULAR)
-        elif h.count("</main>") != 1 or h.count("</head>") != 1:
+        elif h.count("</main>") != 1:
             print("GABIM  %s: strukturë e papritur" % FAQJA_PA_FORMULAR)
             gabime += 1
         else:
             seksioni = merr_seksionin_donator(root)
-            h = h.replace("</head>", STYLE + "\n</head>", 1)
             h = h.replace("</main>", seksioni + "\n</main>", 1)
             ank = 'name="redirect" value="https://rushiti-renovation.fr/merci">'
             h = h.replace(ank, ank + "\n" + fusha_page(FAQJA_PA_FORMULAR[:-5]), 1)
