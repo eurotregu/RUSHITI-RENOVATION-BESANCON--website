@@ -796,64 +796,218 @@ h4 { font-size: 1.1rem; }
     color: var(--text-light);
 }
 
-/* --- Testimonials --- */
-.testimonials {
+/* --- Avis Google (carrousel) --- */
+.avis-google {
     padding: 100px 0;
     background: var(--bg-light);
 }
 
-.testimonial-slider {
-    overflow: hidden;
-    position: relative;
-}
-
-.testimonial-track {
+/* Bandeau de note globale — la note se cite en texte et datée,
+   jamais en aggregateRating JSON-LD (avis tiers, consignes Google). */
+.avis-resume {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 24px 28px;
+    margin-bottom: 40px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
-.testimonial-card {
-    min-width: 100%;
-    padding: 40px;
-    background: #fff;
+.avis-resume-marque {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.avis-resume-marque strong {
+    display: block;
+    font-family: var(--font-heading);
+    font-size: 1rem;
+}
+
+.avis-resume-marque span {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.avis-logo-g {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+}
+
+.avis-logo-g--mini {
+    width: 14px;
+    height: 14px;
+}
+
+.avis-resume-note {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+}
+
+.avis-note-chiffre {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 2.4rem;
+    line-height: 1;
+    color: var(--primary);
+}
+
+.avis-note-sur {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    align-self: flex-end;
+    padding-bottom: 4px;
+}
+
+/* Étoiles : fond gris + calque doré rogné à --taux (4,7/5 = 94 %) */
+.avis-etoiles {
+    position: relative;
+    display: inline-block;
+    font-size: 1.2rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.avis-etoiles-fond {
+    color: #dadce0;
+}
+
+.avis-etoiles-pleines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: var(--taux, 100%);
+    color: #fbbc04;
+}
+
+.avis-note-detail {
+    flex-basis: 100%;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.avis-note-detail a {
+    color: var(--text-light);
+    text-decoration: underline;
+}
+
+.avis-note-detail a:hover {
+    color: var(--primary);
+}
+
+.avis-resume-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.avis-resume-actions .btn {
+    padding: 12px 22px;
+    font-size: 0.9rem;
+}
+
+.avis-resume-actions .btn-outline {
+    color: var(--primary);
+    border-color: var(--border);
+}
+
+.avis-resume-actions .btn-outline:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+@media (max-width: 767px) {
+    .avis-resume {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 22px 20px;
+    }
+
+    .avis-resume-actions {
+        width: 100%;
+    }
+
+    .avis-resume-actions .btn {
+        flex: 1 1 auto;
+        text-align: center;
+    }
+}
+
+/* Carrousel : piste en scroll-snap — glissement tactile natif,
+   et reste utilisable si le JS ne se charge pas. */
+.avis-carrousel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.avis-piste {
+    display: flex;
+    gap: 24px;
+    flex: 1;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.avis-piste::-webkit-scrollbar {
+    display: none;
+}
+
+.avis-piste:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: -3px;
     border-radius: var(--radius);
+}
+
+.avis-card {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 28px;
+    background: #fff;
     border: 1px solid var(--border);
-    text-align: center;
+    border-radius: var(--radius);
     box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
-    .testimonial-card {
-        min-width: 50%;
-        padding: 40px 30px;
+    .avis-card {
+        flex-basis: calc((100% - 24px) / 2);
     }
 }
 
-.stars {
-    color: var(--accent);
-    font-size: 1.3rem;
-    margin-bottom: 16px;
-    letter-spacing: 4px;
+@media (min-width: 1100px) {
+    .avis-card {
+        flex-basis: calc((100% - 48px) / 3);
+    }
 }
 
-.testimonial-card > p {
-    color: var(--text);
-    font-size: 1.05rem;
-    line-height: 1.8;
-    margin-bottom: 24px;
-    font-style: italic;
-}
-
-.testimonial-author {
+.avis-card-tete {
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 12px;
 }
 
-.author-avatar {
+.avis-avatar {
     width: 44px;
     height: 44px;
+    flex-shrink: 0;
     border-radius: 50%;
     background: var(--primary);
     color: #fff;
@@ -865,62 +1019,128 @@ h4 { font-size: 1.1rem; }
     font-size: 0.85rem;
 }
 
-.testimonial-author strong {
+.avis-card-id strong {
     display: block;
     font-family: var(--font-heading);
     font-size: 0.95rem;
+    line-height: 1.4;
 }
 
-.testimonial-author span {
-    font-size: 0.85rem;
+.avis-card-source {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.78rem;
     color: var(--text-muted);
 }
 
-.testimonial-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-top: 32px;
+/* Étoiles par avis : affichées uniquement si la note a été relevée
+   (data-note sur la carte). Sans relevé, aucune étoile n'est inventée. */
+.avis-card .avis-etoiles {
+    font-size: 1rem;
 }
 
-.test-nav-btn {
+.avis-texte {
+    color: var(--text);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    font-style: italic;
+    margin: 0;
+}
+
+.avis-texte.is-clampe {
+    display: -webkit-box;
+    -webkit-line-clamp: 8;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.avis-plus {
+    align-self: flex-start;
+    margin-top: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.avis-plus:hover {
+    color: var(--primary-light);
+}
+
+.avis-nav {
     width: 40px;
     height: 40px;
+    flex-shrink: 0;
     border-radius: 50%;
     border: 2px solid var(--border);
     background: #fff;
     cursor: pointer;
     font-size: 1rem;
     transition: var(--transition);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
 }
 
-.test-nav-btn:hover {
+.avis-nav:hover {
     background: var(--primary);
     color: #fff;
     border-color: var(--primary);
 }
 
-.testimonial-dots {
-    display: flex;
-    gap: 8px;
+/* Les flèches n'apparaissent que si le JS a pris la main — et seulement à partir
+   de la tablette : sur mobile on glisse au doigt, la carte prend toute la largeur. */
+@media (min-width: 768px) {
+    .js-avis .avis-nav {
+        display: flex;
+    }
 }
 
-.testimonial-dots .dot {
+.avis-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 32px;
+}
+
+.avis-dots .dot {
     width: 10px;
     height: 10px;
+    padding: 0;
+    border: 0;
     border-radius: 50%;
     background: var(--border);
     cursor: pointer;
     transition: var(--transition);
 }
 
-.testimonial-dots .dot.active {
+.avis-dots .dot.active {
     background: var(--primary);
     transform: scale(1.2);
+}
+
+.avis-pied {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.avis-pied a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .avis-piste {
+        scroll-behavior: auto;
+    }
 }
 
 /* --- CTA Section --- */

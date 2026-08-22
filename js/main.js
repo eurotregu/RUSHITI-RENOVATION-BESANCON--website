@@ -99,67 +99,168 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Testimonial Slider ---
-    const track = document.getElementById('testimonialTrack');
-    const dotsContainer = document.getElementById('testimonialDots');
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
+    // --- Carrousel Avis Google ---
+    // La piste est un conteneur scroll-snap : le glissement tactile et le clavier
+    // fonctionnent nativement, y compris si ce script ne se charge pas. Le JS
+    // n'ajoute que les flèches, les puces, le défilement auto et le « lire la suite ».
+    const piste = document.getElementById('avisPiste');
 
-    if (track) {
-        const cards = track.querySelectorAll('.testimonial-card');
-        let currentIndex = 0;
-        let slidesPerView = window.innerWidth >= 768 ? 2 : 1;
-        const totalSlides = Math.ceil(cards.length / slidesPerView);
+    if (piste) {
+        const carrousel = piste.closest('.avis-carrousel');
+        const cartes = Array.from(piste.querySelectorAll('.avis-card'));
+        const dotsAvis = document.getElementById('avisDots');
+        const avisPrev = document.getElementById('avisPrev');
+        const avisNext = document.getElementById('avisNext');
+        const DELAI_AUTO = 6000;
+        let defilement = null;
+        // Page visée, et non page lue dans le DOM : pendant un défilement animé,
+        // scrollLeft est encore à mi-course et deux clics rapprochés se marchent dessus.
+        let pageVisee = 0;
 
-        function createDots() {
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
-                const dot = document.createElement('span');
-                dot.className = 'dot' + (i === 0 ? ' active' : '');
-                dot.addEventListener('click', () => goToSlide(i));
-                dotsContainer.appendChild(dot);
+        carrousel.classList.add('js-avis');
+
+        // Nombre de cartes entièrement visibles — mesuré, jamais déduit d'un breakpoint
+        function parVue() {
+            const origine = cartes[0].offsetLeft;
+            const largeur = piste.clientWidth;
+            const visibles = cartes.filter(c => c.offsetLeft - origine < largeur - 1).length;
+            return Math.max(1, visibles);
+        }
+
+        function nbPages() {
+            return Math.ceil(cartes.length / parVue());
+        }
+
+        function pageActuelle() {
+            const origine = cartes[0].offsetLeft;
+            const x = piste.scrollLeft;
+            let index = 0;
+            cartes.forEach((c, i) => {
+                if (c.offsetLeft - origine <= x + 2) index = i;
+            });
+            return Math.min(Math.round(index / parVue()), nbPages() - 1);
+        }
+
+        function allerPage(page) {
+            const n = parVue();
+            pageVisee = page;
+            const cible = cartes[Math.min(page * n, cartes.length - 1)];
+            piste.scrollTo({ left: cible.offsetLeft - cartes[0].offsetLeft });
+            majPuces();
+        }
+
+        function majPuces() {
+            dotsAvis.querySelectorAll('.dot').forEach((d, i) => {
+                d.classList.toggle('active', i === pageVisee);
+                d.setAttribute('aria-current', i === pageVisee ? 'true' : 'false');
+            });
+        }
+
+        function creerPuces() {
+            dotsAvis.innerHTML = '';
+            const total = nbPages();
+            if (total < 2) return;
+            for (let i = 0; i < total; i++) {
+                const puce = document.createElement('button');
+                puce.type = 'button';
+                puce.className = 'dot';
+                puce.setAttribute('aria-label', 'Avis ' + (i + 1) + ' sur ' + total);
+                puce.addEventListener('click', () => {
+                    allerPage(i);
+                    relancerAuto();
+                });
+                dotsAvis.appendChild(puce);
             }
+            majPuces();
         }
 
-        function goToSlide(index) {
-            currentIndex = index;
-            const offset = -(100 / slidesPerView) * currentIndex * slidesPerView;
-            track.style.transform = `translateX(${offset}%)`;
-            const dots = dotsContainer.querySelectorAll('.dot');
-            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+        function decaler(sens) {
+            const total = nbPages();
+            allerPage((pageVisee + sens + total) % total);
         }
 
-        prevBtn.addEventListener('click', () => {
-            goToSlide(currentIndex > 0 ? currentIndex - 1 : totalSlides - 1);
+        // Défilement automatique — suspendu au survol, au focus clavier,
+        // quand l'onglet passe en arrière-plan, et jamais lancé si l'utilisateur
+        // a demandé moins d'animations.
+        const moinsAnimations = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+        // Rien ne tourne tant que la section n'est pas à l'écran : inutile de faire
+        // défiler des avis que personne ne regarde, et le visiteur qui arrive dessus
+        // la trouve au premier avis plutôt qu'au milieu.
+        let sectionVisible = false;
+
+        function stopperAuto() {
+            clearInterval(defilement);
+            defilement = null;
+        }
+
+        function lancerAuto() {
+            if (defilement || !sectionVisible || moinsAnimations.matches || nbPages() < 2) return;
+            defilement = setInterval(() => decaler(1), DELAI_AUTO);
+        }
+
+        function relancerAuto() {
+            stopperAuto();
+            lancerAuto();
+        }
+
+        avisPrev.addEventListener('click', () => { decaler(-1); relancerAuto(); });
+        avisNext.addEventListener('click', () => { decaler(1); relancerAuto(); });
+
+        piste.addEventListener('mouseenter', stopperAuto);
+        piste.addEventListener('mouseleave', lancerAuto);
+        piste.addEventListener('focusin', stopperAuto);
+        piste.addEventListener('focusout', lancerAuto);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) stopperAuto(); else lancerAuto();
         });
 
-        nextBtn.addEventListener('click', () => {
-            goToSlide(currentIndex < totalSlides - 1 ? currentIndex + 1 : 0);
+        let tempoScroll;
+        piste.addEventListener('scroll', () => {
+            clearTimeout(tempoScroll);
+            tempoScroll = setTimeout(() => {
+                pageVisee = pageActuelle();
+                majPuces();
+            }, 120);
         });
 
-        // Auto slide
-        let autoSlide = setInterval(() => {
-            goToSlide(currentIndex < totalSlides - 1 ? currentIndex + 1 : 0);
-        }, 5000);
-
-        track.addEventListener('mouseenter', () => clearInterval(autoSlide));
-        track.addEventListener('mouseleave', () => {
-            autoSlide = setInterval(() => {
-                goToSlide(currentIndex < totalSlides - 1 ? currentIndex + 1 : 0);
-            }, 5000);
-        });
-
+        let largeurConnue = piste.clientWidth;
         window.addEventListener('resize', () => {
-            const newSlidesPerView = window.innerWidth >= 768 ? 2 : 1;
-            if (newSlidesPerView !== slidesPerView) {
-                slidesPerView = newSlidesPerView;
-                currentIndex = 0;
-                createDots();
-                goToSlide(0);
-            }
+            if (piste.clientWidth === largeurConnue) return;
+            largeurConnue = piste.clientWidth;
+            // Le nombre de pages change avec la largeur : on repart de la première.
+            pageVisee = 0;
+            creerPuces();
+            allerPage(0);
         });
 
-        createDots();
+        // « Lire l'avis complet » : n'apparaît que sur les avis réellement tronqués.
+        cartes.forEach(carte => {
+            const texte = carte.querySelector('.avis-texte');
+            texte.classList.add('is-clampe');
+            if (texte.scrollHeight <= texte.clientHeight + 2) return;
+
+            const bouton = document.createElement('button');
+            bouton.type = 'button';
+            bouton.className = 'avis-plus';
+            bouton.textContent = 'Lire l’avis complet';
+            bouton.setAttribute('aria-expanded', 'false');
+            bouton.addEventListener('click', () => {
+                const ouvert = texte.classList.toggle('is-clampe') === false;
+                bouton.setAttribute('aria-expanded', String(ouvert));
+                bouton.textContent = ouvert ? 'Réduire' : 'Lire l’avis complet';
+            });
+            carte.appendChild(bouton);
+        });
+
+        new IntersectionObserver(entrees => {
+            entrees.forEach(entree => {
+                sectionVisible = entree.isIntersecting;
+                if (sectionVisible) lancerAuto(); else stopperAuto();
+            });
+        }, { threshold: 0.25 }).observe(piste);
+
+        creerPuces();
     }
 
     // --- Contact Form (envoi direct via Web3Forms — action/method portés par le <form>,

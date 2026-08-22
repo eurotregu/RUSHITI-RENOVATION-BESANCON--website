@@ -19,7 +19,7 @@ js/main.js       - Scripts interactifs
 - Section hero avec compteurs animés
 - Galerie de réalisations avec filtres
 - Section À Propos (assurance décennale, RGE, SIRET)
-- Slider de témoignages clients
+- Carrousel d'avis Google (note et avis relevés sur la fiche Google, cf. `docs/seo/avis-google-releve-2026-08-22.md`)
 - Formulaire de contact (ouvre le client email avec la demande pré-remplie)
 - Données structurées JSON-LD (LocalBusiness / HousePainter)
 - Animations au scroll
