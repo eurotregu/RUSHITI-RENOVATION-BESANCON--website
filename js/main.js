@@ -162,49 +162,27 @@ document.addEventListener('DOMContentLoaded', () => {
         createDots();
     }
 
-    // --- Contact Form (ouvre le client email avec la demande pre-remplie) ---
+    // --- Contact Form (envoi direct via Web3Forms — action/method portés par le <form>,
+    //     même compte que rushiti-renovation.fr ; redirection vers /merci après envoi) ---
     const form = document.getElementById('contactForm');
     if (form) {
         const status = form.querySelector('.form-status');
 
-        // Libellé lisible d'un champ, repris de son <label> (sans l'astérisque)
-        const libelle = (champ) => {
-            const label = form.querySelector('label[for="' + champ.id + '"]');
-            return label ? label.textContent.replace('*', '').trim() : champ.name;
-        };
-
         form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Champ piège anti-spam : rempli = robot, on ignore silencieusement
-            const piege = form.querySelector('.form-hp');
-            if (piege && piege.value) return;
-
-            const lignes = [];
-            form.querySelectorAll('input[id], select[id], textarea[id]').forEach((champ) => {
-                if (champ.type === 'checkbox' || !champ.value.trim()) return;
-                lignes.push(libelle(champ) + ' : ' + champ.value.trim());
-            });
-
-            const sujet = form.getAttribute('data-subject') || 'Demande de devis';
-            const corps = lignes.join('\n') + '\n\nDemande envoyée depuis rushiti-renovation.fr';
-
-            window.location.href = 'mailto:contact@rushiti-renovation.fr'
-                + '?subject=' + encodeURIComponent(sujet)
-                + '&body=' + encodeURIComponent(corps);
-
-            const btn = form.querySelector('button[type="submit"]');
-            const originalText = btn.textContent;
-            btn.textContent = 'Ouverture de votre messagerie...';
-            btn.disabled = true;
-            if (status) {
-                status.textContent = 'Votre messagerie s\u2019ouvre avec la demande pré-remplie. Il ne reste qu\u2019à l\u2019envoyer.';
+            // Champs pièges anti-spam : remplis/cochés = robot, on n'envoie pas
+            const piege = form.querySelector('input[name="entreprise_hp"]');
+            const robot = form.querySelector('input[name="botcheck"]');
+            if ((piege && piege.value) || (robot && robot.checked)) {
+                e.preventDefault();
+                return;
             }
 
-            setTimeout(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            }, 3000);
+            const btn = form.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = 'Envoi en cours\u2026';
+            if (status) {
+                status.textContent = 'Envoi de votre demande\u2026';
+            }
         });
     }
 
