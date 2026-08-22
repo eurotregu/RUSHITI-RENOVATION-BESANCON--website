@@ -105,3 +105,50 @@ python3 verifiko_demande_rapide.py /rruga/drejt/rushiti-renovation              
    detyrueshëm: **mbahet i detyrueshëm** — varianti B e parasheh, devis-i i
    shkruar kërkon e-mail; hiqet me një fjalë nëse Isuf vendos ndryshe);
 2. **PR #20** — plotësimet e kësaj pakete (të pavarura, pa konflikt përmbajtjeje).
+
+---
+
+# Paketa 3 — `sameAs` i nyjeve LocalBusiness (22/08/2026)
+
+| | |
+|---|---|
+| Data | 22/08/2026 |
+| Objekti | Verifikimi i `sameAs`: a lidh JSON-LD-ja LocalBusiness sitin me PagesJaunes, Google Maps dhe regjistrat tregtarë? |
+| Raporti | `../verifikim-sameas-localbusiness-2026-08-22.md` |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **e pazbatuar**, pret validimin e Isufit (740 faqe) |
+
+## Çfarë u konstatua
+
+**Jo.** 736 nga 757 faqet e prodhimit deklarojnë vetëm `["https://rushiti.fr"]`.
+Google Maps figuron në 1 faqe të vetme (`index.html`); PagesJaunes dhe
+regjistrat tregtarë nuk figurojnë askund. 4 faqe s'kanë fare `sameAs`, 14 s'kanë
+nyje biznesi. Sintaksa JSON është e pastër në të 756 blloqet.
+
+Të katër profilet u hapën live më 22/08 dhe u kryqëzuan me SIRET-in/telefonin
+para se të futeshin në listën kanonike (PagesJaunes `pros/61325501`, Google Maps
+`cid=10915820577691168567`, Annuaire des Entreprises, INPI/RNE).
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_sameas_localbusiness.py` | Plotëson `sameAs` (bashkim, jo zëvendësim), pa rishkruar JSON-in — formatimi ekzistues mbetet. **Idempotent** |
+| `verifiko_sameas.py` | **Vegla e përhershme e regresit**: JSON i vlefshëm + 7 URL-të kanonike në çdo nyje me `@id`; nyjet e ngulitura pa `@id` raportohen si KUJDES. Për t'u ekzekutuar para çdo deploy-i |
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_sameas_localbusiness.py /rruga/drejt/rushiti-renovation           # simulim
+python3 fix_sameas_localbusiness.py /rruga/drejt/rushiti-renovation --apply   # zbatim
+python3 verifiko_sameas.py          /rruga/drejt/rushiti-renovation           # verifikim (exit 0 = konform)
+```
+
+## Prova e testimit
+
+Mbi checkout-in real të prodhimit (`abcdd34`) dhe mbi këtë depo:
+
+- simulim mbi prodhimin: **740 faqe / 740 vargje**, asnjë skedar tjetër i prekur;
+- zbatuar mbi këtë depo (`index.html`, `syndic-copropriete-besancon.html`):
+  JSON i rivalidhuar, formatimi i ruajtur, rileximi jep **0 ndryshime**
+  (idempotencë e provuar);
+- `verifiko_sameas.py` mbi këtë depo: **exit 0**.

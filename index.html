@@ -15,14 +15,18 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "HousePainter",
+      "@type": ["LocalBusiness", "HousePainter", "HomeAndConstructionBusiness"],
+      "@id": "https://rushiti-renovation.fr/#business",
       "name": "RUSHITI Rénovation",
       "description": "Entreprise de rénovation, peinture, plâtrerie et aménagement intérieur à Besançon et dans le Doubs. Devis gratuit.",
       "url": "https://rushiti-renovation.fr/",
+      "image": "https://rushiti-renovation.fr/assets/logo.png",
+      "logo": "https://rushiti-renovation.fr/assets/logo.png",
       "telephone": "+33760279897",
       "email": "contact@rushiti-renovation.fr",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "18 rue du Professeur Haag",
         "addressLocality": "Besançon",
         "postalCode": "25000",
         "addressRegion": "Doubs",
@@ -30,21 +34,32 @@
       },
       "areaServed": ["Besançon", "Doubs"],
       "sameAs": [
+        "https://rushiti.fr",
         "https://www.facebook.com/rushiti.renovation/",
-        "https://www.instagram.com/rushiti.renovation/"
+        "https://www.instagram.com/rushiti.renovation/",
+        "https://www.google.com/maps?cid=10915820577691168567",
+        "https://www.pagesjaunes.fr/pros/61325501",
+        "https://annuaire-entreprises.data.gouv.fr/entreprise/rushiti-905214631",
+        "https://data.inpi.fr/entreprises/905214631"
       ],
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "07:30",
-          "closes": "18:00"
+          "opens": "07:00",
+          "closes": "20:30"
         },
         {
           "@type": "OpeningHoursSpecification",
           "dayOfWeek": "Saturday",
           "opens": "08:00",
-          "closes": "12:00"
+          "closes": "20:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "09:00",
+          "closes": "17:30"
         }
       ],
       "priceRange": "Devis gratuit"
@@ -664,7 +679,7 @@
                         </div>
                         <div>
                             <h4>Horaires</h4>
-                            <p>Lun - Ven : 7h30 - 18h<br>Sam : 8h - 12h</p>
+                            <p>Lun – Ven : 7h – 20h30<br>Sam : 8h – 20h30<br>Dim : 9h – 17h30</p>
                         </div>
                     </div>
                     <div class="zone-intervention">
