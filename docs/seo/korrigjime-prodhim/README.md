@@ -115,7 +115,7 @@ python3 verifiko_demande_rapide.py /rruga/drejt/rushiti-renovation              
 | Data | 22/08/2026 |
 | Objekti | Verifikimi i `sameAs`: a lidh JSON-LD-ja LocalBusiness sitin me PagesJaunes, Google Maps dhe regjistrat tregtarë? |
 | Raporti | `../verifikim-sameas-localbusiness-2026-08-22.md` |
-| Depoja e synuar | `eurotregu/rushiti-renovation` — **e pazbatuar**, pret validimin e Isufit (740 faqe) |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **e zbatuar** me autorizimin e Isufit: PR [#24](https://github.com/eurotregu/rushiti-renovation/pull/24), degë `claude/sameas-localbusiness-citimet`, 743 faqe |
 
 ## Çfarë u konstatua
 
@@ -152,3 +152,25 @@ Mbi checkout-in real të prodhimit (`abcdd34`) dhe mbi këtë depo:
   JSON i rivalidhuar, formatimi i ruajtur, rileximi jep **0 ndryshime**
   (idempotencë e provuar);
 - `verifiko_sameas.py` mbi këtë depo: **exit 0**.
+
+## Zbatimi (22/08, mbrëmje)
+
+Me autorizimin e Isufit skripti u zbatua mbi prodhimin: **743 faqe**. Tri nyje
+biznesi anonime (`contact.html`, `simulateur-peinture.html`,
+`blog/calcul-rouleaux-papier-peint.html`) morën `@id`-në kanonike me dorë —
+skripti nuk ua vë vetë, sepse t'i japësh identitet një nyjeje anonime është
+vendim redaktorial.
+
+Dy përmirësime të vogla dolën nga zbatimi:
+
+- `fix_sameas_localbusiness.py` e fut `sameAs` pas `"priceRange"` ose, kur ai
+  mungon, pas `"taxID"` — rasti i `contact.html`;
+- `verifiko_sameas.py` kontrollon tani që `@id`-ja të jetë kanonikja (një
+  `@id` i dytë = entitet i dytë me të njëjtin emër) dhe nuk e kërkon më
+  `sameAs` te nyjet referencë — JSON-LD i bashkon sipas `@id`, pra përsëritja
+  do të ishte dyfishim.
+
+Verifikimi para push-it: 758 blloqe JSON-LD, 0 të pavlefshme; krahasim
+strukturor bllok për bllok para/pas mbi të 743 skedarët — të vetmit çelësa të
+ndryshuar `sameAs[]` dhe `@id`, asnjë ndryshim jashtë JSON-LD-së; idempotencë e
+provuar; `verifiko_sameas.py` exit 0.
