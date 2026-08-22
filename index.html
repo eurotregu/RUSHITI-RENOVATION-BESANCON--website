@@ -70,7 +70,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#realisations">Réalisations</a></li>
                 <li><a href="#apropos">À Propos</a></li>
-                <li><a href="#temoignages">Témoignages</a></li>
+                <li><a href="#avis">Avis</a></li>
                 <li><a href="#contact" class="nav-cta">Devis Gratuit</a></li>
             </ul>
         </div>
@@ -409,67 +409,178 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="temoignages">
+    <!-- Avis Google (carrousel) -->
+    <section class="avis-google" id="avis">
         <div class="container">
             <div class="section-header">
-                <span class="section-tag">Témoignages</span>
+                <span class="section-tag">Avis Google</span>
                 <h2>Ce que Disent Nos Clients</h2>
-                <p>La satisfaction de nos clients est notre meilleure carte de visite.</p>
+                <p>Les avis publiés par nos clients sur notre fiche Google, repris mot pour mot.</p>
             </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-track" id="testimonialTrack">
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"Travail impeccable pour la rénovation de notre appartement. Équipe sérieuse, propre et respectueuse des délais. Je recommande vivement !"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">ML</div>
-                            <div>
-                                <strong>Marie L.</strong>
-                                <span>Besançon Centre</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"M. Rushiti a refait toute la peinture de notre maison. Le résultat est magnifique. Très bon conseil sur les couleurs et finitions parfaites."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">PD</div>
-                            <div>
-                                <strong>Pierre D.</strong>
-                                <span>Planoise</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"Ravalement de façade réussi. Prix compétitif, travail soigné. L'équipe est agréable et professionnelle. Notre immeuble a retrouvé sa splendeur."</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">SD</div>
-                            <div>
-                                <strong>Sophie D.</strong>
-                                <span>Battant</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial-card">
-                        <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                        <p>"Rénovation complète de notre salle de bain. Du carrelage à la peinture, tout est parfait. Merci à toute l'équipe RUSHITI !"</p>
-                        <div class="testimonial-author">
-                            <div class="author-avatar">JM</div>
-                            <div>
-                                <strong>Jean M.</strong>
-                                <span>Chaprais</span>
-                            </div>
-                        </div>
+
+            <!-- Logo Google, défini une fois et réutilisé par chaque carte -->
+            <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+                <symbol id="logo-google" viewBox="0 0 48 48"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18C11.25 26.86 11 25.45 11 24s.25-2.86.69-4.18v-5.7H4.34C2.85 17.09 2 20.45 2 24s.85 6.91 2.34 9.88l7.35-5.7z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></symbol>
+            </svg>
+
+            <!-- Note globale : citée en texte et datée. Volontairement PAS balisée en
+                 aggregateRating JSON-LD — les avis Google sont des avis tiers. -->
+            <div class="avis-resume">
+                <div class="avis-resume-marque">
+                    <svg class="avis-logo-g" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg>
+                    <div>
+                        <strong>Avis Google</strong>
+                        <span>RUSHITI Rénovation</span>
                     </div>
                 </div>
-                <div class="testimonial-nav">
-                    <button class="test-nav-btn" id="prevBtn" aria-label="Précédent">&larr;</button>
-                    <div class="testimonial-dots" id="testimonialDots"></div>
-                    <button class="test-nav-btn" id="nextBtn" aria-label="Suivant">&rarr;</button>
+                <div class="avis-resume-note">
+                    <span class="avis-note-chiffre">4,7</span>
+                    <span class="avis-note-sur">/ 5</span>
+                    <span class="avis-etoiles" style="--taux: 94%;" role="img" aria-label="Note moyenne de 4,7 sur 5">
+                        <span class="avis-etoiles-fond" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                        <span class="avis-etoiles-pleines" aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+                    </span>
+                    <p class="avis-note-detail">Sur <strong>34 avis</strong> &middot; relevé le 22/08/2026</p>
+                </div>
+                <div class="avis-resume-actions">
+                    <a href="https://search.google.com/local/reviews?placeid=ChIJlwZoPfpjjUcRN28uHfvIfJc" class="btn btn-outline" target="_blank" rel="noopener noreferrer">Lire les 34 avis</a>
+                    <a href="https://search.google.com/local/writereview?placeid=ChIJlwZoPfpjjUcRN28uHfvIfJc" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Laisser un avis</a>
                 </div>
             </div>
+
+            <div class="avis-carrousel">
+                <button class="avis-nav" id="avisPrev" type="button" aria-label="Avis précédents">&larr;</button>
+                <div class="avis-piste" id="avisPiste" tabindex="0" role="group"
+                     aria-roledescription="carrousel" aria-label="Avis Google de nos clients">
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">JJ</span>
+                            <div class="avis-card-id">
+                                <strong>Jérôme J</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Nous avons fait appel à l'entreprise Rushiti pour repeindre entièrement un appartement et refaire les sols. Nous sommes très content du résultat. Le travail est très soigné et a été réalisé rapidement. M Rushiti est accessible, courtois et professionnel. Il a su nous proposer un devis en adéquation avec nos demandes. Merci à lui et son équipe. Je recommande !</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">JD</span>
+                            <div class="avis-card-id">
+                                <strong>Jean-francois D</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Suite à un dégât des eaux, l’entreprise Rushiti est intervenue à la demande de la MAIF afin de remettre notre appartement en état. Nous avons été pleinement satisfaits par la qualité du travail, la réactivité et le professionnalisme de l’équipe. L’ambiance positive au sein de l’entreprise nous a également convaincus de leur confier des travaux supplémentaires, notamment la réfection du parquet et la peinture dans d’autres pièces.</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">A</span>
+                            <div class="avis-card-id">
+                                <strong>Almir</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Entreprise très sérieuse que j'ai contactée pour un remplacement complet d'un parquet chêne suite à un dégât des eaux. Interlocuteurs réactifs, de bon conseil, et les travaux ont été réalisés rapidement dans un contexte pourtant difficile (mobilier en place). Le travail a été très soigneux. Je recommande vivement l'entreprise 😊</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">LS</span>
+                            <div class="avis-card-id">
+                                <strong>Lauryne S</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">L’entreprise Rushiti a réalisé mon plafond complet et le résultat est très bien. Aucunes traces de rouleaux. Le devis a été fait rapidement et très professionnel. Les travaux ont été fait rapidement aussi. Je recommande cette entreprise. Très bon rapport qualité prix</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">MR</span>
+                            <div class="avis-card-id">
+                                <strong>Michel R</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Nous avons été recommandé Rushiti rénovation par des amis qui étaient très contents de cette société qui avait repeint toute leur maison et nous n’avons pas été déçus. Nous ne pouvions pas espérer meilleurs résultats. Et il faut aussi dire que le patron nous a très bien conseillé sur le type de couleurs qui iraient dans l’appartement et le devis était tout à fait raisonnable considérant les travaux nécessaires. Je recommande vivement Rushiti rénovation pour leur professionnalisme mais aussi pour leur gentillesse.</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">AK</span>
+                            <div class="avis-card-id">
+                                <strong>altin k</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Entreprise très sérieuse, disponible par téléphone, facile à joindre. Horaires de rendez-vous respectés. Travail du peintre très soigné : chantier rangé et nettoyé parfaitement chaque soir. Très ponctuel</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">BS</span>
+                            <div class="avis-card-id">
+                                <strong>Bashkim S</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Très satisfait du travail réalisé. L’entreprise travaillait déjà pour ma mère. Nous avons refait intégralement la peinture de notre appartement, travail bien réalisé, tout a bien été protégé et les délais respectés. Très bonne communication et suivi avec M Rushiti et son équipe. Un grand merci</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">SP</span>
+                            <div class="avis-card-id">
+                                <strong>Sandrine P</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Entreprise très sérieuse et professionnelle ! Le travail de peinture et de rénovation a été réalisé avec soin et précision. Les finitions sont parfaites, le chantier a été tenu dans les délais et toujours avec le sourire. Une équipe de confiance, réactive et à l’écoute. Je recommande sans hésitation !</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">LB</span>
+                            <div class="avis-card-id">
+                                <strong>Laura B</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Artisan fiable, sérieux, très gentil et de bon conseil ! Nous recommandons Monsieur Rushiti pour vos travaux (nous avons fait appel à lui pour une pose de plafond et un gros chantier peinture)</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">JF</span>
+                            <div class="avis-card-id">
+                                <strong>jeancharles f</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Je recommande vivement cette entreprise de peinture ! Ils sont intervenus chez nous pour enduire le plafond et peindre l’appartement entièrement, et le résultat est impeccable. Le travail est soigné, propre et vraiment de grande qualité. L’équipe a été très réactive dès le premier contact, agréable et professionnelle tout au long du chantier. Une mention particulière à M. Rushiti, qui a été très aimable et à l’écoute. Les délais annoncés ont été parfaitement respectés, ce qui est très appréciable. C’est rare de trouver des artisans aussi sérieux et efficaces — je n’hésiterai pas à faire appel à eux à nouveau !</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">EA</span>
+                            <div class="avis-card-id">
+                                <strong>Erion A</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">De l'excellent travail, un grand professionnalisme, disponibilité, écoute, discrétion et un rendu magnifique. Je me sens enfin vraiment bien dans mon chez-moi. Merci aux peintres pour leur travail de grande qualité, et merci à Monsieur Rushiti, pour la conduite très maîtrisée de ce chantier.</blockquote>
+                    </article>
+                    <article class="avis-card">
+                        <header class="avis-card-tete">
+                            <span class="avis-avatar" aria-hidden="true">CM</span>
+                            <div class="avis-card-id">
+                                <strong>christelle m</strong>
+                                <span class="avis-card-source"><svg class="avis-logo-g avis-logo-g--mini" aria-hidden="true" focusable="false"><use href="#logo-google"/></svg> Avis Google</span>
+                            </div>
+                        </header>
+                        <blockquote class="avis-texte">Nous avions besoin de travaux urgents, l'entreprise Rushiti a répondu très rapidement et avec efficacité, à nos attentes, en s'adaptant à des clients très âgés.</blockquote>
+                    </article>
+                </div>
+                <button class="avis-nav" id="avisNext" type="button" aria-label="Avis suivants">&rarr;</button>
+            </div>
+            <div class="avis-dots" id="avisDots"></div>
+
+            <p class="avis-pied">
+                12 avis affichés sur 34.
+                <a href="https://search.google.com/local/reviews?placeid=ChIJlwZoPfpjjUcRN28uHfvIfJc" target="_blank" rel="noopener noreferrer">Voir tous les avis sur Google</a>
+            </p>
         </div>
     </section>
 
