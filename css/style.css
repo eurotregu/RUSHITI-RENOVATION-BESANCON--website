@@ -494,6 +494,39 @@ h4 { font-size: 1.1rem; }
     background: var(--accent);
 }
 
+.service-links {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 18px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+}
+
+.service-links li {
+    font-size: 0.88rem;
+    line-height: 1.4;
+}
+
+.service-links a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.service-links a::before {
+    content: '\2192';
+    color: var(--accent);
+}
+
+.service-links a:hover {
+    color: var(--dark);
+}
+
 /* --- Why Us --- */
 .why-us {
     padding: 100px 0;
