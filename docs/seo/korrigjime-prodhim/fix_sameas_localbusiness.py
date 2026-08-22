@@ -14,13 +14,12 @@ Sjellja:
   * radha përfundimtare është ajo e `SAMEAS_KANONIK`, e ndjekur nga çdo URL
     tjetër e panjohur që faqja mbante më parë;
   * idempotent: rileximi i një faqeje tashmë të korrigjuar jep 0 ndryshime;
-  * për faqet me nyje biznesi me `@id` por PA `sameAs` (rasti
-    `zones-intervention.html`), vargu futet para `"priceRange"`.
+  * për faqet me nyje biznesi me `@id` por PA `sameAs`, vargu futet pas
+    `"priceRange"` ose, kur ai mungon, pas `"taxID"`.
 
-NUK prek: nyjet e ngulitura LocalBusiness pa `@id` (`contact.html`,
-`simulateur-peinture.html`, `blog/calcul-rouleaux-papier-peint.html`) — ato
-duhen shndërruar në referencë `{"@id": ".../#business"}`, vendim redaktorial,
-jo zëvendësim automatik.
+NUK prek: nyjet LocalBusiness pa `@id`. Një nyje pa `@id` është entitet
+anonim; t'i jepet `@id`-ja kanonike është vendim redaktorial (bëhet një herë
+me dorë), jo zëvendësim automatik.
 
 Përdorimi:
     python3 fix_sameas_localbusiness.py /rruga/drejt/rushiti-renovation
@@ -49,7 +48,10 @@ SAMEAS_KANONIK = [
 LD_BLLOK = re.compile(
     r'(<script[^>]*application/ld\+json[^>]*>)(.*?)(</script>)', re.S)
 SAMEAS = re.compile(r'"sameAs"(\s*):(\s*)\[(.*?)\]', re.S)
-PRICERANGE = re.compile(r'("priceRange"\s*:\s*"[^"]*",?)')
+# Pika e futjes: priceRange kur ekziston, përndryshe taxID — të dyja janë
+# veti të nyjes që përkufizon biznesin, kurrë të një nën-objekti.
+ANKORAT = [re.compile(r'("priceRange"\s*:\s*"[^"]*")(,?)'),
+           re.compile(r'("taxID"\s*:\s*"[^"]*")(,?)')]
 
 
 def bashko(ekzistuese: list[str]) -> list[str]:
@@ -86,12 +88,16 @@ def fut_sameas(bllok: str) -> tuple[str, int]:
     """Fut `sameAs` në nyjet me `@id` biznesi por pa `sameAs`."""
     if '"sameAs"' in bllok or '#business' not in bllok:
         return bllok, 0
-    if not PRICERANGE.search(bllok):
-        return bllok, 0
     varg = ",".join(json.dumps(u, ensure_ascii=False) for u in SAMEAS_KANONIK)
-    i_ri = PRICERANGE.sub(
-        lambda m: m.group(1) + f'"sameAs":[{varg}],', bllok, count=1)
-    return i_ri, 1 if i_ri != bllok else 0
+    for ankora in ANKORAT:
+        if not ankora.search(bllok):
+            continue
+        i_ri = ankora.sub(
+            lambda m: f'{m.group(1)},"sameAs":[{varg}]{m.group(2)}',
+            bllok, count=1)
+        if i_ri != bllok:
+            return i_ri, 1
+    return bllok, 0
 
 
 def perpuno(shteg: str) -> int:
