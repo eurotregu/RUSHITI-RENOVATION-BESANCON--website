@@ -86,6 +86,8 @@ def main():
             p.append("redirect /merci mungon")
         if 'name="botcheck"' not in h:
             p.append("honeypot botcheck mungon")
+        if 'name="consentement"' not in h:
+            p.append("kutia e pëlqimit RGPD mungon (gabariti post-PR #10)")
         if 'href="/mentions-legales"' not in h:
             p.append("lidhja /mentions-legales mungon")
         if ('name="page" value="https://rushiti-renovation.fr/%s"' % fname[:-5]) not in h:
