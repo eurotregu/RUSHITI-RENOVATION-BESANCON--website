@@ -33,8 +33,7 @@ rédigé)*
 |---|---|---|
 | Fusionner PR #10 puis PR #20 : formulaires stylés, case de consentement, événement `Lead` sur `/merci`, attribution par page, formulaire manquant sur prix-travaux, mentions RGPD | **Isuf : 2 merges**, puis déploiement Cloudflare | Sans l'événement `Lead`, **aucun envoi de formulaire n'est compté** sur 30 pages commerciales |
 | Valider le paquet moisissure A-B-C-D (FAQ, photos avant/après RGPD, pied d'article) | **Isuf : lire et valider** | 2ᵉ visibilité du site (≈ 620 impressions), le cœur est déjà en production |
-| Contrôler l'anomalie de marque : « rushiti-renovation.fr » en position 23 sur son propre domaine | `rushiti-indexation` | 49 impressions, 0 clic, et c'est la requête de marque |
-| Trancher le **domaine principal** (P0-A) | **Isuf : décision** | 10 minutes qui débloquent tout le netlinking |
+| Contrôler l'anomalie de la **chaîne du domaine** : « rushiti-renovation.fr » tapé tel quel sort en position 22-23 | `rushiti-indexation` | 49-52 impressions, 0 clic. La marque elle-même est saine (« rushiti besancon » pos. 2,4) : l'anomalie est circonscrite |
 
 ## Semaine 2 — Convertir la visibilité existante
 
@@ -42,10 +41,11 @@ rédigé)*
 
 | Action | Agent | Gisement visé |
 |---|---|---|
-| Deux liens contextuels entrants vers `/platrerie-besancon` (position 9,1) et deux vers `/ratissage-enduit-besancon` (10,9) | `rushiti-maillage-interne` | Deux piliers à une porte de la page 1, que personne ne pousse |
+| Deux liens contextuels entrants vers `/platrerie-besancon` (position 9,1 sur 10/06 → 18/08) et deux vers `/ratissage-enduit-besancon` (10,9) | `rushiti-maillage-interne` | Deux piliers à une porte de la page 1, que personne ne pousse |
 | Fiche Google Business + inventaire NAP par annuaire | `rushiti-fiche-google-business` + `rushiti-seo-local` | Le pack local écrase le CTR organique du cluster « entreprise de peinture » (1 343 impressions, 0 clic) |
 | Installer GA4 (Consent Mode v2 derrière la bannière existante) | `rushiti-ga4-gtm` | Aucun entonnoir téléphone / formulaire aujourd'hui |
 | Mesurer les Core Web Vitals (accueil, dégât des eaux, une page locale, mobile) | `rushiti-audit-technique` | Jamais relevés |
+| **Trancher le domaine principal** (P0-A) — la seule décision de la vague | **Isuf : décision** | 10 minutes qui débloquent tout le netlinking |
 
 > **Le travail hors-site de cette semaine ne demande aucun déploiement.** Il
 > peut avancer en parallèle du train Cloudflare, ce qui en fait le meilleur
@@ -54,7 +54,10 @@ rédigé)*
 ## Semaine 3 — Ouvrir la porte IA (jamais mesurée)
 
 C'est l'ajout du moteur au plan consolidé. L'outillage est en place depuis
-août ; **aucune mesure n'a été prise**. Dans cet ordre, sans le raccourcir :
+août ; **aucune mesure de citation n'a été prise**. Le volet crawlers, lui,
+n'est pas vierge : un incident réel a déjà été constaté sur ce site — le
+robots.txt managé de Cloudflare bloquait silencieusement tous les crawlers IA.
+D'où l'ordre ci-dessous, sans le raccourcir :
 
 1. `rushiti-visibilite-ia` — robots.txt, crawlers IA (GPTBot, ClaudeBot,
    Google-Extended, PerplexityBot…), validité du JSON-LD, extractibilité,
@@ -96,9 +99,9 @@ prétend économiser.
    livrable en attente est un effort déjà payé qui ne rapporte rien.
 5. **Publier la prochaine cible** du plan éditorial, si le train est prêt.
 
-**Ne fait pas partie du lundi** : re-mesurer la part de voix IA. Le corpus des
-moteurs de réponse bouge en six à huit semaines. Le mesurer chaque lundi
-produit du bruit qu'on prendra pour du signal.
+**Ne fait pas partie du lundi** : les mesures de la porte IA. La part de voix
+se relève au mois, le corpus cité toutes les six à huit semaines. Les refaire
+chaque lundi produit du bruit qu'on prendra pour du signal.
 
 ## Le rituel mensuel
 
@@ -108,14 +111,24 @@ produit du bruit qu'on prendra pour du signal.
 | Pages en décrochage à rafraîchir | `rushiti-refresh-planner` |
 | Avis Google : relevé de la note et du nombre, sollicitation des chantiers livrés | `rushiti-avis-google` |
 | Saisonnalité : ce qui monte dans 6 à 8 semaines | `rushiti-google-trends` |
+| **Part de voix IA** sur le panel figé de 14 requêtes (même panel, mêmes conditions) | `rushiti-part-de-voix-ia` |
 
-## Le rituel des 6-8 semaines (porte IA)
+## Le rituel des 6-8 semaines (corpus cité)
 
 | Action | Agent |
 |---|---|
-| Part de voix sur le panel figé de 14 requêtes | `rushiti-part-de-voix-ia` |
 | Relevé du corpus cité + avancement du plan d'entrée | `rushiti-citation-ia` |
-| Contrôle post-déploiement (robots.txt, JSON-LD, extractibilité) | `rushiti-visibilite-ia` |
+
+## À chaque déploiement, sans exception
+
+| Action | Agent |
+|---|---|
+| Contrôle robots.txt, crawlers IA, JSON-LD, extractibilité | `rushiti-visibilite-ia` |
+
+Ce contrôle-là n'est pas périodique mais **événementiel** : le mode de panne
+connu (robots.txt managé Cloudflare bloquant les crawlers IA) est silencieux
+et revient à chaque changement de configuration. Un déploiement sans ce
+contrôle est un déploiement à l'aveugle sur la porte IA.
 
 ## Le rituel trimestriel
 
@@ -128,8 +141,8 @@ produit du bruit qu'on prendra pour du signal.
 
 ## Ce qui ne se fait jamais dans une cadence
 
-- **Regonfler la grille locale.** Elle est passée de 644 à 301 pages
-  volontairement. Toute reprise passe par `rushiti-keyword-map`.
+- **Regonfler la grille locale.** Elle a été délibérément réduite de plus de
+  moitié. Toute reprise passe par `rushiti-keyword-map`.
 - **Publier pour tenir un rythme.** Une page de plus qui cannibalise coûte
   plus qu'une semaine sans publication.
 - **Mesurer une porte pour se rassurer.** Si la mesure ne change aucune

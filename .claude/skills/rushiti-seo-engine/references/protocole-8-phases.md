@@ -5,7 +5,7 @@
 > déclare bloquée, en nommant ce qui manque et qui peut le fournir.
 >
 > Le playbook générique commence à la phase 2 (analyse concurrentielle). Sur
-> un site de ~300 URL déjà consolidé, commencer là revient à proposer de
+> un site de plusieurs centaines d'URL déjà consolidé, commencer là revient à proposer de
 > créer ce qui existe. D'où la phase 0.
 
 ---
@@ -125,8 +125,8 @@ d'assurance, commerces).
 | Maillage | reçoit des locales et des articles, envoie vers le palier A | pointe vers le pilier | pointe vers le pilier |
 
 **Interdit ici** : proposer d'ajouter un palier à la grille locale ou de
-regonfler le nombre de pages. La grille est passée de 644 à 301 pages
-volontairement. Toute reprise passe par `rushiti-keyword-map`.
+regonfler le nombre de pages. La grille a été délibérément réduite de plus de
+moitié. Toute reprise passe par `rushiti-keyword-map`.
 
 **Livrable** : la place exacte de la cible, ses trois liens entrants
 minimum (sinon elle naît orpheline), et la page voisine à ne pas
@@ -187,7 +187,7 @@ page ?
 **Agent** : `schema-builder`.
 
 La pile habituelle, cohérente par `@id` en URL absolues
-(`https://rushiti-renovation.fr/#identity`) :
+(`https://rushiti-renovation.fr/#business`) :
 
 - `LocalBusiness` / `HousePainter` — le socle du site : NAP au caractère
   près, `telephone` `+33760279897`, `areaServed` Besançon + Doubs.
@@ -195,7 +195,11 @@ La pile habituelle, cohérente par `@id` en URL absolues
   socle.
 - `FAQPage` — **uniquement** sur les questions visibles dans la page.
 - `BreadcrumbList` — cohérent avec le fil d'Ariane affiché.
-- `WebSite` — sur l'accueil seulement.
+
+Rien d'autre. Le site ne porte pas de nœud `WebSite` aujourd'hui : ne pas en
+ajouter un sans arbitrage — le `SearchAction` qu'on y met d'ordinaire ne
+produit plus de sitelinks searchbox, et un nœud de plus est un nœud de plus à
+maintenir cohérent.
 
 **Interdits, sans exception** :
 - `Review` et `aggregateRating` auto-déclarés — contraires aux consignes
@@ -231,9 +235,12 @@ Règles :
   passer par une page chapeau. La proximité thématique est un signal ; la
   diluer coûte.
 
-**Le gisement déjà identifié** (opportunités GSC du 20/08/2026) :
+**Le gisement déjà identifié** (opportunités GSC, export 10/06 → 18/08/2026,
+rapport du 20/08) :
 `/platrerie-besancon` est en position 9,1 et `/ratissage-enduit-besancon` en
-10,9 — à une porte de la page 1 — et **aucun pilier voisin ne les pousse**.
+10,9 **sur la fenêtre 10/06 → 18/08** (respectivement 21,8 et 18,4 sur
+12 mois : ce sont des pages qui montent) — à une porte de la page 1, et
+**aucun pilier voisin ne les pousse**.
 Deux liens contextuels chacun : effort faible, impact fort.
 
 **Livrable** : les phrases exactes à coller, avec leur page de départ et leur
@@ -258,7 +265,7 @@ Le livrable tient en cinq champs :
 | Requête surveillée | celle du registre, au mot près |
 | Page surveillée | l'URL canonique, une seule |
 | Donnée de départ | impressions + position GSC du jour, **avec la date** ; ou `NM` assumé |
-| Fenêtre de relecture | 4 à 6 semaines pour Google · 6 à 8 semaines pour le corpus IA |
+| Fenêtre de relecture | 4 à 6 semaines pour Google · 1 mois pour la part de voix IA · 6 à 8 semaines pour le corpus cité |
 | Effet attendu | fort / moyen / faible, **avec son motif** — jamais un chiffre, jamais une position promise |
 
 Les deux portes se relisent séparément, à leur propre cadence. Les fusionner

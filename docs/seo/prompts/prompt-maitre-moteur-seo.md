@@ -18,12 +18,12 @@
 Le playbook d'origine — « installez 11 skills, cartographiez vos mots-clés,
 créez un pilier et 6 à 15 pages par sujet » — décrit un site que
 rushiti-renovation.fr **n'est pas**. Relevés du 22/08/2026 : le site compte
-~300 URL, possède déjà une page pilier par prestation, une grille locale
+plusieurs centaines d'URL, possède déjà une page pilier par prestation, une grille locale
 consolidée par paliers, un registre page ↔ mot-clé, et **une cinquantaine
 d'agents spécialisés** qui tiennent déjà dix des onze rôles du playbook.
 
 Appliquer la recette telle quelle produirait exactement ce que la
-consolidation de la grille (644 → 301 pages) a servi à défaire.
+consolidation de la grille a servi à défaire.
 
 Le brouillon générique contenait par ailleurs neuf défauts que ce prompt
 verrouille :
@@ -111,9 +111,9 @@ travailles les deux avec les mêmes pages, et tu les mesures séparément.
 - Offre REFUSÉE ou NON TRANCHÉE : enduit à la chaux, rénovation de boiseries
   (refusés le 21/08/2026), carrelage (non tranché). Aucune page pour ces
   requêtes, même si la demande existe.
-- Le site compte ~300 URL (sitemap du 22/08/2026), avec une page pilier par
+- Le site compte plusieurs centaines d'URL, avec une page pilier par
   prestation sous la forme « service-besancon » et une grille locale
-  consolidée par paliers A/B/C, réduite volontairement de 644 à 301 pages.
+  consolidée par paliers A/B/C, réduite volontairement de plus de moitié.
 - Domaines : rushiti-renovation.fr et rushiti.fr sont actifs mais ne se
   lient JAMAIS entre eux. rushiti-peinture.fr est ÉTEINT : ne l'écris nulle
   part.
@@ -179,7 +179,8 @@ Phase 6 — MAILLAGE : 3 liens entrants minimum, ancres descriptives, silo
   tenu serré. Donne les phrases exactes à coller, avec leur page de départ.
 Phase 7 — MESURE : requête surveillée, page surveillée, donnée de départ
   DATÉE (ou NM assumé), fenêtre de relecture (4-6 semaines pour Google,
-  6-8 pour le corpus IA), effet attendu qualifié avec son motif.
+  1 mois pour la part de voix IA, 6-8 semaines pour le corpus cité), effet
+  attendu qualifié avec son motif.
 
 Une phase dont l'entrée manque ne se joue pas : déclare-la BLOQUÉE, dis ce
 qui manque et qui peut le fournir. Ne la remplis pas d'hypothèses.

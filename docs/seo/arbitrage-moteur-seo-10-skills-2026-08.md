@@ -12,20 +12,20 @@
 > le chef d'orchestre, et le brouillon « ultra-master » fourni contenait
 > neuf erreurs factuelles qui l'auraient rendu dangereux tel quel.**
 >
-> Relevés du 22-23/08/2026 : sitemap de rushiti-renovation.fr (~300 URL),
+> Relevés du 22-23/08/2026 : sitemap de rushiti-renovation.fr,
 > roster des agents RUSHITI (une cinquantaine), rapport KPI #1
-> (17/05 → 16/08/2026), plan consolidé du 22/08/2026.
+> (rapport du 21/08/2026, export 12 mois), plan consolidé du 22/08/2026.
 
 ## 1. Ce que le plan supposait, et ce qui est vrai
 
 | Hypothèse du playbook | État réel au 23/08/2026 |
 |---|---|
 | « Installez ces 11 skills, votre site n'en a pas » | Faux. La suite RUSHITI compte **une cinquantaine d'agents**, dont dix couvrent déjà les onze rôles proposés — et couvrent en plus le devis d'assurance IRSI, le mémo de chantier, la prospection B2B, les avis Google, l'indexation, la saisonnalité |
-| « Un pilier + 6 à 15 pages par sujet » | La grille a été **volontairement réduite de 644 à 301 pages** parce que le trop-plein se cannibalisait. Appliquer la recette défait un travail payé |
+| « Un pilier + 6 à 15 pages par sujet » | La grille a été **volontairement réduite de plus de moitié** parce que le trop-plein se cannibalisait. Appliquer la recette défait un travail payé |
 | « Lancez `/keyword-map` en semaine 1 pour construire votre carte » | La carte existe : registre `docs/seo/regjistri-fjale-kyce.csv`, avec une porte de création à 4 contrôles anti-cannibalisation |
 | « Lancez `/onpage-audit` en semaine 2 » | L'audit du 13/08/2026 est rendu, et déjà routé en **14 entrées priorisées** dans le plan consolidé du 22/08 |
-| « `/citation-gap` : trouvez où les concurrents sont cités » | L'outillage existe (`rushiti-citation-ia`, `rushiti-part-de-voix-ia`, panel figé de 14 requêtes, dictionnaire de colonnes, modèle CSV) — mais **aucune mesure n'a encore été prise**. C'est le seul vrai trou du dispositif |
-| « `/rank-tracker` : un tableau, mot-clé → position Google → statut IA » | Deux portes, **deux dénominateurs, deux cadences** (4-6 semaines vs 6-8). Un tableau unique fait lire un mouvement Google comme un mouvement IA |
+| « `/citation-gap` : trouvez où les concurrents sont cités » | L'outillage existe (`rushiti-citation-ia`, `rushiti-part-de-voix-ia`, panel figé de 14 requêtes, dictionnaire de colonnes, modèle CSV) — mais **aucune mesure de citation n'a encore été prise**. C'est le seul vrai trou du dispositif |
+| « `/rank-tracker` : un tableau, mot-clé → position Google → statut IA » | Deux portes, **deux dénominateurs, trois cadences** : Google se relit en 4-6 semaines, la part de voix IA au mois, le corpus cité en 6-8 semaines. Un tableau unique fait lire un mouvement Google comme un mouvement IA |
 | Tableau de prix « 45-75 €/m² TTC » | Aucun prix validé par Isuf. Un tarif publié devient opposable devant un client ou un expert d'assurance |
 | « DTU 25.1 et 60.1 comme preuve d'expertise » | Normes réellement applicables : **DTU 59.1** (peinture), **25.41** (plaques de plâtre), **53.2** (sols souples), convention **IRSI**. Une norme fausse décrédibilise devant le lecteur qu'on visait |
 | « Téléphone : +33 3 81 XX XX XX (à mettre à jour) » | Le numéro existe : **07 60 27 98 97** · `tel:+33760279897`. Un placeholder qui ressemble à un fixe local est pire qu'un trou déclaré |
@@ -58,7 +58,8 @@ livré.
     (l'équivalent du `seo-brief.md` du playbook, mais mesuré, pas déclaré).
   - `references/cadence-et-campagnes.md` — les 30 premiers jours calés sur
     les vagues du plan consolidé, puis les rituels lundi / mensuel /
-    6-8 semaines / trimestriel.
+    mensuel (dont part de voix IA) / 6-8 semaines (corpus cité) /
+    trimestriel, plus le contrôle crawlers à chaque déploiement.
   - `references/pieges-plans-seo-generiques.md` — le catalogue des défauts
     par famille, et ce que ces plans ont **raison** de dire.
 - **Prompt maître** (`docs/seo/prompts/prompt-maitre-moteur-seo.md`) :
@@ -67,7 +68,7 @@ livré.
 ## 3. La phase que le playbook n'a pas — et pourquoi elle compte
 
 Le playbook générique enchaîne 7 phases en commençant par l'analyse
-concurrentielle. Sur un site de 300 URL déjà consolidé, commencer là revient
+concurrentielle. Sur un site de plusieurs centaines d'URL déjà consolidé, commencer là revient
 mécaniquement à proposer de créer ce qui existe.
 
 Le moteur livré ajoute donc une **phase 0 — ÉTAT** : qu'avons-nous déjà, et
@@ -89,11 +90,18 @@ ce qui est déjà visible.
 ## 4. Le seul vrai manque que le playbook a bien vu
 
 Le playbook insiste sur la porte IA, et il a raison : **c'est le seul volet
-du dispositif RUSHITI qui est outillé mais jamais mesuré**.
+du dispositif RUSHITI qui est outillé mais dont la citation n'a jamais été
+mesurée**.
 
-Au 23/08/2026 : part de voix IA `NM`, relevé de corpus cité `NM`, robots.txt
-et crawlers IA `NM`. Le panel de 14 requêtes est figé, le dictionnaire de
-colonnes est écrit, le modèle CSV est prêt — rien n'a été relevé.
+Au 23/08/2026 : part de voix IA `NM`, relevé de corpus cité `NM`. Le panel de
+14 requêtes est figé, le dictionnaire de colonnes est écrit, le modèle CSV est
+prêt — aucun relevé n'a été consigné.
+
+Le volet crawlers, lui, n'est pas vierge : un incident réel a déjà été constaté
+sur ce site — **le robots.txt managé de Cloudflare bloquait silencieusement
+tous les crawlers IA de rushiti-renovation.fr**. C'est un mode de panne connu,
+silencieux, et qui revient à chaque changement de configuration : son état
+actuel demande une revérification, pas une première découverte.
 
 L'ordre correct pour l'ouvrir, inscrit en semaine 3 de la cadence :
 

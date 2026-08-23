@@ -20,7 +20,7 @@
 | `/content-brief` | `rushiti-brief-seo` | Équivalent |
 | `/onpage-audit` | `rushiti-audit-seo` (+ `rushiti-audit-technique`, `rushiti-crawl-audit`) | RUSHITI sépare on-page, technique et crawl en trois agents. Le playbook les mélange |
 | `/citation-gap` | `rushiti-citation-ia` (+ `rushiti-part-de-voix-ia`) | **RUSHITI est nettement plus avancé ici.** Le playbook mesure « cité / pas cité ». RUSHITI distingue cinq surfaces (`S` source, `M` mention, `F` reprise de fait, `Ø` absence, `NM` non mesuré) et relève **les URL citées**, ce qui seul permet un plan d'entrée |
-| `/geo-writer` | `rushiti-architecte-seo`, `rushiti-page-service`, `rushiti-page-locale` | RUSHITI a trois rédacteurs selon le type de page. Un rédacteur unique produirait des pages piliers et des pages communes interchangeables — l'erreur qui a coûté la consolidation 644 → 301 |
+| `/geo-writer` | `rushiti-architecte-seo`, `rushiti-page-service`, `rushiti-page-locale` | RUSHITI a trois rédacteurs selon le type de page. Un rédacteur unique produirait des pages piliers et des pages communes interchangeables — l'erreur qui a coûté la consolidation de la grille |
 | `/schema-smith` | `schema-builder` | Équivalent, avec les interdits Google déjà câblés (pas de `Review` ni d'`aggregateRating` auto-déclarés) |
 | `/internal-linker` | `rushiti-maillage-interne` (+ `orphan-finder`) | Équivalent |
 | `/rank-tracker` | `rushiti-gsc` + `rushiti-part-de-voix-ia` | Le playbook fusionne les deux tableaux dans un seul. RUSHITI les tient **séparés, à cadences différentes** — voir plus bas |
@@ -39,7 +39,7 @@ sur le chiffre d'affaires que le blog :
 | `rushiti-devis-assurance` | Devis dégât des eaux au format IRSI que les experts valident | Métier. Aucun playbook SEO ne sait ce qu'est une unité d'œuvre |
 | `rushiti-memo-chantier`, `rushiti-declinaison-chantier`, `rushiti-etudes-de-cas` | Transformer un chantier réel en matière éditoriale | **La seule source de contenu qu'un concurrent ne peut pas copier** — et celle que les moteurs de réponse récompensent (expérience vécue, E-E-A-T) |
 | `rushiti-prospection-b2b`, `rushiti-relance-b2b`, `rushiti-courriers-clients` | Syndics, gestionnaires, experts d'assurance | Le B2B se gagne par courrier, pas par SERP |
-| `rushiti-indexation`, `rushiti-regression-seo`, `rushiti-cannibal-check` | Hygiène d'un site de 300 URL avec un héritage WordPress | Le playbook suppose un site neuf et propre |
+| `rushiti-indexation`, `rushiti-regression-seo`, `rushiti-cannibal-check` | Hygiène d'un site de plusieurs centaines d'URL avec un héritage WordPress | Le playbook suppose un site neuf et propre |
 | `rushiti-google-trends` | Saisonnalité — **quand** publier | Le ravalement et la peinture extérieure ont des pics. Publier six à huit semaines trop tard coûte la saison |
 | `rushiti-visibilite-ia` | robots.txt, crawlers IA, extractibilité, E-E-A-T | Le playbook parle de citation sans jamais vérifier que les moteurs **peuvent lire** le site |
 
@@ -49,7 +49,7 @@ sur le chiffre d'affaires que le blog :
 appliqué : six silos, pages piliers, grille locale, satellites de blog.
 ⚠️ **Mais la conclusion opérationnelle est inversée ici.** Le playbook dit
 « un pilier + 6 à 15 pages par sujet ». RUSHITI a **déjà** dépassé ce volume
-et vient de réduire la grille de 644 à 301 pages parce que le trop-plein se
+et vient de réduire sa grille de plus de moitié parce que le trop-plein se
 cannibalisait. Appliquer la recette telle quelle défait un travail payé.
 
 **Idée 2 — « Les IA citent les pages qui répondent vite et clairement. »**
@@ -61,7 +61,8 @@ pas écrire plus.
 **Idée 3 — « Regardez les deux tableaux de bord. »** ✅ Tient. ⚠️ Avec une
 correction : le playbook les met dans un même tableau, ligne par mot-clé.
 Les deux portes n'ont ni le même dénominateur ni la même vitesse — Google se
-relit en 4 à 6 semaines, le corpus des moteurs de réponse bouge en 6 à 8.
+relit en 4 à 6 semaines, la part de voix IA se mesure au mois, et le corpus
+cité bouge en 6 à 8 semaines.
 Un tableau unique fait lire un mouvement Google comme un mouvement IA. On les
 tient **côte à côte, datés séparément**.
 

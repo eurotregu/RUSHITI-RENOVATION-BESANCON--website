@@ -65,7 +65,8 @@ page 1 ».
   qualifiés fort / moyen / faible, avec leur motif.
 - **La porte anti-cannibalisation est infranchissable.** Aucune création de
   page ne sort de ce moteur sans verdict `rushiti-keyword-map`. Le site
-  compte ~300 URL et a déjà été consolidé de 644 à 301 : la bonne action est
+  compte plusieurs centaines d'URL et sa grille locale a déjà été délibérément
+  réduite : la bonne action est
   presque toujours de renforcer, jamais de créer.
 - **Un seul site par campagne.** `rushiti-renovation.fr` **ou** `rushiti.fr`,
   jamais les deux, jamais de lien croisé. `rushiti-peinture.fr` est éteint :
@@ -110,9 +111,9 @@ lancé.
 « On fait quoi cette semaine ? » Vous rendez la cadence de
 `references/cadence-et-campagnes.md` : le rituel du lundi (30 minutes), le
 rituel mensuel, le rituel trimestriel — **filtrés par l'état réel du dépôt**,
-pas récités. Une routine qui propose de mesurer la part de voix IA trois
-semaines après la dernière mesure est une routine qui fait perdre une heure :
-le corpus des moteurs de réponse bouge en six à huit semaines, pas en trois.
+pas récités. Une routine qui propose de re-relever le corpus cité trois
+semaines après la dernière mesure fait perdre une heure : ce corpus bouge en
+six à huit semaines, pas en trois. La part de voix, elle, se mesure au mois.
 
 ### Mode 3 — TRIAGE : un plan générique arrive
 
@@ -143,8 +144,8 @@ pas à la même vitesse.
 
 | Porte | Ce qu'on lit | Agent qui la mesure | Cadence |
 |---|---|---|---|
-| **Google** | clics, impressions, CTR, position moyenne, pages avec impressions, gisement top-10 sans clic | `rushiti-gsc`, `rushiti-keyword-map` (rapport KPI) | mensuelle |
-| **Moteurs de réponse** | part de voix sur le panel fixe de 14 requêtes, par moteur | `rushiti-part-de-voix-ia` | 6-8 semaines |
+| **Google** | clics, impressions, CTR, position moyenne, pages avec impressions, gisement top 6 sans clic | `rushiti-gsc`, `rushiti-keyword-map` (rapport KPI) | mensuelle |
+| **Moteurs de réponse** | part de voix sur le panel fixe de 14 requêtes, par moteur | `rushiti-part-de-voix-ia` | **mensuelle** |
 | **Corpus cité** | quelles sources les moteurs citent à notre place, où l'on peut entrer | `rushiti-citation-ia` | 6-8 semaines |
 | **Lisibilité machine** | robots.txt, JSON-LD, extractibilité, E-E-A-T | `rushiti-visibilite-ia` | après chaque déploiement |
 
@@ -155,8 +156,8 @@ action** — une seule, avec son agent et son motif.
 ## Le protocole en 8 phases
 
 Le playbook générique en compte 7 et commence à l'analyse concurrentielle.
-Il manque celle qui compte le plus ici : **l'état**. Sur un site de 300 URL
-déjà consolidé, la phase qui rapporte n'est pas « que font les concurrents »,
+Il manque celle qui compte le plus ici : **l'état**. Sur un site de plusieurs
+centaines d'URL déjà consolidé, la phase qui rapporte n'est pas « que font les concurrents »,
 c'est « qu'avons-nous déjà, et qu'est-ce qui imprime ».
 
 | # | Phase | Question tranchée | Agent principal |
@@ -257,7 +258,7 @@ exactement le genre de détail qu'un plan générique écrase.
 | Point | État | Ce qu'il faut trancher |
 |---|---|---|
 | « devis sous 48 h » | Présent dans un title live et dans les preuves affichables du registre ; mais `rushiti-page-service` et `rushiti-citation-ia` classent tout délai annoncé en promesse à valider | Isuf confirme-t-il « devis sous 48 h » comme engagement affichable ? Si oui, il entre au socle ; sinon il sort des titles |
-| Domaine principal | `rushiti.fr`, `rushiti-renovation.fr` et le microsite Localo dispersent l'autorité (audit du 13/08, P0-A) | Tout basculer en 301 vers `rushiti-renovation.fr` ? Décision de 10 minutes, effet fort |
+| Domaine principal | `rushiti.fr`, `rushiti-peinture.fr` (éteint mais encore publié par des agrégateurs) et le microsite Localo dispersent l'autorité (audit du 13/08, P0-A) | Tout basculer en 301 vers `rushiti-renovation.fr` ? Décision de 10 minutes, effet fort |
 | Carrelage | « Carrelage & Sol » figure sur l'accueil héritée ; aucune prestation ni page confirmée | Prestation offerte ou non ? Tant que non tranché : aucune page, et la mention de l'accueil est à retirer ou à assumer |
 | `/sol-pvc-besancon` vs `/lino-vinyle-lvt-besancon` | Doublon signalé en cours d'arbitrage | Fusion, différenciation ou 301 → `rushiti-cannibal-check` |
 | Note et nombre d'avis | Donnée périssable (34 avis 4,7/5 au relevé du 22/08/2026) | Se revérifie le jour de la publication, jamais recopiée |
@@ -269,7 +270,7 @@ exactement le genre de détail qu'un plan générique écrase.
 | Lancer une campagne sans lire le registre | La moitié des « nouvelles pages » proposées existent déjà. Phase 0, toujours |
 | Fusionner Google et IA en un « score de visibilité » | Deux portes, deux dénominateurs, deux cadences. Côte à côte, jamais additionnés |
 | Compter un moteur non interrogé comme zéro citation | `NM`. Sinon fausse chute au relevé suivant |
-| Proposer 10 pages neuves parce que le playbook dit « 6-15 pages par pilier » | La grille a été réduite de 644 à 301 exprès. Regonfler défait le travail payé |
+| Proposer 10 pages neuves parce que le playbook dit « 6-15 pages par pilier » | La grille a été délibérément réduite de plus de moitié. Regonfler défait le travail payé |
 | Reprendre les DTU d'un plan générique (25.1, 60.1…) | Les DTU applicables ici sont **59.1, 25.41, 53.2**. Une norme fausse décrédibilise devant un expert |
 | Écrire « La Boucle » comme quartier SEO | Les quartiers canoniques sont Battant, Chaprais-Cras, Planoise-Châteaufarine… « la boucle du Doubs » n'est qu'une description géographique |
 | Sortir une fourchette de prix « pour être utile » | Aucun prix sans validation d'Isuf. Ce qui fait le prix s'explique ; le prix ne s'affiche pas |

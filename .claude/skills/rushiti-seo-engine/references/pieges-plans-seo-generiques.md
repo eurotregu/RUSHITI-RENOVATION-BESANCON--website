@@ -61,7 +61,7 @@ s'écrit.
 | # | Ce que dit le plan | Pourquoi c'est faux ici | La version correcte |
 |---|---|---|---|
 | 13 | Créer `/peinture`, `/placo`, `/isolation`, `/renovation-complete` | Ces pages **existent déjà** sous la forme `service-besancon` et récoltent des impressions. Une URL sans zone perd le signal local et divise le signal | Renforcer l'existante. Si Isuf tient aux URL courtes : **301 de la courte vers l'existante**, jamais une seconde page |
-| 14 | « Un pilier + 6 à 15 pages par sujet » | La grille a été **réduite de 644 à 301 pages** précisément parce que le trop-plein se cannibalisait. Appliquer la recette défait un travail payé | Toute création passe par la porte `rushiti-keyword-map` |
+| 14 | « Un pilier + 6 à 15 pages par sujet » | La grille a été **délibérément réduite de plus de moitié** précisément parce que le trop-plein se cannibalisait. Appliquer la recette défait un travail payé | Toute création passe par la porte `rushiti-keyword-map` |
 | 15 | Ajouter un palier à la grille locale, ou une page par commune du département | Même motif. La grille est consolidée par paliers A/B/C | Ne jamais proposer de la regonfler |
 | 16 | Une page livrée avec des trous (« [insérer le paragraphe sur…] ») | Ce n'est pas un livrable, c'est un plan déguisé | Contenu rédigé en entier, ou phase déclarée bloquée |
 
