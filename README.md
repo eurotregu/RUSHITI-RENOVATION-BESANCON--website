@@ -27,3 +27,22 @@ js/main.js       - Scripts interactifs
 ## Déploiement
 
 Site statique - déployé automatiquement sur GitHub Pages à chaque push sur `main` (workflow `.github/workflows/deploy.yml`).
+
+## Moteur SEO + GEO
+
+Le travail de référencement (Google **et** moteurs de réponse IA) est piloté par des agents Claude Code, dans `.claude/skills/`. Point d'entrée unique :
+
+```
+/rushiti-seo-engine
+```
+
+Le chef d'orchestre : il décide quel agent spécialisé tourne, dans quel ordre, sur quelle cible — et il refuse de créer une page quand une page existante porte déjà la requête. Quatre modes : **CAMPAGNE** (une cible de bout en bout), **CADENCE** (quoi faire cette semaine), **TRIAGE** (arbitrer un plan SEO reçu de l'extérieur), **ÉTAT** (tableau de bord des deux portes).
+
+| Document | Rôle |
+|---|---|
+| `.claude/skills/rushiti-seo-engine/` | Le moteur : protocole en 8 phases, correspondance avec les playbooks génériques, catalogue des pièges, état daté du dispositif |
+| `docs/seo/prompts/prompt-maitre-moteur-seo.md` | Le même protocole en prompt bridé, pour un outil IA **hors dépôt** |
+| `docs/seo/arbitrage-moteur-seo-10-skills-2026-08.md` | Pourquoi les 11 skills génériques du playbook « 10-Skill SEO Engine » ne sont pas installés |
+| `docs/seo/regjistri-fjale-kyce.csv` | Le registre canonique page ↔ mot-clé (source de vérité anti-cannibalisation) |
+
+**Règles non négociables** : lecture seule sur la production (les agents n'écrivent que dans `docs/seo/`), aucun prix, délai ni chiffre inventé, aucune promesse de classement, et rien n'est déployé sans validation d'Isuf.
