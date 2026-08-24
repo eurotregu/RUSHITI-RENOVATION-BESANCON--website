@@ -270,3 +270,29 @@ Një përmirësim i vogël doli nga zbatimi: guardi i idempotencës së maillage
 kontrollon ankorën e plotë (`<a href=…>teksti</a>`), jo vetëm praninë e URL-së —
 përndryshe lidhjet e menusë drejt të njëjtave faqe do ta bllokonin futjen e
 ankorave kontekstuale.
+
+## Kalimi i dytë (24/08) — H2-të GEO dhe barra e apelit
+
+Pas relektimit, dy nga arbitrazhet e mbetura u vendosën dhe u zbatuan
+(commit `eb52bd5`, e njëjta PR #26):
+
+- **gjashtë H2 seksionesh** kaluan në formë pyetjeje (« Quels sont les signes
+  d'un dégât des eaux ? », « Combien coûte la réparation d'un dégât des eaux à
+  Besançon ? »…) — asnjë paragraf i prekur, vetëm titujt;
+- **dublimi i pyetjes së çmimit** u shmang: pyetja e FAQ-së u riformulua në
+  « De quoi dépend le montant d'une réparation après dégât des eaux ? », duke
+  ndryshuar `<summary>` **dhe** nyjen `FAQPage` bashkë — pariteti 13/13 i ruajtur;
+- **barra e apelit mobile e pilierit**: « Devis gratuit » → « Devis assurance »
+  (`--cta`). Grila mbetet me « Diagnostic gratuit ».
+
+Skriptet u zgjeruan: `fix_degat_des_eaux.py` mban hapin B7, dhe
+`verifiko_degat_des_eaux.py` ka dy kontrolle të reja — prania e gjashtë H2-ve
+pyetëse dhe mungesa e dublimit të pyetjes së çmimit.
+
+Provat: 7 gabime → **0** (exit 0); riekzekutim **0 skedarë**; **758 blloqe
+JSON-LD** të sitit të rilexuara, 0 të pavlefshme; pariteti FAQ **13/13 identik**;
+diff-i i tekstit të dukshëm i kufizuar në 7 tituj; rendering i verifikuar në
+Chromium.
+
+Pse u shmang dublimi: pa këtë, faqja do të mbante dy herë të njëjtën pyetje
+(H2 + FAQ), gjë që dobëson pikërisht sinjalin GEO që kërkohej.

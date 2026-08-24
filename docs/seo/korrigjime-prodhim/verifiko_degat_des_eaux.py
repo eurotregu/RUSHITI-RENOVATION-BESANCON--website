@@ -18,6 +18,8 @@ Contrôle, sur les 76 pages du silo puis sur la page pilier :
          9. les 6 ancres contextuelles du maillage sont posées
         10. parité FAQ : chaque <summary> a sa Question dans le FAQPage
         11. canonical, robots et title conformes
+        12. GEO : les six H2 de section sont en forme interrogative, et la
+            question prix n'apparaît pas deux fois (H2 + FAQ)
 
 Sortie : 0 = conforme, 1 = au moins une erreur.
 Les avertissements (KUJDES) ne font pas échouer le contrôle.
@@ -33,6 +35,14 @@ import sys
 PILIER = "degat-des-eaux-besancon.html"
 MAX_DESC = 155
 CID = "cid=10915820577691168567"
+H2_QUESTIONS = [
+    "Quels sont les signes d’un dégât des eaux ?",
+    "Comment se déroule la réparation après un dégât des eaux ?",
+    "Pourquoi un dégât des eaux s’aggrave-t-il vite à Besançon ?",
+    "Que comprennent les travaux de remise en état ?",
+    "Comment se passe le dossier d’assurance après un sinistre ?",
+    "Combien coûte la réparation d’un dégât des eaux à Besançon ?",
+]
 ANCRES = [
     ("/devis-assurance-degat-des-eaux-besancon", "devis détaillé poste par poste"),
     ("/expert-assurance-sinistre-besancon", "passage de l'expert"),
@@ -156,6 +166,18 @@ def controle_pilier(p: pathlib.Path) -> None:
     if orphelins:
         err(f, "%d question(s) du FAQPage sans équivalent visible : %s"
             % (len(orphelins), orphelins[:2]))
+
+    # 12 — GEO : H2 interrogatifs, pas de doublon de la question prix
+    h2 = [re.sub(r"\s+", " ", htmllib.unescape(re.sub(r"<[^>]+>", "", x))).strip()
+          for x in re.findall(r"<h2[^>]*>(.*?)</h2>", t, re.S)]
+    for q in H2_QUESTIONS:
+        if q not in h2:
+            err(f, "H2 interrogatif manquant : « %s »" % q)
+    if "Combien coûte la réparation après un dégât des eaux ?" in t:
+        err(f, "doublon prix : l’ancienne question de FAQ coexiste avec le H2 prix")
+    interro = [x for x in h2 if x.endswith("?")]
+    if len(interro) < 6:
+        warn(f, "seulement %d H2 en forme de question" % len(interro))
 
     # 11 — balises
     if 'rel="canonical" href="https://rushiti-renovation.fr/degat-des-eaux-besancon"' not in t:

@@ -32,6 +32,13 @@ Ce que le script fait, dans l'ordre :
      B6  chapeau (<p class="lead">) réécrit en réponse directe — extractibilité
          par les moteurs de réponse. Aucun fait nouveau : mêmes prestations,
          mêmes engagements, ordre inversé.
+     B7  six H2 de section passés en forme interrogative (GEO) : un moteur de
+         réponse cite une section quand son titre est la question posée. Seuls
+         les intitulés changent — aucun paragraphe n'est touché.
+         La question de FAQ « Combien coûte la réparation après un dégât des
+         eaux ? » devient « De quoi dépend le montant… » pour ne pas doublonner
+         le nouveau H2 prix ; le <summary> ET le FAQPage sont modifiés ensemble,
+         la parité reste vérifiable.
 
   C. llms.txt : la ligne dégât des eaux annonce « recherche d'origine », que le
      site attribue par ailleurs au plombier (/devis-assurance-… et
@@ -144,6 +151,25 @@ MUR_AP = ("nos travaux de remise en état couvrent la dépose des placo et isola
           'sur les <a href="/blog/reparer-mur-degat-des-eaux-besancon">murs et cloisons '
           "touchés</a>,")
 
+# B7 — H2 en forme interrogative (GEO)
+H2 = [
+    ("<h2>Dégât des eaux : le problème avant la solution</h2>",
+     "<h2>Quels sont les signes d’un dégât des eaux ?</h2>"),
+    ("<h2>Une approche complète, étape par étape</h2>",
+     "<h2>Comment se déroule la réparation après un dégât des eaux ?</h2>"),
+    ("<h2>Dégât des eaux à Besançon : la ville d'eau qui ne pardonne pas l'attente</h2>",
+     "<h2>Pourquoi un dégât des eaux s’aggrave-t-il vite à Besançon ?</h2>"),
+    ("<h2>Travaux de remise en état : ce que comprend notre intervention</h2>",
+     "<h2>Que comprennent les travaux de remise en état ?</h2>"),
+    ("<h2>Après sinistre : déclaration, passage de l'expert et indemnisation</h2>",
+     "<h2>Comment se passe le dossier d’assurance après un sinistre ?</h2>"),
+    ("<h2>Ce qui fait le prix de votre projet</h2>",
+     "<h2>Combien coûte la réparation d’un dégât des eaux à Besançon ?</h2>"),
+]
+# dédoublonnage de la question prix : <summary> et FAQPage ensemble
+FAQ_AV = "Combien coûte la réparation après un dégât des eaux ?"
+FAQ_AP = "De quoi dépend le montant d’une réparation après dégât des eaux ?"
+
 CTA_AV = '<a class="btn ghost" href="/contact">Devis gratuit</a></div>'
 CTA_AP = '<a class="btn ghost" href="/contact">Devis assurance</a></div>'
 
@@ -222,6 +248,19 @@ def fix_pilier(path: pathlib.Path) -> list[str]:
     if LEAD_AV in html:
         html = html.replace(LEAD_AV, LEAD_AP, 1)
         ch.append("chapeau réécrit en réponse directe (GEO)")
+
+    # B7 — H2 en forme interrogative + dédoublonnage de la question prix
+    n_h2 = 0
+    for av, ap in H2:
+        if av in html:
+            html = html.replace(av, ap, 1)
+            n_h2 += 1
+    if n_h2:
+        ch.append("%d H2 passés en forme interrogative (GEO)" % n_h2)
+    if FAQ_AV in html:
+        n = html.count(FAQ_AV)
+        html = html.replace(FAQ_AV, FAQ_AP)
+        ch.append("FAQ : question prix reformulée, <summary> + FAQPage (×%d)" % n)
 
     if html != orig and FIX_APPLY:
         path.write_text(html, encoding="utf-8")

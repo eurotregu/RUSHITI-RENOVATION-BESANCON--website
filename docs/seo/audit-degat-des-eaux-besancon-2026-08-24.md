@@ -157,9 +157,9 @@ Mêmes prestations, mêmes engagements, aucune promesse ajoutée : seul l'ordre 
 |---|---|---|
 | **La promesse « devis sous 48 h »** | Elle figure déjà sur 9 pages du site, jamais sur le silo dégât des eaux. Le brief la met partout | C'est un engagement commercial : à vous de confirmer qu'il tient sur un sinistre avant de l'afficher sur la page la plus urgente du site |
 | **`<title>` de la page** | « Dégât des eaux Besançon – Intervention rapide \| RUSHITI » (54 car.), conforme. Une variante orientée réparation/assurance est possible | La page ne pèse aujourd'hui que 18 impressions position 20,0 (GSC 17/05–16/08). Changer le title efface le point de référence : à décider avec `rushiti-regression-seo` |
-| **H2 en forme de question** | La grille utilise déjà « Comment se chiffre une réparation après dégât des eaux ? » quand le pilier dit « Ce qui fait le prix de votre projet » | Gain GEO réel mais la FAQ répond déjà à la question du prix : risque de doublon interne. À arbitrer avec `rushiti-h1-h6` |
+| ~~**H2 en forme de question**~~ | **Fait le 24/08, 2ᵉ passe** : six H2 de section passés en question. Le doublon redouté avec la FAQ prix a été traité en même temps — la question de FAQ devient « De quoi dépend le montant d'une réparation après dégât des eaux ? », `<summary>` et `FAQPage` modifiés ensemble, parité 13/13 conservée | — |
 | **Les 75 pages de zone n'ont aucun formulaire** | Constat sorti de l'audit : elles ne convertissent que par la barre d'appel et les liens | Chantier distinct du pilier, à chiffrer séparément (paquet 2 avait transplanté le formulaire sur les pages pilier uniquement) |
-| **Harmoniser la barre mobile du silo** | Pilier : « Devis gratuit ». Grille : « Diagnostic gratuit » | Deux accroches valables ; c'est un choix de marque |
+| ~~**Barre mobile du pilier**~~ | **Fait le 24/08, 2ᵉ passe** : « Devis gratuit » → « Devis assurance » sur le pilier. Les 75 pages de la grille gardent « Diagnostic gratuit » | Harmoniser tout le silo reste un choix de marque |
 
 ---
 
@@ -202,12 +202,12 @@ le `hasOfferCatalog`, la présence du bloc avis rattaché au bon `cid` Google, l
 | Technique (rendu, balises, indexation) | 8,5 | 8,5 | Déjà sain — pas un levier |
 | Données structurées | 8 | 9,5 | `hasOfferCatalog` posé ; `aggregateRating` à envisager une fois les avis affichés |
 | Contenu et couverture (2 100 mots, 13 FAQ) | 9 | 9 | Rien d'urgent |
-| Extractibilité IA (GEO) | 6,5 | 8 | H2 en questions, si arbitré |
+| Extractibilité IA (GEO) | 6,5 | 9 | 6 H2 en questions posés le 24/08 (2ᵉ passe) |
 | Preuve / E-E-A-T | 3 | 8 | Photos de chantier dégât des eaux réelles (RGPD : accord client) |
 | Maillage sortant du pilier | 3 | 8 | Étendre aux pages de zone |
-| Conversion (CRO) | 7 | 8 | « 48 h », si validé |
+| Conversion (CRO) | 7 | 8,5 | « 48 h », si validé |
 | Justesse éditoriale | 5 | 9,5 | — |
-| **Global** | **6,3** | **8,6** | |
+| **Global** | **6,3** | **8,9** | |
 
 **La bascule ne vient pas de la technique — elle est déjà en place — mais de trois
 choses : réparer un contresens qui décrédibilise la page, lui rendre la preuve
@@ -233,3 +233,10 @@ autorité vers ses satellites.**
    formulaire.
 4. Chantier suivant du silo, par ordre de rendement : formulaire sur les 75 pages
    de zone, puis photos de chantier dégât des eaux réelles sur le pilier.
+
+**2ᵉ passe du 24/08** — les deux arbitrages GEO et CRO ont été tranchés et
+appliqués (commit `eb52bd5`, même PR #26) : six H2 de section en forme
+interrogative, dédoublonnage de la question prix entre H2 et FAQ, et barre
+d'appel du pilier en « Devis assurance ». Restent ouverts, inchangés : la
+promesse « 48 h », la réécriture du `<title>`, le formulaire des 75 pages de
+zone, et l'harmonisation de la barre mobile sur toute la grille.
