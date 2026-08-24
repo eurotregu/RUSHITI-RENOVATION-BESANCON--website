@@ -379,3 +379,59 @@ Mbi checkout-in real të prodhimit (`60da3fa`):
 
 Të përputhet **fisha Google** dhe **PagesJaunes** me të njëjtin orar — koherenca
 NAP luhet po aq jashtë sitit sa brenda tij.
+
+---
+
+# Paketa 5 — koherenca e orarit (NAP) (24/08/2026)
+
+| | |
+|---|---|
+| Data | 24/08/2026 |
+| Objekti | Siti deklaronte dy orare kontradiktore; 586 nyje biznesi s'deklaronin fare orar |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **e zbatuar dhe e bashkuar** me autorizimin e Isufit: PR [#27](https://github.com/eurotregu/rushiti-renovation/pull/27), degë `claude/horaires-nap-coherence`, 587 skedarë |
+
+## Çfarë u konstatua
+
+Në **të njëjtën faqe** `/contact`: blloku « Horaires » shkruante « Lundi – Vendredi :
+8h – 18h », ndërsa fundi i faqes (i pranishëm në 755 faqe) shkruante 7 h – 20 h 30,
+7 ditë në javë. Në JSON-LD: 153 faqe e deklaronin variantin e gjatë, **586 nyje
+`LocalBusiness` të plota nuk deklaronin asnjë orar**. Meqë grafi bashkohet sipas
+`@id`, entiteti kishte orar të ndryshueshëm sipas faqes nga hynte motori.
+
+Varianti i vërtetë, i konfirmuar nga Isufi më 24/08: **Hën–Pre 7 h – 20 h 30,
+Sht 8 h – 20 h 30, Die 9 h – 17 h 30**.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_horaires_nap.py` | Korrigjimi, **idempotent**: teksti i `/contact`, `openingHoursSpecification` në 586 nyje, plus `url` + `availableChannel` te nyja `Service` e pilierit DDE |
+| `verifiko_horaires_nap.py` | **Vegla e përhershme e regresit NAP**: JSON i vlefshëm, çdo nyje biznesi me orar, **një variant i vetëm orari** në gjithë sitin, përputhje me variantin e validuar, mungesë e tekstit të vjetër « 8h–18h », plus koherenca e telefonit dhe e adresës. Për t'u ekzekutuar para çdo deploy-i |
+
+## Çfarë u shmang me vetëdije
+
+- **`geo`**: koordinatat e 18 rue du Professeur Haag duhen lexuar nga fisha Google, jo hamendësuar;
+- **`aggregateRating`**: politika e Google për të dhënat e strukturuara i përjashton avis-et e vetëpublikuara për `LocalBusiness` — nuk do të jepte yje;
+- **diversifikimi i ankorave** drejt pilierit: nga 150 lidhje, **75 janë fill i Arianës** (duhet të pasqyrojnë `BreadcrumbList`) dhe **75 janë puleza të shkurtra** në një rresht etiketash lagjeje. Zgjatja do të prishte njërën ose tjetrën. Rekomandimi i mëparshëm u tërhoq pasi u lexua kodi.
+
+## Prova e testimit dhe verifikimi pas bashkimit
+
+- `verifiko_horaires_nap.py`: **587 gabime → 0** (exit 0);
+- riekzekutim: **0 skedarë** (idempotencë);
+- **758 blloqe JSON-LD** të rilexuara, 0 të pavlefshme; **739 nyje biznesi, një variant i vetëm orari**;
+- krahasim çelës për çelës: vetëm `openingHoursSpecification` (586), `url` dhe `availableChannel` (1);
+- asnjë skedar i prekur jashtë JSON-LD-së, përveç `contact.html`;
+- regresi i silos DDE mbeti **CONFORME**;
+- **verifikim pas bashkimit, në prodhim** (24/08): `/contact` shërben tri rreshtat e sakta,
+  dhe `/cloisons-besancon` — faqe jashtë silos DDE — mban `openingHoursSpecification`
+  me variantin e validuar në JSON-LD-në e saj live.
+
+**Shënim metodologjik**: nxjerrja me LLM mbi përmbajtjen e faqes ktheu « pa orar »
+për `/cloisons-besancon`, sepse firecrawl-i i heq tag-et `<script>` nga teksti që
+i jep nxjerrësit. Verifikimi u bë mbi **rawHtml**-in e papërpunuar. Kur kontrollohet
+JSON-LD live, lexohet kodi — kurrë përmbledhja.
+
+## Çfarë i mbetet Isufit
+
+Përputhja e **fishës Google** dhe e **PagesJaunes** me të njëjtin orar: koherenca
+NAP luhet po aq jashtë sitit sa brenda tij.
