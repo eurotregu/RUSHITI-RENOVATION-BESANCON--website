@@ -77,8 +77,18 @@ s'écrit.
 Les DTU aussi se vérifient : un plan générique cite volontiers « DTU 25.1 »
 ou « DTU 60.1 » (plafonds suspendus, plomberie). Les normes réellement
 applicables ici sont **DTU 59.1** (travaux de peinture), **DTU 25.41**
-(plaques de plâtre), **DTU 53.2** (revêtements de sol PVC), plus la
-convention **IRSI** pour les sinistres. Une norme fausse citée comme preuve
+(plaques de plâtre), **DTU 53.12** (sols souples collés), plus la
+convention **IRSI** pour les sinistres. La table complète, vérifiée norme par
+norme le 21/08/2026, est dans `docs/seo/dtu-referencat-eeat.md` — elle couvre
+aussi 42.1 (ravalement), 59.4 (papier peint et toile de verre), 25.42 (ITI),
+45.10 (combles), 51.11 (parquet flottant), et dit ce que **rien** ne couvre
+(LVT clipsée : avis technique ou notice fabricant).
+
+**Le piège se referme aussi sur nos propres documents.** Le socle v4 porte
+encore « DTU 53.2 » ; la vérification du 21/08 l'a corrigé en **53.12**.
+Une source interne périmée produit exactement la même erreur qu'un plan
+générique — d'où la règle : la table datée fait foi, pas la mémoire ni le
+document le plus ancien. Une norme fausse citée comme preuve
 d'expertise décrédibilise devant un expert d'assurance — exactement le
 lecteur qu'on visait.
 

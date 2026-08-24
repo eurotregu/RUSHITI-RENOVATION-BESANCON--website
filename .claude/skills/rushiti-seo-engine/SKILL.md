@@ -82,7 +82,7 @@ page 1 ».
 | NAP au caractère près | 18 rue du Professeur Haag, 25000 Besançon · 07 60 27 98 97 · contact@rushiti-renovation.fr |
 | Téléphone technique | `tel:+33760279897` · WhatsApp `wa.me/33760279897` |
 | Gérants | Isuf & Yll Rushiti — Isuf exerce **depuis 20 ans**, l'entreprise est née le **04/11/2021** : deux faits distincts, jamais fondus en « 20 ans d'existence » |
-| Preuves stables | Diagnostic technique gratuit sur place · décennale + RC pro (ERGO) · DTU **59.1** (peinture), **25.41** (plaques de plâtre), **53.2** (sols souples) · convention **IRSI** |
+| Preuves stables | Diagnostic technique gratuit sur place · décennale + RC pro (ERGO) · DTU selon l'ouvrage — **59.1** (peinture), **25.41** (placo), **53.12** (sols souples collés) · convention **IRSI**. Table vérifiée et complète : `docs/seo/dtu-referencat-eeat.md` |
 | Zone validée | Besançon et ses quartiers + communes du Doubs (25), dont Pontarlier et Montbéliard. **Hors Doubs = hors périmètre** : ni Vesoul, ni Belfort, ni Dole, ni Dijon, ni « rayon de 50 km » |
 | Technique | Site statique, Cloudflare Pages · JSON-LD `HousePainter` · grille locale consolidée par paliers A/B/C — ne jamais proposer de la regonfler |
 | Charte | `#002B4B` · `#1A75BB` · `#016738` (positif) · `#EB1C24` (alerte) |
@@ -271,7 +271,7 @@ exactement le genre de détail qu'un plan générique écrase.
 | Fusionner Google et IA en un « score de visibilité » | Deux portes, deux dénominateurs, deux cadences. Côte à côte, jamais additionnés |
 | Compter un moteur non interrogé comme zéro citation | `NM`. Sinon fausse chute au relevé suivant |
 | Proposer 10 pages neuves parce que le playbook dit « 6-15 pages par pilier » | La grille a été délibérément réduite de plus de moitié. Regonfler défait le travail payé |
-| Reprendre les DTU d'un plan générique (25.1, 60.1…) | Les DTU applicables ici sont **59.1, 25.41, 53.2**. Une norme fausse décrédibilise devant un expert |
+| Reprendre les DTU d'un plan générique (25.1, 60.1…) — ou recopier **53.2**, périmé | La norme des sols souples collés est **53.12**. La table fait foi : `docs/seo/dtu-referencat-eeat.md`. Une norme fausse décrédibilise devant l'expert qu'on visait |
 | Écrire « La Boucle » comme quartier SEO | Les quartiers canoniques sont Battant, Chaprais-Cras, Planoise-Châteaufarine… « la boucle du Doubs » n'est qu'une description géographique |
 | Sortir une fourchette de prix « pour être utile » | Aucun prix sans validation d'Isuf. Ce qui fait le prix s'explique ; le prix ne s'affiche pas |
 | Router vers un agent sans lui donner son entrée | L'agent invente ou bloque. Une phase se lance avec ses données, ou se déclare bloquée |

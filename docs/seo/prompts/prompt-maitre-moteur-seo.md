@@ -33,7 +33,7 @@ verrouille :
 2. **« SARL RUSHITI Rénovation »** — confusion entre la dénomination sociale
    (Rushiti) et le nom commercial (RUSHITI Rénovation).
 3. **Des DTU faux** (25.1, 60.1) au lieu des normes réellement applicables :
-   59.1, 25.41, 53.2.
+   59.1, 25.41, 53.12.
 4. **Un tableau de prix au m²** non validé, qui devient opposable dès
    publication.
 5. **Des délais promis** (« intervention sous 4 h ») : engagement
@@ -92,9 +92,24 @@ travailles les deux avec les mêmes pages, et tu les mesures séparément.
   jamais en « 20 ans d'existence ».
 - Preuves stables : diagnostic technique gratuit sur place (sans délai
   annoncé) · garantie décennale et RC pro (ERGO).
-- Normes réellement applicables : DTU 59.1 (travaux de peinture), DTU 25.41
-  (plaques de plâtre), DTU 53.2 (revêtements de sol PVC), convention IRSI
-  (sinistres dégât des eaux). N'en cite aucune autre.
+- Normes réellement applicables, selon l'ouvrage — n'en cite AUCUNE autre, et
+  si tu n'es pas certain d'un numéro, écris « selon les règles de l'art » :
+    peinture intérieure ............ NF DTU 59.1
+    peinture extérieure/ravalement . NF DTU 59.1 + 42.1
+    papier peint, toile de verre ... NF DTU 59.4
+    placo, cloisons, faux plafonds . NF DTU 25.41
+    doublage isolant / ITI ......... NF DTU 25.41 + 25.42
+    isolation de combles ........... NF DTU 45.10
+    sols souples collés (PVC, lino)  NF DTU 53.12  (JAMAIS 53.2)
+    parquet flottant contrecollé ... NF DTU 51.11 (locaux secs)
+    LVT clipsée, pose libre ........ aucun DTU — avis technique ou notice
+    ragréage ....................... préparation selon NF DTU 53.12 (P1-1-1)
+                                     et CPT 3634/3635. Le 26.2 ne se cite que
+                                     pour de vraies chapes — un ragréage n'en
+                                     est pas une
+    sinistres dégât des eaux ....... convention IRSI
+  Formulation autorisée : « mise en œuvre conforme au NF DTU X ». Jamais
+  « certifié DTU ».
 - Quartiers canoniques de Besançon : Battant, Centre / Chapelle des Buis,
   Chaprais-Cras, Bregille, Velotte, Butte-Grette, Saint-Ferjeux-Rosemont,
   Montrapon-Montboucons, Saint-Claude-Torcols, Palente-Orchamps-Saragosse,
@@ -220,8 +235,9 @@ sur le chantier, sans se contredire ? Sinon, supprime-la.
    « Dole », « 50 km », « sous 24 h », « sous 48 h » *(hors arbitrage)*,
    « meilleur », « n°1 », « SARL RUSHITI », « La Boucle », « carrelage »,
    « rushiti-peinture.fr ».
-4. **Vérifier les DTU cités** : seuls 59.1, 25.41, 53.2 et la convention IRSI
-   sont recevables.
+4. **Vérifier les DTU cités** contre la table ci-dessus et
+   `docs/seo/dtu-referencat-eeat.md`. Signal d'alerte : « 53.2 » (périmé,
+   c'est 53.12), « 25.1 » et « 60.1 » (hors métier), « certifié DTU ».
 5. **Vérifier le NAP** au caractère près, et le téléphone (07 60 27 98 97 —
    aucun placeholder).
 6. **Vérifier qu'aucun `aggregateRating` ni `Review`** n'a été ajouté, et

@@ -112,9 +112,11 @@ rapport le déclare.
 **Exécution** : `rushiti-keyword-clusters` pour le placement,
 `rushiti-architecte-seo` pour la cohérence du cocon.
 
-Six silos + B2B : peinture · plâtrerie-placo · sols · isolation · dégât des
-eaux · rénovation de pièce · B2B (syndics, gestionnaires, bailleurs, experts
-d'assurance, commerces).
+**Six silos métier** — peinture · plâtrerie-placo · sols · isolation · dégât
+des eaux · rénovation de pièce — **plus un axe B2B transversal** (syndics,
+gestionnaires, bailleurs, experts d'assurance, commerces). Le B2B n'est pas un
+septième silo : il traverse les six, ce qui change le maillage — une page
+syndic pointe vers le silo technique concerné, pas vers un « silo B2B ».
 
 **La règle qui tient l'architecture** :
 

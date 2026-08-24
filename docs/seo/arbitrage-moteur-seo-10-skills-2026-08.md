@@ -27,7 +27,7 @@
 | « `/citation-gap` : trouvez où les concurrents sont cités » | L'outillage existe (`rushiti-citation-ia`, `rushiti-part-de-voix-ia`, panel figé de 14 requêtes, dictionnaire de colonnes, modèle CSV) — mais **aucune mesure de citation n'a encore été prise**. C'est le seul vrai trou du dispositif |
 | « `/rank-tracker` : un tableau, mot-clé → position Google → statut IA » | Deux portes, **deux dénominateurs, trois cadences** : Google se relit en 4-6 semaines, la part de voix IA au mois, le corpus cité en 6-8 semaines. Un tableau unique fait lire un mouvement Google comme un mouvement IA |
 | Tableau de prix « 45-75 €/m² TTC » | Aucun prix validé par Isuf. Un tarif publié devient opposable devant un client ou un expert d'assurance |
-| « DTU 25.1 et 60.1 comme preuve d'expertise » | Normes réellement applicables : **DTU 59.1** (peinture), **25.41** (plaques de plâtre), **53.2** (sols souples), convention **IRSI**. Une norme fausse décrédibilise devant le lecteur qu'on visait |
+| « DTU 25.1 et 60.1 comme preuve d'expertise » | Normes réellement applicables : **DTU 59.1** (peinture), **25.41** (placo), **53.12** (sols souples collés), convention **IRSI** — table complète et vérifiée dans `docs/seo/dtu-referencat-eeat.md`. Une norme fausse décrédibilise devant le lecteur qu'on visait |
 | « Téléphone : +33 3 81 XX XX XX (à mettre à jour) » | Le numéro existe : **07 60 27 98 97** · `tel:+33760279897`. Un placeholder qui ressemble à un fixe local est pire qu'un trou déclaré |
 | « SARL RUSHITI Rénovation » | **RUSHITI Rénovation** est le nom commercial ; **Rushiti** la dénomination sociale, réservée aux mentions légales |
 | « 20+ ans d'expérience » comme fait unique | Deux faits distincts : Isuf exerce **depuis 20 ans**, l'entreprise est née le **04/11/2021**. Les fusionner est faux et vérifiable au RCS |
@@ -133,7 +133,29 @@ produit un agent aux normes de la maison.
 | **Carrelage** : prestation offerte ou non ? La mention « Carrelage & Sol » figure sur l'accueil héritée sans page ni arbitrage | offerte / non offerte — si non, retirer la mention |
 | **`/sol-pvc-besancon` vs `/lino-vinyle-lvt-besancon`** : doublon signalé | → `rushiti-cannibal-check` pour verdict, puis fusion ou différenciation |
 
-## 7. Routage
+## 7. Articulation avec les instructions permanentes
+
+`docs/instructions-claude/` (mergé le 24/08/2026, PR #43) porte les
+**préférences permanentes** collées dans les réglages Claude : identité,
+NAP, garde-fous, table DTU, architecture des silos. Les deux documents ne se
+recouvrent pas, et c'est voulu — le README de ce dossier le dit lui-même :
+« Le détail SEO opérationnel n'est volontairement pas recopié : il vit déjà
+dans les agents `.claude/skills/rushiti-*`, et le dupliquer créerait deux
+sources de vérité divergentes. »
+
+| Question | Où elle est tranchée |
+|---|---|
+| Qui est l'entreprise, que peut-on affirmer, quelle norme citer | `docs/instructions-claude/` |
+| Quel agent tourne, sur quoi, dans quel ordre, avec quelle donnée de départ | `rushiti-seo-engine` |
+
+**Une correction remontée de là-bas** : la table DTU vérifiée le 21/08/2026
+(`docs/seo/dtu-referencat-eeat.md`) donne **NF DTU 53.12** pour les sols
+souples collés. Le socle v4 porte encore « 53.2 » ; les fichiers du moteur ont
+été alignés sur la table vérifiée. C'est le cas d'école du catalogue des
+pièges : **une source interne périmée produit exactement la même erreur qu'un
+plan générique.**
+
+## 8. Routage
 
 | Besoin | Agent |
 |---|---|
