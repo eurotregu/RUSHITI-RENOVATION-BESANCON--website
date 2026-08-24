@@ -184,7 +184,7 @@ provuar; `verifiko_sameas.py` exit 0.
 | Data | 24/08/2026 |
 | Objekti | Auditi i faqes pilier `/degat-des-eaux-besancon` — PRIORITETI 1 i regjistrit të fjalëve kyçe |
 | Raporti | `../audit-degat-des-eaux-besancon-2026-08-24.md` |
-| Depoja e synuar | `eurotregu/rushiti-renovation` (siti në prodhim) — **jo kjo depo** |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **e zbatuar** me autorizimin e Isufit: PR [#26](https://github.com/eurotregu/rushiti-renovation/pull/26), degë `claude/forcement-silo-degat-des-eaux`, 77 skedarë |
 | Baza e leximit | prodhimi në commit `3793684` (24/08/2026) + kodi HTML i faqes live |
 
 ## Çfarë u konstatua
@@ -247,3 +247,26 @@ Mbi një kopje të checkout-it real të prodhimit (76 faqe + `llms.txt`):
 Premtimi «devis sous 48 h» (ekziston në 9 faqe të tjera, kurrë në këtë silo),
 rishkrimi i `<title>`, H2-të në formë pyetjeje, formulari që mungon në 75 faqet
 e zonës, dhe harmonizimi i libelit të barrës mobile. Arsyet: §4 e raportit.
+
+## Zbatimi (24/08)
+
+Me autorizimin e Isufit skripti u zbatua mbi prodhimin: **77 skedarë**
+(76 faqe të silos + `llms.txt`), +83 / −82 rreshta. Arbitrazhet mbetën të hapura
+siç ishin rekomanduar: **pa «48 h»**, `<title>` i paprekur, `--cta` i pazbatuar.
+
+Kontrollet para push-it, mbi checkout-in real të prodhimit:
+
+- `verifiko_degat_des_eaux.py`: **86 gabime → 0** (exit 0);
+- riekzekutim i fix-it: **0 skedarë** (idempotencë);
+- **758 blloqe JSON-LD të gjithë sitit** të rilexuara me `json.loads`: **0 të pavlefshme**;
+- krahasim strukturor bllok për bllok: të vetmit çelësa të ndryshuar `description`
+  (76 faqe) dhe `hasOfferCatalog` (1) — asnjë ndryshim tjetër në JSON-LD;
+- **75 faqet e zonës**: asnjë ndryshim jashtë JSON-LD-së;
+- balanca e tageve HTML të pilierit **identike** para/pas;
+- **rendering i verifikuar në Chromium**: blloku i avis-eve i stiluar saktë,
+  i vendosur para FAQ-së si në faqet e grilës.
+
+Një përmirësim i vogël doli nga zbatimi: guardi i idempotencës së maillage-it
+kontrollon ankorën e plotë (`<a href=…>teksti</a>`), jo vetëm praninë e URL-së —
+përndryshe lidhjet e menusë drejt të njëjtave faqe do ta bllokonin futjen e
+ankorave kontekstuale.

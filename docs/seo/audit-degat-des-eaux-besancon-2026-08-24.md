@@ -218,8 +218,12 @@ autorité vers ses satellites.**
 
 ## 7. Suite recommandée
 
-1. Valider le correctif, puis l'appliquer sur le dépôt de production (branche
-   dédiée + PR, comme les paquets 1 à 3).
+1. ~~Valider le correctif, puis l'appliquer sur le dépôt de production.~~
+   **Fait le 24/08** avec l'accord d'Isuf : `eurotregu/rushiti-renovation`
+   [PR #26](https://github.com/eurotregu/rushiti-renovation/pull/26), branche
+   `claude/forcement-silo-degat-des-eaux`, 77 fichiers. Les trois arbitrages du
+   §4 sont restés ouverts : pas de « 48 h », `<title>` inchangé, `--cta` non
+   appliqué. Reste à fusionner la PR.
 2. Relancer `verifiko_degat_des_eaux.py` avant déploiement, et le passer à chaque
    régénération de la grille.
 3. Mesure à 4-6 semaines via `rushiti-regression-seo` : impressions et position
