@@ -296,3 +296,17 @@ Chromium.
 
 Pse u shmang dublimi: pa këtë, faqja do të mbante dy herë të njëjtën pyetje
 (H2 + FAQ), gjë që dobëson pikërisht sinjalin GEO që kërkohej.
+
+## ✅ Bashkuar dhe verifikuar në prodhim (24/08, 11:34 UTC)
+
+PR #26 u bashkua nga Isufi (`main` = `60da3fa`). Kontrolli **live mbi
+rushiti-renovation.fr** (jo mbi parapamje) konfirmoi të gjitha:
+
+6 H2-të pyetëse ✅ · « la recherche de la fuite » ✅ · blloku i avis-eve
+4,7/5 · 34 avis ✅ · `hasOfferCatalog` me 5 oferta ✅ · description-i
+« devis assurance. » ✅ · barra mobile « Devis assurance » ✅ · pariteti FAQ
+13/13 ✅ · 6 ankorat ✅ · dublimi JSON-LD i hequr edhe në grilë
+(`/degat-des-eaux-planoise` i kontrolluar) ✅.
+
+Asnjë korrigjim i nevojshëm pas deploy-it. `verifiko_degat_des_eaux.py` mbetet
+vegla e regresit e silos — të ekzekutohet para çdo deploy-i të ardhshëm.

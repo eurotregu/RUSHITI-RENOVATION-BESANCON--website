@@ -7,6 +7,7 @@
 | Méthode | Lecture du **code HTML** de la page en ligne (rendu Firecrawl, 24/08) + lecture du **dépôt de production** `eurotregu/rushiti-renovation` au commit `3793684` (24/08/2026 02:32). Aucune donnée SERP, aucun chiffre estimé. |
 | Comparatif | Page pilier confrontée aux **75 pages de la grille** `degat-des-eaux-<zone>` et aux 757 pages du site |
 | Livrables | `korrigjime-prodhim/fix_degat_des_eaux.py` (correctif idempotent) · `korrigjime-prodhim/verifiko_degat_des_eaux.py` (outil de régression) |
+| **Statut** | **Fusionné et vérifié en production le 24/08/2026** — PR [#26](https://github.com/eurotregu/rushiti-renovation/pull/26), `main` = `60da3fa` |
 
 ---
 
@@ -240,3 +241,35 @@ interrogative, dédoublonnage de la question prix entre H2 et FAQ, et barre
 d'appel du pilier en « Devis assurance ». Restent ouverts, inchangés : la
 promesse « 48 h », la réécriture du `<title>`, le formulaire des 75 pages de
 zone, et l'harmonisation de la barre mobile sur toute la grille.
+
+---
+
+## 8. Vérification en production — 24/08/2026, 11 h 34 UTC
+
+PR #26 fusionnée (`main` = `60da3fa`), déploiement Cloudflare propagé. Contrôles
+faits directement sur **rushiti-renovation.fr**, pas sur un aperçu :
+
+| Marqueur | Résultat en ligne |
+|---|---|
+| Les six H2 en forme de question | ✅ tous servis, dans l'ordre |
+| « Une prestation n'entre pas dans notre périmètre : **la recherche de la fuite** » | ✅ contresens corrigé |
+| Bloc avis clients | ✅ **4,7 / 5 · 34 avis Google** |
+| `hasOfferCatalog` du nœud `Service` | ✅ **5 offres** (diagnostic, assèchement, traitement, réfection, devis assurance) |
+| Meta et `og:description` | ✅ terminées par « devis assurance. » |
+| Barre d'appel mobile | ✅ « Appeler » + « **Devis assurance** » |
+| Parité FAQ visible ↔ `FAQPage` | ✅ **13 / 13 identiques** |
+| Ancien libellé de FAQ prix (doublon) | ✅ absent |
+| Les 6 ancres contextuelles | ✅ toutes en place, avec leur texte prévu |
+| Doublon JSON-LD sur la grille (`/degat-des-eaux-planoise`) | ✅ supprimé |
+
+Rien à corriger après déploiement.
+
+### Mesure à programmer
+
+Référence à comparer dans 4 à 6 semaines, via `rushiti-regression-seo` :
+
+- `/degat-des-eaux-besancon` : **18 impressions, position moyenne 20,0** (GSC 17/05–16/08/2026) ; **33 impressions, position 16,0** sur 12 mois ;
+- nombre de demandes de devis attribuées à la page (champ `page` du formulaire) ;
+- apparition éventuelle dans les aperçus IA sur les six questions désormais posées en H2.
+
+Ces chiffres sont un point de départ de mesure, pas une promesse de résultat.
