@@ -310,3 +310,72 @@ rushiti-renovation.fr** (jo mbi parapamje) konfirmoi të gjitha:
 
 Asnjë korrigjim i nevojshëm pas deploy-it. `verifiko_degat_des_eaux.py` mbetet
 vegla e regresit e silos — të ekzekutohet para çdo deploy-i të ardhshëm.
+
+---
+
+# Paketa 5 — koherenca e orarit (NAP) (24/08/2026)
+
+| | |
+|---|---|
+| Data | 24/08/2026 |
+| Objekti | Siti deklaronte **dy orare kontradiktore**, madje në të njëjtën faqe |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — PR [#27](https://github.com/eurotregu/rushiti-renovation/pull/27), degë `claude/horaires-nap-coherence`, 587 skedarë |
+| Vendimi | Orari i vërtetë, i konfirmuar nga Isufi më 24/08: **Hën–Pre 7:00–20:30 · Sht 8:00–20:30 · Die 9:00–17:30** (7 ditë/javë) |
+
+## Çfarë u konstatua
+
+| Vendi | Para |
+|---|---|
+| `/contact`, blloku « Horaires » | Lundi – Vendredi : **8h – 18h** |
+| Fundfaqja (755 faqe, përfshirë `/contact`) | Lun–Ven **7h – 20h30** · Sam 8h – 20h30 · Dim 9h – 17h30 |
+| JSON-LD | 153 faqe me variantin e gjatë · **586 nyje pa asnjë orar** |
+
+Vizitori i `/contact` lexonte «8h – 18h» lart dhe «7h – 20h30, e diel përfshirë»
+poshtë. Meqë grafi JSON-LD bashkohet sipas `@id`, entiteti kishte orar të
+ndryshëm sipas faqes së hyrjes. Për një sinistër të dielën në mbrëmje, kjo është
+pikërisht e dhëna që konsultohet.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_horaires_nap.py` | Korrigjimi, **idempotent**: teksti i `/contact`, `openingHoursSpecification` në 586 nyjet e plota (futje me regex — prodhimi ka dy formate hapësire), plus `url` + `availableChannel` te nyja `Service` e pilierit. Shkruan vetëm nëse JSON-i mbetet i vlefshëm |
+| `verifiko_horaires_nap.py` | **Vegla e përhershme e regresit NAP**: JSON i vlefshëm, çdo nyje biznesi me orar, **një variant i vetëm orari në gjithë sitin**, orari konform vendimit të 24/08, teksti i vjetër «Lun–Ven 8h–18h» i zhdukur, telefoni dhe adresa identike kudo |
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_horaires_nap.py /rruga/drejt/rushiti-renovation           # simulim
+python3 fix_horaires_nap.py /rruga/drejt/rushiti-renovation --apply   # zbatim
+python3 verifiko_horaires_nap.py /rruga/drejt/rushiti-renovation      # verifikim (exit 0 = konform)
+```
+
+## Prova e testimit
+
+Mbi checkout-in real të prodhimit (`60da3fa`):
+
+- verifikim **para**: 587 gabime; **pas**: **CONFORME — 0 gabime** (exit 0);
+- riekzekutim i fix-it: **0 skedarë** (idempotencë e provuar);
+- **758 blloqe JSON-LD** të rilexuara, **0 të pavlefshme**;
+- **739 nyje biznesi, 1 variant i vetëm orari**;
+- krahasim çelës për çelës: vetëm `openingHoursSpecification` (586),
+  `url` dhe `availableChannel` (1) — asgjë tjetër;
+- asnjë skedar i prekur jashtë JSON-LD-së, **përveç `contact.html`**;
+- regresi i silos DDE mbetet **CONFORME**;
+- rendering i `/contact` i verifikuar në Chromium (tre rreshtat e orarit).
+
+## Të shmangura me qëllim
+
+- **`geo`** — koordinatat e 18 rue du Professeur Haag duhen marrë nga fisha
+  Google, jo të hamendësuara;
+- **`aggregateRating`** — politika e Google për të dhënat e strukturuara i
+  përjashton avis-et e vetëpublikuara për `LocalBusiness`: nuk do të jepte yje;
+- **diversifikimi i ankorave** drejt pilierit — u propozua, pastaj u tërhoq pas
+  leximit të markup-it: nga 150 lidhje, **75 janë fil d'Ariane** (duhet të
+  pasqyrojnë `BreadcrumbList`) dhe **75 janë çipa të shkurtër** në një rresht
+  etiketash lagjesh. Zgjatja e njërës ose tjetrës prish strukturën.
+
+## Radhë për Isufin (jashtë kodit)
+
+Të përputhet **fisha Google** dhe **PagesJaunes** me të njëjtin orar — koherenca
+NAP luhet po aq jashtë sitit sa brenda tij.
