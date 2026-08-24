@@ -174,3 +174,76 @@ Verifikimi para push-it: 758 blloqe JSON-LD, 0 të pavlefshme; krahasim
 strukturor bllok për bllok para/pas mbi të 743 skedarët — të vetmit çelësa të
 ndryshuar `sameAs[]` dhe `@id`, asnjë ndryshim jashtë JSON-LD-së; idempotencë e
 provuar; `verifiko_sameas.py` exit 0.
+
+---
+
+# Paketa 4 — forcimi i silos «dégât des eaux» (24/08/2026)
+
+| | |
+|---|---|
+| Data | 24/08/2026 |
+| Objekti | Auditi i faqes pilier `/degat-des-eaux-besancon` — PRIORITETI 1 i regjistrit të fjalëve kyçe |
+| Raporti | `../audit-degat-des-eaux-besancon-2026-08-24.md` |
+| Depoja e synuar | `eurotregu/rushiti-renovation` (siti në prodhim) — **jo kjo depo** |
+| Baza e leximit | prodhimi në commit `3793684` (24/08/2026) + kodi HTML i faqes live |
+
+## Çfarë u konstatua
+
+Tri hipotezat e briefit fillestar **nuk qëndrojnë** në kod: JSON-LD-ja ekziston
+(`Service` + `BreadcrumbList` + `FAQPage` me 13 pyetje + `LocalBusiness` me 7
+`sameAs`), sticky CTA-ja ekziston (`.callbar`, 756/757 faqe), dhe ana teknike
+është e shëndetshme (CSS e jashtme e versionuar, fontet async, webp me përmasa,
+GTM me Consent Mode, canonical/robots/sitemap/llms.txt në rregull).
+
+Problemi i vërtetë është tjetërkund — **faqja pilier është hallka më e dobët e
+silos së vet**:
+
+- **75/75 faqet e grilës** kanë `hasOfferCatalog` dhe bllokun e avis-eve Google
+  (4,7/5 · 34 avis); **pilieri s'ka asnjërën**;
+- një zëvendësim global «recherche de fuite» → «mesure d'humidité» ka lënë
+  **tri dëme**: një kundërthënie e dukshme në trupin e pilierit («prestation
+  jashtë perimetrit: la mesure d'humidité de la fuite», ndërsa metoda fillon
+  pikërisht me matjen e lagështisë), një dublim në JSON-LD-në e **76/76** faqeve,
+  dhe një rresht të pasaktë në `llms.txt`;
+- meta description-i i pilierit është **fjali e prerë** («devis conforme»);
+- maillage-i: **757/757 faqe** lidhen drejt pilierit, por thuajse vetëm me ankora
+  navigimi. Deficit i vërtetë është **dalës**: brenda `<main>` pilieri lidh
+  kontekstualisht vetëm **1** faqe, dhe **0** drejt `/devis-assurance-degat-des-eaux-besancon`,
+  `/expert-assurance-sinistre-besancon`, `/renovation-syndic-gestionnaire-besancon`,
+  `/remise-en-etat-logement-locatif-besancon`, blogut IRSI dhe atij «réparer un mur»;
+- GEO: chapeau-ja fillon me paralajmërimin, jo me përgjigjen direkte.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_degat_des_eaux.py` | Korrigjimi, **idempotent**: dublimi JSON-LD (76 faqe), kundërthënia, description-i, `hasOfferCatalog`, blloku i avis-eve, 6 ankorat e maillage-it, chapeau-ja GEO, `llms.txt`. Opsioni `--cta` prek vetëm libelin e barrës mobile të pilierit |
+| `verifiko_degat_des_eaux.py` | **Vegla e përhershme e regresit** e silos: JSON i vlefshëm, pa dublim, pa kundërthënie, description ≤ 155 dhe fjali e mbyllur, `hasOfferCatalog` ≥ 4 oferta, blloku i avis-eve me `cid`-in kanonik, 6 ankorat, pariteti FAQ e dukshme ↔ `FAQPage`, canonical, `.callbar`. Për t'u ekzekutuar para çdo deploy-i |
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_degat_des_eaux.py /rruga/drejt/rushiti-renovation                 # simulim
+python3 fix_degat_des_eaux.py /rruga/drejt/rushiti-renovation --apply         # zbatim
+python3 fix_degat_des_eaux.py /rruga/drejt/rushiti-renovation --apply --cta   # + libeli i barrës mobile
+python3 verifiko_degat_des_eaux.py /rruga/drejt/rushiti-renovation            # verifikim (exit 0 = konform)
+```
+
+## Prova e testimit
+
+Mbi një kopje të checkout-it real të prodhimit (76 faqe + `llms.txt`):
+
+- verifikim **para**: 86 gabime (76 dublime + 10 konstate të pilierit), 1 KUJDES;
+- simulim: 77 skedarë të listuar, asnjë shkrim;
+- zbatim: 77 skedarë, pilieri +2 275 shenja;
+- verifikim **pas**: **CONFORME — 0 gabime, 0 alerta**;
+- riekzekutim i fix-it: **0 skedarë të ndryshuar** (idempotencë e provuar);
+- 76 blloqe JSON-LD të rilexuara me `json.loads`: **0 të pavlefshme**;
+- diff-i i tekstit të dukshëm: vetëm 3 ndryshimet e synuara — 6 ankorat nuk
+  prekin asnjë fjalë.
+
+## Të pavendosura (i mbeten Isufit)
+
+Premtimi «devis sous 48 h» (ekziston në 9 faqe të tjera, kurrë në këtë silo),
+rishkrimi i `<title>`, H2-të në formë pyetjeje, formulari që mungon në 75 faqet
+e zonës, dhe harmonizimi i libelit të barrës mobile. Arsyet: §4 e raportit.
