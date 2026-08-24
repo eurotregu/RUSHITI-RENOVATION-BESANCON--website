@@ -174,3 +174,264 @@ Verifikimi para push-it: 758 blloqe JSON-LD, 0 të pavlefshme; krahasim
 strukturor bllok për bllok para/pas mbi të 743 skedarët — të vetmit çelësa të
 ndryshuar `sameAs[]` dhe `@id`, asnjë ndryshim jashtë JSON-LD-së; idempotencë e
 provuar; `verifiko_sameas.py` exit 0.
+
+---
+
+# Paketa 4 — forcimi i silos «dégât des eaux» (24/08/2026)
+
+| | |
+|---|---|
+| Data | 24/08/2026 |
+| Objekti | Auditi i faqes pilier `/degat-des-eaux-besancon` — PRIORITETI 1 i regjistrit të fjalëve kyçe |
+| Raporti | `../audit-degat-des-eaux-besancon-2026-08-24.md` |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **e zbatuar** me autorizimin e Isufit: PR [#26](https://github.com/eurotregu/rushiti-renovation/pull/26), degë `claude/forcement-silo-degat-des-eaux`, 77 skedarë |
+| Baza e leximit | prodhimi në commit `3793684` (24/08/2026) + kodi HTML i faqes live |
+
+## Çfarë u konstatua
+
+Tri hipotezat e briefit fillestar **nuk qëndrojnë** në kod: JSON-LD-ja ekziston
+(`Service` + `BreadcrumbList` + `FAQPage` me 13 pyetje + `LocalBusiness` me 7
+`sameAs`), sticky CTA-ja ekziston (`.callbar`, 756/757 faqe), dhe ana teknike
+është e shëndetshme (CSS e jashtme e versionuar, fontet async, webp me përmasa,
+GTM me Consent Mode, canonical/robots/sitemap/llms.txt në rregull).
+
+Problemi i vërtetë është tjetërkund — **faqja pilier është hallka më e dobët e
+silos së vet**:
+
+- **75/75 faqet e grilës** kanë `hasOfferCatalog` dhe bllokun e avis-eve Google
+  (4,7/5 · 34 avis); **pilieri s'ka asnjërën**;
+- një zëvendësim global «recherche de fuite» → «mesure d'humidité» ka lënë
+  **tri dëme**: një kundërthënie e dukshme në trupin e pilierit («prestation
+  jashtë perimetrit: la mesure d'humidité de la fuite», ndërsa metoda fillon
+  pikërisht me matjen e lagështisë), një dublim në JSON-LD-në e **76/76** faqeve,
+  dhe një rresht të pasaktë në `llms.txt`;
+- meta description-i i pilierit është **fjali e prerë** («devis conforme»);
+- maillage-i: **757/757 faqe** lidhen drejt pilierit, por thuajse vetëm me ankora
+  navigimi. Deficit i vërtetë është **dalës**: brenda `<main>` pilieri lidh
+  kontekstualisht vetëm **1** faqe, dhe **0** drejt `/devis-assurance-degat-des-eaux-besancon`,
+  `/expert-assurance-sinistre-besancon`, `/renovation-syndic-gestionnaire-besancon`,
+  `/remise-en-etat-logement-locatif-besancon`, blogut IRSI dhe atij «réparer un mur»;
+- GEO: chapeau-ja fillon me paralajmërimin, jo me përgjigjen direkte.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_degat_des_eaux.py` | Korrigjimi, **idempotent**: dublimi JSON-LD (76 faqe), kundërthënia, description-i, `hasOfferCatalog`, blloku i avis-eve, 6 ankorat e maillage-it, chapeau-ja GEO, `llms.txt`. Opsioni `--cta` prek vetëm libelin e barrës mobile të pilierit |
+| `verifiko_degat_des_eaux.py` | **Vegla e përhershme e regresit** e silos: JSON i vlefshëm, pa dublim, pa kundërthënie, description ≤ 155 dhe fjali e mbyllur, `hasOfferCatalog` ≥ 4 oferta, blloku i avis-eve me `cid`-in kanonik, 6 ankorat, pariteti FAQ e dukshme ↔ `FAQPage`, canonical, `.callbar`. Për t'u ekzekutuar para çdo deploy-i |
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_degat_des_eaux.py /rruga/drejt/rushiti-renovation                 # simulim
+python3 fix_degat_des_eaux.py /rruga/drejt/rushiti-renovation --apply         # zbatim
+python3 fix_degat_des_eaux.py /rruga/drejt/rushiti-renovation --apply --cta   # + libeli i barrës mobile
+python3 verifiko_degat_des_eaux.py /rruga/drejt/rushiti-renovation            # verifikim (exit 0 = konform)
+```
+
+## Prova e testimit
+
+Mbi një kopje të checkout-it real të prodhimit (76 faqe + `llms.txt`):
+
+- verifikim **para**: 86 gabime (76 dublime + 10 konstate të pilierit), 1 KUJDES;
+- simulim: 77 skedarë të listuar, asnjë shkrim;
+- zbatim: 77 skedarë, pilieri +2 275 shenja;
+- verifikim **pas**: **CONFORME — 0 gabime, 0 alerta**;
+- riekzekutim i fix-it: **0 skedarë të ndryshuar** (idempotencë e provuar);
+- 76 blloqe JSON-LD të rilexuara me `json.loads`: **0 të pavlefshme**;
+- diff-i i tekstit të dukshëm: vetëm 3 ndryshimet e synuara — 6 ankorat nuk
+  prekin asnjë fjalë.
+
+## Të pavendosura (i mbeten Isufit)
+
+Premtimi «devis sous 48 h» (ekziston në 9 faqe të tjera, kurrë në këtë silo),
+rishkrimi i `<title>`, H2-të në formë pyetjeje, formulari që mungon në 75 faqet
+e zonës, dhe harmonizimi i libelit të barrës mobile. Arsyet: §4 e raportit.
+
+## Zbatimi (24/08)
+
+Me autorizimin e Isufit skripti u zbatua mbi prodhimin: **77 skedarë**
+(76 faqe të silos + `llms.txt`), +83 / −82 rreshta. Arbitrazhet mbetën të hapura
+siç ishin rekomanduar: **pa «48 h»**, `<title>` i paprekur, `--cta` i pazbatuar.
+
+Kontrollet para push-it, mbi checkout-in real të prodhimit:
+
+- `verifiko_degat_des_eaux.py`: **86 gabime → 0** (exit 0);
+- riekzekutim i fix-it: **0 skedarë** (idempotencë);
+- **758 blloqe JSON-LD të gjithë sitit** të rilexuara me `json.loads`: **0 të pavlefshme**;
+- krahasim strukturor bllok për bllok: të vetmit çelësa të ndryshuar `description`
+  (76 faqe) dhe `hasOfferCatalog` (1) — asnjë ndryshim tjetër në JSON-LD;
+- **75 faqet e zonës**: asnjë ndryshim jashtë JSON-LD-së;
+- balanca e tageve HTML të pilierit **identike** para/pas;
+- **rendering i verifikuar në Chromium**: blloku i avis-eve i stiluar saktë,
+  i vendosur para FAQ-së si në faqet e grilës.
+
+Një përmirësim i vogël doli nga zbatimi: guardi i idempotencës së maillage-it
+kontrollon ankorën e plotë (`<a href=…>teksti</a>`), jo vetëm praninë e URL-së —
+përndryshe lidhjet e menusë drejt të njëjtave faqe do ta bllokonin futjen e
+ankorave kontekstuale.
+
+## Kalimi i dytë (24/08) — H2-të GEO dhe barra e apelit
+
+Pas relektimit, dy nga arbitrazhet e mbetura u vendosën dhe u zbatuan
+(commit `eb52bd5`, e njëjta PR #26):
+
+- **gjashtë H2 seksionesh** kaluan në formë pyetjeje (« Quels sont les signes
+  d'un dégât des eaux ? », « Combien coûte la réparation d'un dégât des eaux à
+  Besançon ? »…) — asnjë paragraf i prekur, vetëm titujt;
+- **dublimi i pyetjes së çmimit** u shmang: pyetja e FAQ-së u riformulua në
+  « De quoi dépend le montant d'une réparation après dégât des eaux ? », duke
+  ndryshuar `<summary>` **dhe** nyjen `FAQPage` bashkë — pariteti 13/13 i ruajtur;
+- **barra e apelit mobile e pilierit**: « Devis gratuit » → « Devis assurance »
+  (`--cta`). Grila mbetet me « Diagnostic gratuit ».
+
+Skriptet u zgjeruan: `fix_degat_des_eaux.py` mban hapin B7, dhe
+`verifiko_degat_des_eaux.py` ka dy kontrolle të reja — prania e gjashtë H2-ve
+pyetëse dhe mungesa e dublimit të pyetjes së çmimit.
+
+Provat: 7 gabime → **0** (exit 0); riekzekutim **0 skedarë**; **758 blloqe
+JSON-LD** të sitit të rilexuara, 0 të pavlefshme; pariteti FAQ **13/13 identik**;
+diff-i i tekstit të dukshëm i kufizuar në 7 tituj; rendering i verifikuar në
+Chromium.
+
+Pse u shmang dublimi: pa këtë, faqja do të mbante dy herë të njëjtën pyetje
+(H2 + FAQ), gjë që dobëson pikërisht sinjalin GEO që kërkohej.
+
+## ✅ Bashkuar dhe verifikuar në prodhim (24/08, 11:34 UTC)
+
+PR #26 u bashkua nga Isufi (`main` = `60da3fa`). Kontrolli **live mbi
+rushiti-renovation.fr** (jo mbi parapamje) konfirmoi të gjitha:
+
+6 H2-të pyetëse ✅ · « la recherche de la fuite » ✅ · blloku i avis-eve
+4,7/5 · 34 avis ✅ · `hasOfferCatalog` me 5 oferta ✅ · description-i
+« devis assurance. » ✅ · barra mobile « Devis assurance » ✅ · pariteti FAQ
+13/13 ✅ · 6 ankorat ✅ · dublimi JSON-LD i hequr edhe në grilë
+(`/degat-des-eaux-planoise` i kontrolluar) ✅.
+
+Asnjë korrigjim i nevojshëm pas deploy-it. `verifiko_degat_des_eaux.py` mbetet
+vegla e regresit e silos — të ekzekutohet para çdo deploy-i të ardhshëm.
+
+---
+
+# Paketa 5 — koherenca e orarit (NAP) (24/08/2026)
+
+| | |
+|---|---|
+| Data | 24/08/2026 |
+| Objekti | Siti deklaronte **dy orare kontradiktore**, madje në të njëjtën faqe |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — PR [#27](https://github.com/eurotregu/rushiti-renovation/pull/27), degë `claude/horaires-nap-coherence`, 587 skedarë |
+| Vendimi | Orari i vërtetë, i konfirmuar nga Isufi më 24/08: **Hën–Pre 7:00–20:30 · Sht 8:00–20:30 · Die 9:00–17:30** (7 ditë/javë) |
+
+## Çfarë u konstatua
+
+| Vendi | Para |
+|---|---|
+| `/contact`, blloku « Horaires » | Lundi – Vendredi : **8h – 18h** |
+| Fundfaqja (755 faqe, përfshirë `/contact`) | Lun–Ven **7h – 20h30** · Sam 8h – 20h30 · Dim 9h – 17h30 |
+| JSON-LD | 153 faqe me variantin e gjatë · **586 nyje pa asnjë orar** |
+
+Vizitori i `/contact` lexonte «8h – 18h» lart dhe «7h – 20h30, e diel përfshirë»
+poshtë. Meqë grafi JSON-LD bashkohet sipas `@id`, entiteti kishte orar të
+ndryshëm sipas faqes së hyrjes. Për një sinistër të dielën në mbrëmje, kjo është
+pikërisht e dhëna që konsultohet.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_horaires_nap.py` | Korrigjimi, **idempotent**: teksti i `/contact`, `openingHoursSpecification` në 586 nyjet e plota (futje me regex — prodhimi ka dy formate hapësire), plus `url` + `availableChannel` te nyja `Service` e pilierit. Shkruan vetëm nëse JSON-i mbetet i vlefshëm |
+| `verifiko_horaires_nap.py` | **Vegla e përhershme e regresit NAP**: JSON i vlefshëm, çdo nyje biznesi me orar, **një variant i vetëm orari në gjithë sitin**, orari konform vendimit të 24/08, teksti i vjetër «Lun–Ven 8h–18h» i zhdukur, telefoni dhe adresa identike kudo |
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_horaires_nap.py /rruga/drejt/rushiti-renovation           # simulim
+python3 fix_horaires_nap.py /rruga/drejt/rushiti-renovation --apply   # zbatim
+python3 verifiko_horaires_nap.py /rruga/drejt/rushiti-renovation      # verifikim (exit 0 = konform)
+```
+
+## Prova e testimit
+
+Mbi checkout-in real të prodhimit (`60da3fa`):
+
+- verifikim **para**: 587 gabime; **pas**: **CONFORME — 0 gabime** (exit 0);
+- riekzekutim i fix-it: **0 skedarë** (idempotencë e provuar);
+- **758 blloqe JSON-LD** të rilexuara, **0 të pavlefshme**;
+- **739 nyje biznesi, 1 variant i vetëm orari**;
+- krahasim çelës për çelës: vetëm `openingHoursSpecification` (586),
+  `url` dhe `availableChannel` (1) — asgjë tjetër;
+- asnjë skedar i prekur jashtë JSON-LD-së, **përveç `contact.html`**;
+- regresi i silos DDE mbetet **CONFORME**;
+- rendering i `/contact` i verifikuar në Chromium (tre rreshtat e orarit).
+
+## Të shmangura me qëllim
+
+- **`geo`** — koordinatat e 18 rue du Professeur Haag duhen marrë nga fisha
+  Google, jo të hamendësuara;
+- **`aggregateRating`** — politika e Google për të dhënat e strukturuara i
+  përjashton avis-et e vetëpublikuara për `LocalBusiness`: nuk do të jepte yje;
+- **diversifikimi i ankorave** drejt pilierit — u propozua, pastaj u tërhoq pas
+  leximit të markup-it: nga 150 lidhje, **75 janë fil d'Ariane** (duhet të
+  pasqyrojnë `BreadcrumbList`) dhe **75 janë çipa të shkurtër** në një rresht
+  etiketash lagjesh. Zgjatja e njërës ose tjetrës prish strukturën.
+
+## Radhë për Isufin (jashtë kodit)
+
+Të përputhet **fisha Google** dhe **PagesJaunes** me të njëjtin orar — koherenca
+NAP luhet po aq jashtë sitit sa brenda tij.
+
+---
+
+# Paketa 5 — koherenca e orarit (NAP) (24/08/2026)
+
+| | |
+|---|---|
+| Data | 24/08/2026 |
+| Objekti | Siti deklaronte dy orare kontradiktore; 586 nyje biznesi s'deklaronin fare orar |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **e zbatuar dhe e bashkuar** me autorizimin e Isufit: PR [#27](https://github.com/eurotregu/rushiti-renovation/pull/27), degë `claude/horaires-nap-coherence`, 587 skedarë |
+
+## Çfarë u konstatua
+
+Në **të njëjtën faqe** `/contact`: blloku « Horaires » shkruante « Lundi – Vendredi :
+8h – 18h », ndërsa fundi i faqes (i pranishëm në 755 faqe) shkruante 7 h – 20 h 30,
+7 ditë në javë. Në JSON-LD: 153 faqe e deklaronin variantin e gjatë, **586 nyje
+`LocalBusiness` të plota nuk deklaronin asnjë orar**. Meqë grafi bashkohet sipas
+`@id`, entiteti kishte orar të ndryshueshëm sipas faqes nga hynte motori.
+
+Varianti i vërtetë, i konfirmuar nga Isufi më 24/08: **Hën–Pre 7 h – 20 h 30,
+Sht 8 h – 20 h 30, Die 9 h – 17 h 30**.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_horaires_nap.py` | Korrigjimi, **idempotent**: teksti i `/contact`, `openingHoursSpecification` në 586 nyje, plus `url` + `availableChannel` te nyja `Service` e pilierit DDE |
+| `verifiko_horaires_nap.py` | **Vegla e përhershme e regresit NAP**: JSON i vlefshëm, çdo nyje biznesi me orar, **një variant i vetëm orari** në gjithë sitin, përputhje me variantin e validuar, mungesë e tekstit të vjetër « 8h–18h », plus koherenca e telefonit dhe e adresës. Për t'u ekzekutuar para çdo deploy-i |
+
+## Çfarë u shmang me vetëdije
+
+- **`geo`**: koordinatat e 18 rue du Professeur Haag duhen lexuar nga fisha Google, jo hamendësuar;
+- **`aggregateRating`**: politika e Google për të dhënat e strukturuara i përjashton avis-et e vetëpublikuara për `LocalBusiness` — nuk do të jepte yje;
+- **diversifikimi i ankorave** drejt pilierit: nga 150 lidhje, **75 janë fill i Arianës** (duhet të pasqyrojnë `BreadcrumbList`) dhe **75 janë puleza të shkurtra** në një rresht etiketash lagjeje. Zgjatja do të prishte njërën ose tjetrën. Rekomandimi i mëparshëm u tërhoq pasi u lexua kodi.
+
+## Prova e testimit dhe verifikimi pas bashkimit
+
+- `verifiko_horaires_nap.py`: **587 gabime → 0** (exit 0);
+- riekzekutim: **0 skedarë** (idempotencë);
+- **758 blloqe JSON-LD** të rilexuara, 0 të pavlefshme; **739 nyje biznesi, një variant i vetëm orari**;
+- krahasim çelës për çelës: vetëm `openingHoursSpecification` (586), `url` dhe `availableChannel` (1);
+- asnjë skedar i prekur jashtë JSON-LD-së, përveç `contact.html`;
+- regresi i silos DDE mbeti **CONFORME**;
+- **verifikim pas bashkimit, në prodhim** (24/08): `/contact` shërben tri rreshtat e sakta,
+  dhe `/cloisons-besancon` — faqe jashtë silos DDE — mban `openingHoursSpecification`
+  me variantin e validuar në JSON-LD-në e saj live.
+
+**Shënim metodologjik**: nxjerrja me LLM mbi përmbajtjen e faqes ktheu « pa orar »
+për `/cloisons-besancon`, sepse firecrawl-i i heq tag-et `<script>` nga teksti që
+i jep nxjerrësit. Verifikimi u bë mbi **rawHtml**-in e papërpunuar. Kur kontrollohet
+JSON-LD live, lexohet kodi — kurrë përmbledhja.
+
+## Çfarë i mbetet Isufit
+
+Përputhja e **fishës Google** dhe e **PagesJaunes** me të njëjtin orar: koherenca
+NAP luhet po aq jashtë sitit sa brenda tij.
