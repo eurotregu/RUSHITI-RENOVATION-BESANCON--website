@@ -63,7 +63,7 @@ signer.
 | Coordonnées | 18 rue du Professeur Haag, 25000 Besançon · 07 60 27 98 97 · contact@rushiti-renovation.fr |
 | Expérience | 20 ans de métier sur le bâti bisontin et franc-comtois |
 | Offre | 6 silos : peinture, plâtrerie-placo, sols, isolation, dégât des eaux, rénovation de pièce + B2B syndics |
-| Preuves stables | Diagnostic gratuit sur place · décennale + RC pro (ERGO) · DTU 59.1, 25.41, 53.2 · IRSI pour les sinistres |
+| Preuves stables | Diagnostic gratuit sur place · décennale + RC pro (ERGO) · DTU 59.1, 25.41, 53.12 · IRSI pour les sinistres |
 
 Détail complet (NAP au caractère près, quartiers et communes canoniques,
 contexte géo-climatique, garde-fous du socle) :

@@ -76,7 +76,7 @@ traite de {{SERVICE}} à Besançon.
 - Co-gérants : Isuf & Yll Rushiti · 20 ans de métier · garantie décennale et
   RC pro (ERGO) · diagnostic technique gratuit sur place.
 - Références de mise en œuvre réellement applicables : DTU 59.1 (peinture),
-  DTU 25.41 (plaques de plâtre), DTU 53.2 (sols souples), convention IRSI
+  DTU 25.41 (plaques de plâtre), DTU 53.12 (sols souples), convention IRSI
   (sinistres dégât des eaux).
 - Zone d'intervention VALIDÉE : Besançon et ses quartiers (Battant,
   Centre-ville, Chaprais, Bregille, Planoise, Montrapon, Palente,

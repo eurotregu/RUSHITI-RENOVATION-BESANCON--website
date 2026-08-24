@@ -67,7 +67,7 @@ Quatre à cinq étapes, chacune avec un **geste technique nommé** :
 3. **Traitement des points sensibles** — angles, jonctions plafond-mur,
    reprises sur plâtre ancien, pièces humides.
 4. **Réalisation** — mise en œuvre, nombre de couches ou d'épaisseurs,
-   règles de l'art (DTU 59.1 peinture, 25.41 plaques de plâtre, 53.2 sols).
+   règles de l'art (DTU 59.1 peinture, 25.41 plaques de plâtre, 53.12 sols).
 5. **Réception** — contrôle avec le client, reprises, remise en état.
 
 Les DTU se citent parce qu'ils encadrent réellement le travail — jamais

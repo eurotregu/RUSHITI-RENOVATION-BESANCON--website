@@ -86,7 +86,7 @@ dans ces sources ?
   revêtements de sol, ragréage, remise en état après dégât des eaux,
   rénovation de pièces, aménagement de bureaux et commerces.
 - Garantie décennale et RC pro (ERGO). Références de mise en œuvre : DTU 59.1,
-  DTU 25.41, DTU 53.2, convention IRSI pour les sinistres.
+  DTU 25.41, DTU 53.12, convention IRSI pour les sinistres.
 - Différenciateur validé : diagnostic technique gratuit sur place avant devis.
   SANS délai annoncé.
 - Zone VALIDÉE : Besançon et ses quartiers, Grand Besançon, communes du Doubs

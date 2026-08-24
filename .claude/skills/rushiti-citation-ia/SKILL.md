@@ -86,7 +86,7 @@ rapports qui se répètent.
 | NAP au caractère près | 18 rue du Professeur Haag, 25000 Besançon · 07 60 27 98 97 · contact@rushiti-renovation.fr |
 | Téléphone technique | `tel:+33760279897` · WhatsApp `wa.me/33760279897` |
 | Gérants | Isuf & Yll Rushiti — Isuf exerce le métier depuis 20 ans **et** a créé l'entreprise en 2021 : deux faits distincts, jamais fondus en « 20 ans d'existence » |
-| Preuves stables | Diagnostic technique gratuit sur place, **sans délai annoncé** · décennale + RC pro (ERGO) · DTU 59.1, 25.41, 53.2 · convention IRSI |
+| Preuves stables | Diagnostic technique gratuit sur place, **sans délai annoncé** · décennale + RC pro (ERGO) · DTU 59.1, 25.41, 53.12 · convention IRSI |
 | Zone validée | Besançon et ses quartiers, Grand Besançon, communes du Doubs (25) dont Pontarlier et Montbéliard. **Hors Doubs = hors périmètre** (ni Vesoul, ni Belfort, ni Dole, ni Dijon) |
 | Domaines | `rushiti-renovation.fr` et `rushiti.fr` actifs · `rushiti-peinture.fr` **éteint** : ne jamais l'écrire, et le faire retirer des agrégateurs qui le publient encore |
 

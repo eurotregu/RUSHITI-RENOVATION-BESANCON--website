@@ -118,7 +118,7 @@ sans avoir lu le code.
 | NAP au caractère près | 18 rue du Professeur Haag, 25000 Besançon · 07 60 27 98 97 · contact@rushiti-renovation.fr |
 | Téléphone technique | `tel:+33760279897` · WhatsApp `wa.me/33760279897` |
 | Gérants | Isuf & Yll Rushiti — 20 ans de métier sur le bâti bisontin |
-| Preuves stables | Diagnostic technique gratuit sur place · décennale + RC pro (ERGO) · DTU 59.1, 25.41, 53.2 · convention IRSI pour les sinistres |
+| Preuves stables | Diagnostic technique gratuit sur place · décennale + RC pro (ERGO) · DTU 59.1, 25.41, 53.12 · convention IRSI pour les sinistres |
 | Zone validée | Besançon et ses quartiers + communes du Doubs (25), dont Pontarlier et Montbéliard. **Hors Doubs = hors périmètre** tant qu'Isuf n'a pas arbitré (pas de Vesoul, Belfort, Dole, Dijon) |
 | Technique | Site statique, Cloudflare Pages · JSON-LD `HousePainter` · grille locale consolidée par paliers A/B/C — ne jamais proposer de la regonfler |
 

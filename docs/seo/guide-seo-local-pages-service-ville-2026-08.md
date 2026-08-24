@@ -123,7 +123,7 @@ paragraphe devant un client, il est sur-optimisé.
 - Le vocabulaire technique prouve le métier, puis s'explique en une
   demi-phrase : sous-couche, primaire d'accrochage, ratissage, BA13, bandes
   à joints, **ragréage** (avec « a » — la faute décrédibilise), ITI,
-  assèchement, humidimètre, convention IRSI, DTU 59.1 / 25.41 / 53.2.
+  assèchement, humidimètre, convention IRSI, DTU 59.1 / 25.41 / 53.12.
 
 ### Anti-patterns corrigés
 

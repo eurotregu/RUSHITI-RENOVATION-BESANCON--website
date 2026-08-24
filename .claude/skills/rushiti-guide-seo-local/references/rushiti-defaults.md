@@ -1,6 +1,6 @@
 # Données par défaut RUSHITI Rénovation
 
-> **Version 4 — 15/08/2026.** Fichier de référence unique de la suite RUSHITI. Il fusionne l'ancien `rushiti-defaults.md` et l'ancien `donnees-rushiti.md` (Google Ads). Il prime sur toute copie antérieure. Toute correction se fait ici, puis se propage aux skills.
+> **Version 5 — 24/08/2026.** Fichier de référence unique de la suite RUSHITI. Il fusionne l'ancien `rushiti-defaults.md` et l'ancien `donnees-rushiti.md` (Google Ads). Il prime sur toute copie antérieure. Toute correction se fait ici, puis se propage aux skills.
 
 Ces informations sont **stables**. Un agent les auto-remplit sans jamais les redemander à Isuf. Pour tout autre client/site, ou pour toute donnée non validée, utiliser `[À COMPLÉTER]`.
 
@@ -89,7 +89,7 @@ Propriétaires de maisons et d'appartements à Besançon · syndics de copropri�
 
 ## Normes, garanties et références à citer
 
-- **DTU** applicables selon l'ouvrage (ex. DTU 59.1 travaux de peinture, DTU 25.41 plaques de plâtre, DTU 53.2 revêtements de sol PVC).
+- **DTU** applicables selon l'ouvrage (ex. DTU 59.1 travaux de peinture, DTU 25.41 plaques de plâtre, DTU 53.12 revêtements de sol souples **collés** — PVC, linoléum, caoutchouc). La pose clipsée (LVT) n'est couverte par aucun DTU : suivre l'Avis Technique ou la notice du fabricant.
 - **Garantie décennale** (gros ouvrage / impropre à destination) — assureur ERGO.
 - **Garantie biennale** (bon fonctionnement) et **garantie de parfait achèvement** (1 an).
 - Pour les sinistres : structure et libellés conformes **IRSI** (convention d'indemnisation et de recours sinistres immeubles).
@@ -136,6 +136,7 @@ Ne jamais écrire `rushiti-peinture.fr` dans un contenu, une fiche ou un devis :
 
 | Version | Date | Changement |
 |---|---|---|
+| v5 | 24/08/2026 | Norme sols corrigée : **NF DTU 53.12** remplace le DTU 53.2, obsolète, dans les 12 fichiers de la suite qui le citaient. Source : `docs/seo/dtu-referencat-eeat.md` (vérification norme par norme du 21/08/2026). Précision ajoutée : le 53.12 couvre la pose **collée** (PVC, linoléum, caoutchouc) ; la pose clipsée (LVT) relève de l'Avis Technique du fabricant, aucun DTU ne la couvre. |
 | v4 | 15/08/2026 | Adresse alignée sur la fiche Google Business : « 18 rue **du** Professeur Haag » (le RCS et la BAN écrivent sans « du » — écart normal, documenté). Ajout de la forme juridique SARL, du capital, de la date de création et du code APE (source RCS). |
 | v3 | 15/08/2026 | Fusion avec `donnees-rushiti.md` (RCS, TVA intracom, décennale ERGO, charte graphique). Ajout dénomination sociale / nom commercial, règle NAP, garde-fous, journal des versions. Correction de la faute d'orthographe sur « ragréage » (graphie avec « é » en première syllabe, présente dans 32 fichiers de la suite). |
 | v2 | — | Version canonique précédente, présente en 31 exemplaires. |
