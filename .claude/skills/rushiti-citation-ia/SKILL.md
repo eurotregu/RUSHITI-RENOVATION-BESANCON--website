@@ -266,6 +266,7 @@ tableau de bord sont ceux du rapport, à l'identique.
 | Mélanger le bloc marque et le panel non-marque | Deux dénominateurs distincts ; les confondre gonfle artificiellement le résultat |
 | Reformuler une requête « pour voir » | La comparabilité meurt. Les essais libres vont dans une section exploratoire séparée |
 | Mesurer connecté à un compte qui connaît déjà RUSHITI | L'historique personnalise la réponse ; session neuve, et les conditions écrites dans l'en-tête |
+| Conclure au comportement d'une URL d'après la page affichée | Une redirection suivie et une page servie en 200 rendent le même écran. On relève **l'URL finale et le code de statut**, et on contrôle avec une URL témoin qui n'a jamais existé : témoin en 404 = pas de catch-all |
 | Proposer « créer une page Wikipédia » | Les critères d'admissibilité excluent une SARL artisanale de 2021 ; le temps est mieux placé ailleurs |
 | Proposer de publier son propre « Top 10 des artisans de Besançon » | Auto-classement : ni citable par un moteur qui privilégie les tiers, ni tenable devant des confrères voisins. Un comparatif de **solutions techniques**, oui ; d'entreprises, non |
 | Traiter `llms.txt` comme un levier de citation | Convention émergente, aucun des moteurs suivis ne l'utilise publiquement comme source. Coût nul, effet non démontré : à publier éventuellement, jamais à compter comme action |

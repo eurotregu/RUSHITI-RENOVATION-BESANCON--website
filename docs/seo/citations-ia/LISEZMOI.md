@@ -37,3 +37,21 @@ ligne, champs de source vides.
 Une citation reconstituée de mémoire, une URL devinée, un moteur « probablement
 identique à l'autre », un chiffre arrondi pour faire un total rond. Le relevé
 enregistre ce qui a été vu, à la date où il a été vu.
+
+## Une observation sur une URL se relève sur le statut, pas sur l'écran
+
+Le contenu affiché ne dit pas ce que le serveur a répondu : une redirection
+suivie et une page servie en 200 rendent exactement la même chose. Toute
+observation portant sur le comportement d'une URL — 200, 301, 404, page
+servie à la place d'une autre — se relève sur **l'URL finale et le code de
+statut**, jamais sur le texte rendu. Et elle se contrôle avec une URL témoin
+qui n'a jamais existé : si le témoin renvoie 404, il n'y a pas de catch-all.
+
+Le relevé du 23/08 a manqué ce contrôle et a conclu à tort à un catch-all 200 :
+voir `correctif-url-heritees-2026-08-24.md`.
+
+## Correctifs
+
+| Fichier | Ce qu'il corrige |
+|---|---|
+| `correctif-url-heritees-2026-08-24.md` | Retire l'affirmation « catch-all 200 » du relevé du 23/08 : les trois URL héritées redirigent, et une URL inexistante renvoie bien 404 |
