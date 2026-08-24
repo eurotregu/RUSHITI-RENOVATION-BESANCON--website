@@ -5,7 +5,7 @@
 > d'un relevé daté du dépôt.** Ce qui n'a pas été mesuré est marqué `NM` et
 > ne devient jamais `0`.
 >
-> **Dernière consolidation : 23/08/2026.** Toute donnée de plus de trois mois
+> **Dernière consolidation : 24/08/2026.** Toute donnée de plus de trois mois
 > se signale comme périmée au moment de l'utiliser. Ce fichier ne se
 > recopie pas d'un rapport à l'autre : il se re-relève.
 
@@ -19,6 +19,7 @@
 | Inventaire des piliers | 22/08/2026 | URL piliers par silo, offre confirmée |
 | Relevé avis Google (`docs/seo/avis-google-releve-2026-08-22.md`) | 22/08/2026 | note et nombre d'avis |
 | Audit technique | 13/08/2026 | P0-A domaines, P1-B GA4, P2-B local |
+| Vérification « Page avec redirection » (`docs/seo/verification-page-avec-redirection-2026-08-24.md`) | 24/08/2026 | **taille réelle du site**, contrôle croisé sitemap ↔ `_redirects` ↔ fichiers de production |
 
 ## Porte 1 — Google : la photographie
 
@@ -116,7 +117,7 @@ Un plan générique reproposera la moitié de cette liste. Elle est close.
 | Chantier | Date | Preuve |
 |---|---|---|
 | Dé-duplication des titles sur 40 pages | août 2026 | plan consolidé 22/08 |
-| Consolidation de la grille locale (réduction de plus de moitié, 63 pages épargnées — *compte exact contesté, voir l'écart en fin de fichier*) | août 2026 | idem |
+| Consolidation de la grille locale : **1 395 → 755 URL**, par **646 redirections 301** (63 pages épargnées) | 21/08/2026, vérifiée le 24/08 | plan consolidé 22/08 + vérification du 24/08 |
 | Maillage des 3 pages éclipsées | PR #19 | idem |
 | Création du silo « rénovation de pièce » (salle de bains, cuisine, entreprise-rénovation) | PR #15, mergée le 21/08 | idem |
 | Fusion façade (`/ravalement-facade-besancon` → 301) | PR #14 | inventaire des piliers |
@@ -146,45 +147,46 @@ points passent avant toute campagne de contenu :
 
 - **Note et nombre d'avis Google** : 34 avis, 4,7/5 au relevé du 22/08/2026.
   Ne jamais recopier d'un ancien document : ce compteur bouge.
-- **Nombre d'URL du sitemap** : **contesté entre les sources** — voir
-  l'écart ci-dessous. À re-relever avant tout usage chiffré.
+- **Nombre d'URL du sitemap** : **755**, contrôlées une à une contre les
+  fichiers de production le 24/08/2026. Écart clos — voir ci-dessous.
 - **Positions et impressions** : toute valeur ci-dessus est datée, et sa
   **fenêtre** fait partie de la valeur. Au-delà de trois mois, elle sert
   d'historique, plus de baseline.
 
-## L'écart à lever — la taille du site
+## L'écart levé — la taille réelle du site
 
-**C'est le chiffre le moins fiable de tout le dossier, et il est cité
-partout.** Trois sources internes, à un jour d'intervalle, ne disent pas la
-même chose :
+**Cet écart a été tranché le 24/08/2026**, par contrôle croisé du sitemap, du
+fichier `_redirects` et des fichiers du dépôt de production
+(`docs/seo/verification-page-avec-redirection-2026-08-24.md`). Les chiffres
+mesurés, à retenir :
 
-| Source | Ce qu'elle dit | Date |
+| Grandeur | Valeur vérifiée | Date |
 |---|---|---|
-| Rapport KPI #1 | sitemap actuel ≈ **755 URL** (394 pages avec impressions) | 21/08/2026 |
-| Proposition keyword-map | **755 URL** dans `sitemap-pages.xml`, relevé live · `_redirects` contient **646 redirections 301** | 21/08/2026 |
-| Inventaire des piliers · plan consolidé · guide SEO local | « ~300 URL », « grille consolidée de **644 → 301** pages » | 22/08/2026 |
-| Colonne 3 mois du KPI #1 | 217 pages avec impressions sur **1 395** publiées | 17/05 → 16/08 |
+| URL déclarées au sitemap | **755** | 24/08/2026 |
+| URL du sitemap sans fichier correspondant | **1** (`/blog`, corrigée depuis) | 24/08/2026 |
+| URL à la fois au sitemap et redirigée | **0** | 24/08/2026 |
+| Redirections 301 dans `_redirects` | **646** | 21/08/2026 |
+| Sitemap avant consolidation | 1 395 URL | — |
 
-Une lecture cohérente se dessine — 1 395 URL historiques moins 646
-redirections 301 posées ≈ 749, soit les ~755 mesurés — ce qui suggère que
-« 301 » a été repris comme **un nombre de pages** alors qu'il désigne le
-**code HTTP** des redirections. Le plan de consolidation lui-même parle de
-1 368 → ≈ 682 pages de grille, pas de 644 → 301.
+**Ce que « 644 → 301 » voulait dire.** La formule circule dans plusieurs
+documents internes ; l'exécution réelle est **1 395 → 755 URL, par 646
+redirections 301**. Le « 301 » de la formule est le **code HTTP** des
+redirections, pas un nombre de pages restantes. À ne plus recopier sous cette
+forme : écrire « consolidation de 1 395 à 755 URL (646 redirections 301,
+21/08/2026) ».
 
-**Cette lecture n'est pas tranchée, et ce fichier ne la tranche pas.**
-Conséquences pratiques, à respecter :
+**Conséquence sur le ratio d'indexation.** Les deux nombres du rapport KPI #1
+sont maintenant lisibles : 217/1 395 est la colonne 3 mois (périmètre
+d'**avant** consolidation), 394/755 la colonne 12 mois (périmètre courant).
+Le ratio « pages avec impressions / pages publiées » redevient utilisable, à
+condition de rester dans la même colonne.
 
-1. **Ne jamais réutiliser le ratio « pages avec impressions / pages
-   publiées »** comme indicateur tant que le périmètre n'est pas fixé : les
-   deux nombres viennent de périmètres différents.
-2. **Ne pas écrire un compte d'URL comme un fait** dans un livrable. Le
-   moteur écrit « plusieurs centaines d'URL » tant que le relevé n'a pas été
-   refait.
-3. **Faire trancher par `rushiti-indexation`** : relevé live du sitemap,
-   comptage des 301 effectivement posées, et correction de la formule
-   « 644 → 301 » dans les documents qui la portent si elle est confirmée
-   erronée.
+**Un effet de bord à ne pas confondre avec une panne.** Search Console signale
+413 URL en « Page avec redirection » et une validation en échec : c'est le
+comportement **attendu** après une consolidation voulue, tracée et autorisée.
+Aucune correction n'est à faire de ce côté. La seule anomalie réelle trouvée
+au contrôle était `/blog` (sitemap, canonical et 1 542 liens internes pointant
+vers une URL qui redirigeait), corrigée dans le dépôt de production.
 
-L'argument qui compte, lui, ne dépend pas du chiffre exact : la grille **a
-été délibérément réduite**, et la regonfler défait un travail payé. C'est
-cette conclusion-là qui gouverne les décisions, pas le nombre.
+L'argument de fond reste inchangé, et il ne dépendait pas du chiffre : la
+grille **a été délibérément réduite**, et la regonfler défait un travail payé.
