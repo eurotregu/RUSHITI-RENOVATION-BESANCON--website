@@ -85,8 +85,10 @@ racine. Renumérotation [0]–[11] ; le texte de la description Google Business
    les brouillons, absents du socle v4 et de la grille
    `docs/seo/inventaire-grille-paliers-2026-08.csv`. Palier A/B/C à attribuer.
 6. **Banque de hashtags de l'agent `rushiti-reseaux-sociaux`** (côté claude.ai)
-   — il impose aujourd'hui 3 à 6 hashtags avec une autre banque ; à aligner
-   sur le bloc localisé retenu (5 à 8) AVANT le premier post publié.
+   — à aligner AVANT le premier post publié : remplacer sa banque par le socle
+   localisé (#RUSHITIrenovation, #ArtisanBesancon…) et passer son plafond
+   Facebook/Instagram de 4-6 à 5-8 (LinkedIn 3-5 déjà conforme ; Google
+   Business 0-2). Bloc prêt à coller fourni par Claude le 28/08.
 7. **Écarts relevés en production le 28/08** — « SARL RUSHITI Rénovation » sur
    la page syndic, « RGE » au footer de l'accueil, horaires JSON-LD ≠ footer,
    `priceRange` affirmé (« Devis gratuit » / « €€ »), types HousePainter vs
@@ -97,6 +99,10 @@ racine. Renumérotation [0]–[11] ; le texte de la description Google Business
 
 ## Journal des versions
 
+- **v1.2 — 28/08/2026** : doctrine hashtags précisée par plateforme —
+  banque localisée inchangée, volumes réconciliés avec les plafonds de
+  l'agent réseaux sociaux (LinkedIn 3 à 5, Facebook/Instagram 5 à 8,
+  Google Business 0 à 2), sur délégation d'Isuf.
 - **v1.1 — 28/08/2026** : fusion des brouillons Gemini/Kimi (tableau
   ci-dessus). Nouvelles sections Framework 4D et Réseaux sociaux, protocole
   d'ouverture de session, géographie élargie, isolation acoustique,
