@@ -75,7 +75,7 @@ commerces et bureaux locaux.
 ## Normes, garanties et références à citer
 
 - **DTU** selon l'ouvrage : DTU 59.1 (travaux de peinture), DTU 25.41
-  (plaques de plâtre), DTU 53.2 (revêtements de sol PVC).
+  (plaques de plâtre), NF DTU 53.12 (revêtements de sol PVC collés).
 - **Garantie décennale** (ERGO) · **biennale** (bon fonctionnement) ·
   **parfait achèvement** (1 an).
 - Sinistres : structure et libellés conformes **IRSI**.
