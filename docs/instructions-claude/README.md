@@ -5,13 +5,19 @@ sur toutes les conversations et dans Cowork).
 
 | Fichier | Usage | Taille |
 |---|---|---|
-| `instructions-claude-complete.txt` | Version intégrale. À utiliser si le champ accepte la longueur, sinon en **instructions de Projet** ou en `CLAUDE.md`. | ~15 300 caractères |
-| `instructions-claude-condensee.txt` | Version courte si le champ « Instructions for Claude » tronque. Ne perd aucun garde-fou. | ~2 460 caractères |
+| `instructions-claude-complete.txt` | **Source canonique.** Version intégrale. À utiliser si le champ accepte la longueur, sinon en **instructions de Projet**. | ~20 800 caractères |
+| `instructions-claude-condensee.txt` | Version courte si le champ « Instructions for Claude » tronque. Ne perd aucun garde-fou. Dérivée du canon. | ~2 760 caractères |
+| `CLAUDE.md` (racine du dépôt) | Résumé mince chargé automatiquement par Claude Code sur ce dépôt. Dérivé, jamais collé dans claude.ai. | ~3 150 caractères |
 
 **Recommandation :** version condensée dans le champ global, version complète en
 instructions de Projet. Le détail SEO opérationnel n'est volontairement pas
 recopié : il vit déjà dans les agents `.claude/skills/rushiti-*`, et le dupliquer
 créerait deux sources de vérité divergentes.
+
+**Synchronisation :** `instructions-claude-complete.txt` est la source
+canonique ; la condensée et le `CLAUDE.md` en dérivent. Tout changement de
+version = mise à jour simultanée des trois fichiers + journal ci-dessous.
+Une correction repérée dans un dérivé se corrige d'abord dans le canon.
 
 ## Sources de vérité utilisées
 
@@ -19,7 +25,7 @@ créerait deux sources de vérité divergentes.
 - `docs/seo/dtu-referencat-eeat.md` (vérification norme par norme, 21/08/2026)
 - `README.md` (NAP publié)
 
-## Écarts corrigés par rapport au brouillon initial
+## Écarts corrigés par rapport au brouillon initial (v1.0 — 23/08/2026)
 
 | Point | Brouillon | Corrigé en | Motif |
 |---|---|---|---|
@@ -37,6 +43,34 @@ créerait deux sources de vérité divergentes.
 | Typos | « INSTRICTIONS », « inclis » | corrigés | — |
 | Doublons | bloc entier répété deux fois | fusionné | — |
 
+## Écarts corrigés lors de la fusion des brouillons Gemini/Kimi (v1.1 — 28/08/2026)
+
+Les brouillons fournis le 28/08 (« GEMINI I FUNDIT », « Gemini ultra-premium »,
+« Kimi 3 », questionnaire albanais « KONTEKSTI MASTER ») sont antérieurs aux
+corrections v1.0 : en cas de conflit, la v1.0 fait foi. Le questionnaire
+albanais est écarté (décision Isuf, 28/08) — presque vide et hors périmètre ;
+ses questions encore utiles rejoignent la liste « À me confirmer ».
+
+| Point | Brouillon | Corrigé en | Motif |
+|---|---|---|---|
+| « La Boucle (Centre-Ville) » | réapparaît comme quartier | non repris ; « la boucle du Doubs » reste une description géographique | Régression sur correction v1.0 |
+| Liste de quartiers | « Les Chaprais, Montrapon, Clairs-Soleil, Planoise… » | liste canonique conservée (Chaprais-Cras, Montrapon-Montboucons, Vaîte-Clairs Soleils…) | Seule la liste du socle vaut |
+| NF DTU 60.1, NF C 15-100 | citées (questionnaire) | non reprises | Plomberie et électricité, hors métier (APE 43.34Z) |
+| Plomberie, électricité, hydraulique | services listés (questionnaire) | non repris | Hors périmètre réel de l'entreprise |
+| « respect des délais » (LinkedIn) | promesse sèche | « délais annoncés tenus » | Garde-fou n° 1 : aucun délai inventé |
+| Hashtags | deux blocs divergents : localisés (5-8) vs génériques | bloc localisé retenu (décision Isuf, 28/08) | Doctrine unique ; alignement de l'agent réseaux sociaux à faire (n° 6 ci-dessous) |
+| Saint-Vit, Devecey | cités en première couronne | ajoutés en zone d'intervention, palier local à attribuer | Absents du socle v4 et de la grille de paliers |
+| Isolation | « isolation » seule / « thermique acoustique » | « isolation thermique intérieure (ITI) et combles, isolation acoustique (cloisons et doublages) » | Précision métier ; aucune DTU ajoutée (25.41/25.42 couvrent) |
+| DTU sols du socle v4 | `donnees-rushiti.md` citait encore « DTU 53.2 » | **NF DTU 53.12** (pose collée) | Alignement sur la correction v1.0 — les deux sources divergeaient |
+
+Apports intégrés en v1.1 : section [3] Périmètre de délégation — Framework 4D
+(D1 à D4, transparence haut risque, règles emails/SOP) · point 7 « ouverture
+de session » de la MÉTHODE · section [10] Réseaux sociaux — cadrage ·
+première couronne GBM + secteurs secondaires (Pontarlier, Val de Morteau,
+Haut-Doubs, Montbéliard) · isolation acoustique · création du `CLAUDE.md`
+racine. Renumérotation [0]–[11] ; le texte de la description Google Business
+([11]) est inchangé au caractère près.
+
 ## À me confirmer avant usage en production
 
 1. **RGE** — mentionné dans la section « À Propos » du site, mais classé
@@ -47,3 +81,25 @@ créerait deux sources de vérité divergentes.
    exactes — pour compléter le JSON-LD.
 4. **« Devis gratuit assurance sous 48h »** — présent dans la description Google
    officielle. Engagement tenu ? C'est le seul délai chiffré conservé.
+5. **Palier local de Saint-Vit et Devecey** — cités en première couronne dans
+   les brouillons, absents du socle v4 et de la grille
+   `docs/seo/inventaire-grille-paliers-2026-08.csv`. Palier A/B/C à attribuer.
+6. **Banque de hashtags de l'agent `rushiti-reseaux-sociaux`** (côté claude.ai)
+   — il impose aujourd'hui 3 à 6 hashtags avec une autre banque ; à aligner
+   sur le bloc localisé retenu (5 à 8) AVANT le premier post publié.
+7. **Écarts relevés en production le 28/08** — « SARL RUSHITI Rénovation » sur
+   la page syndic, « RGE » au footer de l'accueil, horaires JSON-LD ≠ footer,
+   `priceRange` affirmé (« Devis gratuit » / « €€ »), types HousePainter vs
+   Painter. Décision Isuf : PR corrective séparée à venir.
+8. **Exposition publique** — GitHub Pages publie tout le dépôt (`path: '.'`),
+   donc `docs/` et `CLAUDE.md` sont servis en ligne. Aucun secret n'y figure
+   (n° ERGO en `[À COMPLÉTER]`) ; confirmer que cette exposition convient.
+
+## Journal des versions
+
+- **v1.1 — 28/08/2026** : fusion des brouillons Gemini/Kimi (tableau
+  ci-dessus). Nouvelles sections Framework 4D et Réseaux sociaux, protocole
+  d'ouverture de session, géographie élargie, isolation acoustique,
+  `CLAUDE.md` racine. Questionnaire albanais écarté.
+- **v1.0 — 23/08/2026** : création — consolidation initiale, 13 écarts
+  corrigés par rapport au brouillon initial (tableau ci-dessus).
