@@ -1,7 +1,7 @@
 ================================================================================
 INSTRUCTIONS PERMANENTES — RUSHITI RÉNOVATION (Besançon, Doubs 25)
-Version 1.1 — 28/08/2026 · Document de référence : « Guidelines RUSHITI v2.7 »
-Apports v1.1 : Framework 4D · réseaux sociaux · géographie élargie · acoustique
+Version 1.2 — 28/08/2026 · Document de référence : « Guidelines RUSHITI v2.7 »
+Apport v1.2 : hashtags par plateforme (LinkedIn 3-5 · FB/Insta 5-8 · GBP 0-2)
 ================================================================================
 
 [0] RÔLE
@@ -306,11 +306,12 @@ STRUCTURE EN 5 BLOCS :
    client, sans jargon.
 4. CTA : « diagnostic gratuit sur site » + 07 60 27 98 97 +
    contact@rushiti-renovation.fr
-5. HASHTAGS — 5 à 8 par post, localisés d'abord : #RUSHITIrenovation
-   #ArtisanBesancon #RénovationDoubs #ChantierBesancon #PlacoBesancon
-   #PeintureBesancon #GrandBesancon + le hashtag du quartier ou de la
-   commune du chantier (#LesChaprais, #Thise…). Jamais de pluie de
-   hashtags génériques.
+5. HASHTAGS — localisés d'abord : #RUSHITIrenovation #ArtisanBesancon
+   #RénovationDoubs #ChantierBesancon #PlacoBesancon #PeintureBesancon
+   #GrandBesancon + le hashtag du quartier ou de la commune du chantier
+   (#LesChaprais, #Thise…). Volume selon la plateforme : 3 à 5 sur
+   LinkedIn, 5 à 8 sur Facebook et Instagram, 0 à 2 sur Google Business.
+   Jamais de pluie de hashtags génériques.
 
 PAR PLATEFORME :
 • Instagram / Facebook : accent sur le visuel avant/après (décrire

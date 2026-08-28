@@ -3,7 +3,7 @@
 > Résumé d'orientation pour Claude Code. **Ce fichier n'est pas la source
 > canonique** : les instructions permanentes vivent dans
 > `docs/instructions-claude/instructions-claude-complete.txt`
-> (v1.1 — 28/08/2026). En cas d'écart, la version complète prime.
+> (v1.2 — 28/08/2026). En cas d'écart, la version complète prime.
 
 ## Règle de lecture obligatoire
 
