@@ -116,4 +116,15 @@ puis relevé de citations `rushiti-citation-ia` sur les 3 prompts ci-dessus.
 
 Aucune promesse de classement ni de citation : on mesure, on compare, on ajuste.
 
+---
+
+## 7. Journal d'exécution
+
+| Date | Événement |
+|---|---|
+| 30/08/2026 | Plan validé par Isuf (PR [#52](https://github.com/eurotregu/RUSHITI-RENOVATION-BESANCON--website/pull/52) fusionnée) ; exécution lancée. |
+| 30/08/2026 | **Vérifications sur les pages de production** : pilier DDE — « remise en état » déjà présent, rien à faire · `/degat-des-eaux-pontarlier` — déjà différenciée (angle Haut-Doubs), rien à faire · `/parquet-flottant-besancon` — la 1re phrase répond déjà à « qui pose », rien à faire. |
+| 30/08/2026 | **Enrichissements livrés** en PR [rushiti-renovation#28](https://github.com/eurotregu/rushiti-renovation/pull/28) (en attente de fusion) : article plafond — FAQ visible 6/6 en parité avec le FAQPage + 2 questions PAA ; `/contact` — réponse directe devis. Paquet détaillé : `contenus/reparer-plafond-faq-enrichissement.md`. Registre mis à jour (lignes plafond et devis peinture). |
+| 30/08/2026 | Volet Earn Pontarlier (relevé `rushiti-citation-ia` sur les 3 prompts) : à faire lors du relevé de part de voix de septembre. |
+
 — À relire avant toute suite — validation finale d'Isuf.
