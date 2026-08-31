@@ -435,3 +435,55 @@ JSON-LD live, lexohet kodi — kurrë përmbledhja.
 
 Përputhja e **fishës Google** dhe e **PagesJaunes** me të njëjtin orar: koherenca
 NAP luhet po aq jashtë sitit sa brenda tij.
+
+---
+
+# Paketa 6 — shëndeti i JSON-LD schema.org (31/08/2026)
+
+| | |
+|---|---|
+| Data | 31/08/2026 |
+| Objekti | Auditi i plotë i balisimit Schema.org — `docs/seo/audit-schema-org-2026-08-31.md` |
+| Depoja e synuar | `eurotregu/rushiti-renovation` (prodhimi, 757 faqe, commit `3317674`) |
+
+## Çfarë u konstatua
+
+Baza është e shëndoshë (758 bllok JSON-LD, **0 gabime sintaksore**, `@id` i vetëm,
+NAP i pandryshuar, 748 `BreadcrumbList` konforme). Tri konstate bllokuese:
+
+- **766 pyetje FAQ të balisuara por të padukshme** në faqe (një pyetje zone për
+  çdo faqe grile; te 10 artikujt e blogut e gjithë FAQ-ja mungon në HTML) dhe
+  **99 përgjigje** që ndryshojnë nga teksti i shfaqur;
+- **`zones-intervention.html`** deklaron `aggregateRating` 4,7/34 pa shfaqur as
+  notë as avis; `index.html` e balison atë notë ndonëse doktrina e 22/08 e kishte
+  përjashtuar shprehimisht;
+- **15 URL imazhesh** të deklaruara në JSON-LD kthejnë 404 (dosja `assets/blog/`
+  s'ekziston: 9 nga 11 artikujt).
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `verifiko_schema_org.py` | **Vegla e përhershme e regresit** për këto pesë kontrolle. Plotëson `verifiko_sameas.py` (`@id`, `sameAs`, orari) — të dyja duhet të kalojnë para çdo deploy-i |
+
+## Përdorimi
+
+```bash
+python3 verifiko_schema_org.py /rruga/drejt/rushiti-renovation   # 0 = konform
+```
+
+Kontrolli i imazheve kapërcehet automatikisht mbi një checkout pa dosjen
+`assets/` (p.sh. kopja GitHub Pages), për të mos dhënë gabime false.
+
+## Prova e testimit
+
+- mbi prodhimin: 756 faqe të lexuara, përmbledhja nxjerr saktësisht 766 / 99 / 15
+  / 2 / 1 — të njëjtat shifra si auditi i pavarur i të njëjtës ditë;
+- mbi këtë depo pas korrigjimit të dy faqeve: `✔ Konform`, dalje 0.
+
+## Çfarë i mbetet Isufit
+
+Arbitrazhi i doktrinës së avis-eve (heqje e `aggregateRating` në prodhim apo
+rishikim i relevës së 22/08), dënominacioni social i saktë për `legalName`,
+koordinatat GPS të adresës, dhe vendimi për pyetjen e zonës: të shfaqet apo të
+hiqet nga balisimi.
