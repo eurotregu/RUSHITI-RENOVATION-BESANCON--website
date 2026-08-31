@@ -1,5 +1,7 @@
 # Liste de mots-clés à exclure — Google Ads RUSHITI Rénovation
 # Version du 31/08/2026 — brouillon, à valider par Isuf avant import.
+# Mode d'emploi détaillé (niveaux, correspondances, rythme, table de
+# décision) : docs/ads/protocole-mots-cles-negatifs.md
 #
 # Usage : Google Ads > Outils > Bibliothèque partagée > Listes de mots clés
 # à exclure > créer « RUSHITI — exclusions générales » > coller les lignes
@@ -181,3 +183,61 @@ définition
 c'est quoi
 signification
 wikipedia
+
+# ====================================================================
+# PLURIELS ET VARIANTES SANS ACCENT
+# --------------------------------------------------------------------
+# Un mot-clé négatif ne suit PAS les variantes proches : contrairement
+# aux mots-clés positifs, il ne bloque ni le pluriel, ni la faute de
+# frappe, ni la version sans accent. « emploi » ne bloque pas
+# « emplois ». C'est la première cause de dépense qui passe malgré une
+# liste d'exclusions.
+#
+# Toute exclusion ajoutée plus tard doit passer le même contrôle :
+# pluriel ? faute courante ? version sans accent ?
+# Voir docs/ads/protocole-mots-cles-negatifs.md, section 2.
+# ====================================================================
+
+emplois
+offres d'emploi
+formations
+stages
+apprentis
+tutos
+tutoriels
+astuces
+aides
+aides financieres
+subventions
+primes
+annuaires
+comparateurs
+forums
+plombiers
+electriciens
+électriciens
+electricité
+couvreurs
+macon
+macons
+maçons
+menuisiers
+architectes
+agences immobilieres
+agence immobilière
+normes
+definitions
+reglementations
+réglementation
+télécharger
+menage
+pinceaux
+rouleaux
+pots de peinture
+credit d'impot
+crédit d impot
+ma prime rénov
+prime rénov
+maprimerénov
+déménagements
+demenagements
