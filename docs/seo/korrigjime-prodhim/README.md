@@ -487,3 +487,61 @@ Arbitrazhi i doktrinës së avis-eve (heqje e `aggregateRating` në prodhim apo
 rishikim i relevës së 22/08), dënominacioni social i saktë për `legalName`,
 koordinatat GPS të adresës, dhe vendimi për pyetjen e zonës: të shfaqet apo të
 hiqet nga balisimi.
+
+---
+
+# Paketa 7 — Twitter Cards dhe Open Graph (31/08/2026)
+
+| | |
+|---|---|
+| Data | 31/08/2026 |
+| Objekti | Auditi i plotë i kartave sociale — `docs/seo/audit-twitter-cards-2026-08-31.md` |
+| Depoja e synuar | `eurotregu/rushiti-renovation` (prodhimi, 757 faqe, commit `3317674`) |
+
+## Çfarë u konstatua
+
+Open Graph-u është i shëndoshë: 756/757 faqe me `og:title`, `og:description`,
+`og:url`, `og:site_name`, dhe `og:url` **përputhet me canonical në 100 % të
+faqeve**. Kartat e X-it, përkundrazi:
+
+- `twitter:card` vetëm në **31 faqe** (faqja e parë s'është ndër to);
+- `twitter:title`, `twitter:description`, `twitter:image`, `twitter:image:alt`:
+  **0 faqe nga 757** — dhe X-i nuk e lexon `og:image:alt`, pra asnjë tekst
+  alternativ mbi asnjë kartë;
+- **18 faqe deklarojnë përmasa imazhi të gabuara** (p.sh. 1104x828 për një foto
+  reale 517x710 portret);
+- asnjë imazh i sitit s'e arrin formatin 1200x630: **483 faqe me foto portret**,
+  **229 me foto nën 600x315**.
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_twitter_cards.py` | Korrigjim **idempotent**: shton 5 balizat twitter të derivuara nga `og:*` e vetë faqes, rimerr alt-in që siti e deklaron tashmë live për të njëjtin imazh, dhe korrigjon përmasat e deklaruara sipas skedarit real |
+| `verifiko_twitter_cards.py` | **Vegla e përhershme e regresit**: 5 balizat, `og:url` = canonical, ekzistenca e imazhit, saktësia e përmasave, plus KUJDES për foto portret ose nën 600x315 |
+
+## Përdorimi
+
+```bash
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation           # simulim
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --apply   # zbatim
+python3 verifiko_twitter_cards.py /rruga/drejt/rushiti-renovation      # 0 = konform
+```
+
+## Prova e testimit
+
+Mbi një **kopje** të depos së prodhimit (kurrë mbi prodhimin):
+
+- gjendja fillestare: **3 770 gabime**;
+- pas `--apply`: 756 faqe të prekura, **10 gabime** të mbetura — tri faqet pa
+  `og:image` dhe alt-i i logos, të gjitha në pritje të Isufit;
+- passa e dytë: **0 faqe të prekura** (idempotencë e provuar);
+- diff mbi një faqe: një rresht i vetëm i prekur, 4 baliza të futura pas
+  balizës së fundit `og:`, asgjë tjetër.
+
+## Çfarë i mbetet Isufit
+
+Vizualët socialë **1200x630** (i vetmi korrigjim që ndryshon vërtet pamjen e
+kartës), vendimi për një llogari X (`twitter:site`), zgjedhja e `og:image` për
+`blog.html`, `contact.html`, `mentions-legales.html`, alt-i i logos, dhe hapja e
+aksesit me shkrim te depoja e prodhimit për ta zbatuar korrigjimin.
