@@ -65,14 +65,37 @@ L'écart de dates est sans ambiguïté : Google n'a pas revu ces pages depuis
 la correction. Il ne s'agit ni d'un défaut résiduel, ni d'une décision
 éditoriale de Google, mais d'une file d'attente de crawl.
 
-## Plan d'action
+## Addendum du 31/08 : la validation tourne déjà depuis le 21/08
+
+Relevé fait dans Search Console le 31/08 (rapporté par Isuf) : une
+validation de ce motif est **en cours depuis le 21/08/2026**, avec les
+**231 URL en statut « En attente »** et **0 en échec**.
+
+Cela corrige l'action n°1 initialement écrite ci-dessous : il n'y a rien à
+cliquer, c'est déjà fait — et fait au bon moment, le lendemain de la
+correction du 20/08 à 22h41. La chronologie est cohérente de bout en bout.
+
+⚠️ **Ne pas relancer la validation.** Relancer remet le compteur à zéro et
+fait perdre les jours déjà écoulés. Contrôle simple : si la date de début
+affichée n'est plus le 21/08 mais le 31/08, la validation a été relancée
+par mégarde — sans gravité, mais le délai repart de zéro.
+
+**À quoi s'attendre.** Seules les **85 pages vivantes** peuvent devenir
+« Corrigée » puis être indexées. Les 97 URL consolidées redirigent
+désormais en 301 et les 49 vestiges WordPress sont en 404 : elles quitteront
+ce motif sans jamais être indexées, ce qui est le comportement voulu. Un
+rapport de validation partiel n'est donc pas un échec — il faut le lire
+page par page, pas au total.
+
+## Plan d'action (révisé le 31/08)
 
 | # | Priorité | Action | Où | Effet attendu |
 |---|---|---|---|---|
-| 1 | 🔴 | **« Valider la correction »** sur le motif « Exclue par la balise noindex » | Search Console → Indexation → Pages → ce motif | Recrawl du lot de 231 URL ; les 85 pages vivantes peuvent enfin être indexées |
-| 2 | 🟠 | Si la validation échoue ou traîne : inspection d'URL + demande d'indexation, **une seule fois**, sur une dizaine de pages à plus forte valeur (quartiers de Besançon et Pontarlier d'abord) | Search Console | Recrawl accéléré sur les pages qui comptent |
-| 3 | 🟡 | Ne rien changer au contenu de ces pages pour l'instant | — | Une modification maintenant brouillerait la mesure du recrawl |
-| 4 | 🟡 | Re-contrôle : nombre de pages indexées et disparition du motif | Search Console, vers le 13/09 | Mesure de l'effet réel |
+| 1 | ✅ | « Valider la correction » — **déjà lancée le 21/08**, 231 URL en attente, 0 en échec | Search Console | Recrawl du lot en cours |
+| 2 | 🔴 | **Ne rien recliquer** sur ce motif ; laisser la validation aller à son terme | Search Console | Évite de remettre le compteur à zéro |
+| 3 | 🟠 | Si rien n'a bougé au 13/09 : inspection d'URL + demande d'indexation, **une seule fois**, sur une dizaine de pages à plus forte valeur (quartiers de Besançon et Pontarlier d'abord) | Search Console | Recrawl accéléré sur les pages qui comptent |
+| 4 | 🟡 | Ne rien changer au contenu de ces pages pour l'instant | — | Une modification maintenant brouillerait la mesure du recrawl |
+| 5 | 🟡 | Re-contrôle : nombre de pages indexées et statut de la validation | Search Console, vers le 13/09 | Mesure de l'effet réel |
 
 ## Ce que cet agent ne promet pas
 
