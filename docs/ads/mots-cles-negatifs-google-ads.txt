@@ -1,0 +1,183 @@
+# Liste de mots-clés à exclure — Google Ads RUSHITI Rénovation
+# Version du 31/08/2026 — brouillon, à valider par Isuf avant import.
+#
+# Usage : Google Ads > Outils > Bibliothèque partagée > Listes de mots clés
+# à exclure > créer « RUSHITI — exclusions générales » > coller les lignes
+# non commentées > appliquer à la campagne Search.
+#
+# Type de correspondance recommandé à l'import : EXPRESSION.
+# En correspondance large, « emploi » exclurait aussi « emploi du temps
+# chantier » ; en expression, l'exclusion reste prévisible.
+#
+# Les lignes commençant par # sont des commentaires : les retirer avant
+# l'import si l'outil ne les accepte pas.
+
+# --- Emploi, formation, orientation ---------------------------------
+emploi
+offre d'emploi
+recrutement
+recrute
+salaire
+combien gagne
+formation
+se former
+apprentissage
+alternance
+apprenti
+stage
+cap peintre
+devenir peintre
+devenir plaquiste
+fiche métier
+indeed
+pole emploi
+france travail
+intérim
+
+# --- Bricolage et faire soi-même ------------------------------------
+tuto
+tutoriel
+comment faire
+comment poser
+comment peindre
+soi meme
+soi-même
+diy
+video
+youtube
+astuce
+technique pour
+
+# --- Achat de matériel, distributeurs, marques ----------------------
+acheter
+pas cher
+promo
+discount
+soldes
+pot de peinture
+litre
+rouleau
+pinceau
+leroy merlin
+castorama
+brico depot
+bricoman
+brico dépôt
+point p
+gedimat
+dulux
+tollens
+ripolin
+zolpan
+sikkens
+placoplatre prix sac
+
+# --- Aides, subventions, dispositifs (pas de RGE chez RUSHITI) ------
+maprimerenov
+ma prime renov
+prime renov
+prime energie
+crédit d'impot
+credit d impot
+subvention
+aide de l'etat
+aide financiere
+anah
+certificat economie energie
+cee
+eco ptz
+rge
+qualibat
+simulateur aide
+
+# --- Annuaires, plateformes de devis, comparateurs ------------------
+pagesjaunes
+pages jaunes
+travaux.com
+quotatis
+starofservice
+star of service
+houzz
+izi by edf
+hellocasa
+mesdepanneurs
+comparateur
+annuaire
+forum
+avis sur
+
+# --- Métiers hors périmètre RUSHITI ---------------------------------
+# (jamais de plomberie ni d'électricité — cf. CLAUDE.md)
+plombier
+plomberie
+electricien
+électricien
+electricite
+chauffagiste
+chaudiere
+pompe a chaleur
+climatisation
+couvreur
+toiture
+charpente
+charpentier
+zinguerie
+maçon
+maconnerie
+terrassement
+menuisier
+menuiserie
+fenetre
+veranda
+piscine
+jardin
+paysagiste
+demenagement
+déménagement
+ménage
+nettoyage
+femme de ménage
+ramonage
+serrurier
+vitrier
+diagnostic immobilier
+architecte
+cuisiniste
+poseur de cuisine
+
+# --- Hors zone d'intervention ---------------------------------------
+# Le ciblage géographique ne bloque pas une requête qui NOMME une autre
+# ville : ces exclusions sont complémentaires, pas redondantes.
+dijon
+belfort
+vesoul
+lons le saunier
+dole
+mulhouse
+strasbourg
+lyon
+paris
+nancy
+lausanne
+neuchatel
+suisse
+
+# --- Location, immobilier, hors intention travaux -------------------
+location materiel
+louer
+achat appartement
+vente maison
+agence immobiliere
+airbnb
+
+# --- Divers sans intention commerciale ------------------------------
+gratuitement
+telecharger
+pdf
+norme
+dtu
+reglementation
+définition
+c'est quoi
+signification
+wikipedia
