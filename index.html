@@ -12,54 +12,143 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <!-- Données structurées : entité unique #business, réutilisée par toutes les pages.
+         geo = centre de Besançon (approximation à remplacer par les coordonnées exactes
+         du 18 rue du Professeur Haag). Pas d'aggregateRating ni de review : les avis
+         Google sont des avis tiers, cf. docs/seo/avis-google-releve-2026-08-22.md -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "HousePainter", "HomeAndConstructionBusiness"],
-      "@id": "https://rushiti-renovation.fr/#business",
-      "name": "RUSHITI Rénovation",
-      "description": "Entreprise de rénovation, peinture, plâtrerie et aménagement intérieur à Besançon et dans le Doubs. Devis gratuit.",
-      "url": "https://rushiti-renovation.fr/",
-      "image": "https://rushiti-renovation.fr/assets/logo.png",
-      "logo": "https://rushiti-renovation.fr/assets/logo.png",
-      "telephone": "+33760279897",
-      "email": "contact@rushiti-renovation.fr",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "18 rue du Professeur Haag",
-        "addressLocality": "Besançon",
-        "postalCode": "25000",
-        "addressRegion": "Doubs",
-        "addressCountry": "FR"
-      },
-      "areaServed": ["Besançon", "Doubs"],
-      "sameAs": [
-        "https://rushiti.fr",
-        "https://www.facebook.com/rushiti.renovation/",
-        "https://www.instagram.com/rushiti.renovation/",
-        "https://www.google.com/maps?cid=10915820577691168567",
-        "https://www.pagesjaunes.fr/pros/61325501",
-        "https://annuaire-entreprises.data.gouv.fr/entreprise/rushiti-905214631",
-        "https://data.inpi.fr/entreprises/905214631"
-      ],
-      "openingHoursSpecification": [
+      "@graph": [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "07:00",
-          "closes": "20:30"
+          "@type": "WebSite",
+          "@id": "https://rushiti-renovation.fr/#website",
+          "url": "https://rushiti-renovation.fr/",
+          "name": "RUSHITI Rénovation",
+          "inLanguage": "fr-FR",
+          "publisher": {
+            "@id": "https://rushiti-renovation.fr/#business"
+          }
         },
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "08:00",
-          "closes": "20:30"
+          "@type": "WebPage",
+          "@id": "https://rushiti-renovation.fr/#webpage",
+          "url": "https://rushiti-renovation.fr/",
+          "name": "RUSHITI Rénovation — rénovation intérieure et peinture à Besançon",
+          "description": "Entreprise de rénovation, peinture et aménagement intérieur à Besançon et dans le Doubs. Diagnostic technique gratuit.",
+          "inLanguage": "fr-FR",
+          "isPartOf": {
+            "@id": "https://rushiti-renovation.fr/#website"
+          },
+          "about": {
+            "@id": "https://rushiti-renovation.fr/#business"
+          }
         },
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Sunday",
-          "opens": "09:00",
-          "closes": "17:30"
+          "@type": [
+            "LocalBusiness",
+            "HousePainter",
+            "HomeAndConstructionBusiness"
+          ],
+          "@id": "https://rushiti-renovation.fr/#business",
+          "name": "RUSHITI Rénovation",
+          "description": "Entreprise de rénovation intérieure à Besançon et dans le Doubs : peinture, plâtrerie et placo, revêtements de sol, isolation thermique et acoustique, remise en état après dégât des eaux, rénovation de pièce. Diagnostic technique gratuit sur site.",
+          "url": "https://rushiti-renovation.fr/",
+          "image": "https://rushiti-renovation.fr/assets/logo.png",
+          "logo": "https://rushiti-renovation.fr/assets/logo.png",
+          "telephone": "+33760279897",
+          "email": "contact@rushiti-renovation.fr",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "18 rue du Professeur Haag",
+            "postalCode": "25000",
+            "addressLocality": "Besançon",
+            "addressRegion": "Bourgogne-Franche-Comté",
+            "addressCountry": "FR"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 47.238,
+            "longitude": 6.0243
+          },
+          "hasMap": "https://www.google.com/maps?cid=10915820577691168567",
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Besançon"
+            },
+            {
+              "@type": "AdministrativeArea",
+              "name": "Doubs"
+            }
+          ],
+          "priceRange": "€€",
+          "taxID": "90521463100012",
+          "vatID": "FR89905214631",
+          "identifier": {
+            "@type": "PropertyValue",
+            "propertyID": "SIRET",
+            "value": "90521463100012"
+          },
+          "founder": [
+            {
+              "@type": "Person",
+              "name": "Isuf Rushiti"
+            },
+            {
+              "@type": "Person",
+              "name": "Yll Rushiti"
+            }
+          ],
+          "foundingDate": "2021",
+          "knowsAbout": [
+            "Peinture intérieure",
+            "Peinture extérieure",
+            "Plâtrerie",
+            "Pose de placo BA13",
+            "Faux plafonds",
+            "Revêtements de sol",
+            "Isolation thermique et acoustique",
+            "Remise en état après dégât des eaux",
+            "Pose de toile de verre",
+            "Pose de papier peint",
+            "Ragréage de sol"
+          ],
+          "sameAs": [
+            "https://rushiti.fr",
+            "https://www.facebook.com/rushiti.renovation/",
+            "https://www.instagram.com/rushiti.renovation/",
+            "https://www.google.com/maps?cid=10915820577691168567",
+            "https://www.pagesjaunes.fr/pros/61325501",
+            "https://annuaire-entreprises.data.gouv.fr/entreprise/rushiti-905214631",
+            "https://data.inpi.fr/entreprises/905214631"
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday"
+              ],
+              "opens": "07:00",
+              "closes": "20:30"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Saturday",
+              "opens": "08:00",
+              "closes": "20:30"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Sunday",
+              "opens": "09:00",
+              "closes": "17:30"
+            }
+          ]
         }
       ]
     }
