@@ -360,3 +360,24 @@ après déploiement :
 Aucun classement n'est promis dans ce rapport : les correctifs P1 lèvent des
 risques de conformité et rendent les pages éligibles, ils ne garantissent aucun
 affichage.
+
+---
+
+## 10. Suite donnée — paquet 7 (02/09/2026)
+
+Les six actions du §7 qui ne demandent aucun arbitrage sont désormais
+outillées : `korrigjime-prodhim/fix_schema_org.py` couvre les points 1, 6, 7,
+8, 9 et 10 (hors `geo`, qui attend les coordonnées réelles).
+
+Testé sur une copie du checkout de production `b7e42cb` : **755 fichiers**,
+idempotence prouvée, 758 blocs JSON-LD toujours valides, **texte visible
+identique bit pour bit**, aucun fichier touché hors JSON-LD, et les cinq
+autres outils de régression du dépôt inchangés (exit 0 avant et après). Les
+99 réponses divergentes tombent à 0.
+
+Le script **ne touche pas `index.html`** : la note y est affichée, donc le
+sujet n'est pas la conformité mais la doctrine du 22/08 — point 2 du §8,
+qui reste à arbitrer, comme les cinq autres.
+
+Détail, journal de test et mode d'emploi : `korrigjime-prodhim/README.md`,
+section « Paketa 7 ».
