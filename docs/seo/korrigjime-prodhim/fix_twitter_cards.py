@@ -2,6 +2,13 @@
 # -*- coding: utf-8 -*-
 """Twitter Cards — depoja e prodhimit eurotregu/rushiti-renovation.
 
+⚠ **Hapat A–C janë të pensionuar që më 02/09/2026.** Isufi vendosi t'i heqë
+të gjitha kartat Twitter (`fix_hiq_twitter.py`): RUSHITI nuk ka llogari X,
+dhe Facebook, WhatsApp, Instagram e LinkedIn lexojnë Open Graph. Skripti
+refuzon tani të ekzekutohet pa `--vetem-permasat`, që të mos i rikthejë ato
+pa u vënë re. Hapi D — korrigjimi i përmasave `og:image:*` — mbetet i
+vlefshëm dhe s'ka të bëjë fare me X-in: ai është arsyeja pse skripti ruhet.
+
 Konstati i 31/08/2026 (`docs/seo/audit-twitter-cards-2026-08-31.md`):
 Open Graph-u është kudo (756/757 faqe), por `twitter:card` vetëm në 31 faqe —
 dhe asnjë faqe e vetme e sitit nuk deklaron `twitter:title`,
@@ -34,10 +41,10 @@ dhe asnjë faqe e vetme e sitit nuk deklaron `twitter:title`,
   - asnjë ndryshim i `og:title` / `og:description` ekzistuese;
   - asnjë prekje e `404.html`.
 
-Usage :  python3 fix_twitter_cards.py /rruga/drejt/checkout [--apply]
+Usage :  python3 fix_twitter_cards.py /rruga/drejt/checkout --vetem-permasat [--apply]
          (pa --apply: simulim, asgjë nuk shkruhet)
 
-Pas ekzekutimit: `python3 verifiko_twitter_cards.py /rruga/drejt/checkout`
+Pas ekzekutimit: `python3 verifiko_apercus_sociaux.py /rruga/drejt/checkout`
 """
 
 from __future__ import annotations
@@ -115,7 +122,9 @@ def harta_e_alteve(rrenja: str) -> dict[str, str]:
     return harta
 
 
-def rregullo(burimi: str, rrenja: str, alte: dict[str, str]) -> tuple[str, list[str]]:
+def rregullo(
+    burimi: str, rrenja: str, alte: dict[str, str], vetem_permasat: bool = False
+) -> tuple[str, list[str]]:
     """Kthen burimin e korrigjuar dhe listën e ndryshimeve."""
     t = balizat(burimi)
     ndryshime: list[str] = []
@@ -144,6 +153,12 @@ def rregullo(burimi: str, rrenja: str, alte: dict[str, str]) -> tuple[str, list[
             )
 
     # A–C. balizat twitter që mungojnë, të derivuara nga og:*
+    # Në modalitetin `--vetem-permasat` ky bllok kapërcehet: arbitrazhi i Isufit
+    # (02/09) e kufizoi korrigjimin te përmasat, sepse RUSHITI nuk është në X
+    # dhe Open Graph-u — i lexuar nga Facebook, Instagram, WhatsApp, LinkedIn —
+    # është tashmë i pranishëm në 756/757 faqe.
+    if vetem_permasat:
+        return burimi, ndryshime
     burimi_twitter = {
         "twitter:card": "summary_large_image",
         "twitter:title": t.get("og:title"),
@@ -177,6 +192,16 @@ def main() -> int:
         return 2
     rrenja = args[0]
     apliko = "--apply" in sys.argv
+    vetem_permasat = "--vetem-permasat" in sys.argv
+    if not vetem_permasat:
+        print(
+            "✘ Hapat A–C (shtimi i balizave twitter:*) u pensionuan më 02/09/2026\n"
+            "  me vendim të Isufit; kartat u hoqën nga i gjithë siti.\n"
+            "  Për të korrigjuar vetëm përmasat e `og:image` (hapi D, ende i\n"
+            "  vlefshëm), rilëshojeni me --vetem-permasat.\n"
+            "  Për të hequr balizat e rikthyera: fix_hiq_twitter.py"
+        )
+        return 2
     if not os.path.isdir(rrenja):
         print(f"✘ Nuk është dosje: {rrenja}")
         return 2
@@ -197,7 +222,7 @@ def main() -> int:
             t = balizat(burimi)
             if "og:title" in t and "og:image" not in t:
                 pa_imazh.append(rel)
-            i_ri, ndryshime = rregullo(burimi, rrenja, alte)
+            i_ri, ndryshime = rregullo(burimi, rrenja, alte, vetem_permasat)
             if not ndryshime:
                 continue
             prekura += 1

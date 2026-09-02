@@ -594,58 +594,312 @@ Kontrollet pas zbatimit:
 
 ---
 
-# Paketa 8 — Twitter Cards dhe Open Graph (31/08/2026)
+# Paketa 8 — 766 pyetjet FAQ të padukshme (02/09/2026)
 
 | | |
 |---|---|
-| Data | 31/08/2026 |
-| Objekti | Auditi i plotë i kartave sociale — `docs/seo/audit-twitter-cards-2026-08-31.md` |
-| Depoja e synuar | `eurotregu/rushiti-renovation` (prodhimi, 757 faqe, commit `3317674`) |
+| Data | 02/09/2026 |
+| Objekti | Konstati **P1-1** i auditit të 31/08, i vetmi konstat bllokues që mbetej pa vegël |
+| Depoja e synuar | `eurotregu/rushiti-renovation` (prodhimi, 757 faqe, commit `b7e42cb`) |
+| Statusi | **Skript i shkruar dhe i provuar — i pazbatuar**, pret arbitrazhin dhe autorizimin e Isufit |
 
-## Çfarë u konstatua
+## Problemi
 
-Open Graph-u është i shëndoshë: 756/757 faqe me `og:title`, `og:description`,
-`og:url`, `og:site_name`, dhe `og:url` **përputhet me canonical në 100 % të
-faqeve**. Kartat e X-it, përkundrazi:
+Google e kërkon shprehimisht: përmbajtja e një `FAQPage` duhet të jetë e
+dukshme për vizitorin mbi faqen që e balison. Përmbajtje që jeton vetëm në
+JSON-LD është shkelje e rregullave, e ndëshkueshme me veprim manual.
 
-- `twitter:card` vetëm në **31 faqe** (faqja e parë s'është ndër to);
-- `twitter:title`, `twitter:description`, `twitter:image`, `twitter:image:alt`:
-  **0 faqe nga 757** — dhe X-i nuk e lexon `og:image:alt`, pra asnjë tekst
-  alternativ mbi asnjë kartë;
-- **18 faqe deklarojnë përmasa imazhi të gabuara** (p.sh. 1104x828 për një foto
-  reale 517x710 portret);
-- asnjë imazh i sitit s'e arrin formatin 1200x630: **483 faqe me foto portret**,
-  **229 me foto nën 600x315**.
+Auditi numëroi **766 pyetje** të tilla, në dy familje:
 
-## Skedarët
+- **grila, 681 faqe** — gabariti shton në balisim një pyetje zone që nuk jepet
+  kurrë në HTML: « Vous déplacez-vous à Avanne-Aveney ? », ose për lagjet
+  « Intervenez-vous dans le quartier Velotte ? » ;
+- **blogu, 9 artikuj (29 pyetje)** — i gjithë seksioni FAQ mungon nga trupi i
+  artikullit. Artikulli i dhjetë, `blog/reparer-plafond-degat-des-eaux-besancon.html`,
+  e shfaq të vetin — **ai është gabariti i ndjekur këtu, fjalë për fjalë**.
 
-| Skedari | Roli |
+## Dy rrugë, arbitrazhi i Isufit
+
+`fix_faq_dukshme.py` i mban të dyja dhe nuk vendos në vend të tij:
+
+| Mënyra | Çfarë bën | Kosto |
+|---|---|---|
+| `--afisho` *(parazgjedhje, rekomandimi i auditit)* | E bën të dukshme pyetjen që tashmë ekziston në balisim | Faqja fiton një pyetje-përgjigje të vërtetë |
+| `--hiq` | Heq nga JSON-LD pyetjet që faqja nuk i shfaq | Faqja humbet përmbajtje |
+
+**Asnjë fjalë nuk shkruhet në asnjërën mënyrë.** Në `--afisho` teksti vjen
+fjalë për fjalë nga `acceptedAnswer`, i shkruar dhe i validuar më parë. I
+vetmi tekst që nuk vjen nga balisimi është titulli i seksionit
+« Questions fréquentes » i 9 artikujve — i kopjuar nga gabariti i faqes së
+dhjetë, jo i shpikur.
+
+Rekomandimi mbetet ai i auditit: **`--afisho`**. « Vous déplacez-vous à X ? »
+është pyetja që klienti bën vërtet, dhe përgjigjja — deplasim i përfshirë,
+diagnostikë falas pa angazhim — është pikërisht ajo që e bind. Fshehja e saj
+humbet një përgjigje të mirë dhe nuk fiton asgjë.
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_faq_dukshme.py /rruga/drejt/rushiti-renovation                    # simulim
+python3 fix_faq_dukshme.py /rruga/drejt/rushiti-renovation --afisho --apply
+python3 fix_faq_dukshme.py /rruga/drejt/rushiti-renovation --hiq --apply
+```
+
+## Prova e testimit (mbi kopje të checkout-it real, `b7e42cb`)
+
+Të dyja mënyrat: **690 skedarë, 766 pyetje** (681 grilë + 9 blog), dhe të dyja
+e kthejnë kontrollin e pyetjeve të padukshme në **0**.
+
+- **idempotencë e provuar** në të dyja mënyrat: 2ᵉ passe → 0 skedarë;
+- **simetri e provuar**: `--afisho` nuk prek asnjë bllok JSON-LD (0 faqe) dhe
+  pasuron tekstin e dukshëm (690); `--hiq` nuk prek asnjë fjalë të tekstit të
+  dukshëm (0) dhe lehtëson balisimin (690);
+- **balanca e tageve** `details`, `summary`, `section`, `article`, `div`,
+  `main`: e mbyllur mbi të 757 faqet, në të dyja mënyrat;
+- **prova që asgjë nuk është shpikur**: mbi të 681 faqet e grilës, **çdo fjalë
+  e shtuar** gjendet në JSON-LD-në e vetë faqes. Mbi 9 artikujt, e njëjta gjë
+  plus titulli i seksionit i gabaritit;
+- **rendering i verifikuar në Chromium**: pyetja e zonës del si `<details>` i
+  fundit i FAQ-së ekzistuese; seksioni FAQ i blogut del para CTA-së, si te
+  gabariti;
+- **të pesë veglat e tjera të regresit**: exit 0.
+
+### Zinxhiri paketa 7 + paketa 8
+
+Të dy urdhrat e zbatimit (7→8 dhe 8→7) japin një rezultat **identik bit për
+bit**. Bashkë, ato e ulin auditin nga **883 konstate në 17** — dhe të 17-tat
+janë saktësisht dy arbitrazhet e mbetura:
+
+```
+      15  imazh i deklaruar që s'ekziston     → vizualet e 9 artikujve
+       1  aggregateRating mbi biznesin        → doktrina e avis-eve (index.html)
+       1  review mbi biznesin                 → e njëjta doktrinë
+```
+
+758 blloqe JSON-LD të rilexuara pas zinxhirit: **0 të pavlefshme**.
+
+## Çfarë pret Isufi
+
+1. **Arbitrazhi**: `--afisho` apo `--hiq` ?
+2. **Autorizimi i zbatimit** mbi prodhimin, për paketën 7 dhe këtë.
+
+---
+
+## ✅ Zbatimi i paketave 7 dhe 8 në prodhim (02/09/2026, 15:44 UTC)
+
+Me autorizimin e Isufit dhe arbitrazhin e tij `--afisho`, të dyja paketat u
+zbatuan mbi prodhimin: PR [#30](https://github.com/eurotregu/rushiti-renovation/pull/30),
+degë `claude/paketat-7-8-schema-org-faq`, **755 skedarë**, e bashkuar nga Isufi
+(`main` = `19079d8`).
+
+Auditi i 31/08 ra nga **883 konstate në 17** — dhe të 17-tat janë saktësisht
+dy arbitrazhet e mbetura (15 imazhe, 2 rreshta avis-esh).
+
+### Verifikimi live mbi `rushiti-renovation.fr` (jo mbi parapamje)
+
+Lexuar mbi **rawHtml**-in e papërpunuar, kurrë mbi përmbledhjen e LLM-së —
+metoda e vendosur që nga paketa 5. Një provë e parë me nxjerrje LLM ktheu
+tekstin e dukshëm në vend të balisimit: prandaj lexohet kodi.
+
+| Faqja | Konstati |
 |---|---|
-| `fix_twitter_cards.py` | Korrigjim **idempotent**: shton 5 balizat twitter të derivuara nga `og:*` e vetë faqes, rimerr alt-in që siti e deklaron tashmë live për të njëjtin imazh, dhe korrigjon përmasat e deklaruara sipas skedarit real |
-| `verifiko_twitter_cards.py` | **Vegla e përhershme e regresit**: 5 balizat, `og:url` = canonical, ekzistenca e imazhit, saktësia e përmasave, plus KUJDES për foto portret ose nën 600x315 |
+| `/cloisons-avanne-aveney` | « Vous déplacez-vous à Avanne-Aveney ? » shfaqet në `<summary>` — pyetja del **2 herë** në burim (JSON-LD + HTML i dukshëm), 6 `<details>` në vend të 5 ✔ |
+| `/mentions-legales` | nyja `LocalBusiness` e plotë: `@graph`, `taxID`, `vatID`, `founder` Isuf & Yll, orari, `sameAs`, `knowsAbout` ✔ · `legalName` **mungon**, siç ishte parashikuar (pret K-bis-in) ✔ |
+| `/zones-intervention` | `aggregateRating` i hequr ✔ |
+
+### ⚠️ Konstat i papritur: Worker-i e mbishkruan hapin B
+
+**`addressRegion` shërbehet si « Doubs », jo si « Bourgogne-Franche-Comté ».**
+
+Depoja e bashkuar mban « Bourgogne-Franche-Comté » në **741 faqe**, asnjë
+« Doubs ». Por Worker-i `image-license-jsonld` (i modifikuar më 02/09 në 11:05
+UTC, pra **para** zbatimit të paketave) e rishkruan në fluturim, rreshti 450:
+
+```js
+// --- Ajout 2026-09-02 (autorisé par Isuf) : uniformisation addressRegion + bloc avis ---
+html = html.split('"addressRegion":"Bourgogne-Franche-Comté"').join('"addressRegion":"Doubs"');
+```
+
+Pra hapi **B** i paketës 7 është i anuluar në prodhim. Dy burime të vërtete
+që divergojnë: depoja thotë një gjë, faqja e shërbyer një tjetër.
+
+**Fakti i schema.org**: `addressRegion` pret « the first-level Administrative
+division ». Në Francë kjo është **rajoni** (Bourgogne-Franche-Comté);
+departamenti (Doubs) është i nivelit të dytë. Auditi i 31/08 e konstatoi
+pikërisht këtë (§P2-2), dhe PR #51 — që propozonte « Doubs » — u rekomandua
+për mbyllje po për këtë arsye.
+
+**Vendimi i takon Isufit.** Worker-i nuk u prek. Dy dalje të mundshme:
+heqja e rreshtit 450 (depoja bëhet burimi i vetëm), ose kthimi i depos në
+« Doubs » (Worker-i bëhet i panevojshëm për këtë pikë). Të mbeten të dyja
+siç janë do të thotë që një audit i ardhshëm do ta rihapë sigurisht çështjen.
+
+### Çfarë NUK preket nga Worker-i
+
+Kontroll i të ~60 rishkrimeve të Worker-it: **asnjë nuk prek `<details>` as
+`acceptedAnswer`** → **paketa 8 është e paprekur**, e provuar live.
+
+Worker-i injekton edhe një bllok « Avis clients » mbi faqet jashtë blogut që
+s'e kanë (kushti: përmban « Questions fréquentes » dhe jo « Avis clients »).
+`zones-intervention` s'ka asnjërën → nota nuk shfaqet aty → **heqja e
+`aggregateRating` mbetet e drejtë** edhe duke marrë parasysh Worker-in.
+
+### Radhë për Isufin
+
+1. **Arbitrazhi `addressRegion`**: Worker-i apo depoja?
+2. Imazhet e 9 artikujve · doktrina e avis-eve te faqja e pritjes ·
+   `legalName` në K-bis · koordinatat GPS të adresës.
+
+---
+
+# Paketa 9 — përmasat e imazheve sociale (02/09/2026)
+
+| | |
+|---|---|
+| Data | 02/09/2026 |
+| Objekti | Konstati **P1-2** i auditit të Twitter Cards (31/08): 18 faqe deklarojnë përmasa imazhi që s'përputhen me skedarin |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — PR [#32](https://github.com/eurotregu/rushiti-renovation/pull/32), **18 skedarë** |
+| Arbitrazhi i Isufit (02/09) | **vetëm përmasat** — jo blloku i balizave twitter |
+
+## Pse vetëm përmasat
+
+Open Graph — që e lexojnë Facebook, Instagram, WhatsApp dhe LinkedIn — është
+tashmë i pranishëm në **756 nga 757 faqe**. RUSHITI **nuk ka llogari X**
+(sameAs: Facebook, Instagram, Google, PagesJaunes, Annuaire, INPI, rushiti.fr).
+
+Balizat `twitter:*` nuk do të ndryshonin asgjë të dukshme mbi kanalet reale;
+përmasat e gabuara po. Prandaj `fix_twitter_cards.py` mori opsionin
+**`--vetem-permasat`**, që kapërcen bllokun A–C.
+
+Pa opsion: **756 faqe**. Me opsion: **18 faqe**, saktësisht ato me defekt.
+
+## Çfarë ishte e gabuar
+
+**Përmbysje portret / peizazh** — pamja shpallej e shtrirë ndërsa imazhi është
+në këmbë:
+
+| Faqja | Deklaruar | Real |
+|---|---|---|
+| `amenagement-commerce-bureau-besancon` | 1104×828 | **828×1104** |
+| `cloisons-besancon` | 900×1200 | **828×1104** |
+| `degat-des-eaux-besancon` | 900×1200 | **828×1104** |
+
+**Devijime të forta** — shtatë faqe shpallnin 1104×828 për një imazh
+**413×224**: `entreprise-renovation`, `expert-assurance-sinistre`,
+`prix-travaux-renovation`, `renovation-appartement`, `renovation-cuisine`,
+`renovation-salle-de-bain`, `renovation-syndic-gestionnaire`.
+
+Përmasat e deklaruara vijnë tani nga **leximi binar i çdo skedari imazh**,
+kurrë nga një vlerësim.
 
 ## Përdorimi
 
 ```bash
-python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation           # simulim
-python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --apply   # zbatim
-python3 verifiko_twitter_cards.py /rruga/drejt/rushiti-renovation      # 0 = konform
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --vetem-permasat           # simulim
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --vetem-permasat --apply   # zbatim
+# hapat A–C (shtimi i kartave) janë të pensionuar — shih paketën 10
 ```
 
 ## Prova e testimit
 
-Mbi një **kopje** të depos së prodhimit (kurrë mbi prodhimin):
+Mbi një kopje të checkout-it të prodhimit, para zbatimit:
 
-- gjendja fillestare: **3 770 gabime**;
-- pas `--apply`: 756 faqe të prekura, **10 gabime** të mbetura — tri faqet pa
-  `og:image` dhe alt-i i logos, të gjitha në pritje të Isufit;
-- passa e dytë: **0 faqe të prekura** (idempotencë e provuar);
-- diff mbi një faqe: një rresht i vetëm i prekur, 4 baliza të futura pas
-  balizës së fundit `og:`, asgjë tjetër.
+- **idempotencë e provuar**: kalimi i dytë → 0 skedarë;
+- **teksti i dukshëm identik** mbi të 757 faqet;
+- **asnjë balizë `twitter:` e shtuar** — modaliteti i kufizuar u respektua;
+- **krahasim çelës për çelës**: të vetmet vlera të ndryshuara janë
+  `og:image:width` dhe `og:image:height`, **nga 18 herë secila**;
+- pesë veglat e regresit të mëparshme: **exit 0**; `verifiko_schema_org`
+  mbetet me 17 konstatet e veta në pritje arbitrazhi, të pandryshuara.
 
 ## Çfarë i mbetet Isufit
 
-Vizualët socialë **1200x630** (i vetmi korrigjim që ndryshon vërtet pamjen e
-kartës), vendimi për një llogari X (`twitter:site`), zgjedhja e `og:image` për
-`blog.html`, `contact.html`, `mentions-legales.html`, alt-i i logos, dhe hapja e
-aksesit me shkrim te depoja e prodhimit për ta zbatuar korrigjimin.
+1. **Tri faqe pa imazh social** — `blog.html`, `contact.html`,
+   `mentions-legales.html`. Skripti i sinjalizon pa i prekur: zgjedhja e
+   vizualit është vendim redaktorial.
+2. **Shtatë imazhe shumë të vogla** — korrigjimi i përmasës e bën atë të
+   saktë, jo më të madhe. Një imazh 413×224 do të mbetet miniaturë e vogël.
+   Për një pamje me gjerësi të plotë duhen vizuale rreth **1200×630**.
+
+## Shënim mbi PR #61
+
+Skedari i versionuar këtu tani mban opsionin `--vetem-permasat`. PR #61 mbetet
+i dobishëm për auditin dhe vegëlën e verifikimit, por versioni i tij i
+skriptit është i mëparshëm: në rast bashkimi, mbahet ky.
+
+
+---
+
+# Paketa 10 — heqja e plotë e kartave Twitter (02/09/2026)
+
+`fix_hiq_twitter.py`
+
+## Vendimi
+
+Auditi i 31/08 e kishte nxjerrë mungesën e kartave Twitter si mangësi, dhe
+inventari i 02/09 e kishte renditur atë të parën « sipas vlerës ». Ai renditje
+ishte i saktë vetëm në një kuptim shumë të ngushtë — e vetmja paketë e
+mjetuar dhe kurrë e zbatuar — dhe **mashtrues mbi interesin real**: RUSHITI
+nuk ka llogari X, ndërsa Facebook, WhatsApp, Instagram dhe LinkedIn lexojnë
+të gjitha Open Graph, i cili është i plotë mbi 756 nga 757 faqe.
+
+Isufi vendosi: heqje e plotë.
+
+## Çfarë u hoq
+
+31 faqe mbanin secila një balizë të vetme, `<meta name="twitter:card"
+content="summary_large_image">`, gjithnjë midis `og:image:alt` dhe
+`og:site_name`. Asnjë `twitter:title`, `twitter:description`,
+`twitter:image` apo `twitter:image:alt` nuk ekzistonte askund në sit.
+
+Skripti i mbulon të shtatë çelësat `twitter:*`, jo vetëm `card`: një gabarit
+i vjetër ose një degë e vjetër mund ta rifusë ndonjërin, dhe kalimi i
+ardhshëm duhet ta kapë.
+
+## Kushti i sigurisë
+
+X-i, kur nuk gjen `twitter:*`, **bie prapa mbi Open Graph**. Prandaj heqja
+nuk humbet asgjë — as mbi X-in vetë — sa kohë faqja ka `og:title` dhe
+`og:image`. Skripti e verifikon këtë para çdo shkrimi dhe e lë të paprekur
+çdo faqe që nuk i ka të dyja. Mbi të 31 faqet, kushti ishte i plotësuar.
+
+## Prova e testimit
+
+Mbi një kopje të checkout-it të prodhimit (`7a22e0a`):
+
+- **31 skedarë të prekur, 31 baliza të hequra**, të gjitha `twitter:card`;
+- **idempotencë**: kalimi i dytë → 0 skedarë;
+- **asnjë ndryshim tjetër**: për secilin nga 31 skedarët, heqja e balizës nga
+  versioni i mëparshëm jep **saktësisht** versionin e ri, bajt për bajt;
+- **asnjë balizë `og:*` e ndryshuar** në asnjë skedar;
+- **teksti i dukshëm identik** mbi të 757 faqet;
+- **758 blloqe JSON-LD**, të gjitha të vlefshme;
+- gjashtë veglat e regresit: exit 0, përveç `verifiko_schema_org` që kthen
+  **saktësisht të njëjtat 17 konstate** si para heqjes (15 imazhe bloge që
+  mungojnë + 2 fusha avisi mbi faqen e nisjes) — pra heqja nuk prek asgjë
+  nga balisimi.
+
+## Veglat e prekura
+
+- `verifiko_twitter_cards.py` → **`verifiko_apercus_sociaux.py`**. Kontrolli
+  u përmbys: në vend që të kërkojë praninë e `twitter:*`, ai tani sinjalizon
+  **rikthimin** e ndonjërës. Pjesa tjetër — `og:url` == kanonike, ekzistenca
+  e `og:image`, saktësia e përmasave, cilësia e vizualit — mbeti e paprekur,
+  sepse ajo kurrë nuk kishte të bënte me X-in.
+- `fix_twitter_cards.py` → hapat A–C **refuzojnë të ekzekutohen** pa
+  `--vetem-permasat`. Skedari nuk u fshi: hapi D (korrigjimi i përmasave
+  `og:image:*`) mbetet i vlefshëm dhe i pavarur nga X-i.
+
+## Kopja GitHub Pages
+
+`syndic-copropriete-besancon.html` e kësaj depoje mbante të njëjtën balizë.
+E hequr në të njëjtin kalim, me të njëjtin skript.
+
+## Çfarë i mbetet Isufit — i pandryshuar
+
+Heqja e kartave **nuk e zgjidh** çështjen e vizualeve: `og:image` mbetet
+burimi i vetëm i paraqitjes sociale mbi të gjitha rrjetet, dhe asnjë imazh i
+sitit nuk arrin 1200 px gjerësi. `verifiko_apercus_sociaux.py` numëron 712
+paralajmërime mbi këtë — imazhe portret ose nën 600×315. Prodhimi i vizualeve
+rreth **1200×630** mbetet arbitrazhi i vetëm i hapur mbi këtë temë.
