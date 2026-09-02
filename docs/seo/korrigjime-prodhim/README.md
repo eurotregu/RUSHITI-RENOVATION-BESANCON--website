@@ -750,3 +750,80 @@ s'e kanë (kushti: përmban « Questions fréquentes » dhe jo « Avis clients �
 1. **Arbitrazhi `addressRegion`**: Worker-i apo depoja?
 2. Imazhet e 9 artikujve · doktrina e avis-eve te faqja e pritjes ·
    `legalName` në K-bis · koordinatat GPS të adresës.
+
+---
+
+# Paketa 9 — përmasat e imazheve sociale (02/09/2026)
+
+| | |
+|---|---|
+| Data | 02/09/2026 |
+| Objekti | Konstati **P1-2** i auditit të Twitter Cards (31/08): 18 faqe deklarojnë përmasa imazhi që s'përputhen me skedarin |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — PR [#32](https://github.com/eurotregu/rushiti-renovation/pull/32), **18 skedarë** |
+| Arbitrazhi i Isufit (02/09) | **vetëm përmasat** — jo blloku i balizave twitter |
+
+## Pse vetëm përmasat
+
+Open Graph — që e lexojnë Facebook, Instagram, WhatsApp dhe LinkedIn — është
+tashmë i pranishëm në **756 nga 757 faqe**. RUSHITI **nuk ka llogari X**
+(sameAs: Facebook, Instagram, Google, PagesJaunes, Annuaire, INPI, rushiti.fr).
+
+Balizat `twitter:*` nuk do të ndryshonin asgjë të dukshme mbi kanalet reale;
+përmasat e gabuara po. Prandaj `fix_twitter_cards.py` mori opsionin
+**`--vetem-permasat`**, që kapërcen bllokun A–C.
+
+Pa opsion: **756 faqe**. Me opsion: **18 faqe**, saktësisht ato me defekt.
+
+## Çfarë ishte e gabuar
+
+**Përmbysje portret / peizazh** — pamja shpallej e shtrirë ndërsa imazhi është
+në këmbë:
+
+| Faqja | Deklaruar | Real |
+|---|---|---|
+| `amenagement-commerce-bureau-besancon` | 1104×828 | **828×1104** |
+| `cloisons-besancon` | 900×1200 | **828×1104** |
+| `degat-des-eaux-besancon` | 900×1200 | **828×1104** |
+
+**Devijime të forta** — shtatë faqe shpallnin 1104×828 për një imazh
+**413×224**: `entreprise-renovation`, `expert-assurance-sinistre`,
+`prix-travaux-renovation`, `renovation-appartement`, `renovation-cuisine`,
+`renovation-salle-de-bain`, `renovation-syndic-gestionnaire`.
+
+Përmasat e deklaruara vijnë tani nga **leximi binar i çdo skedari imazh**,
+kurrë nga një vlerësim.
+
+## Përdorimi
+
+```bash
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --vetem-permasat           # simulim
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --vetem-permasat --apply   # zbatim
+python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation                            # paketa e plotë (756 faqe)
+```
+
+## Prova e testimit
+
+Mbi një kopje të checkout-it të prodhimit, para zbatimit:
+
+- **idempotencë e provuar**: kalimi i dytë → 0 skedarë;
+- **teksti i dukshëm identik** mbi të 757 faqet;
+- **asnjë balizë `twitter:` e shtuar** — modaliteti i kufizuar u respektua;
+- **krahasim çelës për çelës**: të vetmet vlera të ndryshuara janë
+  `og:image:width` dhe `og:image:height`, **nga 18 herë secila**;
+- pesë veglat e regresit të mëparshme: **exit 0**; `verifiko_schema_org`
+  mbetet me 17 konstatet e veta në pritje arbitrazhi, të pandryshuara.
+
+## Çfarë i mbetet Isufit
+
+1. **Tri faqe pa imazh social** — `blog.html`, `contact.html`,
+   `mentions-legales.html`. Skripti i sinjalizon pa i prekur: zgjedhja e
+   vizualit është vendim redaktorial.
+2. **Shtatë imazhe shumë të vogla** — korrigjimi i përmasës e bën atë të
+   saktë, jo më të madhe. Një imazh 413×224 do të mbetet miniaturë e vogël.
+   Për një pamje me gjerësi të plotë duhen vizuale rreth **1200×630**.
+
+## Shënim mbi PR #61
+
+Skedari i versionuar këtu tani mban opsionin `--vetem-permasat`. PR #61 mbetet
+i dobishëm për auditin dhe vegëlën e verifikimit, por versioni i tij i
+skriptit është i mëparshëm: në rast bashkimi, mbahet ky.

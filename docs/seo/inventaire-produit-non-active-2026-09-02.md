@@ -41,7 +41,7 @@ direct (02/09, 15:58 UTC).
 
 ## 2. Produit, testé, prêt — et jamais mis en ligne
 
-### 2.1 Twitter Cards — le plus gros livrable dormant
+### 2.1 Twitter Cards — ⚠️ classement révisé le 02/09 (voir addendum §8)
 
 **726 pages sur 757 n'ont aucune `twitter:card`.** Compté sur la production
 à l'instant : 31 pages sur 757 en portent une.
@@ -126,8 +126,9 @@ Détail et recommandation par PR : `tri-pull-requests-2026-09-02.md`.
 
 ## 7. Par ordre de valeur
 
-1. **Twitter Cards** — 726 pages, paquet prêt et testé. Le seul correctif
-   technique outillé qui dort.
+1. ~~**Twitter Cards** — 726 pages.~~ **Rétrogradé** : voir l'addendum §8.
+   Les 18 dimensions fausses ont été corrigées le 02/09 ; le reste du paquet
+   n'apporte rien de visible sur les canaux réels de RUSHITI.
 2. **Les 3 sections de la page pilier peinture** — contenu déjà rédigé pour
    une page commerciale de tête, à réextraire sur `main`.
 3. **Les 4 arbitrages** (§4) — ils débloquent les 17 derniers constats de
@@ -135,3 +136,77 @@ Détail et recommandation par PR : `tri-pull-requests-2026-09-02.md`.
 4. **Le relevé part de voix IA** — il ne tient qu'à vos copier-coller.
 5. **Les pages Pontarlier/Valdahon et l'outil diagnostic** — décisions de
    contenu, à passer par la porte anti-cannibalisation.
+
+
+---
+
+## 8. Addendum du 02/09 — classement révisé, et ce qui a été fait depuis
+
+**Je m'étais trompé de hiérarchie.** Le §2.1 classait les Twitter Cards en
+tête « par ordre de valeur ». C'était exact au sens « seul paquet outillé
+jamais appliqué », mais trompeur sur l'intérêt réel. Les faits, vérifiés sur
+la production :
+
+| | |
+|---|---|
+| Pages avec Open Graph (`og:title`) | **756 / 757** |
+| Pages avec `twitter:card` | 31 / 757 |
+| Compte X / Twitter de RUSHITI | **aucun** — Facebook, Instagram, Google, PagesJaunes |
+
+Open Graph est ce que lisent Facebook, Instagram, WhatsApp et LinkedIn, et il
+est déjà partout. Les balises `twitter:*` n'auraient donc rien changé de
+visible sur les canaux réellement utilisés.
+
+### Ce qui avait une vraie valeur dans ce paquet, et qui est fait
+
+Sur arbitrage d'Isuf, le correctif a été **limité aux dimensions déclarées** :
+PR de production [#32](https://github.com/eurotregu/rushiti-renovation/pull/32),
+**18 fichiers**.
+
+Le script a reçu pour cela une option `--vetem-permasat` qui saute le bloc des
+balises twitter — sans elle il touchait 756 pages, avec elle exactement les 18.
+
+Deux familles de défauts corrigées :
+
+- **inversions portrait / paysage** : `amenagement-commerce-bureau` annonçait
+  1104×828 pour une image de 828×1104 ; `cloisons-besancon` et
+  `degat-des-eaux-besancon` annonçaient 900×1200 pour 828×1104 ;
+- **écarts francs** : sept pages annonçaient 1104×828 pour une image de
+  413×224, dont `renovation-syndic-gestionnaire`, `expert-assurance-sinistre`
+  et `prix-travaux-renovation`.
+
+Preuves : idempotence (2ᵉ passe, 0 fichier), texte visible identique sur les
+757 pages, **aucune balise `twitter:` ajoutée**, comparaison clé par clé ne
+montrant que `og:image:width` et `og:image:height` — 18 fois chacune. Les cinq
+outils de régression antérieurs : exit 0.
+
+### Ce qui reste, et qui n'est pas automatisable
+
+**Trois pages sans image sociale** — `blog.html`, `contact.html`,
+`mentions-legales.html`. Le script les signale mais n'y touche pas : choisir
+un visuel est une décision d'Isuf.
+
+**Sept images trop petites.** Corriger une dimension la rend exacte, pas plus
+grande : une image de 413×224 restera affichée en petite vignette, en dessous
+du minimum d'une grande carte sociale. Pour un aperçu pleine largeur sur
+WhatsApp ou Facebook, il faudrait des visuels d'environ 1200×630 sur ces
+pages — production d'images, pas balisage.
+
+### Conséquence sur la PR #61
+
+Le fichier `fix_twitter_cards.py` versionné ici porte désormais l'option
+`--vetem-permasat`. La PR #61 reste utile pour son audit
+(`audit-twitter-cards-2026-08-31.md`) et son vérificateur, mais sa version du
+script est antérieure : en cas de fusion, garder celle-ci.
+
+### Classement révisé de ce qui dort
+
+1. **Les 3 sections rédigées pour la page pilier peinture** (§2.2) — contenu
+   commercial déjà écrit, sur une page de tête, absent du site.
+2. **Les 4 arbitrages** (§4) — ils débloquent les 17 derniers constats.
+3. **Les visuels sociaux** — 3 pages sans image, 7 images sous-dimensionnées.
+4. **Le relevé part de voix IA** — il ne tient qu'aux copier-coller d'Isuf.
+5. **Les pages Pontarlier/Valdahon et l'outil diagnostic** — décisions de
+   contenu, sous porte anti-cannibalisation.
+6. **Les balises twitter restantes** — propreté technique, gain non visible
+   tant que RUSHITI n'est pas sur X.
