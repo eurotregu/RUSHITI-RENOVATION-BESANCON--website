@@ -40,6 +40,12 @@ de sa demande d'aide.
 Correction mécanique et idempotente, un seul bloc HTML répété. **Décision d'Isuf requise
 avant toute intervention.**
 
+> **Arbitrage d'Isuf, 02/09/2026 (soir) : la qualification RGE est détenue.** La mention
+> est légitime et reste telle quelle — « Artisan local · Qualification RGE » — sans ajout
+> de numéro ni d'organisme, par décision d'Isuf. Constat clos : aucune modification des
+> 93 pages. Numéro, organisme et domaines couverts : **[À COMPLÉTER]** si un jour Isuf
+> souhaite les afficher.
+
 ### 0.2 Les pages isolation citent le DTU des plaques de plâtre
 
 Comptage des DTU cités sur l'ensemble du site :
@@ -237,7 +243,7 @@ six lignes marquées « juste » restent, elles, entièrement valables.
 
 | Rang | Action | Portée | Décision requise |
 |---|---|---|---|
-| 0 | Trancher « Qualification RGE » sur 93 pages | 93 fichiers | **Isuf** |
+| 0 | ~~Trancher « Qualification RGE » sur 93 pages~~ — **clos le 02/09 : détenue, mention conservée** | — | tranché |
 | 0 bis | Trancher les DTU du silo isolation | 93 fichiers | **Isuf** |
 | 1 | Formulaire sur la page d'accueil | 1 fichier | technique |
 | 2 | FAQ + FAQPage sur la page d'accueil | 1 fichier | relecture |
