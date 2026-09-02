@@ -89,10 +89,14 @@ racine. Renumérotation [0]–[11] ; le texte de la description Google Business
    localisé (#RUSHITIrenovation, #ArtisanBesancon…) et passer son plafond
    Facebook/Instagram de 4-6 à 5-8 (LinkedIn 3-5 déjà conforme ; Google
    Business 0-2). Bloc prêt à coller fourni par Claude le 28/08.
-7. **Écarts relevés en production le 28/08** — « SARL RUSHITI Rénovation » sur
-   la page syndic, « RGE » au footer de l'accueil, horaires JSON-LD ≠ footer,
-   `priceRange` affirmé (« Devis gratuit » / « €€ »), types HousePainter vs
-   Painter. Décision Isuf : PR corrective séparée à venir.
+7. **Écarts relevés en production le 28/08** — **corrigés** par la PR #49,
+   mergée le 29/08 : « SARL RUSHITI Rénovation » (page syndic) → « SARL
+   Rushiti (nom commercial RUSHITI Rénovation) » ; « RGE » retiré du footer
+   et du badge À propos de l'accueil ; horaires du footer syndic alignés sur
+   le paquet 5 ; `priceRange` retiré des deux JSON-LD ; type unifié sur
+   `HousePainter`. Restent ouverts : le RGE si la certification est
+   réellement détenue (point 1) et l'`openingHoursSpecification` de la page
+   syndic une fois les horaires confirmés (point 3).
 8. **Exposition publique** — GitHub Pages publie tout le dépôt (`path: '.'`),
    donc `docs/` et `CLAUDE.md` sont servis en ligne. Aucun secret n'y figure
    (n° ERGO en `[À COMPLÉTER]`) ; confirmer que cette exposition convient.
