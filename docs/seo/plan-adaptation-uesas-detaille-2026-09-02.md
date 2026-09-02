@@ -73,6 +73,13 @@ défaut de certitude, la règle du dépôt s'applique — « selon les règles d
 Le DTU 58.1 (plafonds suspendus) ne figure pas dans la table de vérité des instructions :
 à valider avant de le conserver sur les 38 pages faux-plafonds.
 
+> **Arbitrage d'Isuf, 02/09/2026 (soir) : « prenez les DTU exacts ».** Appliqué et fusionné
+> en production (PR #35 du dépôt `rushiti-renovation`) : sur les 93 pages isolation, bandeau
+> « Travaux selon NF DTU 25.41, 25.42 et 45.10 », étape de pose citant le NF DTU 25.42
+> (doublage isolant) et le NF DTU 45.10 (combles et rampants), étape plaques au NF DTU 25.41,
+> description JSON-LD du Service portant les trois références. Constat clos. **Reste ouvert :
+> le DTU 58.1 des 38 pages faux-plafonds**, en attente de la réponse d'Isuf.
+
 ---
 
 ## 1. Ce qu'est uesas.fr, et ce que ça change
@@ -244,7 +251,7 @@ six lignes marquées « juste » restent, elles, entièrement valables.
 | Rang | Action | Portée | Décision requise |
 |---|---|---|---|
 | 0 | ~~Trancher « Qualification RGE » sur 93 pages~~ — **clos le 02/09 : détenue, mention conservée** | — | tranché |
-| 0 bis | Trancher les DTU du silo isolation | 93 fichiers | **Isuf** |
+| 0 bis | ~~Trancher les DTU du silo isolation~~ — **fait le 02/09, PR #35 prod fusionnée** ; reste le DTU 58.1 des faux-plafonds | — | tranché |
 | 1 | Formulaire sur la page d'accueil | 1 fichier | technique |
 | 2 | FAQ + FAQPage sur la page d'accueil | 1 fichier | relecture |
 | 3 | Réécriture de `/a-propos` | 1 fichier | faits à fournir |
