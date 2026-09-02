@@ -278,6 +278,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            // Vérification hCaptcha : le widget Web3Forms dépose sa réponse dans un
+            // textarea caché « h-captcha-response ». Vide = case non cochée, on
+            // n'envoie pas et on l'explique. Si le widget n'a pas pu se charger
+            // (script bloqué), le textarea n'existe pas : on laisse partir le POST,
+            // Web3Forms tranche côté serveur.
+            const captcha = form.querySelector('textarea[name="h-captcha-response"]');
+            if (captcha && !captcha.value) {
+                e.preventDefault();
+                if (status) {
+                    status.textContent = 'Merci de cocher la case « Je suis humain » avant d\u2019envoyer votre demande.';
+                }
+                const widget = form.querySelector('.h-captcha');
+                if (widget) {
+                    widget.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+                return;
+            }
+
             const btn = form.querySelector('button[type="submit"]');
             btn.disabled = true;
             btn.textContent = 'Envoi en cours\u2026';
