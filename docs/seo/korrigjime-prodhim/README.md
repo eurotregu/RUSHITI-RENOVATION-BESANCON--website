@@ -683,3 +683,70 @@ janë saktësisht dy arbitrazhet e mbetura:
 
 1. **Arbitrazhi**: `--afisho` apo `--hiq` ?
 2. **Autorizimi i zbatimit** mbi prodhimin, për paketën 7 dhe këtë.
+
+---
+
+## ✅ Zbatimi i paketave 7 dhe 8 në prodhim (02/09/2026, 15:44 UTC)
+
+Me autorizimin e Isufit dhe arbitrazhin e tij `--afisho`, të dyja paketat u
+zbatuan mbi prodhimin: PR [#30](https://github.com/eurotregu/rushiti-renovation/pull/30),
+degë `claude/paketat-7-8-schema-org-faq`, **755 skedarë**, e bashkuar nga Isufi
+(`main` = `19079d8`).
+
+Auditi i 31/08 ra nga **883 konstate në 17** — dhe të 17-tat janë saktësisht
+dy arbitrazhet e mbetura (15 imazhe, 2 rreshta avis-esh).
+
+### Verifikimi live mbi `rushiti-renovation.fr` (jo mbi parapamje)
+
+Lexuar mbi **rawHtml**-in e papërpunuar, kurrë mbi përmbledhjen e LLM-së —
+metoda e vendosur që nga paketa 5. Një provë e parë me nxjerrje LLM ktheu
+tekstin e dukshëm në vend të balisimit: prandaj lexohet kodi.
+
+| Faqja | Konstati |
+|---|---|
+| `/cloisons-avanne-aveney` | « Vous déplacez-vous à Avanne-Aveney ? » shfaqet në `<summary>` — pyetja del **2 herë** në burim (JSON-LD + HTML i dukshëm), 6 `<details>` në vend të 5 ✔ |
+| `/mentions-legales` | nyja `LocalBusiness` e plotë: `@graph`, `taxID`, `vatID`, `founder` Isuf & Yll, orari, `sameAs`, `knowsAbout` ✔ · `legalName` **mungon**, siç ishte parashikuar (pret K-bis-in) ✔ |
+| `/zones-intervention` | `aggregateRating` i hequr ✔ |
+
+### ⚠️ Konstat i papritur: Worker-i e mbishkruan hapin B
+
+**`addressRegion` shërbehet si « Doubs », jo si « Bourgogne-Franche-Comté ».**
+
+Depoja e bashkuar mban « Bourgogne-Franche-Comté » në **741 faqe**, asnjë
+« Doubs ». Por Worker-i `image-license-jsonld` (i modifikuar më 02/09 në 11:05
+UTC, pra **para** zbatimit të paketave) e rishkruan në fluturim, rreshti 450:
+
+```js
+// --- Ajout 2026-09-02 (autorisé par Isuf) : uniformisation addressRegion + bloc avis ---
+html = html.split('"addressRegion":"Bourgogne-Franche-Comté"').join('"addressRegion":"Doubs"');
+```
+
+Pra hapi **B** i paketës 7 është i anuluar në prodhim. Dy burime të vërtete
+që divergojnë: depoja thotë një gjë, faqja e shërbyer një tjetër.
+
+**Fakti i schema.org**: `addressRegion` pret « the first-level Administrative
+division ». Në Francë kjo është **rajoni** (Bourgogne-Franche-Comté);
+departamenti (Doubs) është i nivelit të dytë. Auditi i 31/08 e konstatoi
+pikërisht këtë (§P2-2), dhe PR #51 — që propozonte « Doubs » — u rekomandua
+për mbyllje po për këtë arsye.
+
+**Vendimi i takon Isufit.** Worker-i nuk u prek. Dy dalje të mundshme:
+heqja e rreshtit 450 (depoja bëhet burimi i vetëm), ose kthimi i depos në
+« Doubs » (Worker-i bëhet i panevojshëm për këtë pikë). Të mbeten të dyja
+siç janë do të thotë që një audit i ardhshëm do ta rihapë sigurisht çështjen.
+
+### Çfarë NUK preket nga Worker-i
+
+Kontroll i të ~60 rishkrimeve të Worker-it: **asnjë nuk prek `<details>` as
+`acceptedAnswer`** → **paketa 8 është e paprekur**, e provuar live.
+
+Worker-i injekton edhe një bllok « Avis clients » mbi faqet jashtë blogut që
+s'e kanë (kushti: përmban « Questions fréquentes » dhe jo « Avis clients »).
+`zones-intervention` s'ka asnjërën → nota nuk shfaqet aty → **heqja e
+`aggregateRating` mbetet e drejtë** edhe duke marrë parasysh Worker-in.
+
+### Radhë për Isufin
+
+1. **Arbitrazhi `addressRegion`**: Worker-i apo depoja?
+2. Imazhet e 9 artikujve · doktrina e avis-eve te faqja e pritjes ·
+   `legalName` në K-bis · koordinatat GPS të adresës.
