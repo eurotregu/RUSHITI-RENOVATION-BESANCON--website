@@ -903,3 +903,20 @@ burimi i vetëm i paraqitjes sociale mbi të gjitha rrjetet, dhe asnjë imazh i
 sitit nuk arrin 1200 px gjerësi. `verifiko_apercus_sociaux.py` numëron 712
 paralajmërime mbi këtë — imazhe portret ose nën 600×315. Prodhimi i vizualeve
 rreth **1200×630** mbetet arbitrazhi i vetëm i hapur mbi këtë temë.
+
+## Verifikimi live pas bashkimit
+
+PR e prodhimit u bashkua nga Isufi më 02/09 në 17:25 UTC. Tri faqe të lexuara
+live mbi **rawHtml** të papërpunuar (`/isolation-besancon`, `/merci`,
+`/degat-des-eaux-besancon`): **asnjë balizë `twitter:`**, dhe të dhjetë çelësat
+`og:*` të paprekur. Mbi `/isolation-besancon`, `og:image:alt` ndiqet tani
+drejtpërdrejt nga `og:site_name` — pikërisht vendi ku ishte baliza.
+
+⚠ **Kurth i ambientit, i verifikuar më 02/09.** `curl` drejt
+`rushiti-renovation.fr` nuk kalon: proxy-ja e ambientit i përgjigjet `403` çdo
+CONNECT, dhe curl kthen **0 bajt me kod 000**. Një `grep` mbi një përgjigje të
+zbrazët nuk gjen asgjë — pra një kontroll i tipit « a ka mbetur baliza? » del
+**i suksesshëm rrejshëm**, dhe një kontroll i tipit « a ka ende `og:title`? »
+del **i dështuar rrejshëm**. Verifikimi live bëhet vetëm përmes Firecrawl-it,
+i cili e merr faqen nga ana e vet. Kjo shtohet te kurthi tashmë i njohur i
+paketës 5: lexoni **rawHtml**, kurrë përmbledhjen e LLM-së.
