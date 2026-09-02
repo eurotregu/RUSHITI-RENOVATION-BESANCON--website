@@ -1,32 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Vegël regresi: Twitter Cards dhe Open Graph mbi një checkout HTML.
+"""Vegël regresi: paraqitja sociale (Open Graph) mbi një checkout HTML.
 
-Kontrollon, faqe për faqe (auditi i 31/08/2026,
-`docs/seo/audit-twitter-cards-2026-08-31.md`):
+Deri më 02/09/2026 kjo vegël quhej `verifiko_twitter_cards.py` dhe kërkonte
+praninë e balizave `twitter:*`. Isufi vendosi t'i heqë të gjitha: RUSHITI nuk
+ka llogari X, dhe kanalet e vërteta të firmës — Facebook, WhatsApp, Instagram,
+LinkedIn — lexojnë Open Graph. Kontrolli u përmbys, pjesa tjetër mbeti e
+paprekur, sepse ajo kurrë nuk kishte të bënte me X-in.
 
-  1. **twitter:card** i pranishëm kudo ku ka `og:title` — pa të, X-i nuk e ka
-     të deklaruar tipin e kartës dhe vignette e madhe nuk garantohet;
-  2. **twitter:title / twitter:description / twitter:image** të deklaruara
-     shprehimisht. X-i bie prapa te `og:*` kur mungojnë, por
-     **`og:image:alt` nuk lexohet nga X** — prandaj `twitter:image:alt` është
-     i vetmi tekst alternativ i kartës;
-  3. **og:url == canonical** (një kartë që tregon një URL tjetër nga kanonikja
-     shpërndan variantin e gabuar);
-  4. **og:image ekziston** në checkout dhe **dimensionet e deklaruara
+Kontrollon, faqe për faqe:
+
+  1. **asnjë balizë `twitter:*` e rikthyer** — një gabarit i vjetër ose një
+     degë e vjetër mund ta rifusë atë pa u vënë re; ky është roja i vendimit;
+  2. **og:url == canonical** (një paraqitje që tregon një URL tjetër nga
+     kanonikja shpërndan variantin e gabuar);
+  3. **og:image ekziston** në checkout dhe **dimensionet e deklaruara
      përputhen me skedarin real** — një raport i gabuar e detyron crawler-in
      të rezervojë përmasa të gabuara;
-  5. **cilësia e imazhit**: KUJDES nëse është portret ose nën 600x315
-     (rekomandimi: 1200x630, minimumi teknik i X-it 300x157).
-
-Nuk shpik kurrë asgjë: `twitter:site` / `twitter:creator` raportohen vetëm
-nëse ekzistojnë — asnjë identifikues X nuk propozohet nga vegla.
+  4. **cilësia e imazhit**: KUJDES nëse është portret ose nën 600x315
+     (rekomandimi i platformave: 1200x630).
 
 Dalja 0 = konform. Për t'u ekzekutuar para çdo deploy-i.
 
-    python3 verifiko_twitter_cards.py /rruga/drejt/rushiti-renovation
+    python3 verifiko_apercus_sociaux.py /rruga/drejt/rushiti-renovation
 """
-
 from __future__ import annotations
 
 import collections
@@ -43,13 +40,8 @@ HOST = "rushiti-renovation.fr/"
 # Faqe që nuk shpërndahen kurrë në rrjete sociale: pa kartë, pa gabim.
 PERJASHTIME = {"404.html"}
 
-TWITTER_TE_DOMOSDOSHME = (
-    "twitter:card",
-    "twitter:title",
-    "twitter:description",
-    "twitter:image",
-    "twitter:image:alt",
-)
+# Heqja e 02/09 (`fix_hiq_twitter.py`): asnjë prej tyre nuk duhet të rikthehet.
+TWITTER = re.compile(r'(?:name|property)\s*=\s*["\']twitter:[^"\']*["\']', re.I)
 
 
 def balizat(burimi: str) -> dict[str, str]:
@@ -122,11 +114,13 @@ def main() -> int:
                 continue
             faqe += 1
 
-            for celes in TWITTER_TE_DOMOSDOSHME:
-                if celes not in t:
-                    gabim(celes + " mungon", f"{rel}: {celes} mungon")
-
             burimi = open(os.path.join(dp, f), encoding="utf-8", errors="replace").read()
+            for m in TWITTER.finditer(burimi):
+                gabim(
+                    "balizë twitter e rikthyer",
+                    f"{rel}: {m.group(0)} — e hequr më 02/09, nuk duhet të rikthehet",
+                )
+
             kanonike = CANONIKJA.search(burimi)
             if kanonike and t.get("og:url", "").rstrip("/") != kanonike.group(1).rstrip("/"):
                 gabim("og:url ≠ canonical", f"{rel}: og:url {t.get('og:url')} ≠ canonical {kanonike.group(1)}")
@@ -153,10 +147,6 @@ def main() -> int:
                         elif w < 600 or h < 315:
                             kujdes.append(f"{rel}: og:image {w}x{h} nën 600x315 — vignette e vogël")
 
-            for celes in ("twitter:site", "twitter:creator"):
-                if celes in t:
-                    kujdes.append(f"{rel}: {celes} = {t[celes]} — të verifikohet që llogaria ekziston")
-
     print(f"Faqe me baliza og: {faqe}")
     if not kontrollo_imazhet:
         print("(pa dosjen `assets/`: kontrolli i imazheve u kapërcye — checkout jo i prodhimit)")
@@ -176,7 +166,7 @@ def main() -> int:
         if len(gabime) > 30:
             print(f"  … dhe {len(gabime) - 30} të tjera")
         return 1
-    print("\n✔ Konform: kartë e plotë, URL koherente, imazhe të pranishme me përmasa të sakta.")
+    print("\n✔ Konform: asnjë balizë twitter, URL koherente, imazhe të pranishme me përmasa të sakta.")
     return 0
 
 

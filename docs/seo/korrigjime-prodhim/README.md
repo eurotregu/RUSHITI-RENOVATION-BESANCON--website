@@ -798,7 +798,7 @@ kurrë nga një vlerësim.
 ```bash
 python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --vetem-permasat           # simulim
 python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation --vetem-permasat --apply   # zbatim
-python3 fix_twitter_cards.py /rruga/drejt/rushiti-renovation                            # paketa e plotë (756 faqe)
+# hapat A–C (shtimi i kartave) janë të pensionuar — shih paketën 10
 ```
 
 ## Prova e testimit
@@ -827,3 +827,79 @@ Mbi një kopje të checkout-it të prodhimit, para zbatimit:
 Skedari i versionuar këtu tani mban opsionin `--vetem-permasat`. PR #61 mbetet
 i dobishëm për auditin dhe vegëlën e verifikimit, por versioni i tij i
 skriptit është i mëparshëm: në rast bashkimi, mbahet ky.
+
+
+---
+
+# Paketa 10 — heqja e plotë e kartave Twitter (02/09/2026)
+
+`fix_hiq_twitter.py`
+
+## Vendimi
+
+Auditi i 31/08 e kishte nxjerrë mungesën e kartave Twitter si mangësi, dhe
+inventari i 02/09 e kishte renditur atë të parën « sipas vlerës ». Ai renditje
+ishte i saktë vetëm në një kuptim shumë të ngushtë — e vetmja paketë e
+mjetuar dhe kurrë e zbatuar — dhe **mashtrues mbi interesin real**: RUSHITI
+nuk ka llogari X, ndërsa Facebook, WhatsApp, Instagram dhe LinkedIn lexojnë
+të gjitha Open Graph, i cili është i plotë mbi 756 nga 757 faqe.
+
+Isufi vendosi: heqje e plotë.
+
+## Çfarë u hoq
+
+31 faqe mbanin secila një balizë të vetme, `<meta name="twitter:card"
+content="summary_large_image">`, gjithnjë midis `og:image:alt` dhe
+`og:site_name`. Asnjë `twitter:title`, `twitter:description`,
+`twitter:image` apo `twitter:image:alt` nuk ekzistonte askund në sit.
+
+Skripti i mbulon të shtatë çelësat `twitter:*`, jo vetëm `card`: një gabarit
+i vjetër ose një degë e vjetër mund ta rifusë ndonjërin, dhe kalimi i
+ardhshëm duhet ta kapë.
+
+## Kushti i sigurisë
+
+X-i, kur nuk gjen `twitter:*`, **bie prapa mbi Open Graph**. Prandaj heqja
+nuk humbet asgjë — as mbi X-in vetë — sa kohë faqja ka `og:title` dhe
+`og:image`. Skripti e verifikon këtë para çdo shkrimi dhe e lë të paprekur
+çdo faqe që nuk i ka të dyja. Mbi të 31 faqet, kushti ishte i plotësuar.
+
+## Prova e testimit
+
+Mbi një kopje të checkout-it të prodhimit (`7a22e0a`):
+
+- **31 skedarë të prekur, 31 baliza të hequra**, të gjitha `twitter:card`;
+- **idempotencë**: kalimi i dytë → 0 skedarë;
+- **asnjë ndryshim tjetër**: për secilin nga 31 skedarët, heqja e balizës nga
+  versioni i mëparshëm jep **saktësisht** versionin e ri, bajt për bajt;
+- **asnjë balizë `og:*` e ndryshuar** në asnjë skedar;
+- **teksti i dukshëm identik** mbi të 757 faqet;
+- **758 blloqe JSON-LD**, të gjitha të vlefshme;
+- gjashtë veglat e regresit: exit 0, përveç `verifiko_schema_org` që kthen
+  **saktësisht të njëjtat 17 konstate** si para heqjes (15 imazhe bloge që
+  mungojnë + 2 fusha avisi mbi faqen e nisjes) — pra heqja nuk prek asgjë
+  nga balisimi.
+
+## Veglat e prekura
+
+- `verifiko_twitter_cards.py` → **`verifiko_apercus_sociaux.py`**. Kontrolli
+  u përmbys: në vend që të kërkojë praninë e `twitter:*`, ai tani sinjalizon
+  **rikthimin** e ndonjërës. Pjesa tjetër — `og:url` == kanonike, ekzistenca
+  e `og:image`, saktësia e përmasave, cilësia e vizualit — mbeti e paprekur,
+  sepse ajo kurrë nuk kishte të bënte me X-in.
+- `fix_twitter_cards.py` → hapat A–C **refuzojnë të ekzekutohen** pa
+  `--vetem-permasat`. Skedari nuk u fshi: hapi D (korrigjimi i përmasave
+  `og:image:*`) mbetet i vlefshëm dhe i pavarur nga X-i.
+
+## Kopja GitHub Pages
+
+`syndic-copropriete-besancon.html` e kësaj depoje mbante të njëjtën balizë.
+E hequr në të njëjtin kalim, me të njëjtin skript.
+
+## Çfarë i mbetet Isufit — i pandryshuar
+
+Heqja e kartave **nuk e zgjidh** çështjen e vizualeve: `og:image` mbetet
+burimi i vetëm i paraqitjes sociale mbi të gjitha rrjetet, dhe asnjë imazh i
+sitit nuk arrin 1200 px gjerësi. `verifiko_apercus_sociaux.py` numëron 712
+paralajmërime mbi këtë — imazhe portret ose nën 600×315. Prodhimi i vizualeve
+rreth **1200×630** mbetet arbitrazhi i vetëm i hapur mbi këtë temë.
