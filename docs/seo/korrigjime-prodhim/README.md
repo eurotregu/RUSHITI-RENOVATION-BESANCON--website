@@ -591,3 +591,95 @@ Kontrollet pas zbatimit:
 
 1. **Autorizimin e zbatimit** mbi prodhimin (755 skedarë, vetëm JSON-LD).
 2. Gjashtë arbitrazhet e §8 të auditit, të pandryshuara.
+
+---
+
+# Paketa 8 — 766 pyetjet FAQ të padukshme (02/09/2026)
+
+| | |
+|---|---|
+| Data | 02/09/2026 |
+| Objekti | Konstati **P1-1** i auditit të 31/08, i vetmi konstat bllokues që mbetej pa vegël |
+| Depoja e synuar | `eurotregu/rushiti-renovation` (prodhimi, 757 faqe, commit `b7e42cb`) |
+| Statusi | **Skript i shkruar dhe i provuar — i pazbatuar**, pret arbitrazhin dhe autorizimin e Isufit |
+
+## Problemi
+
+Google e kërkon shprehimisht: përmbajtja e një `FAQPage` duhet të jetë e
+dukshme për vizitorin mbi faqen që e balison. Përmbajtje që jeton vetëm në
+JSON-LD është shkelje e rregullave, e ndëshkueshme me veprim manual.
+
+Auditi numëroi **766 pyetje** të tilla, në dy familje:
+
+- **grila, 681 faqe** — gabariti shton në balisim një pyetje zone që nuk jepet
+  kurrë në HTML: « Vous déplacez-vous à Avanne-Aveney ? », ose për lagjet
+  « Intervenez-vous dans le quartier Velotte ? » ;
+- **blogu, 9 artikuj (29 pyetje)** — i gjithë seksioni FAQ mungon nga trupi i
+  artikullit. Artikulli i dhjetë, `blog/reparer-plafond-degat-des-eaux-besancon.html`,
+  e shfaq të vetin — **ai është gabariti i ndjekur këtu, fjalë për fjalë**.
+
+## Dy rrugë, arbitrazhi i Isufit
+
+`fix_faq_dukshme.py` i mban të dyja dhe nuk vendos në vend të tij:
+
+| Mënyra | Çfarë bën | Kosto |
+|---|---|---|
+| `--afisho` *(parazgjedhje, rekomandimi i auditit)* | E bën të dukshme pyetjen që tashmë ekziston në balisim | Faqja fiton një pyetje-përgjigje të vërtetë |
+| `--hiq` | Heq nga JSON-LD pyetjet që faqja nuk i shfaq | Faqja humbet përmbajtje |
+
+**Asnjë fjalë nuk shkruhet në asnjërën mënyrë.** Në `--afisho` teksti vjen
+fjalë për fjalë nga `acceptedAnswer`, i shkruar dhe i validuar më parë. I
+vetmi tekst që nuk vjen nga balisimi është titulli i seksionit
+« Questions fréquentes » i 9 artikujve — i kopjuar nga gabariti i faqes së
+dhjetë, jo i shpikur.
+
+Rekomandimi mbetet ai i auditit: **`--afisho`**. « Vous déplacez-vous à X ? »
+është pyetja që klienti bën vërtet, dhe përgjigjja — deplasim i përfshirë,
+diagnostikë falas pa angazhim — është pikërisht ajo që e bind. Fshehja e saj
+humbet një përgjigje të mirë dhe nuk fiton asgjë.
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_faq_dukshme.py /rruga/drejt/rushiti-renovation                    # simulim
+python3 fix_faq_dukshme.py /rruga/drejt/rushiti-renovation --afisho --apply
+python3 fix_faq_dukshme.py /rruga/drejt/rushiti-renovation --hiq --apply
+```
+
+## Prova e testimit (mbi kopje të checkout-it real, `b7e42cb`)
+
+Të dyja mënyrat: **690 skedarë, 766 pyetje** (681 grilë + 9 blog), dhe të dyja
+e kthejnë kontrollin e pyetjeve të padukshme në **0**.
+
+- **idempotencë e provuar** në të dyja mënyrat: 2ᵉ passe → 0 skedarë;
+- **simetri e provuar**: `--afisho` nuk prek asnjë bllok JSON-LD (0 faqe) dhe
+  pasuron tekstin e dukshëm (690); `--hiq` nuk prek asnjë fjalë të tekstit të
+  dukshëm (0) dhe lehtëson balisimin (690);
+- **balanca e tageve** `details`, `summary`, `section`, `article`, `div`,
+  `main`: e mbyllur mbi të 757 faqet, në të dyja mënyrat;
+- **prova që asgjë nuk është shpikur**: mbi të 681 faqet e grilës, **çdo fjalë
+  e shtuar** gjendet në JSON-LD-në e vetë faqes. Mbi 9 artikujt, e njëjta gjë
+  plus titulli i seksionit i gabaritit;
+- **rendering i verifikuar në Chromium**: pyetja e zonës del si `<details>` i
+  fundit i FAQ-së ekzistuese; seksioni FAQ i blogut del para CTA-së, si te
+  gabariti;
+- **të pesë veglat e tjera të regresit**: exit 0.
+
+### Zinxhiri paketa 7 + paketa 8
+
+Të dy urdhrat e zbatimit (7→8 dhe 8→7) japin një rezultat **identik bit për
+bit**. Bashkë, ato e ulin auditin nga **883 konstate në 17** — dhe të 17-tat
+janë saktësisht dy arbitrazhet e mbetura:
+
+```
+      15  imazh i deklaruar që s'ekziston     → vizualet e 9 artikujve
+       1  aggregateRating mbi biznesin        → doktrina e avis-eve (index.html)
+       1  review mbi biznesin                 → e njëjta doktrinë
+```
+
+758 blloqe JSON-LD të rilexuara pas zinxhirit: **0 të pavlefshme**.
+
+## Çfarë pret Isufi
+
+1. **Arbitrazhi**: `--afisho` apo `--hiq` ?
+2. **Autorizimi i zbatimit** mbi prodhimin, për paketën 7 dhe këtë.
