@@ -487,3 +487,107 @@ Arbitrazhi i doktrinës së avis-eve (heqje e `aggregateRating` në prodhim apo
 rishikim i relevës së 22/08), dënominacioni social i saktë për `legalName`,
 koordinatat GPS të adresës, dhe vendimi për pyetjen e zonës: të shfaqet apo të
 hiqet nga balisimi.
+
+---
+
+# Paketa 7 — korrigjimet Schema.org pa arbitrazh (02/09/2026)
+
+| | |
+|---|---|
+| Data | 02/09/2026 |
+| Objekti | Zbatimi i pikave të auditit të 31/08 që **nuk presin asnjë vendim** nga Isufi (`../audit-schema-org-2026-08-31.md`, §7) |
+| Depoja e synuar | `eurotregu/rushiti-renovation` (prodhimi, 757 faqe, commit `b7e42cb`) |
+| Statusi | **Skript i shkruar dhe i provuar mbi prodhimin — i pazbatuar**, pret autorizimin e Isufit |
+
+## Ndarja: çfarë hyn, çfarë pret
+
+Auditi i 31/08 la 10 veprime dhe 6 arbitrazhe. Paketa 7 merr **vetëm** ato ku
+korrigjimi është i pakundërshtueshëm — një shkelje e rregullave të Google, një
+e dhënë faktikisht e gabuar, ose një veti falas. Çdo gjë që kërkon një vendim
+mbetet jashtë, e paprekur.
+
+| §7 | Veprimi | Paketa 7 |
+|---|---|---|
+| 1 | `aggregateRating` mbi `zones-intervention.html` | ✔ hapi **A** |
+| 2 | doktrina e avis-eve mbi `index.html` | ⏸ **arbitrazh i Isufit** |
+| 3 | vetia `image` e 9 artikujve pa vizual | ⏸ **arbitrazh i Isufit** |
+| 4 | FAQ-ja e padukshme e 10 artikujve të blogut | ⏸ punë redaktoriale |
+| 5 | pyetja e zonës e ~736 faqeve të grilës | ⏸ **arbitrazh i Isufit** |
+| 6 | 99 përgjigje që ndryshojnë nga teksti | ✔ hapi **G** |
+| 7 | `addressRegion` mbi `index.html` dhe `a-propos.html` | ✔ hapi **B** |
+| 8 | `publisher` i blogut → `@id` kanonike | ✔ hapi **C** |
+| 9 | `LocalBusiness` mbi `mentions-legales.html` | ✔ hapi **D** |
+| 10 | `vatID`, `knowsAbout`, `url` mbi `Service` | ✔ hapat **E** dhe **F** |
+| 10 | `geo` i unifikuar | ⏸ presin koordinatat e sakta |
+
+Dy zgjedhje meritojnë shpjegim:
+
+- **Hapi A nuk e prek `index.html`.** Skripti heq notën **vetëm nga faqet që
+  s'e shfaqin** — aty ku balisimi është shkelje e qartë. Faqja e pritjes e
+  shfaq notën 4,7/34 dhe të tre avis-et fjalë për fjalë: aty pyetja nuk është
+  konformiteti por doktrina e 22/08, dhe vendimi i takon Isufit. Skripti e
+  raporton këtë rast si `A~` («i ruajtur») pa e ndryshuar.
+- **Hapi G shkon nga faqja drejt JSON-LD-së, kurrë e kundërta.** Përgjigjja e
+  balisuar zëvendësohet me tekstin e `<div class="ans">` të vetë faqes. Asnjë
+  fjalë nuk shkruhet: teksti i dukshëm mbetet i pandryshuar, prova më poshtë.
+- **`legalName` nuk preket**, dhe nyja e re e `mentions-legales.html` nuk e
+  mban: dënominacioni social pret K-bis-in (§8 e auditit).
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_schema_org.py` | Korrigjimi në shtatë hapa, **idempotent**. Ndërhyrje tekstuale të synuara mbi JSON-LD-në: formatimi i bllokut ruhet, çelësat nuk rirenditen. Shkruan vetëm nëse çdo bllok mbetet JSON i vlefshëm |
+| `verifiko_schema_org.py` | Vegla e regresit e paketës 6, e papërdorur ndryshe — mbetet kontrolli para çdo deploy-i |
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_schema_org.py /rruga/drejt/rushiti-renovation           # simulim
+python3 fix_schema_org.py /rruga/drejt/rushiti-renovation --apply   # zbatim
+python3 verifiko_schema_org.py /rruga/drejt/rushiti-renovation      # verifikim
+```
+
+## Prova e testimit (mbi një kopje të checkout-it real, `b7e42cb`)
+
+Simulimi dhe zbatimi japin të njëjtat shifra — **755 skedarë**:
+
+```
+       1  A — notë/avis të vetëshpallur të hequr (faqe që s'i shfaq)
+       2  B — addressRegion i korrigjuar
+      12  C — publisher i lidhur me entitetin
+       1  D — nyje identiteti e shtuar (mentions-legales)
+    1480  E — vatID / knowsAbout të shtuar
+     733  F — url i shtuar mbi nyje Service
+      99  G — përgjigje FAQ e rigjeneruar nga faqja
+```
+
+Kontrollet pas zbatimit:
+
+- **idempotencë e provuar**: riekzekutimi prek **0 skedarë**;
+- **758 blloqe JSON-LD** të rilexuara me `json.loads`: **0 të pavlefshme**;
+- **teksti i dukshëm i të 757 faqeve: identik bit për bit** para/pas —
+  asnjë fjalë e shkruar, asnjë e fshirë;
+- **asnjë skedar i ndryshuar jashtë JSON-LD-së**: HTML-ja me blloqet e
+  maskuara është identike para/pas mbi të gjitha faqet;
+- **krahasim çelës për çelës** mbi të 758 blloqet: të vetmet vlera të
+  ndryshuara janë `addressRegion` (2) dhe `text` i përgjigjeve (99). Gjithçka
+  tjetër është shtim ose heqje e pritur — `knowsAbout` (741 nyje), `vatID`
+  (741), `url` (736), `@id` i publisher-it (12), nyja e `mentions-legales`,
+  dhe të katër fushat e `aggregateRating` të `zones-intervention`;
+- `verifiko_schema_org.py`: **99 përgjigje divergjente → 0**, `aggregateRating`
+  2 → 1 dhe `review` 1 → 1 (të dyja mbi `index.html`, të ruajtura me qëllim).
+  Mbeten 766 pyetjet e padukshme dhe 15 imazhet — të dyja në pritje të
+  arbitrazhit, siç ishte parashikuar;
+- **të pesë veglat e tjera të regresit** (`verifiko_sameas`,
+  `verifiko_horaires_nap`, `verifiko_degat_des_eaux`, `verifiko_demande_rapide`,
+  `verifiko_papier_peint`) japin **exit 0 para dhe pas** — asnjë fitim i
+  mëparshëm i prishur;
+- mbi **këtë depo** (kopja GitHub Pages): **0 skedarë të prekur**. Dy faqet e
+  korrigjuara me dorë më 31/08 janë tashmë konforme — skripti konvergjon me to,
+  provë e kryqëzuar që rregullat e tij janë të njëjtat.
+
+## Çfarë pret Isufi
+
+1. **Autorizimin e zbatimit** mbi prodhimin (755 skedarë, vetëm JSON-LD).
+2. Gjashtë arbitrazhet e §8 të auditit, të pandryshuara.
