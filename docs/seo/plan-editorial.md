@@ -72,6 +72,63 @@ d'abord ce qui imprime déjà, puis crée peu mais au bon moment — publier 6 �
    rapport #2 — il tranche aussi la décision crépi et mesure l'effet des
    corrections déployées en août.
 
+---
+
+## Addendum du 02/09/2026 — quatre sujets proposés par un rapport externe
+
+> Produit par `rushiti-architecte-seo` (mode plan éditorial). Isuf a transmis
+> la recommandation « Créer un blog ou une section Conseils & Astuces » d'un
+> rapport d'audit externe, avec quatre sujets. **Le blog existe** : 11 articles
+> en production (880 à 1 740 mots), lien « Conseils » dans le menu — comptés
+> dans le dépôt de production le 02/09/2026. La question n'est donc pas de
+> créer le blog, mais de savoir si ces quatre sujets méritent un article sans
+> concurrencer ce qui existe. Chaque sujet est passé contre les 11 articles, le
+> registre `regjistri-fjale-kyce.csv` et les quartiers canoniques de
+> `donnees-rushiti.md`.
+
+### Verdict sujet par sujet
+
+| Sujet proposé | Collision constatée | Verdict |
+|---|---|---|
+| « Choisir la bonne peinture pour un appartement de la Boucle du Doubs » | « La Boucle » n'est pas un quartier canonique (liste unique des 13 quartiers) ; le registre porte déjà « peinture bâti ancien boucle besançon » en **arbitrage**, demande non prouvée | **Reformuler** — sujet non géolocalisé « Quelle peinture pour un appartement ancien : finition, support, murs qui ont vécu », le centre ancien traité en section, pas en cible |
+| « Pourquoi les plafonds des logements de Planoise demandent une préparation spéciale » | Planoise a déjà **18 pages locales** en production (peinture, plâtrerie, faux plafonds, ratissage…) ; un article géolocalisé les cannibaliserait ; la prémisse technique (plafonds des années 60-70) n'est pas établie | **Écarter** comme article. Si un vrai problème récurrent existe (plafond crépi ou gouttelette à lisser), il devient un satellite non géolocalisé du pilier ratissage-enduit, nourri par la matière chantier d'Isuf |
+| « Dégât des eaux en Franche-Comté : ce qu'il faut savoir avant d'appeler l'assurance » | Doublon direct de `/blog/degat-des-eaux-assurance-qui-paie-quoi` (attribué au registre) et de la ligne 2 du plan (déroulé du chantier avec l'assurance sur le pilier) ; « Franche-Comté » trop large, aucun signal | **Reformuler** — l'angle distinct est celui du vivier d'idées : « Dégât des eaux : les bons réflexes des 48 premières heures » (gestes, photos datées, ne pas repeindre), qui renvoie vers « qui paie quoi » au lieu de le répéter |
+| « Isolation des murs en bâti ancien : ITI ou ITE ? » | « ITI ou ITE que choisir » est **déjà attribué** à `/blog/isolation-interieure-iti-perte-de-place-epaisseur` ; chaque page ITI porte un H3 « ITI ou ITE » et une FAQ ; la ligne 3 du plan (« mur froid », octobre) couvre déjà l'angle bâti ancien | **Écarter** comme article ; **enrichir** l'article ITI existant d'une section bâti ancien (mur en pierre, humidité, pare-vapeur) |
+
+### Lignes ajoutées à la roadmap
+
+| # | Sujet | Silo → pilier | Famille | Protocoles | Priorité | Fenêtre | Statut |
+|---|---|---|---|---|---|---|---|
+| 7 | **Article « Dégât des eaux : les bons réflexes des 48 premières heures »** — couper, documenter (photos datées), déclarer, ne pas repeindre ; premier lien vers le pilier, liens frères vers « qui paie quoi », « réparer un plafond », « réparer un mur » | 5. Dégât des eaux → `/degat-des-eaux-besancon` | Méthode & pédagogie | DÉGÂT DES EAUX · AEO | 🟠 | **Octobre-novembre** — avant la haute saison hivernale, cohérent avec la ligne 2 | **Idée** → verdict PORTA (`rushiti-keyword-map`) puis brief |
+| 8 | **Article « Quelle peinture pour un appartement ancien : finition, support, murs qui ont vécu »** — mat/velours/satin selon la pièce, plâtre qui farine, mur nord, préparation avant tout ; section « dans le centre ancien de Besançon » | 1. Peinture → `/peinture-interieure-besancon` | Choix & comparaison | BÂTI ANCIEN · AEO | 🟡 | **À caler** — aucune preuve de demande (PV) ; lever d'abord l'arbitrage « peinture bâti ancien » du registre | **Idée** → volume (Trends / Keyword Planner) puis PORTA |
+| 9 | **Enrichir l'article ITI existant** : section « Isoler par l'intérieur un mur ancien en pierre » (humidité du support, pare-vapeur, lame d'air) | 4. Isolation → `/isolation-interieure-besancon` | Enrichissement satellite | BÂTI ANCIEN · AEO | 🟢 | **Octobre**, dans la même fenêtre que les lignes 3 et 4 | Porte passée (renfort d'existant, requête attribuée au registre) |
+
+### Écarté, et pourquoi
+
+- **Article géolocalisé Planoise** : hors périmètre du blog (les pages
+  quartier appartiennent à `rushiti-page-locale`) et déjà servi par 18 pages
+  locales ; prémisse technique non vérifiée — ne s'écrit que si Isuf la
+  confirme par la matière chantier.
+- **Article « ITI ou ITE »** : requête déjà attribuée à un article existant ;
+  un second fabriquerait la cannibalisation que la ligne 9 évite.
+- **Article « avant d'appeler l'assurance »** sous cette forme : doublon de
+  « qui paie quoi » ; l'angle 48 heures (ligne 7) le remplace.
+- **« La Boucle » comme cible** : nom non canonique, écrit seulement comme
+  description géographique.
+
+### Les 3 prochaines actions, routées
+
+1. **Lignes 7 et 8 → `rushiti-keyword-map`** pour le verdict PORTA et la
+   consignation au registre (dont la levée de l'arbitrage « peinture bâti
+   ancien »).
+2. **Ligne 7 → `rushiti-brief-seo`** dès la porte passée (analyse SERP :
+   ce que disent les assureurs et les plateformes de devis, et ce qu'un
+   artisan de terrain peut dire de plus).
+3. **Ligne 9 → rédaction ici**, avec la ligne 3, une fois la matière bâti
+   ancien confirmée par Isuf (mur en pierre humide : ce qu'on fait vraiment).
+
+Rien n'est rédigé ni publié sans validation d'Isuf.
+
 ## Journal du plan
 
 | Date | Événement |
@@ -79,3 +136,4 @@ d'abord ce qui imprime déjà, puis crée peu mais au bon moment — publier 6 �
 | 21/08/2026 | Création du plan automne 2026 (6 lignes : 3 enrichissements, 2 créations consignées au registre, 1 candidat à valider). Aucune ligne rédigée à ce jour. |
 | 21/08/2026 (soir) | **Arbitrages rendus par Isuf** : enduit à la chaux — non offert ; rénovation boiseries — non couverte. Registre mis à jour (REFUZOHET, lignes chaux et bois). |
 | 21/08/2026 (soir) | **Ligne 1** : lecture live de l'article moisissure — les 3 actions du brief (H2 VMC, bloc conversion, maillage) déjà déployées en production ; paquet A-B-C-D des compléments (FAQ, photos RGPD, pied d'article) livré dans `docs/seo/contenus/moisissure-plafond-enrichissement.md`, en validation. |
+| 02/09/2026 | **Addendum** : 4 sujets d'un rapport externe évalués — 2 reformulés (lignes 7 et 8), 1 converti en enrichissement (ligne 9), 1 écarté (Planoise, géolocalisé). Blog confirmé existant (11 articles). Aucune ligne rédigée. |
