@@ -1342,6 +1342,16 @@ h4 { font-size: 1.1rem; }
     accent-color: var(--primary);
 }
 
+/* Vérification anti-robot hCaptcha (widget injecté par le script Web3Forms) */
+.form-captcha {
+    margin-bottom: 20px;
+    min-height: 78px; /* hauteur du widget : évite un saut de mise en page au chargement */
+}
+
+.form-captcha .h-captcha iframe {
+    max-width: 100%;
+}
+
 /* Champ piège anti-spam : invisible pour l'utilisateur, rempli par les robots */
 .form-hp {
     position: absolute;

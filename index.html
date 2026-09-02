@@ -820,6 +820,10 @@
                         <input type="checkbox" id="consentement" name="consentement" required>
                         <span>J'accepte que mes coordonnées soient utilisées pour me recontacter au sujet de cette demande. Elles ne sont ni revendues ni utilisées à d'autres fins — voir nos <a href="https://rushiti-renovation.fr/mentions-legales" target="_blank" rel="noopener">mentions légales</a>.</span>
                     </label>
+                    <!-- Vérification anti-robot hCaptcha (fournie par Web3Forms, sans clé propre) -->
+                    <div class="form-captcha">
+                        <div class="h-captcha" data-captcha="true" data-lang="fr"></div>
+                    </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-full">Envoyer ma demande</button>
                     <p class="form-status" role="status" aria-live="polite"></p>
                     <div class="form-reassure">
@@ -916,5 +920,7 @@
     </button>
 
     <script src="js/main.js"></script>
+    <!-- Web3Forms : affiche le hCaptcha du formulaire de contact (chargé en différé, ne bloque pas le rendu) -->
+    <script src="https://web3forms.com/client/script.js" async defer></script>
 </body>
 </html>

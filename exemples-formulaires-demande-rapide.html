@@ -528,6 +528,7 @@ a{color:var(--primary);text-decoration:none}
 
       <h3 style="font-size:17px;margin-bottom:6px">2. Anti-spam</h3>
       <p style="margin-bottom:18px;color:var(--text-light)">Chaque variante contient un champ piège invisible (<code>entreprise_hp</code>) : un humain ne le voit pas, un robot le remplit, et l'envoi est alors ignoré sans message d'erreur. C'est suffisant contre le spam automatique courant, sans imposer de captcha à vos clients.</p>
+      <p style="margin-bottom:18px;color:var(--text-light)"><strong>Revu le 02/09/2026 :</strong> le piège seul ne suffit plus. Ce soir-là, un robot de balayage (test d'injection SQL) a envoyé 17 soumissions en une minute sur le formulaire de <code>/peinture-interieure-besancon</code>, champs vides et code d'attaque dans la case de consentement — sans jamais toucher le champ piège. Réponse retenue : le <strong>hCaptcha fourni par Web3Forms</strong> (aucune clé ni inscription à créer), une case « Je suis humain » avant le bouton d'envoi, vérifiée côté serveur une fois activée dans le tableau de bord Web3Forms. Détail dans <code>docs/formulaire-demande-rapide-variante-b.md</code>.</p>
 
       <h3 style="font-size:17px;margin-bottom:6px">3. RGPD</h3>
       <p style="margin-bottom:18px;color:var(--text-light)">La case de consentement et une phrase de finalité claire sont le minimum. Pensez à ce que la page mentions légales indique qui traite les données, pour quoi, combien de temps elles sont conservées et comment les faire supprimer. Le texte de la case est à valider par vos soins.</p>

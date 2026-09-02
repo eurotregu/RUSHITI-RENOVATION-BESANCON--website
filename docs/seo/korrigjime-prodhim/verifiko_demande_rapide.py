@@ -9,6 +9,8 @@ Kontrollet për secilën nga 30 faqet pilier me formular:
   - subjekt jo bosh që mbaron me « — rushiti-renovation.fr »;
   - redirect /merci, honeypot botcheck, lidhja /mentions-legales;
   - fusha e fshehtë page = URL-ja e faqes (atribuim për faqe);
+  - hCaptcha (02/09/2026): 1 widget h-captcha para butonit, skripti Web3Forms
+    dhe kontrolli inline para </body> — edhe për /contact;
   - strukturë e shëndoshë: 1 </head>, 1 </main>, 1 </body>, <form> = </form>,
     asnjë «</main></main>» i dyfishuar.
 
@@ -60,6 +62,23 @@ PAGES = [
 ]
 
 
+HCAPTCHA_WIDGET = '<div class="h-captcha" data-captcha="true" data-lang="fr"'
+HCAPTCHA_SKRIPTI = 'src="https://web3forms.com/client/script.js"'
+HCAPTCHA_KONTROLLI = '<script>/*hcaptcha*/'
+
+
+def kontrollo_hcaptcha(h):
+    """Mbrojtja anti-robot e 02/09/2026 (fix_hcaptcha_formular.py)."""
+    p = []
+    if h.count(HCAPTCHA_WIDGET) != 1:
+        p.append("widget h-captcha: %d herë" % h.count(HCAPTCHA_WIDGET))
+    if HCAPTCHA_SKRIPTI not in h:
+        p.append("skripti Web3Forms (hCaptcha) mungon")
+    if HCAPTCHA_KONTROLLI not in h:
+        p.append("kontrolli inline hCaptcha mungon")
+    return p
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -92,6 +111,7 @@ def main():
             p.append("lidhja /mentions-legales mungon")
         if ('name="page" value="https://rushiti-renovation.fr/%s"' % fname[:-5]) not in h:
             p.append("fusha page nuk tregon faqen")
+        p += kontrollo_hcaptcha(h)
         if "</main></main>" in h:
             p.append("</main></main> i dyfishuar")
         for tag in ("</head>", "</main>", "</body>"):
@@ -105,6 +125,24 @@ def main():
             print("GABIM  %s — %s" % (fname, "; ".join(p)))
         else:
             print("OK     %s" % fname)
+
+    # /contact — i njëjti formular, i njëjti çelës, e njëjta mbrojtje hCaptcha
+    contact = root / "contact.html"
+    if not contact.exists():
+        print("MUNGON contact.html")
+        gabime += 1
+    else:
+        ch = contact.read_text(encoding="utf-8")
+        p = kontrollo_hcaptcha(ch)
+        if ch.count(ACCESS_KEY) != 1:
+            p.append("access_key: %d herë" % ch.count(ACCESS_KEY))
+        if 'name="botcheck"' not in ch:
+            p.append("honeypot botcheck mungon")
+        if p:
+            gabime += 1
+            print("GABIM  contact.html — %s" % "; ".join(p))
+        else:
+            print("OK     contact.html")
 
     # Kontrollet KUJDES — priten nga PR #10 «mise en forme»; s'bllokojnë exit-in
     css = root / "assets" / "css" / "s971fb819.css"
@@ -120,7 +158,7 @@ def main():
     else:
         print("OK     /merci mbart event Lead të dedikuar")
 
-    print("\n%d faqe + /merci të kontrolluara, %d me probleme." % (len(PAGES), gabime))
+    print("\n%d faqe + /contact + /merci të kontrolluara, %d me probleme." % (len(PAGES), gabime))
     sys.exit(1 if gabime else 0)
 
 

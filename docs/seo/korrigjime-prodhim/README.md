@@ -920,3 +920,65 @@ zbrazët nuk gjen asgjë — pra një kontroll i tipit « a ka mbetur baliza? »
 del **i dështuar rrejshëm**. Verifikimi live bëhet vetëm përmes Firecrawl-it,
 i cili e merr faqen nga ana e vet. Kjo shtohet te kurthi tashmë i njohur i
 paketës 5: lexoni **rawHtml**, kurrë përmbledhjen e LLM-së.
+
+---
+
+# Paketa 11 — mbrojtja anti-robot hCaptcha e formularëve (02/09/2026)
+
+| | |
+|---|---|
+| Data | 02/09/2026 |
+| Objekti | 17 dërgesa automatike në një minutë (21h23–21h24) mbi formularin e `/peinture-interieure-besancon`: skanim SQL injection, fushat bosh, kodi i sulmit në fushën `consentement`. Asnjë dëm i mundshëm (Web3Forms, pa bazë të dhënash), 17 e-mailet klasifikuar spam |
+| Depoja e synuar | `eurotregu/rushiti-renovation` — **klon vetëm-lexim** në këtë seancë; skripti testuar mbi HTML-në reale, zbatimi në prodhim pret autorizimin e Isufit |
+| Dokumenti | `../../formulaire-demande-rapide-variante-b.md` (« Mise à jour du 02/09/2026 ») |
+
+## Pse honeypot-i nuk mjaftoi
+
+`botcheck` kap robotët që plotësojnë çdo fushë. Një skaner dobësish e rimerr
+formularin siç është dhe ndryshon **një fushë në herë**: kutinë e fshehur nuk e
+shënon kurrë. Duhet një provë që roboti nuk e kalon dot: hCaptcha e Web3Forms
+(pa çelës të vetin, pa regjistrim, çelësi i përbashkët i planit falas
+injektohet nga skripti i tyre).
+
+## Skedarët
+
+| Skedari | Roli |
+|---|---|
+| `fix_hcaptcha_formular.py` | Shton në 31 faqe (30 pilier + `contact.html`) widget-in `h-captcha` para butonit « Envoyer », skriptin Web3Forms dhe kontrollin inline (mesazh në frëngjisht nëse kutia s'është shënuar) para `</body>`. **Idempotent** |
+| `verifiko_demande_rapide.py` | Zgjeruar: kontrollon tre elementët hCaptcha mbi 30 faqet pilier dhe mbi `/contact` (kontroll i ri) |
+
+## Prova e testimit (02/09, mbi kopjen e klonit të prodhimit, commit `b838f92`)
+
+- `verifiko` para: 31 GABIM (hCaptcha mungon kudo) — pritej;
+- `fix` simulim: 31 DO SHTOHEJ, 0 probleme; `--apply`: 31 SHTUAR;
+- `verifiko` pas: **0 probleme** (30 pilier + `/contact` + `/merci`);
+- rizbatim: **0 ndryshime** (idempotencë e provuar);
+- `node --check` mbi skriptin inline: OK.
+
+Dy kurthe të kapura gjatë testimit: (1) `peinture-facade-isolation-exterieure`
+mban `<p><button…>` pa `class="u35"` — ankora u bë regex; (2) selektori i
+skriptit inline nuk duhet të përmbajë vargun e plotë `action="…/submit"`, se
+`verifiko` e numëron dhe gjen 2 formularë.
+
+## Çfarë i mbetet Isufit — i domosdoshëm
+
+1. **Aktivizimi i hCaptcha në panelin Web3Forms** (app.web3forms.com →
+   formulari me çelësin `1aee0248-…`). Pa të, widget-i shfaqet por dërgesat pa
+   captcha kalojnë ende. Radha: **së pari kodi në prodhim, pastaj aktivizimi**
+   — e kundërta do t'i bllokonte të gjitha dërgesat.
+2. `/simulateur-peinture` poston me fetch JSON pa widget: pas aktivizimit bie
+   te fallback-u `mailto:`. Trajtim i veçantë ose çelës i dytë — [À COMPLÉTER].
+3. Mentions légales: hCaptcha (Intuition Machines) si nën-përpunues — [À COMPLÉTER].
+
+## Përdorimi (mbi një checkout të depos së prodhimit)
+
+```bash
+python3 fix_hcaptcha_formular.py /rruga/drejt/rushiti-renovation           # simulim
+python3 fix_hcaptcha_formular.py /rruga/drejt/rushiti-renovation --apply   # zbatim
+python3 verifiko_demande_rapide.py /rruga/drejt/rushiti-renovation         # 0 probleme = konform
+```
+
+## Kopja GitHub Pages
+
+`index.html`, `js/main.js`, `css/style.css` të kësaj depoje: i njëjti widget,
+i njëjti skript Web3Forms, kontrolli në `main.js` (mesazh te `.form-status`).

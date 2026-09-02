@@ -8,6 +8,66 @@
 > que la page `/contact`), et la copie GitHub Pages (`index.html` de ce dépôt)
 > utilise désormais le même envoi.
 
+## Mise à jour du 02/09/2026 — protection anti-robot hCaptcha
+
+### Ce qui s'est passé
+
+Le 02/09/2026 entre 21h23 et 21h24, le formulaire de
+`/peinture-interieure-besancon` a reçu **17 soumissions automatiques** en une
+minute : Nom / Tél / E-mail / Message vides, et dans le champ `consentement`
+des charges d'injection SQL (`oui' UNION ALL SELECT NULL,…`) à la place de
+« oui ». C'est un balayage générique de vulnérabilités, pas une attaque ciblée,
+et il ne pouvait rien atteindre : le formulaire poste chez Web3Forms, aucune
+base de données ne se trouve derrière. Les 17 e-mails ont été classés en spam.
+
+Le honeypot `botcheck` n'a rien filtré : un scanner de ce type ne coche pas
+une case cachée, il rejoue le formulaire tel quel en mutant un champ à la
+fois. Le piège ne protège que des robots qui remplissent tout.
+
+### Ce qui est ajouté (31 formulaires : 30 pages pilier + `/contact`)
+
+Web3Forms fournit un hCaptcha « zéro configuration » : pas de clé à créer, pas
+de compte hCaptcha, la clé de site partagée du plan gratuit est injectée par
+leur script. Trois lignes par page, posées par
+`docs/seo/korrigjime-prodhim/fix_hcaptcha_formular.py` (idempotent, testé
+sur les 31 pages réelles : 31 modifications, 0 erreur, second passage
+0 modification) :
+
+1. le widget, juste avant le bouton « Envoyer ma demande » :
+   `<div class="h-captcha" data-captcha="true" data-lang="fr"></div>` ;
+2. le script Web3Forms avant `</body>` :
+   `<script src="https://web3forms.com/client/script.js" async defer></script>` ;
+3. un contrôle inline (même endroit) : case non cochée → l'envoi est bloqué
+   et un message en français s'affiche sous le widget, au lieu de la page
+   d'erreur anglaise de Web3Forms. Si le script a été bloqué (extension,
+   réseau), le contrôle se retire et le POST natif part comme avant : c'est
+   Web3Forms qui tranche côté serveur.
+
+`verifiko_demande_rapide.py` contrôle désormais les trois éléments sur les
+30 pages pilier et sur `/contact`. La copie GitHub Pages (`index.html`,
+`js/main.js`, `css/style.css` de ce dépôt) reçoit la même protection.
+
+### Ce qui reste à faire par Isuf — indispensable
+
+- **Activer hCaptcha dans le tableau de bord Web3Forms**
+  (app.web3forms.com → formulaire portant la clé `1aee0248-…` → protection
+  anti-spam → hCaptcha). Sans cette activation, le widget s'affiche mais une
+  soumission sans captcha passe encore. Le déploiement du code peut précéder
+  l'activation (le widget est alors inoffensif), l'inverse est à éviter : une
+  activation sans widget bloquerait tous les envois.
+- **`/simulateur-peinture`** utilise la même clé mais poste en `fetch` JSON,
+  sans widget. Une fois hCaptcha activé sur la clé, Web3Forms refusera ses
+  envois et le simulateur basculera sur son repli `mailto:` existant
+  (demande non perdue, mais dépendante de la messagerie du visiteur). À
+  traiter séparément : widget rendu explicitement dans le formulaire
+  construit en JavaScript, ou clé Web3Forms distincte pour le simulateur.
+  [À COMPLÉTER : décision]
+- **Mentions légales** : ajouter hCaptcha (Intuition Machines, Inc.) comme
+  sous-traitant du formulaire, à côté de Web3Forms. [À COMPLÉTER]
+- Si hCaptcha se révèle trop pénible pour les clients (les énigmes du plan
+  gratuit sont parfois laborieuses), l'alternative documentée par Web3Forms
+  est Cloudflare Turnstile — réservée à leur offre payante.
+
 ## État déployé (production — dépôt `eurotregu/rushiti-renovation`)
 
 Chaque page pilier `-besancon` porte une section `<section class="soft"
@@ -20,6 +80,8 @@ id="demande-rapide">` avec :
 - champ caché `page` avec l'URL de la page (attribution précise de chaque lead) ;
 - redirection vers `https://rushiti-renovation.fr/merci` après envoi ;
 - honeypot `botcheck` (case cachée : cochée = robot, Web3Forms ignore l'envoi) ;
+- depuis le 02/09/2026 : widget hCaptcha avant le bouton + script Web3Forms
+  et contrôle inline avant `</body>` (voir la mise à jour ci-dessus) ;
 - phrase de consentement RGPD avec lien vers `/mentions-legales` ;
 - service pré-sélectionné selon la page (liste identique à `/contact`).
 
