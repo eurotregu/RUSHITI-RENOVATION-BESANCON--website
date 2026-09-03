@@ -1,0 +1,71 @@
+{
+  "slug": "papier-peint-escalier-[À COMPLÉTER : commune]",
+  "titre": "[À COMPLÉTER : ex. Papier peint à motifs dans une cage d'escalier à …]",
+  "titre_court": "Papier peint à motifs, cage d'escalier",
+  "title_seo": "[À COMPLÉTER : ≤ 60 caractères]",
+  "meta_description": "[À COMPLÉTER : ≤ 160 caractères, problème → résultat]",
+  "prestation_principale": "papier-peint",
+  "prestations": [
+    "papier-peint",
+    "ratissage-enduit",
+    "peinture-interieure"
+  ],
+  "commune": "[À COMPLÉTER : nom canonique, ex. Mamirolle]",
+  "zone_slug": "[À COMPLÉTER : slug de la page locale si elle existe, ex. mamirolle]",
+  "quartier": "",
+  "type_bati": "[À COMPLÉTER : ex. maison des années 1980, combles aménagés]",
+  "client_type": "[À COMPLÉTER : Particulier / Syndic / Bailleur / Assurance / Commerce]",
+  "date_chantier": "[À COMPLÉTER : AAAA-MM]",
+  "duree": "",
+  "en_bref": "[À COMPLÉTER : 2 phrases, problème → ce qu'on a fait → résultat]",
+  "probleme": "[À COMPLÉTER : ce que vivait le client, avec ses mots. 1 à 2 paragraphes séparés par une ligne vide]",
+  "diagnostic": "[À COMPLÉTER : ce que la visite a montré, mesures faites (humidité, planéité…), cause identifiée]",
+  "intervention": {
+    "preparation": "[À COMPLÉTER : protection, dépose, préparation des supports]",
+    "traitement": "[À COMPLÉTER : traitement de la cause, produits et techniques, DTU si exact]",
+    "finition": "[À COMPLÉTER : finition, nettoyage, réception]"
+  },
+  "resultat": "[À COMPLÉTER : ce qui a changé pour le client, sans chiffre inventé]",
+  "points_cles": [
+    "[À COMPLÉTER : 3 enseignements techniques]",
+    "",
+    ""
+  ],
+  "accord_photos": false,
+  "photos": [
+    {
+      "fichier": "papier-peint-escalier.webp",
+      "etape": "apres",
+      "alt": "Papier peint posé dans une cage d'escalier, raccords alignés",
+      "legende": "Cage d'escalier, raccords des motifs"
+    },
+    {
+      "fichier": "papier-peint-motifs.webp",
+      "etape": "apres",
+      "alt": "Pose soignée de papier peint à motifs dans un séjour",
+      "legende": "Séjour, papier peint à motifs"
+    }
+  ],
+  "citation": {
+    "texte": "",
+    "auteur_affiche": "",
+    "accord_ecrit": false,
+    "date_accord": ""
+  },
+  "faq": [
+    {
+      "q": "[À COMPLÉTER : question que ce client posait]",
+      "a": "[À COMPLÉTER]"
+    }
+  ],
+  "articles_lies": [
+    {
+      "url": "/blog/calcul-rouleaux-papier-peint",
+      "ancre": "Combien de rouleaux de papier peint ?"
+    }
+  ],
+  "cta_titre": "",
+  "date_publication": "",
+  "_matiere_visible": "2 photos finies (escalier + séjour : même chantier ?). Préparation des murs (ratissage ?), type de papier (intissé ?), difficulté (hauteur, raccords) à confirmer.",
+  "_statut": "PRÉ-REMPLI depuis les photos du site — tout le reste est à récolter avec questionnaire-chantier.md"
+}

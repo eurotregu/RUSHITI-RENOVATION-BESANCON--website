@@ -1,0 +1,75 @@
+{
+  "slug": "degat-des-eaux-plafond-[À COMPLÉTER : commune]",
+  "titre": "[À COMPLÉTER : ex. Plafond repris après dégât des eaux à …]",
+  "titre_court": "Plafond repris après dégât des eaux",
+  "title_seo": "[À COMPLÉTER : ≤ 60 caractères]",
+  "meta_description": "[À COMPLÉTER : ≤ 160 caractères, problème → résultat]",
+  "prestation_principale": "degat-des-eaux",
+  "prestations": [
+    "degat-des-eaux",
+    "platrerie",
+    "peinture-interieure"
+  ],
+  "commune": "[À COMPLÉTER : nom canonique, ex. Mamirolle]",
+  "zone_slug": "[À COMPLÉTER : slug de la page locale si elle existe, ex. mamirolle]",
+  "quartier": "",
+  "type_bati": "[À COMPLÉTER : ex. maison des années 1980, combles aménagés]",
+  "client_type": "[À COMPLÉTER : Particulier / Syndic / Bailleur / Assurance / Commerce]",
+  "date_chantier": "[À COMPLÉTER : AAAA-MM]",
+  "duree": "",
+  "en_bref": "[À COMPLÉTER : 2 phrases, problème → ce qu'on a fait → résultat]",
+  "probleme": "[À COMPLÉTER : ce que vivait le client, avec ses mots. 1 à 2 paragraphes séparés par une ligne vide]",
+  "diagnostic": "[À COMPLÉTER : ce que la visite a montré, mesures faites (humidité, planéité…), cause identifiée]",
+  "intervention": {
+    "preparation": "[À COMPLÉTER : protection, dépose, préparation des supports]",
+    "traitement": "[À COMPLÉTER : traitement de la cause, produits et techniques, DTU si exact]",
+    "finition": "[À COMPLÉTER : finition, nettoyage, réception]"
+  },
+  "resultat": "[À COMPLÉTER : ce qui a changé pour le client, sans chiffre inventé]",
+  "points_cles": [
+    "[À COMPLÉTER : 3 enseignements techniques]",
+    "",
+    ""
+  ],
+  "accord_photos": false,
+  "photos": [
+    {
+      "fichier": "renovation-plafond.webp",
+      "etape": "pendant",
+      "alt": "Plafond en cours de reprise après dégât des eaux",
+      "legende": "Plafond repris avant mise en peinture"
+    },
+    {
+      "fichier": "renovation-couloir.webp",
+      "etape": "pendant",
+      "alt": "Couloir en cours de rénovation, sol et murs",
+      "legende": "[À COMPLÉTER : même chantier ?]"
+    }
+  ],
+  "citation": {
+    "texte": "",
+    "auteur_affiche": "",
+    "accord_ecrit": false,
+    "date_accord": ""
+  },
+  "faq": [
+    {
+      "q": "[À COMPLÉTER : question que ce client posait]",
+      "a": "[À COMPLÉTER]"
+    }
+  ],
+  "articles_lies": [
+    {
+      "url": "/blog/reparer-plafond-degat-des-eaux-besancon",
+      "ancre": "Réparer un plafond après un dégât des eaux"
+    },
+    {
+      "url": "/blog/degat-des-eaux-assurance-qui-paie-quoi",
+      "ancre": "Dégât des eaux : qui paie quoi"
+    }
+  ],
+  "cta_titre": "",
+  "date_publication": "",
+  "_matiere_visible": "SILO PRIORITAIRE. 1 photo sûre (renovation-plafond). Il faut un vrai dossier : origine de la fuite (réparée par qui), relevés d'humidité, délai de séchage constaté, dossier assurance (vocabulaire IRSI, jamais de promesse de prise en charge).",
+  "_statut": "PRÉ-REMPLI depuis les photos du site — tout le reste est à récolter avec questionnaire-chantier.md"
+}

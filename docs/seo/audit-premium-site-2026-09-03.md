@@ -141,8 +141,8 @@ Sévérité : 🔴 critique · 🟠 élevée · 🟡 moyenne · 🟢 faible. Ver
 **14. Grille locale : ≈ 700 pages identiques à 88 %** 🟠 [Adapter] [Supprimer]
 - Pages : `/{service}-{zone}` — 114 peinture, 92 isolation, 75 plâtrerie, 75 sols, 75 dégât des eaux, 45 ratissage, 42 cloisons, 40 papier peint, 38 faux plafonds, 27 vitrification, 18 parquet, 18 doublage, 16 toile de verre, 16 sol PVC, 15 ragréage, 15 lino
 - Preuve : `/platrerie-mamirolle` (1 646 mots) contre `/platrerie-deluz` (1 582 mots) : **12 % de mots uniques**, 19 % de séquences de 5 mots uniques. Le contenu propre se limite à un paragraphe géographique (distance, population, altitude, repère), une phrase de « chantier type » et la dernière question FAQ. Les avis, la méthode, les prix, les FAQ sont identiques.
-- Impact : Google traite ce motif comme du contenu à l'échelle : pages indexées mais jamais classées, budget de crawl dilué, et risque d'action manuelle « scaled content abuse ». Le plan par paliers d'août (`inventaire-grille-paliers-2026-08.csv` : A 18 / B 10 / C 5 pages par zone) prévoit la consolidation ; en production, 0 page en noindex et 755 URL au sitemap.
-- Correction : (a) appliquer la grille : zones palier C → conserver 5 pages, rediriger 301 les 13 autres vers le pilier service (pas vers l'accueil) ; (b) pour les zones A et B, exiger une preuve locale réelle par page (étude de cas, photo, avis mentionnant la commune, type de bâti observé) ou ne pas garder la page ; (c) ne jamais créer de page « rénovation-{commune} » sans passer par la porte `rushiti-keyword-map` (la PR #9 avait créé ce risque) ; (d) mesurer avant/après avec un groupe témoin.
+- Impact : Google traite ce motif comme du contenu à l'échelle : pages indexées mais jamais classées, budget de crawl dilué, et risque d'action manuelle « scaled content abuse ». **Rectificatif du 03/09 (soir)** : le plan par paliers d'août (A 18 / B 10 / C 5) **est appliqué** en production (706 pages de grille, 644 → 301 redirections, 31 zones en léger dépassement justifié par la GSC). Le problème restant est le contenu : 16 % de contenu propre en médiane sur les 706 pages (`grille-locale/mesure-differenciation-2026-09-03.csv`).
+- Correction : (a) ~~appliquer la grille~~ déjà fait en août ; ne pas supprimer les 31 pages en dépassement sans l'export GSC qui les a justifiées ; (b) pour les zones A et B, exiger une preuve locale réelle par page (étude de cas, photo, avis mentionnant la commune, type de bâti observé) ou ne pas garder la page ; (c) ne jamais créer de page « rénovation-{commune} » sans passer par la porte `rushiti-keyword-map` (la PR #9 avait créé ce risque) ; (d) mesurer avant/après avec un groupe témoin.
 - Effort : Important · Décision : Isuf (suppression d'URL) · Skills : `rushiti-keyword-map`, `rushiti-page-locale`, `rushiti-journal-experiences`
 
 **15. Cannibalisation probable plaquiste / plâtrerie et isolation / isolation intérieure** 🟡 [Adapter]
@@ -267,6 +267,8 @@ Deux requêtes de contrôle via Firecrawl (localisation Besançon) : « peintre 
 - Prochain audit complet : mars 2027, ou après toute refonte de gabarit.
 
 ---
+
+*Suivi (soir) : constats 4, 8, 10, 12 appliqués dans la PR [#40](https://github.com/eurotregu/rushiti-renovation/pull/40) (fusionnée) ; constat 13 → kit `etudes-de-cas/` (matière à fournir par Isuf) ; constat 14 rectifié → `grille-locale/README.md`.*
 
 *Suivi : constats 1, 2, 3, 6, 7 appliqués le 03/09 dans la PR [#39](https://github.com/eurotregu/rushiti-renovation/pull/39) du dépôt de production (fusionnée) ; constats 4, 8, 10, 12 appliqués dans la PR [#40](https://github.com/eurotregu/rushiti-renovation/pull/40) (brouillon) ; constat 9 retiré (faux positif). Découverte en passant : 150 pages portaient `legalName: "RUSHITI Rénovation"`, corrigé dans la PR #40.*
 
