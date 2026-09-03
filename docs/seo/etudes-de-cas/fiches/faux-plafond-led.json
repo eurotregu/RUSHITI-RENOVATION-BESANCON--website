@@ -1,0 +1,66 @@
+{
+  "slug": "faux-plafond-led-[À COMPLÉTER : commune]",
+  "titre": "[À COMPLÉTER : ex. Faux plafond avec éclairage LED indirect à …]",
+  "titre_court": "Faux plafond avec éclairage LED",
+  "title_seo": "[À COMPLÉTER : ≤ 60 caractères]",
+  "meta_description": "[À COMPLÉTER : ≤ 160 caractères, problème → résultat]",
+  "prestation_principale": "faux-plafonds",
+  "prestations": [
+    "faux-plafonds",
+    "platrerie",
+    "peinture-interieure"
+  ],
+  "commune": "[À COMPLÉTER : nom canonique, ex. Mamirolle]",
+  "zone_slug": "[À COMPLÉTER : slug de la page locale si elle existe, ex. mamirolle]",
+  "quartier": "",
+  "type_bati": "[À COMPLÉTER : ex. maison des années 1980, combles aménagés]",
+  "client_type": "[À COMPLÉTER : Particulier / Syndic / Bailleur / Assurance / Commerce]",
+  "date_chantier": "[À COMPLÉTER : AAAA-MM]",
+  "duree": "",
+  "en_bref": "[À COMPLÉTER : 2 phrases, problème → ce qu'on a fait → résultat]",
+  "probleme": "[À COMPLÉTER : ce que vivait le client, avec ses mots. 1 à 2 paragraphes séparés par une ligne vide]",
+  "diagnostic": "[À COMPLÉTER : ce que la visite a montré, mesures faites (humidité, planéité…), cause identifiée]",
+  "intervention": {
+    "preparation": "[À COMPLÉTER : protection, dépose, préparation des supports]",
+    "traitement": "[À COMPLÉTER : traitement de la cause, produits et techniques, DTU si exact]",
+    "finition": "[À COMPLÉTER : finition, nettoyage, réception]"
+  },
+  "resultat": "[À COMPLÉTER : ce qui a changé pour le client, sans chiffre inventé]",
+  "points_cles": [
+    "[À COMPLÉTER : 3 enseignements techniques]",
+    "",
+    ""
+  ],
+  "accord_photos": false,
+  "photos": [
+    {
+      "fichier": "faux-plafond-suspendu.webp",
+      "etape": "pendant",
+      "alt": "Faux plafond suspendu en cours de pose",
+      "legende": "Ossature du faux plafond en cours"
+    },
+    {
+      "fichier": "faux-plafond-led.webp",
+      "etape": "apres",
+      "alt": "Faux plafond avec corniche lumineuse LED, finition moderne",
+      "legende": "Corniche lumineuse LED, finition peinte"
+    }
+  ],
+  "citation": {
+    "texte": "",
+    "auteur_affiche": "",
+    "accord_ecrit": false,
+    "date_accord": ""
+  },
+  "faq": [
+    {
+      "q": "[À COMPLÉTER : question que ce client posait]",
+      "a": "[À COMPLÉTER]"
+    }
+  ],
+  "articles_lies": [],
+  "cta_titre": "",
+  "date_publication": "",
+  "_matiere_visible": "2 à 3 photos : ossature puis corniche LED finie (faux-plafond-dalles.webp est un autre chantier ?). Pièce, hauteur gagnée/perdue, raison (plafond abîmé ? éclairage ?) à confirmer. L'électricité (alimentation LED) est hors périmètre : nommer l'électricien.",
+  "_statut": "PRÉ-REMPLI depuis les photos du site — tout le reste est à récolter avec questionnaire-chantier.md"
+}

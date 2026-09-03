@@ -1,0 +1,71 @@
+{
+  "slug": "salle-de-bain-[À COMPLÉTER : commune]",
+  "titre": "[À COMPLÉTER : ex. Salle de bains rénovée à …]",
+  "titre_court": "Rénovation de salle de bains",
+  "title_seo": "[À COMPLÉTER : ≤ 60 caractères]",
+  "meta_description": "[À COMPLÉTER : ≤ 160 caractères, problème → résultat]",
+  "prestation_principale": "renovation-salle-de-bain",
+  "prestations": [
+    "renovation-salle-de-bain",
+    "platrerie",
+    "peinture-interieure"
+  ],
+  "commune": "[À COMPLÉTER : nom canonique, ex. Mamirolle]",
+  "zone_slug": "[À COMPLÉTER : slug de la page locale si elle existe, ex. mamirolle]",
+  "quartier": "",
+  "type_bati": "[À COMPLÉTER : ex. maison des années 1980, combles aménagés]",
+  "client_type": "[À COMPLÉTER : Particulier / Syndic / Bailleur / Assurance / Commerce]",
+  "date_chantier": "[À COMPLÉTER : AAAA-MM]",
+  "duree": "",
+  "en_bref": "[À COMPLÉTER : 2 phrases, problème → ce qu'on a fait → résultat]",
+  "probleme": "[À COMPLÉTER : ce que vivait le client, avec ses mots. 1 à 2 paragraphes séparés par une ligne vide]",
+  "diagnostic": "[À COMPLÉTER : ce que la visite a montré, mesures faites (humidité, planéité…), cause identifiée]",
+  "intervention": {
+    "preparation": "[À COMPLÉTER : protection, dépose, préparation des supports]",
+    "traitement": "[À COMPLÉTER : traitement de la cause, produits et techniques, DTU si exact]",
+    "finition": "[À COMPLÉTER : finition, nettoyage, réception]"
+  },
+  "resultat": "[À COMPLÉTER : ce qui a changé pour le client, sans chiffre inventé]",
+  "points_cles": [
+    "[À COMPLÉTER : 3 enseignements techniques]",
+    "",
+    ""
+  ],
+  "accord_photos": false,
+  "photos": [
+    {
+      "fichier": "salle-de-bain-1.webp",
+      "etape": "pendant",
+      "alt": "Salle de bain en cours de rénovation, habillage des murs et du plafond",
+      "legende": "Habillage des murs et du plafond en cours"
+    },
+    {
+      "fichier": "salle-de-bain-2.webp",
+      "etape": "pendant",
+      "alt": "Salle de bain rénovée, murs et plafond habillés",
+      "legende": "[À COMPLÉTER : légende après]"
+    }
+  ],
+  "citation": {
+    "texte": "",
+    "auteur_affiche": "",
+    "accord_ecrit": false,
+    "date_accord": ""
+  },
+  "faq": [
+    {
+      "q": "[À COMPLÉTER : question que ce client posait]",
+      "a": "[À COMPLÉTER]"
+    }
+  ],
+  "articles_lies": [
+    {
+      "url": "/blog/moisissure-plafond-salle-de-bain-besancon",
+      "ancre": "Moisissure au plafond de la salle de bain : que faire"
+    }
+  ],
+  "cta_titre": "",
+  "date_publication": "",
+  "_matiere_visible": "2 photos (salle-de-bain-1, salle-de-bain-2) : murs et plafond en cours d'habillage. Commune, cause (humidité ? ventilation ?), prestations exactes à confirmer.",
+  "_statut": "PRÉ-REMPLI depuis les photos du site — tout le reste est à récolter avec questionnaire-chantier.md"
+}
