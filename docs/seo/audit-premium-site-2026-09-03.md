@@ -88,7 +88,7 @@ Sévérité : 🔴 critique · 🟠 élevée · 🟡 moyenne · 🟢 faible. Ver
 ### B. Conversion et expérience
 
 **6. Bloc de fin « Des murs à ratisser avant peinture ? » sur cinq pages qui ne parlent pas de ratissage** 🟠 [Corriger]
-- Pages : `/renovation-syndic-gestionnaire-besancon`, `/devis-assurance-degat-des-eaux-besancon`, `/remise-en-etat-logement-locatif-besancon`, `/plaquiste-besancon`, `/prix-travaux-renovation-besancon` (les piliers, pages locales, accueil, à propos, contact et zones ne sont pas touchés)
+- Pages : `/renovation-syndic-gestionnaire-besancon`, `/devis-assurance-degat-des-eaux-besancon`, `/remise-en-etat-logement-locatif-besancon`, `/plaquiste-besancon`, `/prix-travaux-renovation-besancon`, et, vus au dépôt le 03/09, `/amenagement-commerce-bureau-besancon`, `/renovation-appartement-besancon` (les piliers, pages locales, accueil, à propos, contact et zones ne sont pas touchés)
 - Impact : dernier bloc avant le pied de page, donc dernier argument lu par un syndic, un gestionnaire ou un expert d'assurance : « Nous passons examiner vos murs en lumière rasante ». Fuite de gabarit qui casse la crédibilité au moment de décider.
 - Preuve : H2 final servi le 03/09 sur les 5 URL.
 - Correction : un bloc de fin par intention — syndic : « Un immeuble à remettre en état à Besançon ? … devis présentable en conseil syndical » ; assurance : « Un sinistre à documenter ? … devis détaillé pour votre dossier » ; locatif : « Un logement à relouer ? … » ; plaquiste : « Une cloison, un plafond, un doublage ? … » ; prix : « Un chantier à chiffrer ? … ». Vérifier par script que le H2 final de chaque page contient un mot du H1 (test de régression à ajouter à `korrigjime-prodhim/`).
@@ -106,7 +106,7 @@ Sévérité : 🔴 critique · 🟠 élevée · 🟡 moyenne · 🟢 faible. Ver
 - Correction : charger hCaptcha au premier `focus` sur un champ du formulaire ou quand le formulaire entre dans le viewport (`IntersectionObserver`, déjà utilisé sur le site pour les animations). Alternative : Cloudflare Turnstile (invisible, sans case à cocher, gratuit, déjà chez l'hébergeur), soutenu par Web3Forms.
 - Effort : Moyen · Skill : `rushiti-audit-technique`
 
-**9. Google Fonts appelé deux fois, en bloquant le rendu** 🟡 [Adapter]
+**9. Google Fonts appelé deux fois, en bloquant le rendu** ~~🟡~~ **Retiré le 03/09 : faux positif.** Le second `<link>` vu dans le rendu est le repli `<noscript>` du motif `media="print" onload="this.media='all'"` ; les sources ne contiennent qu'un appel, non bloquant. Reste valable : l'auto-hébergement des polices (optionnel).
 - Pages : toutes
 - Preuve : deux balises `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces…&family=Inter…">` strictement identiques dans le `<head>` servi (une avec `media="all"`), après deux `preconnect`.
 - Impact : requête dupliquée, CSS de polices bloquant, dépendance à un domaine tiers pour l'affichage du texte.
@@ -222,7 +222,7 @@ Sévérité : 🔴 critique · 🟠 élevée · 🟡 moyenne · 🟢 faible. Ver
 | P0 | Bouton e-mail illisible (contraste) | Corriger | 🟠 | Rapide | CSS |
 | P1 | Retirer `aggregateRating`/`review`, ajouter `legalName`, vraies `geo` | Supprimer / Ajouter | 🟠 | Rapide | `schema-builder`, `rushiti-jsonld-validator` |
 | P1 | hCaptcha à la demande (ou Turnstile) | Adapter | 🟠 | Moyen | `rushiti-audit-technique` |
-| P1 | Google Fonts : une balise, puis auto-hébergement | Adapter | 🟡 | Moyen | CSS |
+| P1 | ~~Google Fonts : une balise~~ (faux positif, retiré le 03/09) ; auto-hébergement optionnel | Adapter | 🟢 | Moyen | CSS |
 | P1 | Page À propos : visages, parcours, attestation, `Person` | Ajouter | 🟠 | Moyen | `rushiti-page-service` |
 | P1 | Page Contact : étapes, délai validé, carte, WhatsApp | Ajouter | 🟡 | Rapide | gabarit |
 | P1 | Inventaire GTM, GA4 + événements derrière consentement | À vérifier / Ajouter | 🟡 | Moyen | `rushiti-ga4-gtm` |
@@ -267,5 +267,7 @@ Deux requêtes de contrôle via Firecrawl (localisation Besançon) : « peintre 
 - Prochain audit complet : mars 2027, ou après toute refonte de gabarit.
 
 ---
+
+*Suivi : constats 1, 2, 3, 6, 7 appliqués le 03/09 dans la PR [#39](https://github.com/eurotregu/rushiti-renovation/pull/39) du dépôt de production (brouillon, validation d'Isuf attendue) ; constat 9 retiré (faux positif).*
 
 *Rapport du 03/09/2026. Lecture seule : rien n'a été modifié en production, rien n'est déployé sans validation d'Isuf. Sources : pages servies par rushiti-renovation.fr le 03/09/2026 (Firecrawl, rendu navigateur), capture mobile 390 px, `docs/seo/` de ce dépôt (audits des 13/08, 22/08, 31/08 et 02/09). Aucun chiffre estimé : les mesures manquantes sont marquées comme telles.*
