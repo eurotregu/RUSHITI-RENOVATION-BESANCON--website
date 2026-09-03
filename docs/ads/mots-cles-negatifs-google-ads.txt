@@ -1,0 +1,337 @@
+# ====================================================================
+# Liste de mots-clés à exclure — Google Ads RUSHITI Rénovation
+# ====================================================================
+# Version du 31/08/2026 — brouillon, à valider par Isuf avant import.
+#
+# Mode d'emploi complet (niveaux, correspondances, table de décision,
+# indicateurs, maintenance) : docs/ads/guide-mots-cles-negatifs.md
+#
+# Import : Google Ads > Outils > Bibliothèque partagée > Listes de mots
+# clés à exclure > créer « RUSHITI — exclusions générales » > coller les
+# lignes non commentées > appliquer à « Search — RUSHITI Besançon ».
+#
+# TYPE DE CORRESPONDANCE À L'IMPORT : EXPRESSION.
+# Rappel : pour un négatif d'UN SEUL mot, expression et large bloquent
+# exactement la même chose. La différence n'apparaît qu'à partir de deux
+# mots. Voir guide §5.
+#
+# AVANT DE POSER : vérification anti-collision obligatoire.
+# Google Ads > Mots-clés > filtre « Texte du mot-clé contient <terme> ».
+# Si la liste revient non vide, le négatif chevauche un mot-clé acheté et
+# couperait la diffusion en silence. Voir guide §3.
+#
+# CE QUI NE DOIT JAMAIS ENTRER DANS CETTE LISTE :
+#   gratuit  — tuerait « devis gratuit peintre besançon »
+#   prix     — tuerait « prix rénovation appartement besançon »
+#   tarif · devis · combien · avis · expert
+#   toute requête placo / isolation / sols : ce sont les compteurs
+#   d'ouverture des groupes d'annonces 4 à 6 (playbook §3)
+#
+# JOURNAL : chaque passe d'ajout se fait sous une ligne de date, avec le
+# motif en commentaire. L'interface Google ne conserve ni la date ni la
+# raison d'un négatif — sans journal, la revue de dépose trimestrielle
+# est impossible.
+# ====================================================================
+
+
+# ####################################################################
+# PASSE INITIALE — 31/08/2026 — liste de lancement
+# ####################################################################
+
+# --- 1. Emploi, formation, orientation (guide §1.1) -----------------
+emploi
+emplois
+offre d'emploi
+offres d'emploi
+recrutement
+recrute
+salaire
+combien gagne
+formation
+formations
+se former
+cap peintre
+cours
+stage
+stages
+alternance
+apprentissage
+apprenti
+apprentis
+devenir peintre
+devenir plaquiste
+fiche métier
+indeed
+pole emploi
+france travail
+intérim
+
+# --- 2. Bricolage, tutoriels, faire soi-même (guide §1.2) ----------
+tuto
+tutos
+tutoriel
+tutoriels
+comment faire
+comment poser
+comment peindre
+soi meme
+soi-même
+diy
+astuce
+astuces
+video
+youtube
+étape par étape
+
+# --- 3. Matériel, distributeurs, marques (guide §1.3) --------------
+leroy merlin
+castorama
+brico depot
+brico dépôt
+bricoman
+bricomarché
+point p
+gedimat
+pot de peinture
+pots de peinture
+nuancier
+litre
+rouleau
+rouleaux
+pinceau
+pinceaux
+location materiel
+echafaudage
+acheter
+promo
+soldes
+dulux
+tollens
+ripolin
+zolpan
+sikkens
+
+# --- 4. Aides et dispositifs réglementés (guide §1.4) --------------
+# RUSHITI n'a pas de certification RGE (CLAUDE.md) : ces contacts sont
+# inexploitables. À revoir si une certification est engagée.
+maprimerenov
+maprimerénov
+ma prime renov
+ma prime rénov
+prime renov
+prime rénov
+prime energie
+prime
+primes
+subvention
+subventions
+aide de l'etat
+aide financiere
+aides financieres
+anah
+crédit d'impot
+credit d impot
+certificat economie energie
+cee
+eco ptz
+rge
+qualibat
+simulateur aide
+
+# --- 5. Plateformes de mise en relation, annuaires (guide §1.5) ----
+# Budget national, revendent le lead à 3-5 artisans : enchère perdue
+# d'avance, requête navigationnelle.
+travaux.com
+quotatis
+habitatpresto
+izi by edf
+ootravaux
+starofservice
+star of service
+houzz
+hellocasa
+mesdepanneurs
+pagesjaunes
+pages jaunes
+annuaire
+annuaires
+comparateur
+comparateurs
+forum
+forums
+
+# --- 6. Métiers hors périmètre (guide §1.6) ------------------------
+# Jamais de plomberie ni d'électricité (CLAUDE.md).
+# ⚠️ « toiture » est à retirer le jour où le groupe d'annonces Isolation
+# ouvre (palier 2) : il bloquerait « isolation toiture besançon ».
+plombier
+plombiers
+plomberie
+electricien
+électricien
+electriciens
+électriciens
+electricite
+électricité
+chauffagiste
+chaudiere
+pompe a chaleur
+climatisation
+couvreur
+couvreurs
+toiture
+charpente
+charpentier
+zinguerie
+macon
+maçon
+macons
+maçons
+maconnerie
+terrassement
+menuisier
+menuisiers
+menuiserie
+fenetre
+veranda
+piscine
+jardin
+paysagiste
+demenagement
+déménagement
+déménagements
+menage
+ménage
+nettoyage
+femme de ménage
+ramonage
+serrurier
+vitrier
+diagnostic immobilier
+architecte
+architectes
+cuisiniste
+poseur de cuisine
+
+# --- 7. Homonymie « peintre » et « peinture » (guide §1.7) ---------
+# La famille la plus sous-estimée : en français, « peintre » désigne
+# aussi l'artiste, « peinture » aussi le loisir créatif et la
+# carrosserie. Gros volume, tombe en plein sur « peintre besançon ».
+peinture voiture
+peinture carrosserie
+peinture jante
+peintre artiste
+peinture sur toile
+toile de maitre
+peinture à l'huile
+peinture acrylique
+tableau
+peinture au numéro
+peinture par numéro
+peinture diamant
+peinture sur soie
+cours de peinture
+atelier peinture
+peinture bateau
+peinture poudre
+peinture industrielle
+peintre en lettres
+graffiti
+
+# --- 8. Information pure, réglementaire (guide §1.8) ---------------
+définition
+definitions
+c'est quoi
+signification
+wikipedia
+norme
+normes
+dtu
+reglementation
+réglementation
+loi
+pdf
+telecharger
+télécharger
+
+# --- 9. Administratif du dégât des eaux (guide §1.8) ---------------
+# Assuré perdu dans sa procédure, pas client cherchant un artisan.
+# Frappe directement le groupe d'annonces 3.
+# NE PAS exclure « expert » : « expert dégât des eaux besançon » est
+# souvent un syndic qui cherche justement un artisan.
+qui paie
+constat amiable
+déclaration sinistre
+convention irsi
+locataire ou propriétaire
+délai déclaration
+remboursement
+franchise
+indemnisation
+recours
+litige assurance
+
+# --- 10. Collocations de prix (guide §2.2) -------------------------
+# Le mot « prix » seul reste ACHETÉ. On n'exclut que la collocation qui
+# porte l'intention informative.
+prix moyen
+prix au m2
+prix au m²
+prix m2
+bareme
+barème
+
+# --- 11. Concurrents locaux nommés (guide §2.1) --------------------
+# Requête navigationnelle : l'internaute veut CETTE entreprise. CTR très
+# bas, Quality Score dégradé pour tout le groupe. Liste à réviser au
+# bilan mensuel depuis l'Aperçu des enchères.
+doubs en couleurs
+peinture reno
+peinture 25
+
+# --- 12. Positionnement prix — À VALIDER PAR ISUF (guide §2.2) -----
+# Décision de positionnement, pas évidence technique : RUSHITI ne se bat
+# pas sur le prix et ces requêtes produisent des leads cotés C.
+# À réévaluer au bout de 3 mois selon le CPA.
+pas cher
+moins cher
+petit budget
+low cost
+
+# --- 13. Hors zone d'intervention ----------------------------------
+# Le ciblage géographique ne bloque pas une requête qui NOMME une autre
+# ville : ces exclusions sont complémentaires, pas redondantes.
+# ⚠️ Pontarlier et Montbéliard sont dans le Doubs mais HORS du rayon de
+# 25 km (concurrence §4) : à retirer de cette liste le jour où le palier
+# 3 ouvre une campagne dédiée.
+dijon
+belfort
+vesoul
+lons le saunier
+dole
+pontarlier
+montbeliard
+montbéliard
+mulhouse
+strasbourg
+lyon
+paris
+nancy
+lausanne
+neuchatel
+suisse
+
+# --- 14. Immobilier, hors intention travaux ------------------------
+louer
+achat appartement
+vente maison
+agence immobiliere
+agence immobilière
+agences immobilieres
+airbnb
+
+
+# ####################################################################
+# PASSE SUIVANTE — [DATE] — après le premier relevé des termes de
+# recherche. Ajouter ici, avec le motif en commentaire.
+# ####################################################################
