@@ -75,7 +75,10 @@ commerces et bureaux locaux.
 ## Normes, garanties et références à citer
 
 - **DTU** selon l'ouvrage : DTU 59.1 (travaux de peinture), DTU 25.41
-  (plaques de plâtre), NF DTU 53.12 (revêtements de sol PVC collés).
+  (plaques de plâtre), NF DTU 53.12 (revêtements de sol souples **collés** —
+  PVC, linoléum, caoutchouc).
+- La pose clipsée (LVT) n'est couverte par aucun DTU : suivre l'Avis
+  Technique ou la notice du fabricant.
 - **Garantie décennale** (ERGO) · **biennale** (bon fonctionnement) ·
   **parfait achèvement** (1 an).
 - Sinistres : structure et libellés conformes **IRSI**.

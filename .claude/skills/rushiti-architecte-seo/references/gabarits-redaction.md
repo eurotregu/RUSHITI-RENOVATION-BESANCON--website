@@ -58,7 +58,7 @@ signes qui changent le traitement. C'est ici que les 20 ans de métier parlent.>
 
 ## <H2 — la solution complète : préparation + traitement + finition>
 <Étapes numérotées. Expliquer le pourquoi de chaque étape. Citer la norme
-utile (DTU 59.1, 25.41, 53.2…) et l'expliquer en une demi-phrase.>
+utile (DTU 59.1, 25.41, 53.12…) et l'expliquer en une demi-phrase.>
 
 <Tableau comparatif quand le sujet s'y prête (finitions, matériaux, options)
 — des critères techniques honnêtes, y compris les limites de chaque option.>

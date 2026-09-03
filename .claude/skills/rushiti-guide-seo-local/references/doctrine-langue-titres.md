@@ -208,7 +208,7 @@ demi-phrase (pédagogie RUSHITI) :
 - **Plâtrerie/placo** : BA13, rails et montants, bandes à joints, doublage,
   faux plafond, reprise de plâtre ancien, DTU 25.41.
 - **Sols** : parquet flottant, stratifié, PVC/LVT, **ragréage** (avec « a » —
-  la graphie fautive décrédibilise), vitrification, DTU 53.2.
+  la graphie fautive décrédibilise), vitrification, DTU 53.12.
 - **Isolation** : ITI, doublage isolant, combles perdus, pont thermique,
   condensation, mur froid.
 - **Dégât des eaux** : assèchement, humidimètre, traitement antifongique,

@@ -46,7 +46,7 @@ sans avoir lu le code de la page.
 | 5 | **Vraies tables HTML** | Toute comparaison ou série de valeurs en `<table>` avec `<th>`. Une grille CSS n'est pas une table : elle se prélève mal |
 | 6 | **Vraies listes** | `<ul>` / `<ol>` pour les étapes et les énumérations, pas des paragraphes à tirets |
 | 7 | **Chiffres sourcés ou absents** | Tout chiffre porte son unité, sa source et sa date. Sans source datée, il ne s'écrit pas — `[À COMPLÉTER]` |
-| 8 | **Normes citées juste** | Référence exacte (DTU 59.1, DTU 25.41, DTU 53.2, convention IRSI) et ce qu'elle régit en une proposition. Une norme citée de travers décrédibilise toute la page |
+| 8 | **Normes citées juste** | Référence exacte (DTU 59.1, DTU 25.41, DTU 53.12, convention IRSI) et ce qu'elle régit en une proposition. Une norme citée de travers décrédibilise toute la page |
 | 9 | **Date et auteur visibles** | Date de publication ou de mise à jour affichée, et le contenu technique signé (Isuf ou Yll Rushiti, 20 ans de métier). Un texte sans date ni auteur est une source faible |
 | 10 | **Contenu dans le HTML brut** | Le texte principal est présent sans exécution de JavaScript |
 | 11 | **Structure et NAP** | Un seul H1, hiérarchie Hn continue, NAP en texte HTML — pas seulement en image ni seulement en JSON-LD |
