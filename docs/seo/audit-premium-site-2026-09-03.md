@@ -268,6 +268,6 @@ Deux requêtes de contrôle via Firecrawl (localisation Besançon) : « peintre 
 
 ---
 
-*Suivi : constats 1, 2, 3, 6, 7 appliqués le 03/09 dans la PR [#39](https://github.com/eurotregu/rushiti-renovation/pull/39) du dépôt de production (brouillon, validation d'Isuf attendue) ; constat 9 retiré (faux positif).*
+*Suivi : constats 1, 2, 3, 6, 7 appliqués le 03/09 dans la PR [#39](https://github.com/eurotregu/rushiti-renovation/pull/39) du dépôt de production (fusionnée) ; constats 4, 8, 10, 12 appliqués dans la PR [#40](https://github.com/eurotregu/rushiti-renovation/pull/40) (brouillon) ; constat 9 retiré (faux positif). Découverte en passant : 150 pages portaient `legalName: "RUSHITI Rénovation"`, corrigé dans la PR #40.*
 
 *Rapport du 03/09/2026. Lecture seule : rien n'a été modifié en production, rien n'est déployé sans validation d'Isuf. Sources : pages servies par rushiti-renovation.fr le 03/09/2026 (Firecrawl, rendu navigateur), capture mobile 390 px, `docs/seo/` de ce dépôt (audits des 13/08, 22/08, 31/08 et 02/09). Aucun chiffre estimé : les mesures manquantes sont marquées comme telles.*
