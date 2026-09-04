@@ -268,6 +268,8 @@ Deux requêtes de contrôle via Firecrawl (localisation Besançon) : « peintre 
 
 ---
 
+*Contrôle après purge (04/09) : cache Cloudflare purgé (`purge_everything`, zone rushiti-renovation.fr) puis relecture en direct de l'accueil, À propos, Contact, syndic, un article de blog, `platrerie-deluz`, le sitemap et les mentions légales : conformes aux paquets 9 à 12 (geo BAN, `legalName`, bandeau GA4, « relevé le 22/08/2026 », `Mis à jour le`, lastmod). La feuille `s971fb819.css?v=10` servie contient bien le bloc `/*p12*/` (l'absence constatée le 03/09 venait d'une copie edge antérieure à la purge). Un seul écart : les piliers (`/peinture-interieure-besancon`…) affichent encore trois `div.stars` par avis, injectés par le Worker (`AVIS_BLOCK`) et non par les sources → correctif PR [#42](https://github.com/eurotregu/rushiti-renovation/pull/42) du dépôt de production (brouillon ; déploiement par l'API Workers après validation, version `2026-09-04-avis-sans-etoiles`).*
+
 *Suivi (nuit) : constats 2 (hébergeur, GTM), 4 (geo), 11, 16, 17, 18, 20, 21 appliqués dans le paquet 12 (PR de production) ; 5 → courrier `annuaires/` ; 25 → dossier `charte/` ; 19 caduc ; 26 aligné dans ce dépôt.*
 
 *Suivi (soir) : constats 4, 8, 10, 12 appliqués dans la PR [#40](https://github.com/eurotregu/rushiti-renovation/pull/40) (fusionnée) ; constat 13 → kit `etudes-de-cas/` (matière à fournir par Isuf) ; constat 14 rectifié → `grille-locale/README.md`.*
