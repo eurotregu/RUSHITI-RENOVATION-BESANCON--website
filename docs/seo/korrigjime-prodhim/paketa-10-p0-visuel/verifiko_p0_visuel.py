@@ -17,7 +17,7 @@ for p in pages:
     if name == "index.html" and '"review":[' in h:
         errs.append("index.html : tableau JSON-LD review (notes non relevées) présent")
     for m in re.finditer(r'href="/assets/css/s[0-9a-f]+\.css\?v=([0-9]+)"', h):
-        if m.group(1) != "9": errs.append(f"{name} : CSS ?v={m.group(1)} au lieu de 9")
+        if int(m.group(1)) < 9: errs.append(f"{name} : CSS ?v={m.group(1)} au lieu de 9 ou plus")
     # le H2 final doit contenir un mot du H1 ou de la thématique : contrôle simple sur les 7 pages corrigées
 for c in glob.glob(os.path.join(root, "assets", "css", "*.css")):
     if "/*p0-ghost-cta*/" not in open(c, encoding="utf-8").read():

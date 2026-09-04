@@ -169,7 +169,7 @@ Sévérité : 🔴 critique · 🟠 élevée · 🟡 moyenne · 🟢 faible. Ver
 
 ### D. Technique
 
-**19. Cartes Twitter absentes sur 100 % des pages contrôlées** 🟡 [Ajouter]
+**19. Cartes Twitter absentes sur 100 % des pages contrôlées** ~~🟡~~ **Caduc (03/09 soir)** : retrait volontaire décidé par Isuf le 02/09 (pas de compte X, les réseaux utilisés lisent l'Open Graph).
 - Preuve : 0 balise `twitter:*` sur les 9 pages analysées (OG complet partout). Le correctif testé existe (PR #61, 726 pages).
 - Impact : limité (LinkedIn, WhatsApp, Facebook lisent l'OG) mais X, Slack et certains agrégateurs non.
 - Correction : appliquer le script de la PR #61 dérivé des `og:*`.
@@ -267,6 +267,8 @@ Deux requêtes de contrôle via Firecrawl (localisation Besançon) : « peintre 
 - Prochain audit complet : mars 2027, ou après toute refonte de gabarit.
 
 ---
+
+*Suivi (nuit) : constats 2 (hébergeur, GTM), 4 (geo), 11, 16, 17, 18, 20, 21 appliqués dans le paquet 12 (PR de production) ; 5 → courrier `annuaires/` ; 25 → dossier `charte/` ; 19 caduc ; 26 aligné dans ce dépôt.*
 
 *Suivi (soir) : constats 4, 8, 10, 12 appliqués dans la PR [#40](https://github.com/eurotregu/rushiti-renovation/pull/40) (fusionnée) ; constat 13 → kit `etudes-de-cas/` (matière à fournir par Isuf) ; constat 14 rectifié → `grille-locale/README.md`.*
 
