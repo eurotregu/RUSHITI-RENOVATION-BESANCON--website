@@ -64,7 +64,7 @@ def main(root):
         s = f.read_text(encoding="utf-8"); s2, k = sub_count(s, f'fill="{OLD_NAVY}"', f'fill="{NEW_NAVY}"'); st["favicon"] += k
         if k: f.write_text(s2, encoding="utf-8")
     print("A. CSS : --navy", st["css_navy"], "· --navy-dark", st["css_dark"], "· --ok", st["css_ok"], "· ombres", st["css_shadow"], "(attendu 2/2/2/18 au premier passage)")
-    print("B. pages : theme-color", st["theme"], "· ?v=11", st["cssv"], "(attendu 756/756)   C. inline --navy", st["inline"], "(attendu 1)")
+    print("B. pages : theme-color", st["theme"], "· ?v=11", st["cssv"], "(attendu 756/756)   C. blog :root inline", st["inline"], "(attendu 13 au premier passage)")
     print("D. manifest", st["manifest"], "  E. favicon.svg", st["favicon"], "(attendu 1/1)   F. coches SVG", st["stroke"], "(attendu 7377)")
 
 if __name__ == "__main__":
