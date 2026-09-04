@@ -1,0 +1,8 @@
+# Copier en .dev.vars pour le développement local (jamais commité).
+# En production : npx wrangler secret put <NOM>
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+# Chaîne aléatoire longue : openssl rand -hex 32
+COOKIE_ENCRYPTION_KEY=
+# Adresses Google autorisées à se connecter, séparées par des virgules (vide = toutes)
+ALLOWED_EMAILS=
