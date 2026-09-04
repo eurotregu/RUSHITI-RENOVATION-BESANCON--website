@@ -24,6 +24,10 @@ js/main.js       - Scripts interactifs
 - Données structurées JSON-LD (LocalBusiness / HousePainter)
 - Animations au scroll
 
+## Outils
+
+- `tools/mcp-gbp/` : serveur MCP (Cloudflare Worker) reliant Claude à la fiche Google Business Profile — voir `tools/mcp-gbp/README.md`. Aucun secret dans le dépôt ; déployé séparément avec Wrangler.
+
 ## Déploiement
 
 Site statique - déployé automatiquement sur GitHub Pages à chaque push sur `main` (workflow `.github/workflows/deploy.yml`).
